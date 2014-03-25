@@ -17,9 +17,14 @@ namespace TicTacToeGame.Test
         internal void AIMove()
         {
             if (BoardIsEmpty())
-                Board[1, 1] = Cell.AI;
+                FillCell(1, 1, Cell.AI);
             else if (Board[0, 0] == Cell.Empty)
-                Board[0, 0] = Cell.AI;
+                FillCell(0, 0, Cell.AI);
+        }
+
+        private void FillCell(int row, int column, Cell cell)
+        {
+            Board[row, column] = cell;
         }
 
         private bool BoardIsEmpty()
@@ -35,7 +40,7 @@ namespace TicTacToeGame.Test
 
         internal void OpponentMove(int row, int column)
         {
-            Board[row, column] = Cell.Opponent;
+            FillCell(row, column, Cell.Opponent);
         }
     }
 }
