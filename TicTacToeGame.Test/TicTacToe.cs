@@ -15,5 +15,10 @@ namespace TicTacToeGame.Test
                                                 {Cell.Empty, Cell.AI, Cell.Empty},
                                                 {Cell.Empty, Cell.Empty, Cell.Empty}};
         }
+
+        internal void OpponentMove(int p1, int p2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

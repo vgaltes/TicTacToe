@@ -3,6 +3,7 @@
     public enum Cell
     {
         Empty,
-        AI
+        AI,
+        Opponent
     }
 }
