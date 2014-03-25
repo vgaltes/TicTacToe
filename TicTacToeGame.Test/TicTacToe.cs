@@ -20,7 +20,9 @@ namespace TicTacToeGame.Test
                 FillCell(1, 1, Cell.AI);
             else if (Board[0, 0] == Cell.Empty)
                 FillCell(0, 0, Cell.AI);
-            else FillCell(2, 2, Cell.AI);
+            else if ( Board[0,0] == Cell.Opponent)
+                FillCell(2, 2, Cell.AI);
+            else FillCell(2, 0, Cell.AI);
         }
 
         private void FillCell(int row, int column, Cell cell)
