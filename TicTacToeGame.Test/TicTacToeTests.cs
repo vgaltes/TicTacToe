@@ -57,7 +57,7 @@ namespace TicTacToeGame.Test
 
             var expectedBoard = new Cell[3, 3]{{Cell.Empty, Cell.Empty, Cell.Opponent},
                                                 {Cell.Empty, Cell.Empty, Cell.Empty},
-                                                {Cell.AI, Cell.Empty, Cell.AI}};
+                                                {Cell.AI, Cell.Empty, Cell.Empty}};
 
             ticTacToe.Board.Should().BeEquivalentTo(expectedBoard);
         }
