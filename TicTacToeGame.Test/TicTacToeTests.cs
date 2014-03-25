@@ -47,5 +47,19 @@ namespace TicTacToeGame.Test
 
             ticTacToe.Board.Should().BeEquivalentTo(expectedBoard);
         }
+
+        [TestMethod]
+        public void GivenThereIsAnOpponentInTheSecondCorner_TheAIPutsTheMarkInTheFourthCorner()
+        {
+            var ticTacToe = new TicTacToe();
+            ticTacToe.OpponentMove(0, 2);
+            ticTacToe.AIMove();
+
+            var expectedBoard = new Cell[3, 3]{{Cell.Empty, Cell.Empty, Cell.Opponent},
+                                                {Cell.Empty, Cell.Empty, Cell.Empty},
+                                                {Cell.AI, Cell.Empty, Cell.AI}};
+
+            ticTacToe.Board.Should().BeEquivalentTo(expectedBoard);
+        }
     }
 }
