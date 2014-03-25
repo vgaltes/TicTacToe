@@ -11,7 +11,9 @@ namespace TicTacToeGame.Test
 
         internal void AIMove()
         {
-            throw new NotImplementedException();
+            Board = new Cell[3, 3]{{Cell.Empty, Cell.Empty, Cell.Empty},
+                                                {Cell.Empty, Cell.AI, Cell.Empty},
+                                                {Cell.Empty, Cell.Empty, Cell.Empty}};
         }
     }
 }
