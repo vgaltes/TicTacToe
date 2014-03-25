@@ -9,16 +9,33 @@ namespace TicTacToeGame.Test
     {
         internal Cell[,] Board{get; private set;}
 
-        internal void AIMove()
+        internal TicTacToe()
         {
-            Board = new Cell[3, 3]{{Cell.Empty, Cell.Empty, Cell.Empty},
-                                                {Cell.Empty, Cell.AI, Cell.Empty},
-                                                {Cell.Empty, Cell.Empty, Cell.Empty}};
+            Board = new Cell[3, 3];
         }
 
-        internal void OpponentMove(int p1, int p2)
+        internal void AIMove()
         {
-            throw new NotImplementedException();
+            if (BoardIsEmpty())
+                Board[1, 1] = Cell.AI;
+            else if (Board[0, 0] == Cell.Empty)
+                Board[0, 0] = Cell.AI;
+        }
+
+        private bool BoardIsEmpty()
+        {
+            foreach(var cell in Board)
+            {
+                if (cell != Cell.Empty)
+                    return false;
+            }
+
+            return true;
+        }
+
+        internal void OpponentMove(int row, int column)
+        {
+            Board[row, column] = Cell.Opponent;
         }
     }
 }
