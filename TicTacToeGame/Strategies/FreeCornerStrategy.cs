@@ -9,7 +9,20 @@
 
         public void Update(Cell[,] board)
         {
-            board[0, 0] = Cell.AI;
+            if (FirstSquareIsFree(board))
+                board[0, 0] = Cell.AI;
+            else if (SecondSquareIsFree(board))
+                board[0, 2] = Cell.AI;
+        }
+
+        private bool FirstSquareIsFree(Cell[,] board)
+        {
+            return board[0, 0] == Cell.Empty;
+        }
+
+        private bool SecondSquareIsFree(Cell[,] board)
+        {
+            return board[0, 2] == Cell.Empty;
         }
 
         private bool ThereIsAFreeSquare(Cell[,] board)

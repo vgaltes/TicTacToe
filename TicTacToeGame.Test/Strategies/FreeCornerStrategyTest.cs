@@ -55,7 +55,11 @@ namespace TicTacToeGame.Test.Strategies
             var freeCornerStrategy = new FreeCornerStrategy();
             freeCornerStrategy.Update(initialBoard);
 
-            var expectedBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 2));
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
+                {
+                    Mark.OpponentFromCoordinates(0, 0),
+                    Mark.AIFromCoordinates(0, 2)
+                });
 
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
