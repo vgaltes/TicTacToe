@@ -97,5 +97,20 @@ namespace TicTacToeGame.Test.Strategies
 
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
+
+        [TestMethod]
+        public void GivenThereIsAMarkInTheThreeFirstCorners_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                Mark.OpponentFromCoordinates(0, 0),
+                Mark.OpponentFromCoordinates(0, 2),
+                Mark.OpponentFromCoordinates(2, 0)
+            });
+
+            var freeCornerStrategy = new FreeCornerStrategy();
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
     }
 }
