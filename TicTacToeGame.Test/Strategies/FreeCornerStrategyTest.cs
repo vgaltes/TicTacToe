@@ -35,5 +35,16 @@ namespace TicTacToeGame.Test.Strategies
 
             initialBoard.Should().BeEquivalentTo(expectedBoard);
         }
+
+        [TestMethod]
+        public void GivenThereIsAMarkInTheFirstCorner_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithAMark(0, 0, Cell.Opponent);
+
+            var freeCornerStrategy = new FreeCornerStrategy();
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
     }
 }
