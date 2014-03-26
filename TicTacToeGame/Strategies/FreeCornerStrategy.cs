@@ -4,7 +4,7 @@
     {
         public bool CanHandle(Cell[,] board)
         {
-            return !ThereIsAFreeSquare(board);
+            return ThereIsAFreeSquare(board);
         }
 
         public void Update(Cell[,] board)
@@ -14,10 +14,8 @@
 
         private bool ThereIsAFreeSquare(Cell[,] board)
         {
-            return board[0, 0] != Cell.Empty ||
-                board[0, 2] != Cell.Empty ||
-                board[2, 0] != Cell.Empty ||
-                board[2, 2] != Cell.Empty;
+            return board[0, 0] == Cell.Empty ||
+                board[0, 2] == Cell.Empty;
         }
     }
 }
