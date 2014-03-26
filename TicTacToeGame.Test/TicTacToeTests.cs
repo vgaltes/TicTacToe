@@ -8,22 +8,6 @@ namespace TicTacToeGame.Test
     [TestClass]
     public class TicTacToeTests
     {
-        
-
-        [TestMethod]
-        public void GivenThereIsAnOpponentMarkInTheCenter_TheAIPutTheMarkInTheFirstCorner()
-        {
-            var ticTacToe = new TicTacToe();
-            ticTacToe.OpponentMove(1, 1);
-            ticTacToe.AIMove();
-
-            var expectedBoard = new Cell[3, 3]{{Cell.AI, Cell.Empty, Cell.Empty},
-                                                {Cell.Empty, Cell.Opponent, Cell.Empty},
-                                                {Cell.Empty, Cell.Empty, Cell.Empty}};
-
-            ticTacToe.Board.Should().BeEquivalentTo(expectedBoard);
-        }
-
         [TestMethod]
         public void GivenThereIsAnOpponentInTheFirstCorner_TheAIPutsTheMarkInTheThirdCorner()
         {

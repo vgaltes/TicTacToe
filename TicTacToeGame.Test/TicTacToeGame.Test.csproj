@@ -55,7 +55,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BoardTestHelper.cs" />
     <Compile Include="Strategies\CenterStrategyTest.cs" />
+    <Compile Include="Strategies\FreeCornerStrategyTest.cs" />
     <Compile Include="TicTacToeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
