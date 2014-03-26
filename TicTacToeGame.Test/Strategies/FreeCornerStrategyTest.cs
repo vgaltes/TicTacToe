@@ -73,5 +73,25 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeTrue();
         }
+
+        [TestMethod]
+        public void GivenThereIsAMarkInTheTwoFirstCorners_TheAIPutTheMarkInTheThirdCorner()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                Mark.OpponentFromCoordinates(0, 0),
+                Mark.OpponentFromCoordinates(0, 2)
+            });
+
+            var freeCornerStrategy = new FreeCornerStrategy();
+            freeCornerStrategy.Update(initialBoard);
+
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                Mark.OpponentFromCoordinates(0, 0),
+                Mark.OpponentFromCoordinates(0, 2),
+                Mark.OpponentFromCoordinates(2, 0)
+            });
+
+            initialBoard.Should().BeEquivalentTo(expectedBoard);
+        }
     }
 }
