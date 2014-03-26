@@ -33,7 +33,7 @@ namespace TicTacToeGame.Test.Strategies
 
             var expectedBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
 
-            initialBoard.Should().BeEquivalentTo(expectedBoard);
+            initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
         [TestMethod]
@@ -55,9 +55,9 @@ namespace TicTacToeGame.Test.Strategies
             var freeCornerStrategy = new FreeCornerStrategy();
             freeCornerStrategy.Update(initialBoard);
 
-            var expectedBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
+            var expectedBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 2));
 
-            initialBoard.Should().BeEquivalentTo(expectedBoard);
+            initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(2, 0)
             });
 
-            initialBoard.Should().BeEquivalentTo(expectedBoard);
+            initialBoard.Should().ContainInOrder(expectedBoard);
         }
     }
 }
