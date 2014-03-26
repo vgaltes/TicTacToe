@@ -1,13 +1,13 @@
 ﻿namespace TicTacToeGame.Strategies
 {
-    internal class OppositeCornerStrategy
+    public class OppositeCornerStrategy : TicTacToeStrategy
     {
-        internal bool CanHandle(Cell[,] board)
+        public bool CanHandle(Cell[,] board)
         {
             return ThereIsAnOpponentInASquare(board);
         }
 
-        internal void Update(Cell[,] board)
+        public void Update(Cell[,] board)
         {
             PutAMarkInTheOppositeSquare(board);
         }

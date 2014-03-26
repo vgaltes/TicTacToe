@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TicTacToeGame.Strategies
 {
-    internal class CenterStrategy
+    public class CenterStrategy : TicTacToeStrategy
     {
-        internal bool CanHandle(Cell[,] board)
+        public bool CanHandle(Cell[,] board)
         {
             foreach (var cell in board)
             {
@@ -19,7 +19,7 @@ namespace TicTacToeGame.Strategies
             return true;
         }
 
-        internal void Update(Cell[,] board)
+        public void Update(Cell[,] board)
         {
             board[1, 1] = Cell.AI;
         }

@@ -1,13 +1,13 @@
 ﻿namespace TicTacToeGame.Strategies
 {
-    internal class FreeCornerStrategy
+    public class FreeCornerStrategy : TicTacToeStrategy
     {
-        internal bool CanHandle(Cell[,] board)
+        public bool CanHandle(Cell[,] board)
         {
             return !ThereIsAFreeSquare(board);
         }
 
-        internal void Update(Cell[,] board)
+        public void Update(Cell[,] board)
         {
             board[0, 0] = Cell.AI;
         }

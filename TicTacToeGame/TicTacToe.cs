@@ -1,4 +1,5 @@
-﻿using TicTacToeGame.Strategies;
+﻿using System.Collections.Generic;
+using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame
 {
@@ -6,23 +7,34 @@ namespace TicTacToeGame
     {
         public Cell[,] Board{get; private set;}
 
+        private List<TicTacToeStrategy> Strategies;
+
         public TicTacToe()
         {
             Board = new Cell[3, 3];
+            CreateStrategies();
+        }
+
+        private void CreateStrategies()
+        {
+            Strategies = new List<TicTacToeStrategy>
+            {
+                new CenterStrategy(),
+                new OppositeCornerStrategy(),
+                new FreeCornerStrategy()
+            };
         }
 
         public void AIMove()
         {
-            var centerStrategy = new CenterStrategy();
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-            var freeCornerStrategy = new FreeCornerStrategy();
-
-            if (centerStrategy.CanHandle(Board))
-                centerStrategy.Update(Board);
-            else if (oppositeCornerStrategy.CanHandle(Board))
-                oppositeCornerStrategy.Update(Board);
-            else if (freeCornerStrategy.CanHandle(Board))
-                freeCornerStrategy.Update(Board);
+            foreach ( var strategy in Strategies)
+            {
+                if ( strategy.CanHandle(Board))
+                {
+                    strategy.Update(Board);
+                    break;
+                }
+            }
         }       
 
         private void FillCell(int row, int column, Cell cell)
