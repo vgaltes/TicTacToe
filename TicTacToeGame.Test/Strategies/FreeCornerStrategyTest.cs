@@ -31,7 +31,7 @@ namespace TicTacToeGame.Test.Strategies
             var freeCornerStrategy = new FreeCornerStrategy();
             freeCornerStrategy.Update(initialBoard);
 
-            var expectedBoard = BoardTestHelper.GetABoardWithAMark(0, 0, Cell.AI);
+            var expectedBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
 
             initialBoard.Should().BeEquivalentTo(expectedBoard);
         }
@@ -39,7 +39,34 @@ namespace TicTacToeGame.Test.Strategies
         [TestMethod]
         public void GivenThereIsAMarkInTheFirstCorner_CanHandleReturnsTrue()
         {
-            var initialBoard = BoardTestHelper.GetABoardWithAMark(0, 0, Cell.Opponent);
+            var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
+
+            var freeCornerStrategy = new FreeCornerStrategy();
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void GivenThereIsAMarkInTheFirstCorner_TheAIPutTheMarkInTheSecondCorner()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
+
+            var freeCornerStrategy = new FreeCornerStrategy();
+            freeCornerStrategy.Update(initialBoard);
+
+            var expectedBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
+
+            initialBoard.Should().BeEquivalentTo(expectedBoard);
+        }
+
+        [TestMethod]
+        public void GivenThereIsAMarkInTheTwoFirstCorners_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks( new List<Mark> {
+                Mark.OpponentFromCoordinates(0, 0),
+                Mark.OpponentFromCoordinates(0, 2)
+            });
 
             var freeCornerStrategy = new FreeCornerStrategy();
             var canHandle = freeCornerStrategy.CanHandle(initialBoard);
