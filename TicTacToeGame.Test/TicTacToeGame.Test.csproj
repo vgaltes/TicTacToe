@@ -56,6 +56,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Cell.cs" />
+    <Compile Include="Strategies\CenterStrategy.cs" />
+    <Compile Include="Strategies\FreeCornerStrategy.cs" />
+    <Compile Include="Strategies\OppositeCornerStrategy.cs" />
     <Compile Include="TicTacToe.cs" />
     <Compile Include="TicTacToeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TicTacToeGame.Test.Strategies;
 
 namespace TicTacToeGame.Test
 {
@@ -16,29 +17,21 @@ namespace TicTacToeGame.Test
 
         internal void AIMove()
         {
-            if (BoardIsEmpty())
-                FillCell(1, 1, Cell.AI);
-            else if (Board[0, 0] == Cell.Empty)
-                FillCell(0, 0, Cell.AI);
-            else if ( Board[0,0] == Cell.Opponent)
-                FillCell(2, 2, Cell.AI);
-            else FillCell(2, 0, Cell.AI);
-        }
+            var centerStrategy = new CenterStrategy();
+            var oppositeCornerStrategy = new OppositeCornerStrategy();
+            var freeCornerStrategy = new FreeCornerStrategy();
+
+            if (centerStrategy.CanHandle(Board))
+                centerStrategy.Update(Board);
+            else if (oppositeCornerStrategy.CanHandle(Board))
+                oppositeCornerStrategy.Update(Board);
+            else if (freeCornerStrategy.CanHandle(Board))
+                freeCornerStrategy.Update(Board);
+        }       
 
         private void FillCell(int row, int column, Cell cell)
         {
             Board[row, column] = cell;
-        }
-
-        private bool BoardIsEmpty()
-        {
-            foreach(var cell in Board)
-            {
-                if (cell != Cell.Empty)
-                    return false;
-            }
-
-            return true;
         }
 
         internal void OpponentMove(int row, int column)
