@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicTacToeGame.Test.Strategies
+namespace TicTacToeGame.Strategies
 {
     internal class CenterStrategy
     {

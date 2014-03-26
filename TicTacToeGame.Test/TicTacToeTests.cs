@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
+using TicTacToeGame;
 
 namespace TicTacToeGame.Test
 {

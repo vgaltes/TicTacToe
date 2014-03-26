@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TicTacToeGame.Test.Strategies;
+﻿using TicTacToeGame.Strategies;
 
-namespace TicTacToeGame.Test
+namespace TicTacToeGame
 {
-    class TicTacToe
+    public class TicTacToe
     {
-        internal Cell[,] Board{get; private set;}
+        public Cell[,] Board{get; private set;}
 
-        internal TicTacToe()
+        public TicTacToe()
         {
             Board = new Cell[3, 3];
         }
 
-        internal void AIMove()
+        public void AIMove()
         {
             var centerStrategy = new CenterStrategy();
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -34,7 +30,7 @@ namespace TicTacToeGame.Test
             Board[row, column] = cell;
         }
 
-        internal void OpponentMove(int row, int column)
+        public void OpponentMove(int row, int column)
         {
             FillCell(row, column, Cell.Opponent);
         }

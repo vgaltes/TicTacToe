@@ -55,16 +55,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Cell.cs" />
-    <Compile Include="Strategies\CenterStrategy.cs" />
-    <Compile Include="Strategies\FreeCornerStrategy.cs" />
-    <Compile Include="Strategies\OppositeCornerStrategy.cs" />
-    <Compile Include="TicTacToe.cs" />
     <Compile Include="TicTacToeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToeGame\TicTacToeGame.csproj">
+      <Project>{1d4d550b-159e-4061-a3c0-e73b244b9aec}</Project>
+      <Name>TicTacToeGame</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
