@@ -92,7 +92,7 @@ namespace TicTacToeGame.Test.Strategies
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
                 Mark.OpponentFromCoordinates(0, 0),
                 Mark.OpponentFromCoordinates(0, 2),
-                Mark.OpponentFromCoordinates(2, 0)
+                Mark.AIFromCoordinates(2, 0)
             });
 
             initialBoard.Should().ContainInOrder(expectedBoard);

@@ -13,6 +13,8 @@
                 board[0, 0] = Cell.AI;
             else if (SecondSquareIsFree(board))
                 board[0, 2] = Cell.AI;
+            else if (ThirdSquareIsFree(board))
+                board[2, 0] = Cell.AI;
         }
 
         private bool FirstSquareIsFree(Cell[,] board)
@@ -23,6 +25,11 @@
         private bool SecondSquareIsFree(Cell[,] board)
         {
             return board[0, 2] == Cell.Empty;
+        }
+
+        private bool ThirdSquareIsFree(Cell[,] board)
+        {
+            return board[2, 0] == Cell.Empty;
         }
 
         private bool ThereIsAFreeSquare(Cell[,] board)
