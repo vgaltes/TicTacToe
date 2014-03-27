@@ -17,6 +17,7 @@ namespace TicTacToeGame.Console.Test
         public void Play(int row, int column)
         {
             ticTacToe.OpponentMove(row, column);
+            ticTacToe.AIMove();
         }
     }
 }

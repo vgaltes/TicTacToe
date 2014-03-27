@@ -25,7 +25,7 @@ namespace TicTacToeGame
             };
         }
 
-        public void AIMove()
+        public virtual void AIMove()
         {
             foreach ( var strategy in Strategies)
             {
