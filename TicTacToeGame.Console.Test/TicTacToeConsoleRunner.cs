@@ -20,9 +20,9 @@ namespace TicTacToeGame.Console.Test
             ticTacToe.AIMove();
         }
 
-        public void GetBoard()
+        public Cell[,] GetBoard()
         {
-            throw new NotImplementedException();
+            return ticTacToe.Board;
         }
     }
 }
