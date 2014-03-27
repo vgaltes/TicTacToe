@@ -19,5 +19,10 @@ namespace TicTacToeGame.Console.Test
             ticTacToe.OpponentMove(row, column);
             ticTacToe.AIMove();
         }
+
+        public void GetBoard()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

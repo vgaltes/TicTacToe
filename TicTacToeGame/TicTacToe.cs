@@ -5,7 +5,7 @@ namespace TicTacToeGame
 {
     public class TicTacToe
     {
-        public Cell[,] Board{get; private set;}
+        public virtual Cell[,] Board{get; private set;}
 
         private List<TicTacToeStrategy> Strategies;
 
