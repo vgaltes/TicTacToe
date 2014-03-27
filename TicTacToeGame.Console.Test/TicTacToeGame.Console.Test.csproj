@@ -58,6 +58,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TicTacToeBoardDrawer.cs" />
+    <Compile Include="TicTacToeBoardDrawerTests.cs" />
     <Compile Include="TicTacToeConsoleRunner.cs" />
     <Compile Include="TicTacToeConsoleRunnerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
