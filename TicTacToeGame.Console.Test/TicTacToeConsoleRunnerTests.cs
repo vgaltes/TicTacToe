@@ -17,5 +17,16 @@ namespace TicTacToeGame.Console.Test
 
             ticTacToe.Verify(ttt => ttt.OpponentMove(0, 0));
         }
+
+        [TestMethod]
+        public void WhenThePlayerPlays_TheGamePlaysTheAI()
+        {
+            var ticTacToe = new Mock<TicTacToe>();
+            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object);
+
+            ticTacToeConsoleRunner.Play(0, 0);
+
+            ticTacToe.Verify(ttt => ttt.AIMove());
+        }
     }
 }
