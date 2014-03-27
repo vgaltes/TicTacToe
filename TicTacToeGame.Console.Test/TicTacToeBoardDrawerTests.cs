@@ -40,5 +40,20 @@ namespace TicTacToeGame.Console.Test
 
             boardRepresentation.Should().Be(expectedRepresentation);
         }
+
+        [TestMethod]
+        public void GetBoardRepresentationOfBoardWithOpponentInSomeCells_ReturnsTheBoardDrawnAsAString()
+        {
+            Cell[,] board = new Cell[3, 3]{{Cell.Empty, Cell.Opponent, Cell.Opponent},
+                                                {Cell.Opponent, Cell.Empty, Cell.Opponent},
+                                                {Cell.Opponent, Cell.Opponent, Cell.Empty}};
+
+            var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
+            var boardRepresentation = ticTacToeBoardDrawer.GetRepresentationOf(board);
+
+            var expectedRepresentation = " |O|O\n-----\nO| |O\n-----\nO|O| ";
+
+            boardRepresentation.Should().Be(expectedRepresentation);
+        }
     }
 }
