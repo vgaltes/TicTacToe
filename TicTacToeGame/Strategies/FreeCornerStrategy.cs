@@ -15,6 +15,8 @@
                 board[0, 2] = Cell.AI;
             else if (IsThirdSquareFree(board))
                 board[2, 0] = Cell.AI;
+            else if (IsFourthSquareFree(board))
+                board[2, 2] = Cell.AI;
         }
 
         private bool IsFirstSquareFree(Cell[,] board)
