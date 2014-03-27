@@ -42,7 +42,7 @@ namespace TicTacToeGame
             Board[row, column] = cell;
         }
 
-        public void OpponentMove(int row, int column)
+        public virtual void OpponentMove(int row, int column)
         {
             FillCell(row, column, Cell.Opponent);
         }
