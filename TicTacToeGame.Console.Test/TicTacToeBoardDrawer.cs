@@ -7,9 +7,9 @@ namespace TicTacToeGame.Console.Test
 {
     class TicTacToeBoardDrawer
     {
-        internal object GetRepresentationOf(Cell[,] board)
+        internal string GetRepresentationOf(Cell[,] board)
         {
-            throw new NotImplementedException();
+            return " | | \n-----\n | | \n-----\n | | ";
         }
     }
 }
