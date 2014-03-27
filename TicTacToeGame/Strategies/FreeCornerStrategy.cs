@@ -9,34 +9,40 @@
 
         public void Update(Cell[,] board)
         {
-            if (FirstSquareIsFree(board))
+            if (IsFirstSquareFree(board))
                 board[0, 0] = Cell.AI;
-            else if (SecondSquareIsFree(board))
+            else if (IsSecondSquareFree(board))
                 board[0, 2] = Cell.AI;
-            else if (ThirdSquareIsFree(board))
+            else if (IsThirdSquareFree(board))
                 board[2, 0] = Cell.AI;
         }
 
-        private bool FirstSquareIsFree(Cell[,] board)
+        private bool IsFirstSquareFree(Cell[,] board)
         {
             return board[0, 0] == Cell.Empty;
         }
 
-        private bool SecondSquareIsFree(Cell[,] board)
+        private bool IsSecondSquareFree(Cell[,] board)
         {
             return board[0, 2] == Cell.Empty;
         }
 
-        private bool ThirdSquareIsFree(Cell[,] board)
+        private bool IsThirdSquareFree(Cell[,] board)
         {
             return board[2, 0] == Cell.Empty;
         }
+        private bool IsFourthSquareFree(Cell[,] board)
+        {
+            return board[2, 2] == Cell.Empty;
+        }
+
 
         private bool ThereIsAFreeSquare(Cell[,] board)
         {
-            return board[0, 0] == Cell.Empty ||
-                board[0, 2] == Cell.Empty ||
-                board[2, 0] == Cell.Empty;
+            return IsFirstSquareFree(board) ||
+                IsSecondSquareFree(board) ||
+                IsThirdSquareFree(board) ||
+                IsFourthSquareFree(board);
         }
     }
 }
