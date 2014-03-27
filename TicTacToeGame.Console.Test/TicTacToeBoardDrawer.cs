@@ -18,10 +18,9 @@ namespace TicTacToeGame.Console.Test
         private string Draw(Cell cell)
         {
             if (cell == Cell.AI)
-            {
                 return "X";
-            }
-
+            if (cell == Cell.Opponent)
+                return "O";
             return " ";
         }
     }
