@@ -10,13 +10,7 @@ namespace TicTacToeGame.Strategies
     {
         public bool CanHandle(Cell[,] board)
         {
-            foreach (var cell in board)
-            {
-                if (cell != Cell.Empty)
-                    return false;
-            }
-
-            return true;
+            return board[1, 1] == Cell.Empty;
         }
 
         public void Update(Cell[,] board)

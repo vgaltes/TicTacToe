@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace TicTacToeGame.Console.Test
+﻿namespace TicTacToeGame.Console
 {
-    class TicTacToeBoardDrawer
+    public class TicTacToeBoardDrawer
     {
-        internal string GetRepresentationOf(Cell[,] board)
+        public string GetRepresentationOf(Cell[,] board)
         {
             return string.Format("{0}|{1}|{2}\n-----\n{3}|{4}|{5}\n-----\n{6}|{7}|{8}",
                 Draw(board[0, 0]), Draw(board[0, 1]), Draw(board[0, 2]),

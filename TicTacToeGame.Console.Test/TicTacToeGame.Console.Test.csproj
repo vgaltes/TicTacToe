@@ -58,9 +58,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="TicTacToeBoardDrawer.cs" />
     <Compile Include="TicTacToeBoardDrawerTests.cs" />
-    <Compile Include="TicTacToeConsoleRunner.cs" />
     <Compile Include="TicTacToeConsoleRunnerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TicTacToeGame.Test\TicTacToeGame.Console\TicTacToeGame.Console.csproj">
+      <Project>{6c88dd5c-8d2d-4c7a-8576-d2405a2f0c5d}</Project>
+      <Name>TicTacToeGame.Console</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TicTacToeGame\TicTacToeGame.csproj">
       <Project>{1d4d550b-159e-4061-a3c0-e73b244b9aec}</Project>
       <Name>TicTacToeGame</Name>
