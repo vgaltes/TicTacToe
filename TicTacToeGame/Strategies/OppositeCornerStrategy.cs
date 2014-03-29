@@ -1,18 +1,7 @@
 ﻿using System.Collections.Generic;
+
 namespace TicTacToeGame.Strategies
 {
-    public class MarkCoordinate
-    {
-        public int Row { get; private set; }
-        public int Column { get; private set; }
-
-        public MarkCoordinate(int row, int column)
-        {
-            Row = row;
-            Column = column;
-        }
-    }
-
     public class OppositeCornerStrategy : TicTacToeStrategy
     {
         private Dictionary<MarkCoordinate, MarkCoordinate> CornersAndOpposites
@@ -53,24 +42,16 @@ namespace TicTacToeGame.Strategies
             return board[markCoordinate.Row, markCoordinate.Column] == Cell.Opponent;
         }
 
-        private bool ThereIsAnOpponentInASquare(Cell[,] board)
-        {
-            return board[0, 0] == Cell.Opponent ||
-                board[0, 2] == Cell.Opponent ||
-                board[2, 0] == Cell.Opponent ||
-                board[2, 2] == Cell.Opponent;
-        }
-
         private void PutAMarkInTheOppositeSquare(Cell[,] board)
         {
-            if (board[0, 0] == Cell.Opponent)
-                board[2, 2] = Cell.AI;
-            if (board[0, 2] == Cell.Opponent)
-                board[2, 0] = Cell.AI;
-            if (board[2, 0] == Cell.Opponent)
-                board[0, 2] = Cell.AI;
-            if (board[2, 2] == Cell.Opponent)
-                board[0, 0] = Cell.AI;
+            foreach (var cornerAndOpposite in CornersAndOpposites)
+            {
+                if (IsThereAndOpponentInTheCorner(cornerAndOpposite.Key, board)
+                    && IsOppositeCornerFree(cornerAndOpposite.Value, board))
+                {
+                    board[cornerAndOpposite.Value.Row, cornerAndOpposite.Value.Column] = Cell.AI;
+                }
+            }
         }
     }
 }
