@@ -24,10 +24,19 @@ namespace TicTacToeGame.Test
                                                 {Cell.Empty, Cell.Empty, Cell.Empty},
                                                 {Cell.Empty, Cell.Empty, Cell.Empty}};
 
-            foreach ( var mark in marks)
+            foreach (var mark in marks)
             {
                 board[mark.Row, mark.Column] = mark.Cell;
             }
+
+            return board;
+        }
+
+        internal static Cell[,] GetFullBoard()
+        {
+            var board = new Cell[3, 3]{{Cell.AI, Cell.AI, Cell.AI},
+                                        {Cell.AI, Cell.AI, Cell.AI},
+                                        {Cell.AI, Cell.AI, Cell.AI}};
 
             return board;
         }
