@@ -9,11 +9,18 @@ namespace TicTacToeGame.Strategies
         public FreeSideStrategy()
         {
             Sides.Add(new MarkCoordinate(0, 1));
+            Sides.Add(new MarkCoordinate(1, 0));
         }
 
         public bool CanHandle(Cell[,] board)
         {
-            return board[Sides[0].Row, Sides[0].Column] == Cell.Empty;
+            foreach ( var side in Sides)
+            {
+                if (board[side.Row, side.Column] == Cell.Empty)
+                    return true;
+            }
+
+            return false;
         }
     }
 }
