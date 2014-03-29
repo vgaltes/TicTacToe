@@ -10,7 +10,7 @@ namespace TicTacToeGame.Test.Strategies
         [TestMethod]
         public void GivenTheCenterIsFree_CanHandleReturnsTrue()
         {
-            var initialBoard = BoardTestHelper.GetEmptyBoard();
+            var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
             var centerStrategy = new CenterStrategy();
             var canHandle = centerStrategy.CanHandle(initialBoard);
@@ -32,7 +32,7 @@ namespace TicTacToeGame.Test.Strategies
         [TestMethod]
         public void GivenTheCenterIsFree_UpdatePutsAMarkInTheCenter()
         {
-            var initialBoard = BoardTestHelper.GetEmptyBoard();
+            var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
             var centerStrategy = new CenterStrategy();
             centerStrategy.Update(initialBoard);

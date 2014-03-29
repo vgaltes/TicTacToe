@@ -3,7 +3,7 @@ namespace TicTacToeGame.Test
 {
     public static class BoardTestHelper
     {
-        public static Cell[,] GetEmptyBoard()
+        public static Cell[,] GetAnEmptyBoard()
         {
             return GetABoardWithAMarkInTheCenterOfType(Cell.Empty);
         }

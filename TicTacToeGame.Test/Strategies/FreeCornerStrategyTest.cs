@@ -15,7 +15,7 @@ namespace TicTacToeGame.Test.Strategies
         [TestMethod]
         public void GivenThereIsTheFirstCornerEmpty_CanHandleReturnsTrue()
         {
-            var initialBoard = BoardTestHelper.GetEmptyBoard();
+            var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
             var freeCornerStrategy = new FreeCornerStrategy();
             var canHandle = freeCornerStrategy.CanHandle(initialBoard);
@@ -26,7 +26,7 @@ namespace TicTacToeGame.Test.Strategies
         [TestMethod]
         public void GivenThereIsTheFirstCornerEmpty_TheAIPutTheMarkInTheFirstCorner()
         {
-            var initialBoard = BoardTestHelper.GetEmptyBoard();
+            var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
             var freeCornerStrategy = new FreeCornerStrategy();
             freeCornerStrategy.Update(initialBoard);
