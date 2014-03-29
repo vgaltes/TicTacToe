@@ -28,7 +28,13 @@ namespace TicTacToeGame.Strategies
 
         public void Update(Cell[,] board)
         {
-            throw new System.NotImplementedException();
+            foreach (var side in Sides)
+            {
+                if (board[side.Row, side.Column] == Cell.Empty)
+                {
+                    board[side.Row, side.Column] = Cell.AI;
+                }
+            }
         }
     }
 }
