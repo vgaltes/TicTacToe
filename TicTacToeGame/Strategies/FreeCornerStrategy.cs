@@ -1,50 +1,41 @@
-﻿namespace TicTacToeGame.Strategies
+﻿using System.Collections.Generic;
+
+namespace TicTacToeGame.Strategies
 {
     public class FreeCornerStrategy : TicTacToeStrategy
     {
+        private List<MarkCoordinate> Corners
+            = new List<MarkCoordinate>();
+
+        public FreeCornerStrategy()
+        {
+            Corners.Add(new MarkCoordinate(0, 0));
+            Corners.Add(new MarkCoordinate(0, 2));
+            Corners.Add(new MarkCoordinate(2, 0));
+            Corners.Add(new MarkCoordinate(2, 2));
+        }
+
         public bool CanHandle(Cell[,] board)
         {
-            return ThereIsAFreeSquare(board);
+            foreach (var corner in Corners)
+            {
+                if (board[corner.Row, corner.Column] == Cell.Empty)
+                    return true;
+            }
+
+            return false;
         }
 
         public void Update(Cell[,] board)
         {
-            if (IsFirstSquareFree(board))
-                board[0, 0] = Cell.AI;
-            else if (IsSecondSquareFree(board))
-                board[0, 2] = Cell.AI;
-            else if (IsThirdSquareFree(board))
-                board[2, 0] = Cell.AI;
-            else if (IsFourthSquareFree(board))
-                board[2, 2] = Cell.AI;
-        }
-
-        private bool IsFirstSquareFree(Cell[,] board)
-        {
-            return board[0, 0] == Cell.Empty;
-        }
-
-        private bool IsSecondSquareFree(Cell[,] board)
-        {
-            return board[0, 2] == Cell.Empty;
-        }
-
-        private bool IsThirdSquareFree(Cell[,] board)
-        {
-            return board[2, 0] == Cell.Empty;
-        }
-        private bool IsFourthSquareFree(Cell[,] board)
-        {
-            return board[2, 2] == Cell.Empty;
-        }
-
-
-        private bool ThereIsAFreeSquare(Cell[,] board)
-        {
-            return IsFirstSquareFree(board) ||
-                IsSecondSquareFree(board) ||
-                IsThirdSquareFree(board) ||
-                IsFourthSquareFree(board);
+            foreach (var corner in Corners)
+            {
+                if (board[corner.Row, corner.Column] == Cell.Empty)
+                {
+                    board[corner.Row, corner.Column] = Cell.AI;
+                    return;
+                }
+            }
         }
     }
 }
