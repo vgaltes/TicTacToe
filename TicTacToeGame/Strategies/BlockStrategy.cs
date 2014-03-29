@@ -1,15 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TicTacToeGame.Strategies
 {
+    public class Line
+    {
+        public MarkCoordinate LineStart { get; private set; }
+        public MarkCoordinate LineMiddle { get; private set; }
+
+        public MarkCoordinate LineEnd { get; private set; }
+
+        public Line(MarkCoordinate start, MarkCoordinate middle, MarkCoordinate end)
+        {
+            LineStart = start;
+            LineMiddle = middle;
+            LineEnd = end;
+        }
+    }
+
     public class BlockStrategy : TicTacToeStrategy
     {
+        List<Line> Lines = new List<Line>();
+
+        public BlockStrategy()
+        {
+            Lines.Add(new Line(new MarkCoordinate(0,0), new MarkCoordinate(0,1), new MarkCoordinate(0,2)));
+            Lines.Add(new Line(new MarkCoordinate(0,2), new MarkCoordinate(0, 1), new MarkCoordinate(0, 0)));
+        }
+
         public bool CanHandle(Cell[,] board)
         {
-            if (board[0, 0] == Cell.Opponent && board[0, 1] == Cell.Opponent && board[0,2] == Cell.Empty)
-                return true;
-            if (board[0, 1] == Cell.Opponent && board[0, 2] == Cell.Opponent)
-                return true;
+            foreach (var line in Lines)
+            {
+                if (board[line.LineStart.Row, line.LineStart.Column] == Cell.Opponent &&
+                     board[line.LineMiddle.Row, line.LineMiddle.Column] == Cell.Opponent &&
+                     board[line.LineEnd.Row, line.LineEnd.Column] == Cell.Empty
+                    )
+                    return true;
+            }
 
             return false;
         }
