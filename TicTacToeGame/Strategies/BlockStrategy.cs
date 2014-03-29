@@ -8,6 +8,8 @@ namespace TicTacToeGame.Strategies
         {
             if (board[0, 0] == Cell.Opponent && board[0, 1] == Cell.Opponent && board[0,2] == Cell.Empty)
                 return true;
+            if (board[0, 1] == Cell.Opponent && board[0, 2] == Cell.Opponent)
+                return true;
 
             return false;
         }
