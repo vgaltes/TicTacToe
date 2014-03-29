@@ -37,6 +37,18 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [TestMethod]
+        public void GivenThereIsAnOpponentInTheSecondCorner_CanHandleReturnsTrue()
+        {
+            var oppositeCornerStrategy = new OppositeCornerStrategy();
+
+            var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 2));
+
+            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
+
+        [TestMethod]
         public void GivenThereIsAnOpponentInTheSecondCorner_TheAIPutsTheMarkInTheFourthCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
