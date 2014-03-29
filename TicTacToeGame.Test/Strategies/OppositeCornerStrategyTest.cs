@@ -151,5 +151,28 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeFalse();
         }
+
+        [TestMethod]
+        public void GivenThereIsAnOpponentInTheFirstAndSecondCorner_TheAIPutsTheMarkInTheThirdCorner()
+        {
+            var oppositeCornerStrategy = new OppositeCornerStrategy();
+
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
+            {
+                Mark.OpponentFromCoordinates(0, 0),
+                Mark.OpponentFromCoordinates(0, 2)
+            });
+
+            oppositeCornerStrategy.Update(initialBoard);
+
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
+                {
+                    Mark.OpponentFromCoordinates(0, 0),
+                    Mark.OpponentFromCoordinates(0, 2),
+                    Mark.AIFromCoordinates(2, 2)
+                });
+
+            initialBoard.Should().ContainInOrder(expectedBoard);
+        }
     }
 }

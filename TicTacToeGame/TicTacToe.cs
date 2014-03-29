@@ -21,7 +21,8 @@ namespace TicTacToeGame
             {
                 new CenterStrategy(),
                 new OppositeCornerStrategy(),
-                new FreeCornerStrategy()
+                new FreeCornerStrategy(),
+                new FreeSideStrategy()
             };
         }
 
