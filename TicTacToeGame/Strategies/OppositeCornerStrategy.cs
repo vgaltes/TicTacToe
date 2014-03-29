@@ -50,6 +50,7 @@ namespace TicTacToeGame.Strategies
                     && IsOppositeCornerFree(cornerAndOpposite.Value, board))
                 {
                     board[cornerAndOpposite.Value.Row, cornerAndOpposite.Value.Column] = Cell.AI;
+                    return;
                 }
             }
         }
