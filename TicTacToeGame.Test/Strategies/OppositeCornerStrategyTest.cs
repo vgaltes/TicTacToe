@@ -20,7 +20,7 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [TestMethod]
-        public void GivenThereIsAnOpponentInTheFirstCorner_TheAIPutsTheMarkInTheThirdCorner()
+        public void GivenThereIsAnOpponentInTheFirstCorner_TheAIPutsTheMarkInTheFourthCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
 
@@ -49,7 +49,7 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [TestMethod]
-        public void GivenThereIsAnOpponentInTheSecondCorner_TheAIPutsTheMarkInTheFourthCorner()
+        public void GivenThereIsAnOpponentInTheSecondCorner_TheAIPutsTheMarkInTheThirdCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
 
@@ -76,6 +76,24 @@ namespace TicTacToeGame.Test.Strategies
             var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
 
             canHandle.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void GivenThereIsAnOpponentInTheThirdCorner_TheAIPutsTheMarkInTheSecondCorner()
+        {
+            var oppositeCornerStrategy = new OppositeCornerStrategy();
+
+            var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(2, 0));
+
+            oppositeCornerStrategy.Update(initialBoard);
+
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
+                {
+                    Mark.OpponentFromCoordinates(2, 0),
+                    Mark.AIFromCoordinates(0, 2)
+                });
+
+            initialBoard.Should().ContainInOrder(expectedBoard);
         }
     }
 }
