@@ -66,6 +66,20 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [TestMethod]
+        public void GivenThereAreTwoMarksInARowStartingInFirstSideAndTheThirdOneIsOccupied_CanHandleReturnsFalse()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                Mark.OpponentFromCoordinates(0, 1),
+                Mark.OpponentFromCoordinates(0, 2),
+                Mark.AIFromCoordinates(0,0)
+            });
+
+            var canHandle = blockStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeFalse();
+        }
+
+        [TestMethod]
         public void GivenThereAreTwoMarksInARowStartingInSecondSide_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
