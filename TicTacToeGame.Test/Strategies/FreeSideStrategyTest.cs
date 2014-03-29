@@ -7,16 +7,26 @@ namespace TicTacToeGame.Test.Strategies
     [TestClass]
     public class FreeSideStrategyTest
     {
+        FreeSideStrategy freeSideStrategy = new FreeSideStrategy();
+
         [TestMethod]
         public void GivenAFullBoard_CanHandleReturnsFalse()
         {
-            var freeSideStrategy = new FreeSideStrategy();
-
-            var initialBoard = BoardTestHelper.GetFullBoard();
+            var initialBoard = BoardTestHelper.GetAFullBoard();
 
             var canHandle = freeSideStrategy.CanHandle(initialBoard);
 
             canHandle.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void GivenTheFirstSideFree_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(0,1);
+
+            var canHandle = freeSideStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
         }
     }
 }

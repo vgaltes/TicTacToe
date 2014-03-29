@@ -32,11 +32,20 @@ namespace TicTacToeGame.Test
             return board;
         }
 
-        internal static Cell[,] GetFullBoard()
+        internal static Cell[,] GetAFullBoard()
         {
             var board = new Cell[3, 3]{{Cell.AI, Cell.AI, Cell.AI},
                                         {Cell.AI, Cell.AI, Cell.AI},
                                         {Cell.AI, Cell.AI, Cell.AI}};
+
+            return board;
+        }
+
+        internal static Cell[,] GetAFullBoardWithAnEmptyCellAt(int row, int column)
+        {
+            var board = GetAFullBoard();
+
+            board[row, column] = Cell.Empty;
 
             return board;
         }
