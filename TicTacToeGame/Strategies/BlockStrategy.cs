@@ -6,7 +6,7 @@ namespace TicTacToeGame.Strategies
     {
         public bool CanHandle(Cell[,] board)
         {
-            if (board[0, 0] == Cell.Opponent && board[0, 1] == Cell.Opponent)
+            if (board[0, 0] == Cell.Opponent && board[0, 1] == Cell.Opponent && board[0,2] == Cell.Empty)
                 return true;
 
             return false;
