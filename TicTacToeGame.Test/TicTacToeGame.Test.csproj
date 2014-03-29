@@ -59,7 +59,7 @@
     <Compile Include="Mark.cs" />
     <Compile Include="Strategies\CenterStrategyTest.cs" />
     <Compile Include="Strategies\FreeCornerStrategyTest.cs" />
-    <Compile Include="TicTacToeTests.cs" />
+    <Compile Include="Strategies\OppositeCornerStrategyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
