@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 namespace TicTacToeGame.Strategies
 {
-    public class FreeSideStrategy
+    public class FreeSideStrategy : TicTacToeStrategy
     {
         private List<MarkCoordinate> Sides
             = new List<MarkCoordinate>();
@@ -23,6 +23,12 @@ namespace TicTacToeGame.Strategies
             }
 
             return false;
+        }
+
+
+        public void Update(Cell[,] board)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
