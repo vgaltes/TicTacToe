@@ -88,5 +88,15 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeTrue();
         }
+
+        [TestMethod]
+        public void GivenTheFourthSideFree_UpdatePutsAMarkInTheFourthSide()
+        {
+            var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(2, 1);
+
+            freeSideStrategy.Update(initialBoard);
+
+            initialBoard[2, 1].Should().Be(Cell.AI);
+        }
     }
 }
