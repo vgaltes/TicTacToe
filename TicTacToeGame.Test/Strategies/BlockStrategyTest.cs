@@ -8,6 +8,8 @@ namespace TicTacToeGame.Test.Strategies
     [TestClass]
     public class BlockStrategyTest
     {
+        BlockStrategy blockStrategy = new BlockStrategy();
+
         [TestMethod]
         public void GivenThereIsAMarkInAllCorners_CanHandleReturnsFalse()
         {
@@ -18,10 +20,22 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(2, 2)
             });
 
-            var blockStrategy = new BlockStrategy();
             var canHandle = blockStrategy.CanHandle(initialBoard);
 
             canHandle.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void GivenThereAreTwoMarksInARowStartingInFirstCorner_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                Mark.OpponentFromCoordinates(0, 0),
+                Mark.OpponentFromCoordinates(0, 1)
+            });
+
+            var canHandle = blockStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
         }
     }
 }
