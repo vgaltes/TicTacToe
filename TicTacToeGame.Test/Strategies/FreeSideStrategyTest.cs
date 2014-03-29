@@ -70,6 +70,16 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [TestMethod]
+        public void GivenTheThirdSideFree_UpdatePutsAMarkInTheThirdSide()
+        {
+            var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(1, 2);
+
+            freeSideStrategy.Update(initialBoard);
+
+            initialBoard[1, 2].Should().Be(Cell.AI);
+        }
+
+        [TestMethod]
         public void GivenTheFourthSideFree_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(2, 1);
