@@ -38,5 +38,15 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeTrue();
         }
+
+        [TestMethod]
+        public void GivenTheThirdSideFree_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(1, 2);
+
+            var canHandle = freeSideStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
     }
 }
