@@ -126,6 +126,12 @@ namespace TicTacToeGame.Test.Strategies
             TestUpdateLine(line);
         }
 
+        [Test, TestCaseSource("GetTestDataForColumns")]
+        public void TestUpdate_ForColumns(TestLine line)
+        {
+            TestUpdateLine(line);
+        }
+
         private void TestCanHandleLine(TestLine line)
         {
             Mark startMark = Mark.OpponentFromCoordinates(line.RowStart, line.ColumnStart);
