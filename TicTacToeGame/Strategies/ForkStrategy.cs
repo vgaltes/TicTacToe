@@ -5,7 +5,7 @@ namespace TicTacToeGame.Strategies
     {
         public bool CanHandle(Cell[,] board)
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
