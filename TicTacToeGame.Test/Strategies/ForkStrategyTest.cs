@@ -34,8 +34,22 @@ namespace TicTacToeGame.Test.Strategies
         public void GivenABoarkWithTwoAIMarkInALine_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
-                    Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(0, 0),
                 Mark.AIFromCoordinates(0, 1)
+            });
+
+            var canHandle = forkStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
+
+        [Test]
+        public void GivenABoardWithAIMarksInFirstAndFourthCornerAndOpponentMarkInCenter_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(2, 2),
+                Mark.OpponentFromCoordinates(1,1)
             });
 
             var canHandle = forkStrategy.CanHandle(initialBoard);
