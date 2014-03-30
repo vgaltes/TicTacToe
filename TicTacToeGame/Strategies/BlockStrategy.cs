@@ -26,6 +26,8 @@ namespace TicTacToeGame.Strategies
             AddRows();
 
             AddColumns();
+
+            AddDiagonals();
         }
 
         private void AddColumns()
@@ -46,6 +48,11 @@ namespace TicTacToeGame.Strategies
             Lines.Add(new Line(new MarkCoordinate(1, 2), new MarkCoordinate(1, 1), new MarkCoordinate(1, 0)));
             Lines.Add(new Line(new MarkCoordinate(2, 0), new MarkCoordinate(2, 1), new MarkCoordinate(2, 2)));
             Lines.Add(new Line(new MarkCoordinate(2, 2), new MarkCoordinate(2, 1), new MarkCoordinate(2, 0)));
+        }
+
+        private void AddDiagonals()
+        {
+            Lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(1, 1), new MarkCoordinate(2, 2)));
         }
 
         public bool CanHandle(Cell[,] board)
