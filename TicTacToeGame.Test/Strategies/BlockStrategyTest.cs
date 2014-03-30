@@ -105,22 +105,22 @@ namespace TicTacToeGame.Test.Strategies
         [Test, TestCaseSource("GetTestDataForRows")]
         public void TestCanHandle_ForRows(TestLine line)
         {
-            TestLine(line);
+            TestCanHandleLine(line);
         }
 
         [Test, TestCaseSource("GetTestDataForColumns")]
         public void TestCanHandle_ForColumns(TestLine line)
         {
-            TestLine(line);
+            TestCanHandleLine(line);
         }
 
         [Test, TestCaseSource("GetTestDataForDiagonals")]
         public void TestCanHandle_ForDiagonals(TestLine line)
         {
-            TestLine(line);
+            TestCanHandleLine(line);
         }
 
-        private void TestLine(TestLine line)
+        private void TestCanHandleLine(TestLine line)
         {
             Mark startMark = Mark.OpponentFromCoordinates(line.RowStart, line.ColumnStart);
             Mark endMark = Mark.OpponentFromCoordinates(line.RowEnd, line.ColumnEnd);
