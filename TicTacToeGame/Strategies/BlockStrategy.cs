@@ -74,7 +74,16 @@ namespace TicTacToeGame.Strategies
 
         public void Update(Cell[,] board)
         {
-            throw new NotImplementedException();
+            foreach (var line in Lines)
+            {
+                if (board[line.LineStart.Row, line.LineStart.Column] == Cell.Opponent &&
+                     board[line.LineEnd.Row, line.LineEnd.Column] == Cell.Opponent &&
+                     board[line.Evaluate.Row, line.Evaluate.Column] == Cell.Empty
+                    )
+                {
+                    board[line.Evaluate.Row, line.Evaluate.Column] = Cell.AI;
+                }                    
+            }
         }
     }
 }
