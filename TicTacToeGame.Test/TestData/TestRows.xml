@@ -123,5 +123,16 @@
       <EvaluateValue>AI</EvaluateValue>
       <ExpectedCanHandleValue>false</ExpectedCanHandleValue>
     </TestLine>
+
+    <TestLine>
+      <RowStart>0</RowStart>
+      <ColumnStart>0</ColumnStart>
+      <RowEnd>0</RowEnd>
+      <ColumnEnd>2</ColumnEnd>
+      <RowEvaluate>0</RowEvaluate>
+      <ColumnEvaluate>1</ColumnEvaluate>
+      <EvaluateValue>Empty</EvaluateValue>
+      <ExpectedCanHandleValue>true</ExpectedCanHandleValue>
+    </TestLine>
   </Lines>
 </TestData>

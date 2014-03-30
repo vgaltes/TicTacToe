@@ -19,6 +19,7 @@ namespace TicTacToeGame
         {
             Strategies = new List<TicTacToeStrategy>
             {
+                new WinStrategy(),
                 new BlockStrategy(),
                 new CenterStrategy(),
                 new OppositeCornerStrategy(),
