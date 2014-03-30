@@ -103,19 +103,19 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [Test, TestCaseSource("GetTestDataForRows")]
-        public void TestRows(TestLine line)
+        public void TestCanHandle_ForRows(TestLine line)
         {
             TestLine(line);
         }
 
         [Test, TestCaseSource("GetTestDataForColumns")]
-        public void TestColumns(TestLine line)
+        public void TestCanHandle_ForColumns(TestLine line)
         {
             TestLine(line);
         }
 
         [Test, TestCaseSource("GetTestDataForDiagonals")]
-        public void TestDiagonals(TestLine line)
+        public void TestCanHandle_ForDiagonals(TestLine line)
         {
             TestLine(line);
         }
