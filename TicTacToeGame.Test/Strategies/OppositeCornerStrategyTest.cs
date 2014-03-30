@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame.Test.Strategies
 {
-    [TestClass]
+    [TestFixture]
     public class OppositeCornerStrategyTest
     {
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheFirstCorner_CanHandleReturnsTrue()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -19,7 +19,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheFirstCorner_TheAIPutsTheMarkInTheFourthCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -36,7 +36,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheSecondCorner_CanHandleReturnsTrue()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -48,7 +48,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheSecondCorner_TheAIPutsTheMarkInTheThirdCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -66,7 +66,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheThirdCorner_CanHandleReturnsTrue()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -78,7 +78,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheThirdCorner_TheAIPutsTheMarkInTheSecondCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -96,7 +96,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheFourthCorner_CanHandleReturnsTrue()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -108,7 +108,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheFourthCorner_TheAIPutsTheMarkInTheFirstCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -126,7 +126,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenAnEmptyBoard_CanHandleReturnsFalse()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -138,7 +138,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheFirstAndFourthCorner_CanHandleReturnsFalse()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();
@@ -152,7 +152,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAnOpponentInTheFirstAndSecondCorner_TheAIPutsTheMarkInTheThirdCorner()
         {
             var oppositeCornerStrategy = new OppositeCornerStrategy();

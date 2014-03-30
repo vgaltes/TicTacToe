@@ -1,23 +1,23 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 
 namespace TicTacToeGame.Console.Test
 {
-    [TestClass]
+    [TestFixture]
     public class TicTacToeConsoleRunnerTests
     {
         Mock<TicTacToe> ticTacToe;
         TicTacToeConsoleRunner ticTacToeConsoleRunner;
 
-        [TestInitialize]
+        [Test]
         public void TestInitialize()
         {
             ticTacToe = new Mock<TicTacToe>();
             ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object);
         }
 
-        [TestMethod]
+        [Test]
         public void WhenThePlayerPlays_TheGameHandlesTheMove()
         {
             ticTacToeConsoleRunner.Play(0, 0);
@@ -25,7 +25,7 @@ namespace TicTacToeGame.Console.Test
             ticTacToe.Verify(ttt => ttt.OpponentMove(0, 0));
         }
 
-        [TestMethod]
+        [Test]
         public void WhenThePlayerPlays_TheGamePlaysTheAI()
         {
             ticTacToeConsoleRunner.Play(0, 0);
@@ -33,7 +33,7 @@ namespace TicTacToeGame.Console.Test
             ticTacToe.Verify(ttt => ttt.AIMove());
         }
 
-        [TestMethod]
+        [Test]
         public void WhenAskingForTheBoard_TheGameBoardIsReturned()
         {
             ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Cell[1, 1]);

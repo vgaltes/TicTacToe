@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
+using NUnit.Framework;
 
 namespace TicTacToeGame.Console.Test
 {
-    [TestClass]
+    [TestFixture]
     public class TicTacToeBoardDrawerTests
     {
-        [TestMethod]
+        [Test]
         public void GetBoardRepresentationOfAnEmptyBoard_ReturnsEmptyBoardDrawnAsAString()
         {
             Cell[,] board = new Cell[3, 3]{{Cell.Empty, Cell.Empty, Cell.Empty},
@@ -26,7 +26,7 @@ namespace TicTacToeGame.Console.Test
             boardRepresentation.Should().Be(expectedRepresentation);
         }
 
-        [TestMethod]
+        [Test]
         public void GetBoardRepresentationOfBoardWithAIInSomeCells_ReturnsTheBoardDrawnAsAString()
         {
             Cell[,] board = new Cell[3, 3]{{Cell.AI, Cell.Empty, Cell.Empty},
@@ -41,7 +41,7 @@ namespace TicTacToeGame.Console.Test
             boardRepresentation.Should().Be(expectedRepresentation);
         }
 
-        [TestMethod]
+        [Test]
         public void GetBoardRepresentationOfBoardWithOpponentInSomeCells_ReturnsTheBoardDrawnAsAString()
         {
             Cell[,] board = new Cell[3, 3]{{Cell.Empty, Cell.Opponent, Cell.Opponent},

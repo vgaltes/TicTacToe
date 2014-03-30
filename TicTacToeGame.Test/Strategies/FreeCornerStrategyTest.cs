@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TicTacToeGame.Strategies;
 using FluentAssertions;
+using NUnit.Framework;
 
 namespace TicTacToeGame.Test.Strategies
 {
-    [TestClass]
+    [TestFixture]
     public class FreeCornerStrategyTest
     {
-        [TestMethod]
+        [Test]
         public void GivenThereIsTheFirstCornerEmpty_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
@@ -23,7 +23,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsTheFirstCornerEmpty_TheAIPutTheMarkInTheFirstCorner()
         {
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
@@ -36,7 +36,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAMarkInTheFirstCorner_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
@@ -47,7 +47,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAMarkInTheFirstCorner_TheAIPutTheMarkInTheSecondCorner()
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
@@ -64,7 +64,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAMarkInTheTwoFirstCorners_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetABoardWithMarks( new List<Mark> {
@@ -78,7 +78,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAMarkInTheTwoFirstCorners_TheAIPutTheMarkInTheThirdCorner()
         {
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
@@ -98,7 +98,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAMarkInTheThreeFirstCorners_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
@@ -113,7 +113,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAMarkInTheThreeFirstCorners_TheAIPutTheMarkInTheFourthCorner()
         {
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
@@ -135,7 +135,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenThereIsAMarkInAllCorners_CanHandleReturnsFalse()
         {
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {

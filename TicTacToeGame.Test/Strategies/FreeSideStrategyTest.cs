@@ -1,15 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
+﻿using FluentAssertions;
 using TicTacToeGame.Strategies;
+using NUnit.Framework;
 
 namespace TicTacToeGame.Test.Strategies
 {
-    [TestClass]
+    [TestFixture]
     public class FreeSideStrategyTest
     {
         FreeSideStrategy freeSideStrategy = new FreeSideStrategy();
 
-        [TestMethod]
+        [Test]
         public void GivenAFullBoard_CanHandleReturnsFalse()
         {
             var initialBoard = BoardTestHelper.GetAFullBoard();
@@ -19,7 +19,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheFirstSideFree_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(0,1);
@@ -29,7 +29,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheFirstSideFree_UpdatePutsAMarkInTheFirstSide()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(0, 1);
@@ -39,7 +39,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard[0, 1].Should().Be(Cell.AI);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheSecondSideFree_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(1, 0);
@@ -49,7 +49,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheSecondSideFree_UpdatePutsAMarkInTheSeconSide()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(1, 0);
@@ -59,7 +59,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard[1, 0].Should().Be(Cell.AI);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheThirdSideFree_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(1, 2);
@@ -69,7 +69,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheThirdSideFree_UpdatePutsAMarkInTheThirdSide()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(1, 2);
@@ -79,7 +79,7 @@ namespace TicTacToeGame.Test.Strategies
             initialBoard[1, 2].Should().Be(Cell.AI);
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheFourthSideFree_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(2, 1);
@@ -89,7 +89,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheFourthSideFree_UpdatePutsAMarkInTheFourthSide()
         {
             var initialBoard = BoardTestHelper.GetAFullBoardWithAnEmptyCellAt(2, 1);

@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame.Test.Strategies
 {
-    [TestClass]
+    [TestFixture]
     public class CenterStrategyTest
     {
-        [TestMethod]
+        [Test]
         public void GivenTheCenterIsFree_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
@@ -18,7 +18,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheCenterIsNotFree_CanHandleReturnsFalse()
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMarkInTheCenterOfType(Cell.Opponent);
@@ -29,7 +29,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void GivenTheCenterIsFree_UpdatePutsAMarkInTheCenter()
         {
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
