@@ -5,7 +5,7 @@ namespace TicTacToeGame.Strategies
 {
     public abstract class LineStrategy : TicTacToeStrategy
     {
-        List<Line> Lines = new List<Line>();
+        protected List<Line> Lines = new List<Line>();
         private Cell cellTypeToEvaluate;
 
         public LineStrategy(Cell cellTypeToEvaluate)
