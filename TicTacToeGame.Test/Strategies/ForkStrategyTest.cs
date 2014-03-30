@@ -72,5 +72,20 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeFalse();
         }
+
+        [Test]
+        public void GivenABoardWithAIMarksInACornerAndASideAndOpponentMarkInACornerAndASide_CanHandleReturnsTrue()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(1, 2),
+                Mark.OpponentFromCoordinates(0,1),
+                Mark.OpponentFromCoordinates(2,2)
+            });
+
+            var canHandle = forkStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
     }
 }
