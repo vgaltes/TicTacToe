@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace TicTacToeGame.Test.Strategies
 {
     [TestFixture]
+    [Ignore]
     public class ForkStrategyTest
     {
         ForkStrategy forkStrategy = new ForkStrategy();
@@ -43,6 +44,7 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
+        
         [Test]
         public void GivenABoarkWithTwoAIMarkInALine_UpdatesReturnsABoardWithAnAIMarkInTheSecondSide()
         {
