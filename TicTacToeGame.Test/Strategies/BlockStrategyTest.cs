@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
-using TicTacToeGame.Strategies;
-using System;
-using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using FluentAssertions;
+using NUnit.Framework;
+using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame.Test.Strategies
 {
