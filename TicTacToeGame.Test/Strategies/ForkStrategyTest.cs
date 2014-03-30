@@ -112,5 +112,28 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeTrue();
         }
+
+        [Test]
+        public void GivenABoardWithAIMarksInACornerAndASideAndOpponentMarkInACornerAndASide_UpdateAddsAnAIMarkInTheSecondSide()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(1, 2),
+                Mark.OpponentFromCoordinates(0,1),
+                Mark.OpponentFromCoordinates(2,2)
+            });
+
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(1, 2),
+                Mark.AIFromCoordinates(1, 0),
+                Mark.OpponentFromCoordinates(0,1),
+                Mark.OpponentFromCoordinates(2,2)
+            });
+
+            forkStrategy.Update(initialBoard);
+
+            initialBoard.Should().ContainInOrder(expectedBoard);
+        }
     }
 }
