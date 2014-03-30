@@ -55,6 +55,7 @@
     <Compile Include="Strategies\MarkCoordinate.cs" />
     <Compile Include="Strategies\OppositeCornerStrategy.cs" />
     <Compile Include="Strategies\TicTacToeStrategy.cs" />
+    <Compile Include="Strategies\WinStrategy.cs" />
     <Compile Include="TicTacToe.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

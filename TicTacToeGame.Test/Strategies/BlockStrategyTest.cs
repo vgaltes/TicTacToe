@@ -13,13 +13,6 @@ namespace TicTacToeGame.Test.Strategies
     {
         BlockStrategy blockStrategy = new BlockStrategy();
 
-        private TestContext testContextInstance;
-        public TestContext TestContext
-        {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
-        }
-
         [Test]
         public void GivenThereIsAMarkInAllCorners_CanHandleReturnsFalse()
         {
