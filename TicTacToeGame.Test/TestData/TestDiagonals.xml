@@ -7,9 +7,39 @@
       <RowEnd>1</RowEnd>
       <ColumnEnd>1</ColumnEnd>
       <RowEvaluate>2</RowEvaluate>
-      <ColumnEvaluate>1</ColumnEvaluate>
+      <ColumnEvaluate>2</ColumnEvaluate>
       <EvaluateValue>Empty</EvaluateValue>
       <ExpectedCanHandleValue>true</ExpectedCanHandleValue>
-    </TestLine>    
+    </TestLine>
+    <TestLine>
+      <RowStart>2</RowStart>
+      <ColumnStart>2</ColumnStart>
+      <RowEnd>1</RowEnd>
+      <ColumnEnd>1</ColumnEnd>
+      <RowEvaluate>0</RowEvaluate>
+      <ColumnEvaluate>0</ColumnEvaluate>
+      <EvaluateValue>Empty</EvaluateValue>
+      <ExpectedCanHandleValue>true</ExpectedCanHandleValue>
+    </TestLine>
+    <TestLine>
+      <RowStart>0</RowStart>
+      <ColumnStart>0</ColumnStart>
+      <RowEnd>1</RowEnd>
+      <ColumnEnd>1</ColumnEnd>
+      <RowEvaluate>2</RowEvaluate>
+      <ColumnEvaluate>2</ColumnEvaluate>
+      <EvaluateValue>AI</EvaluateValue>
+      <ExpectedCanHandleValue>false</ExpectedCanHandleValue>
+    </TestLine>
+    <TestLine>
+      <RowStart>2</RowStart>
+      <ColumnStart>2</ColumnStart>
+      <RowEnd>1</RowEnd>
+      <ColumnEnd>1</ColumnEnd>
+      <RowEvaluate>0</RowEvaluate>
+      <ColumnEvaluate>0</ColumnEvaluate>
+      <EvaluateValue>AI</EvaluateValue>
+      <ExpectedCanHandleValue>false</ExpectedCanHandleValue>
+    </TestLine>
   </Lines>
 </TestData>
