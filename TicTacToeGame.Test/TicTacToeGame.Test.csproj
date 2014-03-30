@@ -76,6 +76,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\TestDiagonals.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\TestColumns.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

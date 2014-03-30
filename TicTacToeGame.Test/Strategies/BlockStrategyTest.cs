@@ -114,6 +114,12 @@ namespace TicTacToeGame.Test.Strategies
             TestLine(line);
         }
 
+        [Test, TestCaseSource("GetTestDataForDiagonals")]
+        public void TestDiagonals(TestLine line)
+        {
+            TestLine(line);
+        }
+
         private void TestLine(TestLine line)
         {
             Mark startMark = Mark.OpponentFromCoordinates(line.RowStart, line.ColumnStart);
@@ -139,6 +145,11 @@ namespace TicTacToeGame.Test.Strategies
         private IEnumerable<TestLine> GetTestDataForColumns()
         {
             return GetTestData(@"TestData\TestColumns.xml");
+        }
+
+        private IEnumerable<TestLine> GetTestDataForDiagonals()
+        {
+            return GetTestData(@"TestData\TestDiagonals.xml");
         }
         
         private IEnumerable<TestLine> GetTestData(string fileName)
