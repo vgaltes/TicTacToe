@@ -47,7 +47,7 @@ namespace TicTacToeGame.Strategies
             Lines.Add(new Line(new MarkCoordinate(2, 0), new MarkCoordinate(1, 1), new MarkCoordinate(0, 2)));
         }
 
-        public bool CanHandle(Cell[,] board)
+        public virtual bool CanHandle(Cell[,] board)
         {
             foreach (var line in Lines)
             {
@@ -58,7 +58,7 @@ namespace TicTacToeGame.Strategies
             return false;
         }
         
-        public void Update(Cell[,] board)
+        public virtual void Update(Cell[,] board)
         {
             foreach (var line in Lines)
             {

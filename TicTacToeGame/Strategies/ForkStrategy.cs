@@ -7,7 +7,7 @@ namespace TicTacToeGame.Strategies
     {
         public ForkStrategy() : base(Cell.AI) { }
 
-        public new bool CanHandle(Cell[,] board)
+        public override bool CanHandle(Cell[,] board)
         {
             int suitableLines = 0;
 
