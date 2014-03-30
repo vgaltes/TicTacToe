@@ -30,7 +30,7 @@ namespace TicTacToeGame.Strategies
             Lines.Add(new Line(new MarkCoordinate(2, 0), new MarkCoordinate(2, 1), new MarkCoordinate(2, 2)));
             Lines.Add(new Line(new MarkCoordinate(2, 2), new MarkCoordinate(2, 1), new MarkCoordinate(2, 0)));
 
-            Lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(0, 1), new MarkCoordinate(0, 2)));
+            Lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(1, 0), new MarkCoordinate(2, 0)));
         }
 
         public bool CanHandle(Cell[,] board)
