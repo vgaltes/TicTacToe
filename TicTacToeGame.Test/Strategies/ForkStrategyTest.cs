@@ -21,13 +21,13 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [Test]
-        public void GivenABoarkWithOneAIMark_CanHandleReturnsFalse()
+        public void GivenABoarkWithOneAIMark_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
 
             var canHandle = forkStrategy.CanHandle(initialBoard);
 
-            canHandle.Should().BeFalse();
+            canHandle.Should().BeTrue();
         }
 
         [Test]
@@ -55,6 +55,22 @@ namespace TicTacToeGame.Test.Strategies
             var canHandle = forkStrategy.CanHandle(initialBoard);
 
             canHandle.Should().BeTrue();
+        }
+
+        [Test]
+        public void GivenABoardWithAIMarksInAllCornersAndOpponentMarkInCenter_CanHandleReturnsFalse()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(2, 2),
+                Mark.AIFromCoordinates(0, 2),
+                Mark.AIFromCoordinates(2, 0),
+                Mark.OpponentFromCoordinates(1,1)
+            });
+
+            var canHandle = forkStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeFalse();
         }
     }
 }

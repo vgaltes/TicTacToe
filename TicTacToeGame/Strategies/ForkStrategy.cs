@@ -20,13 +20,35 @@ namespace TicTacToeGame.Strategies
                             if (line.LineStart.Row == row && line.LineStart.Column == column ||
                                 line.LineEnd.Row == row && line.LineEnd.Column == column ||
                                 line.Evaluate.Row == row && line.Evaluate.Column == column)
-                                suitableLines++;
+                            {
+                                if ( IsLineSuitableForAFork(board, line))
+                                    suitableLines++;
+                            }   
                         }
                     }
                 }
             }
 
             return suitableLines >= 2;
+        }
+
+        private bool IsLineSuitableForAFork(Cell[,] board, Line line)
+        {
+            int aiCells = 0;
+
+            if (board[line.LineStart.Row, line.LineStart.Column] == Cell.Opponent ||
+                board[line.LineEnd.Row, line.LineEnd.Column] == Cell.Opponent ||
+                board[line.Evaluate.Row, line.Evaluate.Column] == Cell.Opponent)
+                return false;
+            
+            if (board[line.LineStart.Row, line.LineStart.Column] == Cell.AI)
+                aiCells++;
+            if (board[line.LineEnd.Row, line.LineEnd.Column] == Cell.AI)
+                aiCells++;
+            if (board[line.Evaluate.Row, line.Evaluate.Column] == Cell.AI)
+                aiCells++;
+
+            return aiCells == 1;
         }
     }
 }
