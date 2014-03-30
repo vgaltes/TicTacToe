@@ -1,11 +1,8 @@
 ﻿using System;
 namespace TicTacToeGame.Strategies
 {
-    public class ForkStrategy
+    public class ForkStrategy : LineStrategy
     {
-        public bool CanHandle(Cell[,] board)
-        {
-            return false;
-        }
+        public ForkStrategy() : base(Cell.AI) { }
     }
 }

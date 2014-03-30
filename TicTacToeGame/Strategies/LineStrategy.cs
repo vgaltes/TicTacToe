@@ -82,14 +82,14 @@ namespace TicTacToeGame.Strategies
                 board[coordinate.Row, coordinate.Column] = Cell.AI;
         }
 
-        private bool LineHasTwoCellsOfEvaluatedType(Cell[,] board, Line line)
+        protected bool LineHasTwoCellsOfEvaluatedType(Cell[,] board, Line line)
         {
             int cellCount = CountCellsOfType(cellTypeToEvaluate, board, line);
 
             return cellCount == 2;
         }
 
-        private bool LineHasOneEmptyCell(Cell[,] board, Line line)
+        protected bool LineHasOneEmptyCell(Cell[,] board, Line line)
         {
             int cellCount = CountCellsOfType(Cell.Empty, board, line);
 
