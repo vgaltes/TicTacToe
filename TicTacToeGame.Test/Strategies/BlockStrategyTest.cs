@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TicTacToeGame.Strategies;
+using System;
 
 namespace TicTacToeGame.Test.Strategies
 {
@@ -9,6 +10,13 @@ namespace TicTacToeGame.Test.Strategies
     public class BlockStrategyTest
     {
         BlockStrategy blockStrategy = new BlockStrategy();
+
+        private TestContext testContextInstance;
+        public TestContext TestContext
+        {
+            get { return testContextInstance; }
+            set { testContextInstance = value; }
+        }
 
         [TestMethod]
         public void GivenThereIsAMarkInAllCorners_CanHandleReturnsFalse()
@@ -90,6 +98,31 @@ namespace TicTacToeGame.Test.Strategies
             var canHandle = blockStrategy.CanHandle(initialBoard);
 
             canHandle.Should().BeTrue();
+        }
+
+        [TestMethod]
+        [DeploymentItem("TestData\\TestRows.xml", "TestData")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\TestData\\TestRows.xml", "TestRows", DataAccessMethod.Sequential)]
+        public void TestRows()
+        {
+            Mark startMark = Mark.OpponentFromCoordinates(Convert.ToInt32(TestContext.DataRow["RowStart"]),
+                Convert.ToInt32(TestContext.DataRow["ColumnStart"]));
+            Mark endMark = Mark.OpponentFromCoordinates(Convert.ToInt32(TestContext.DataRow["RowEnd"]),
+                Convert.ToInt32(TestContext.DataRow["ColumnEnd"]));
+
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                startMark,
+                endMark
+            });
+
+            if (!(string.IsNullOrWhiteSpace(TestContext.DataRow["EvaluateValue"].ToString())))
+                initialBoard[Convert.ToInt32(TestContext.DataRow["RowEvaluate"]),
+                    Convert.ToInt32(TestContext.DataRow["ColumneEvaluate"])] = 
+                        (Cell)Enum.Parse(typeof(Cell), TestContext.DataRow["EvaluateValue"].ToString());
+
+            var canHandle = blockStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().Be(bool.Parse(TestContext.DataRow["ExpectedValue"].ToString()));
         }
     }
 }

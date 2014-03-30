@@ -6,15 +6,15 @@ namespace TicTacToeGame.Strategies
     public class Line
     {
         public MarkCoordinate LineStart { get; private set; }
-        public MarkCoordinate LineMiddle { get; private set; }
-
         public MarkCoordinate LineEnd { get; private set; }
+
+        public MarkCoordinate Evaluate { get; private set; }
 
         public Line(MarkCoordinate start, MarkCoordinate middle, MarkCoordinate end)
         {
             LineStart = start;
-            LineMiddle = middle;
-            LineEnd = end;
+            LineEnd = middle;
+            Evaluate = end;
         }
     }
 
@@ -34,8 +34,8 @@ namespace TicTacToeGame.Strategies
             foreach (var line in Lines)
             {
                 if (board[line.LineStart.Row, line.LineStart.Column] == Cell.Opponent &&
-                     board[line.LineMiddle.Row, line.LineMiddle.Column] == Cell.Opponent &&
-                     board[line.LineEnd.Row, line.LineEnd.Column] == Cell.Empty
+                     board[line.LineEnd.Row, line.LineEnd.Column] == Cell.Opponent &&
+                     board[line.Evaluate.Row, line.Evaluate.Column] == Cell.Empty
                     )
                     return true;
             }

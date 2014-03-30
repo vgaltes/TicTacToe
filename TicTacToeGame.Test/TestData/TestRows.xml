@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Lines>
+  <Line>
+    <RowStart>0</RowStart>
+    <ColumnStart>0</ColumnStart>
+    <RowEnd>0</RowEnd>
+    <ColumnEnd>1</ColumnEnd>
+    <RowEvaluate>0</RowEvaluate>
+    <ColumnEvaluate>2</ColumnEvaluate>
+    <EvaluateValue>Empty</EvaluateValue>
+    <ExpectedValue>True</ExpectedValue>
+  </Line>
+  <Line>
+    <RowStart>0</RowStart>
+    <ColumnStart>0</ColumnStart>
+    <RowEnd>0</RowEnd>
+    <ColumnEnd>1</ColumnEnd>
+    <RowEvaluate>0</RowEvaluate>
+    <ColumnEvaluate>2</ColumnEvaluate>
+    <EvaluateValue>AI</EvaluateValue>
+    <ExpectedValue>False</ExpectedValue>
+  </Line>
+  <Line>
+    <RowStart>0</RowStart>
+    <ColumnStart>2</ColumnStart>
+    <RowEnd>0</RowEnd>
+    <ColumnEnd>1</ColumnEnd>
+    <RowEvaluate>0</RowEvaluate>
+    <ColumnEvaluate>0</ColumnEvaluate>
+    <EvaluateValue>Empty</EvaluateValue>
+    <ExpectedValue>True</ExpectedValue>
+  </Line>
+  <Line>
+    <RowStart>0</RowStart>
+    <ColumnStart>2</ColumnStart>
+    <RowEnd>0</RowEnd>
+    <ColumnEnd>1</ColumnEnd>
+    <RowEvaluate>0</RowEvaluate>
+    <ColumnEvaluate>0</ColumnEvaluate>
+    <EvaluateValue>AI</EvaluateValue>
+    <ExpectedValue>False</ExpectedValue>
+  </Line>
+</Lines>
