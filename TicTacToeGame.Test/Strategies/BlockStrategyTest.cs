@@ -124,8 +124,7 @@ namespace TicTacToeGame.Test.Strategies
                 endMark
              });
 
-            if (!(string.IsNullOrWhiteSpace(line.EvaluateValue)))
-                initialBoard[line.RowEvaluate, line.ColumnEvaluate] = (Cell)Enum.Parse(typeof(Cell), line.EvaluateValue);
+            initialBoard[line.RowEvaluate, line.ColumnEvaluate] = (Cell)Enum.Parse(typeof(Cell), line.EvaluateValue);
 
             var canHandle = blockStrategy.CanHandle(initialBoard);
 
