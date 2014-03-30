@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace TicTacToeGame.Test.Strategies
 {
     [TestFixture]
-    [Ignore]
     public class ForkStrategyTest
     {
         ForkStrategy forkStrategy = new ForkStrategy();
@@ -22,13 +21,13 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [Test]
-        public void GivenABoarkWithOneAIMark_CanHandleReturnsTrue()
+        public void GivenABoarkWithOneAIMark_CanHandleReturnsFalse()
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
 
             var canHandle = forkStrategy.CanHandle(initialBoard);
 
-            canHandle.Should().BeTrue();
+            canHandle.Should().BeFalse();
         }
 
         [Test]
@@ -77,23 +76,7 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeTrue();
         }
-
-        [Test]
-        public void GivenABoardWithAIMarksInAllCornersAndOpponentMarkInCenter_CanHandleReturnsFalse()
-        {
-            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
-                Mark.AIFromCoordinates(0, 0),
-                Mark.AIFromCoordinates(2, 2),
-                Mark.AIFromCoordinates(0, 2),
-                Mark.AIFromCoordinates(2, 0),
-                Mark.OpponentFromCoordinates(1,1)
-            });
-
-            var canHandle = forkStrategy.CanHandle(initialBoard);
-
-            canHandle.Should().BeFalse();
-        }
-
+        
         [Test]
         public void GivenABoardWithAIMarksInACornerAndASideAndOpponentMarkInACornerAndASide_CanHandleReturnsTrue()
         {
