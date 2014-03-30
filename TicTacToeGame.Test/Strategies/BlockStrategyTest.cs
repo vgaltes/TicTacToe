@@ -120,6 +120,12 @@ namespace TicTacToeGame.Test.Strategies
             TestCanHandleLine(line);
         }
 
+        [Test, TestCaseSource("GetTestDataForRows")]
+        public void TestUpdate_ForRows(TestLine line)
+        {
+            TestUpdateLine(line);
+        }
+
         private void TestCanHandleLine(TestLine line)
         {
             Mark startMark = Mark.OpponentFromCoordinates(line.RowStart, line.ColumnStart);
@@ -135,6 +141,23 @@ namespace TicTacToeGame.Test.Strategies
             var canHandle = blockStrategy.CanHandle(initialBoard);
 
             canHandle.Should().Be(line.ExpectedCanHandleValue);
+        }
+
+        private void TestUpdateLine(TestLine line)
+        {
+            Mark startMark = Mark.OpponentFromCoordinates(line.RowStart, line.ColumnStart);
+            Mark endMark = Mark.OpponentFromCoordinates(line.RowEnd, line.ColumnEnd);
+
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                startMark,
+                endMark
+             });
+
+            if (line.ExpectedCanHandleValue)
+            {
+                blockStrategy.Update(initialBoard);
+                initialBoard[line.RowEvaluate, line.ColumnEvaluate].Should().Be(Cell.AI);
+            }
         }
 
         private IEnumerable<TestLine> GetTestDataForRows()
