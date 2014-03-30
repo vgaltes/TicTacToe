@@ -76,6 +76,27 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeTrue();
         }
+
+        [Test]
+        public void GivenABoardWithAIMarksInFirstAndFourthCornerAndOpponentMarkInCenter_UpdateAddsAnAIMarkInSecondCorner()
+        {
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(2, 2),
+                Mark.OpponentFromCoordinates(1,1)
+            });
+
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(2, 2),
+                Mark.AIFromCoordinates(0, 2),
+                Mark.OpponentFromCoordinates(1,1)
+            });
+
+            forkStrategy.Update(initialBoard);
+
+            initialBoard.Should().ContainInOrder(expectedBoard);
+        }
         
         [Test]
         public void GivenABoardWithAIMarksInACornerAndASideAndOpponentMarkInACornerAndASide_CanHandleReturnsTrue()
