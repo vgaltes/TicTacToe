@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BoardTestHelper.cs" />
     <Compile Include="Mark.cs" />
+    <Compile Include="Strategies\ForkStrategyTest.cs" />
     <Compile Include="Strategies\WinStrategyTest.cs" />
     <Compile Include="Strategies\BlockStrategyTest.cs" />
     <Compile Include="Strategies\CenterStrategyTest.cs" />
