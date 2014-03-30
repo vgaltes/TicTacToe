@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+
 namespace TicTacToeGame.Strategies
 {
     public abstract class LineStrategy : TicTacToeStrategy
@@ -49,28 +51,65 @@ namespace TicTacToeGame.Strategies
         {
             foreach (var line in Lines)
             {
-                if (board[line.LineStart.Row, line.LineStart.Column] == cellTypeToEvaluate &&
-                     board[line.LineEnd.Row, line.LineEnd.Column] == cellTypeToEvaluate &&
-                     board[line.Evaluate.Row, line.Evaluate.Column] == Cell.Empty
-                    )
+                if (LineHasTwoCellsOfEvaluatedType(board, line) && LineHasOneEmptyCell(board, line))
                     return true;
             }
 
             return false;
         }
-
+        
         public void Update(Cell[,] board)
         {
             foreach (var line in Lines)
             {
-                if (board[line.LineStart.Row, line.LineStart.Column] == cellTypeToEvaluate &&
-                     board[line.LineEnd.Row, line.LineEnd.Column] == cellTypeToEvaluate &&
-                     board[line.Evaluate.Row, line.Evaluate.Column] == Cell.Empty
-                    )
+                if (LineHasTwoCellsOfEvaluatedType(board, line) && LineHasOneEmptyCell(board, line))
                 {
-                    board[line.Evaluate.Row, line.Evaluate.Column] = Cell.AI;
+                    FillEmptyCellWithAIMark(board, line);
                 }
             }
+        }
+
+        private void FillEmptyCellWithAIMark(Cell[,] board, Line line)
+        {
+            FillMarkCoordinateIfEmpty(board, line.LineStart);
+            FillMarkCoordinateIfEmpty(board, line.LineEnd);
+            FillMarkCoordinateIfEmpty(board, line.Evaluate);
+        }
+
+        private void FillMarkCoordinateIfEmpty(Cell[,] board, MarkCoordinate coordinate)
+        {
+            if (board[coordinate.Row, coordinate.Column] == Cell.Empty)
+                board[coordinate.Row, coordinate.Column] = Cell.AI;
+        }
+
+        private bool LineHasTwoCellsOfEvaluatedType(Cell[,] board, Line line)
+        {
+            int cellCount = CountCellsOfType(cellTypeToEvaluate, board, line);
+
+            return cellCount == 2;
+        }
+
+        private bool LineHasOneEmptyCell(Cell[,] board, Line line)
+        {
+            int cellCount = CountCellsOfType(Cell.Empty, board, line);
+
+            return cellCount == 1;
+        }
+
+        private int CountCellsOfType(Cell cellType, Cell[,] board, Line line)
+        {
+            int cellCount = 0;
+
+            if (board[line.LineStart.Row, line.LineStart.Column] == cellType)
+                cellCount++;
+
+            if (board[line.LineEnd.Row, line.LineEnd.Column] == cellType)
+                cellCount++;
+
+            if (board[line.Evaluate.Row, line.Evaluate.Column] == cellType)
+                cellCount++;
+
+            return cellCount;
         }
     }
 }
