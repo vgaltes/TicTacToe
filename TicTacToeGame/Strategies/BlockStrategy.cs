@@ -7,7 +7,6 @@ namespace TicTacToeGame.Strategies
     {
         public MarkCoordinate LineStart { get; private set; }
         public MarkCoordinate LineEnd { get; private set; }
-
         public MarkCoordinate Evaluate { get; private set; }
 
         public Line(MarkCoordinate start, MarkCoordinate middle, MarkCoordinate end)
@@ -27,6 +26,11 @@ namespace TicTacToeGame.Strategies
             Lines.Add(new Line(new MarkCoordinate(0,0), new MarkCoordinate(0,1), new MarkCoordinate(0,2)));
             Lines.Add(new Line(new MarkCoordinate(0,2), new MarkCoordinate(0, 1), new MarkCoordinate(0, 0)));
             Lines.Add(new Line(new MarkCoordinate(1, 0), new MarkCoordinate(1, 1), new MarkCoordinate(1, 2)));
+            Lines.Add(new Line(new MarkCoordinate(1, 2), new MarkCoordinate(1, 1), new MarkCoordinate(1, 0)));
+            Lines.Add(new Line(new MarkCoordinate(2, 0), new MarkCoordinate(2, 1), new MarkCoordinate(2, 2)));
+            Lines.Add(new Line(new MarkCoordinate(2, 2), new MarkCoordinate(2, 1), new MarkCoordinate(2, 0)));
+
+            Lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(0, 1), new MarkCoordinate(0, 2)));
         }
 
         public bool CanHandle(Cell[,] board)

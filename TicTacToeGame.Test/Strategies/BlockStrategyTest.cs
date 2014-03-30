@@ -3,6 +3,8 @@ using FluentAssertions;
 using TicTacToeGame.Strategies;
 using System;
 using NUnit.Framework;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace TicTacToeGame.Test.Strategies
 {
@@ -100,29 +102,56 @@ namespace TicTacToeGame.Test.Strategies
             canHandle.Should().BeTrue();
         }
 
-        //[TestMethod]
-        //[DeploymentItem("TestData\\TestRows.xml", "TestData")]
-        //[DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\TestData\\TestRows.xml", "TestRows", DataAccessMethod.Sequential)]
-        //public void TestRows()
-        //{
-        //    Mark startMark = Mark.OpponentFromCoordinates(Convert.ToInt32(TestContext.DataRow["RowStart"]),
-        //        Convert.ToInt32(TestContext.DataRow["ColumnStart"]));
-        //    Mark endMark = Mark.OpponentFromCoordinates(Convert.ToInt32(TestContext.DataRow["RowEnd"]),
-        //        Convert.ToInt32(TestContext.DataRow["ColumnEnd"]));
+        [Test, TestCaseSource("GetTestDataForRows")]
+        public void TestRows(TestLine line)
+        {
+            TestLine(line);
+        }
 
-        //    var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
-        //        startMark,
-        //        endMark
-        //    });
+        [Test, TestCaseSource("GetTestDataForColumns")]
+        public void TestColumns(TestLine line)
+        {
+            TestLine(line);
+        }
 
-        //    if (!(string.IsNullOrWhiteSpace(TestContext.DataRow["EvaluateValue"].ToString())))
-        //        initialBoard[Convert.ToInt32(TestContext.DataRow["RowEvaluate"]),
-        //            Convert.ToInt32(TestContext.DataRow["ColumneEvaluate"])] = 
-        //                (Cell)Enum.Parse(typeof(Cell), TestContext.DataRow["EvaluateValue"].ToString());
+        private void TestLine(TestLine line)
+        {
+            Mark startMark = Mark.OpponentFromCoordinates(line.RowStart, line.ColumnStart);
+            Mark endMark = Mark.OpponentFromCoordinates(line.RowEnd, line.ColumnEnd);
 
-        //    var canHandle = blockStrategy.CanHandle(initialBoard);
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
+                startMark,
+                endMark
+             });
 
-        //    canHandle.Should().Be(bool.Parse(TestContext.DataRow["ExpectedValue"].ToString()));
-        //}
+            if (!(string.IsNullOrWhiteSpace(line.EvaluateValue)))
+                initialBoard[line.RowEvaluate, line.ColumnEvaluate] = (Cell)Enum.Parse(typeof(Cell), line.EvaluateValue);
+
+            var canHandle = blockStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().Be(line.ExpectedCanHandleValue);
+        }
+
+        private IEnumerable<TestLine> GetTestDataForRows()
+        {
+            return GetTestData(@"TestData\TestRows.xml");
+        }
+
+        private IEnumerable<TestLine> GetTestDataForColumns()
+        {
+            return GetTestData(@"TestData\TestColumns.xml");
+        }
+        
+        private IEnumerable<TestLine> GetTestData(string fileName)
+        {
+            using ( var fileStreamReader = new StreamReader(fileName))
+            {
+                var serializer = new XmlSerializer(typeof(TestData));
+                TestData lines = (TestData)serializer.Deserialize(fileStreamReader);
+
+                foreach (var line in lines.Lines)
+                    yield return line;
+            }
+        }
     }
 }

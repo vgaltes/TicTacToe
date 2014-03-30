@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TestData>
+  <Lines>
+    <TestLine>
+      <RowStart>0</RowStart>
+      <ColumnStart>0</ColumnStart>
+      <RowEnd>1</RowEnd>
+      <ColumnEnd>0</ColumnEnd>
+      <RowEvaluate>2</RowEvaluate>
+      <ColumnEvaluate>0</ColumnEvaluate>
+      <EvaluateValue>Empty</EvaluateValue>
+      <ExpectedCanHandleValue>true</ExpectedCanHandleValue>
+    </TestLine>
+  </Lines>
+</TestData>
