@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using TicTacToeGame.Strategies;
+﻿using System.Collections.Generic;
 using FluentAssertions;
-using System.Collections.Generic;
+using NUnit.Framework;
+using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame.Test.Strategies
 {
@@ -17,6 +17,22 @@ namespace TicTacToeGame.Test.Strategies
             var canHandle = blockForkStrategy.CanHandle(initialBoard);
 
             canHandle.Should().BeTrue();
+        }
+
+        [Test]
+        public void GivenThereIsAnAICellInTheFirstCorner_UpdatePutsAMarkInTheFirstSide()
+        {
+            var blockForkStrategy = new BlockForkStrategy();
+
+            var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
+            blockForkStrategy.Update(initialBoard);
+
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.AIFromCoordinates(0, 0),
+                Mark.AIFromCoordinates(0, 1)
+            });
+
+            initialBoard.Should().ContainInOrder(expectedBoard);
         }
 
         [Test]
