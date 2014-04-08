@@ -27,7 +27,21 @@ namespace TicTacToeGame.Strategies
 
         public void Update(Cell[,] board)
         {
-            throw new NotImplementedException();
+            foreach (var emptyCell in EmptyCellsInBoard(board))
+            {
+                var imaginaryBoard = new Cell[3, 3];
+                Array.Copy(board, imaginaryBoard, board.Length);
+                imaginaryBoard[emptyCell.Row, emptyCell.Column] = Cell.AI;
+
+                foreach (var line in Lines)
+                {
+                    if (IsLineSuitableForABlockFork(imaginaryBoard, line))
+                    {
+                        board[emptyCell.Row, emptyCell.Column] = Cell.AI;
+                        return;
+                    }
+                }
+            }
         }
 
         private IEnumerable<MarkCoordinate> EmptyCellsInBoard(Cell[,] board)
