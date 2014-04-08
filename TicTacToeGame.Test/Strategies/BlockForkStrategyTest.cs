@@ -51,5 +51,25 @@ namespace TicTacToeGame.Test.Strategies
 
             canHandle.Should().BeFalse();
         }
+
+        [Test]
+        public void GivenThereIsAnAICellInTheSecondCornerAndAnOpponentCellInTheFirstCorner_UpdatePutsAMarkInTheCenter()
+        {
+            var blockForkStrategy = new BlockForkStrategy();
+
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.OpponentFromCoordinates(0,0),
+                Mark.AIFromCoordinates(0, 2)
+            });
+            blockForkStrategy.Update(initialBoard);
+
+            var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.OpponentFromCoordinates(0,0),
+                Mark.AIFromCoordinates(0, 2),
+                Mark.AIFromCoordinates(1, 1)
+            });
+
+            initialBoard.Should().ContainInOrder(expectedBoard);
+        }
     }
 }
