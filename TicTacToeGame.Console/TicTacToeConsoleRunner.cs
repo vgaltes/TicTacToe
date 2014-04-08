@@ -7,6 +7,7 @@
         public TicTacToeConsoleRunner(TicTacToe ticTacToe)
         {
             this.ticTacToe = ticTacToe;
+            //ticTacToe.AIMove();
         }
 
         public void Play(int row, int column)

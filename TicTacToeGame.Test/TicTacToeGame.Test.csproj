@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BoardTestHelper.cs" />
     <Compile Include="Mark.cs" />
+    <Compile Include="Strategies\BlockForkStrategyTest.cs" />
     <Compile Include="Strategies\ForkStrategyTest.cs">
       <SubType>Code</SubType>
     </Compile>

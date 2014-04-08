@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Cell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\BlockForkStrategy.cs" />
     <Compile Include="Strategies\BlockStrategy.cs" />
     <Compile Include="Strategies\CenterStrategy.cs" />
     <Compile Include="Strategies\ForkStrategy.cs">
