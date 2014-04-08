@@ -14,11 +14,11 @@ namespace TicTacToeGame.Strategies
             Sides.Add(new MarkCoordinate(2, 1));
         }
 
-        public bool CanHandle(Cell[,] board)
+        public bool CanHandle(Board board)
         {
             foreach ( var side in Sides)
             {
-                if (board[side.Row, side.Column] == Cell.Empty)
+                if ( board.IsCellOfType(Cell.Empty, side.Row, side.Column))
                     return true;
             }
 
@@ -26,13 +26,13 @@ namespace TicTacToeGame.Strategies
         }
 
 
-        public void Update(Cell[,] board)
+        public void Update(Board board)
         {
             foreach (var side in Sides)
             {
-                if (board[side.Row, side.Column] == Cell.Empty)
+                if (board.IsCellOfType(Cell.Empty, side.Row, side.Column))
                 {
-                    board[side.Row, side.Column] = Cell.AI;
+                    board.FillAICell(side.Row, side.Column);
                 }
             }
         }

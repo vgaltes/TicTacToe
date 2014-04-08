@@ -1,9 +1,11 @@
 ﻿using System;
+
 namespace TicTacToeGame.Strategies
 {
     public interface TicTacToeStrategy
     {
-        bool CanHandle(TicTacToeGame.Cell[,] board);
-        void Update(TicTacToeGame.Cell[,] board);
+        bool CanHandle(Board board);
+
+        void Update(Board board);
     }
 }

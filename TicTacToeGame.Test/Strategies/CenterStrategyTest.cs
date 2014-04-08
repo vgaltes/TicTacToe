@@ -39,7 +39,7 @@ namespace TicTacToeGame.Test.Strategies
 
             var expectedBoard = BoardTestHelper.GetABoardWithAMarkInTheCenterOfType(Cell.AI);
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
     }
 }

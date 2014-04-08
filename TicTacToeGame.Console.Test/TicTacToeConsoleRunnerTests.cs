@@ -36,7 +36,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenAskingForTheBoard_TheGameBoardIsReturned()
         {
-            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Cell[1, 1]);
+            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
             ticTacToeConsoleRunner.GetBoard();
 
             ticTacToe.VerifyGet(ttt => ttt.Board);

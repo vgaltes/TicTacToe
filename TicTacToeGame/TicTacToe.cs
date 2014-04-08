@@ -5,13 +5,13 @@ namespace TicTacToeGame
 {
     public class TicTacToe
     {
-        public virtual Cell[,] Board{get; private set;}
-
+        public virtual Board Board { get; private set; }
+        
         private List<TicTacToeStrategy> Strategies;
 
         public TicTacToe()
         {
-            Board = new Cell[3, 3];
+            Board = new Board();
             CreateStrategies();
         }
 
@@ -21,6 +21,8 @@ namespace TicTacToeGame
             {
                 new WinStrategy(),
                 new BlockStrategy(),
+                new ForkStrategy(),
+                new BlockForkStrategy(),
                 new CenterStrategy(),
                 new OppositeCornerStrategy(),
                 new FreeCornerStrategy(),
@@ -40,14 +42,9 @@ namespace TicTacToeGame
             }
         }       
 
-        private void FillCell(int row, int column, Cell cell)
-        {
-            Board[row, column] = cell;
-        }
-
         public virtual void OpponentMove(int row, int column)
         {
-            FillCell(row, column, Cell.Opponent);
+            this.Board.FillOpponentCell(row, column);
         }
     }
 }

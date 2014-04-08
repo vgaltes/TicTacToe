@@ -15,24 +15,24 @@ namespace TicTacToeGame.Strategies
             Corners.Add(new MarkCoordinate(2, 2));
         }
 
-        public bool CanHandle(Cell[,] board)
+        public bool CanHandle(Board board)
         {
             foreach (var corner in Corners)
             {
-                if (board[corner.Row, corner.Column] == Cell.Empty)
+                if ( board.IsCellOfType(Cell.Empty, corner.Row, corner.Column))
                     return true;
             }
 
             return false;
         }
 
-        public void Update(Cell[,] board)
+        public void Update(Board board)
         {
             foreach (var corner in Corners)
             {
-                if (board[corner.Row, corner.Column] == Cell.Empty)
+                if (board.IsCellOfType(Cell.Empty, corner.Row, corner.Column))
                 {
-                    board[corner.Row, corner.Column] = Cell.AI;
+                    board.FillAICell(corner.Row, corner.Column);
                     return;
                 }
             }

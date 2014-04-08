@@ -8,14 +8,14 @@ namespace TicTacToeGame.Strategies
 {
     public class CenterStrategy : TicTacToeStrategy
     {
-        public bool CanHandle(Cell[,] board)
+        public bool CanHandle(Board board)
         {
-            return board[1, 1] == Cell.Empty;
+            return board.IsCenterEmpty();
         }
 
-        public void Update(Cell[,] board)
+        public void Update(Board board)
         {
-            board[1, 1] = Cell.AI;
+            board.FillCenterWithAICell();
         }
     }
 }

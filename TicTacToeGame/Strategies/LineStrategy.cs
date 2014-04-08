@@ -39,7 +39,7 @@ namespace TicTacToeGame.Strategies
             Lines.Add(new Line(new MarkCoordinate(0, 2), new MarkCoordinate(1, 1), new MarkCoordinate(2, 0)));
         }
 
-        public virtual bool CanHandle(Cell[,] board)
+        public virtual bool CanHandle(Board board)
         {
             foreach (var line in Lines)
             {
@@ -50,7 +50,7 @@ namespace TicTacToeGame.Strategies
             return false;
         }
         
-        public virtual void Update(Cell[,] board)
+        public virtual void Update(Board board)
         {
             foreach (var line in Lines)
             {
@@ -61,7 +61,7 @@ namespace TicTacToeGame.Strategies
             }
         }
 
-        private void FillEmptyCellWithAIMark(Cell[,] board, Line line)
+        private void FillEmptyCellWithAIMark(Board board, Line line)
         {
             foreach(var coordinate in line.Coordinates)
             {
@@ -69,37 +69,29 @@ namespace TicTacToeGame.Strategies
             }
         }
 
-        private void FillMarkCoordinateIfEmpty(Cell[,] board, MarkCoordinate coordinate)
+        private void FillMarkCoordinateIfEmpty(Board board, MarkCoordinate coordinate)
         {
-            if (board[coordinate.Row, coordinate.Column] == Cell.Empty)
-                board[coordinate.Row, coordinate.Column] = Cell.AI;
+            if ( board.IsCellOfType(Cell.Empty, coordinate.Row, coordinate.Column))
+            {
+                board.FillAICell(coordinate.Row, coordinate.Column);
+            }
         }
 
-        protected bool LineHasTwoCellsOfEvaluatedType(Cell[,] board, Line line)
+        protected bool LineHasTwoCellsOfEvaluatedType(Board board, Line line)
         {
-            int cellCount = CountCellsOfType(cellTypeToEvaluate, board, line);
-
+            int cellCount = board.CountCellsOfTypeInLine(cellTypeToEvaluate, line);
             return cellCount == 2;
         }
 
-        protected bool LineHasOneEmptyCell(Cell[,] board, Line line)
+        protected bool LineHasOneEmptyCell(Board board, Line line)
         {
-            int cellCount = CountCellsOfType(Cell.Empty, board, line);
-
+            int cellCount = board.CountCellsOfTypeInLine(Cell.Empty, line);
             return cellCount == 1;
         }
 
-        private int CountCellsOfType(Cell cellType, Cell[,] board, Line line)
+        private int CountCellsOfType(Cell cellType, Board board, Line line)
         {
-            int cellCount = 0;
-
-            foreach ( var coordinate in line.Coordinates)
-            {
-                if (board[coordinate.Row, coordinate.Column] == cellType)
-                    cellCount++;
-            }
-
-            return cellCount;
+            return board.CountCellsOfTypeInLine(cellType, line);
         }
     }
 }

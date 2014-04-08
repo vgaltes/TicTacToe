@@ -60,7 +60,7 @@ namespace TicTacToeGame.Test.Strategies
 
             forkStrategy.Update(initialBoard);
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace TicTacToeGame.Test.Strategies
 
             forkStrategy.Update(initialBoard);
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
         
         [Test]
@@ -133,7 +133,7 @@ namespace TicTacToeGame.Test.Strategies
 
             forkStrategy.Update(initialBoard);
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace TicTacToeGame.Test.Strategies
                     Mark.AIFromCoordinates(2, 2)
                 });
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace TicTacToeGame.Test.Strategies
                     Mark.AIFromCoordinates(2, 0)
                 });
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace TicTacToeGame.Test.Strategies
                     Mark.AIFromCoordinates(0, 2)
                 });
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
 
         [Test]
@@ -123,7 +123,7 @@ namespace TicTacToeGame.Test.Strategies
                     Mark.AIFromCoordinates(0, 0)
                 });
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
 
         [Test]
@@ -172,7 +172,7 @@ namespace TicTacToeGame.Test.Strategies
                     Mark.AIFromCoordinates(2, 2)
                 });
 
-            initialBoard.Should().ContainInOrder(expectedBoard);
+            initialBoard.Should().Be(expectedBoard);
         }
     }
 }

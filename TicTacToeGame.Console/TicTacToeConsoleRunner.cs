@@ -16,7 +16,7 @@
             ticTacToe.AIMove();
         }
 
-        public Cell[,] GetBoard()
+        public Board GetBoard()
         {
             return ticTacToe.Board;
         }

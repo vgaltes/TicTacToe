@@ -7,13 +7,11 @@ namespace TicTacToeGame.Strategies
     {
         public BlockForkStrategy() : base(Cell.AI) { }
 
-        public bool CanHandle(Cell[,] board)
+        public override bool CanHandle(Board board)
         {
-            foreach (var emptyCell in EmptyCellsInBoard(board))
+            foreach (var emptyCell in board.EmptyCells)
             {
-                var imaginaryBoard = new Cell[3, 3];
-                Array.Copy(board, imaginaryBoard, board.Length);
-                imaginaryBoard[emptyCell.Row, emptyCell.Column] = Cell.AI;
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell.Row, emptyCell.Column);
 
                 foreach (var line in Lines)
                 {
@@ -25,19 +23,17 @@ namespace TicTacToeGame.Strategies
             return false;
         }
 
-        public void Update(Cell[,] board)
+        public override void Update(Board board)
         {
-            foreach (var emptyCell in EmptyCellsInBoard(board))
+            foreach (var emptyCell in board.EmptyCells)
             {
-                var imaginaryBoard = new Cell[3, 3];
-                Array.Copy(board, imaginaryBoard, board.Length);
-                imaginaryBoard[emptyCell.Row, emptyCell.Column] = Cell.AI;
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell.Row, emptyCell.Column);
 
                 foreach (var line in Lines)
                 {
                     if (IsLineSuitableForABlockFork(imaginaryBoard, line))
                     {
-                        board[emptyCell.Row, emptyCell.Column] = Cell.AI;
+                        board.FillAICell(emptyCell.Row, emptyCell.Column);
                         return;
                     }
                 }
@@ -58,16 +54,16 @@ namespace TicTacToeGame.Strategies
             }
         }
 
-        private bool IsLineSuitableForABlockFork(Cell[,] board, Line line)
+        private bool IsLineSuitableForABlockFork(Board board, Line line)
         {
             int aiCells = 0;
 
             foreach (var coordinate in line.Coordinates)
             {
-                if (board[coordinate.Row, coordinate.Column] == Cell.Opponent)
+                if ( board.IsCellOfType(Cell.Opponent, coordinate.Row, coordinate.Column))
                     return false;
 
-                if (board[coordinate.Row, coordinate.Column] == Cell.AI)
+                if ( board.IsCellOfType(Cell.AI, coordinate.Row, coordinate.Column))
                     aiCells++;
             }
 

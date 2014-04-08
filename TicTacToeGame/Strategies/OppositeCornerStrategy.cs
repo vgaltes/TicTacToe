@@ -15,7 +15,7 @@ namespace TicTacToeGame.Strategies
             CornersAndOpposites.Add(new MarkCoordinate(2, 2), new MarkCoordinate(0, 0));
         }
 
-        public bool CanHandle(Cell[,] board)
+        public bool CanHandle(Board board)
         {   
             foreach ( var cornerAndOpposite in CornersAndOpposites )
             {
@@ -27,29 +27,29 @@ namespace TicTacToeGame.Strategies
             return false;
         }
         
-        public void Update(Cell[,] board)
+        public void Update(Board board)
         {
             PutAMarkInTheOppositeSquare(board);
         }
         
-        private bool IsOppositeCornerFree(MarkCoordinate markCoordinate, Cell[,] board)
+        private bool IsOppositeCornerFree(MarkCoordinate markCoordinate, Board board)
         {
-            return board[markCoordinate.Row, markCoordinate.Column] == Cell.Empty;
+            return board.IsCellOfType(Cell.Empty, markCoordinate.Row, markCoordinate.Column);
         }
 
-        private bool IsThereAndOpponentInTheCorner(MarkCoordinate markCoordinate, Cell[,] board)
+        private bool IsThereAndOpponentInTheCorner(MarkCoordinate markCoordinate, Board board)
         {
-            return board[markCoordinate.Row, markCoordinate.Column] == Cell.Opponent;
+            return board.IsCellOfType(Cell.Opponent, markCoordinate.Row, markCoordinate.Column);
         }
 
-        private void PutAMarkInTheOppositeSquare(Cell[,] board)
+        private void PutAMarkInTheOppositeSquare(Board board)
         {
             foreach (var cornerAndOpposite in CornersAndOpposites)
             {
                 if (IsThereAndOpponentInTheCorner(cornerAndOpposite.Key, board)
                     && IsOppositeCornerFree(cornerAndOpposite.Value, board))
                 {
-                    board[cornerAndOpposite.Value.Row, cornerAndOpposite.Value.Column] = Cell.AI;
+                    board.FillAICell(cornerAndOpposite.Value.Row, cornerAndOpposite.Value.Column);
                     return;
                 }
             }

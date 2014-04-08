@@ -7,15 +7,13 @@ namespace TicTacToeGame.Strategies
     {
         public ForkStrategy() : base(Cell.AI) { }
 
-        public override bool CanHandle(Cell[,] board)
-        {            
-            foreach (var emptyCell in EmptyCellsInBoard(board))
+        public override bool CanHandle(Board board)
+        {
+            foreach (var emptyCell in board.EmptyCells)
             {
                 int suitableLines = 0;
 
-                var imaginaryBoard = new Cell[3, 3];
-                Array.Copy(board, imaginaryBoard, board.Length);
-                imaginaryBoard[emptyCell.Row, emptyCell.Column] = Cell.AI;
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell.Row, emptyCell.Column);
 
                 foreach (var line in Lines)
                 {
@@ -30,16 +28,14 @@ namespace TicTacToeGame.Strategies
             return false;
         }
 
-        public override void Update(Cell[,] board)
+        public override void Update(Board board)
         {
             
-            foreach (var emptyCell in EmptyCellsInBoard(board))
+            foreach (var emptyCell in board.EmptyCells)
             {
                 int suitableLines = 0;
 
-                var imaginaryBoard = new Cell[3, 3];
-                Array.Copy(board, imaginaryBoard, board.Length);
-                imaginaryBoard[emptyCell.Row, emptyCell.Column] = Cell.AI;
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell.Row, emptyCell.Column);
 
                 foreach ( var line in Lines)
                 { 
@@ -49,25 +45,10 @@ namespace TicTacToeGame.Strategies
 
                 if (suitableLines >= 2)
                 {
-                    board[emptyCell.Row, emptyCell.Column] = Cell.AI;
+                    board.FillAICell(emptyCell.Row, emptyCell.Column);
                     return;
                 }
             }            
-        }
-
-        
-        private IEnumerable<MarkCoordinate> EmptyCellsInBoard(Cell[,] board)
-        {
-            for (int row = 0; row < 3; row++)
-            {
-                for (int column = 0; column < 3; column++)
-                {
-                    if (board[row, column] == Cell.Empty)
-                    {
-                        yield return new MarkCoordinate(row, column);
-                    }
-                }
-            }
         }
 
         private IEnumerable<Line> LinesWhichCrossesTheCell(MarkCoordinate cell)
@@ -82,16 +63,16 @@ namespace TicTacToeGame.Strategies
             }
         }
 
-        private bool IsLineSuitableForAFork(Cell[,] board, Line line)
+        private bool IsLineSuitableForAFork(Board board, Line line)
         {
             int aiCells = 0;
 
             foreach(var coordinate in line.Coordinates )
             {
-                if (board[coordinate.Row, coordinate.Column] == Cell.Opponent)
+                if(board.IsCellOfType(Cell.Opponent, coordinate.Row, coordinate.Column))
                     return false;
 
-                if (board[coordinate.Row, coordinate.Column] == Cell.AI)
+                if (board.IsCellOfType(Cell.AI, coordinate.Row, coordinate.Column))
                     aiCells++;
             }
 
