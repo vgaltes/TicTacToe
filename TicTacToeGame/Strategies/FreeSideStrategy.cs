@@ -3,20 +3,10 @@ namespace TicTacToeGame.Strategies
 {
     public class FreeSideStrategy : TicTacToeStrategy
     {
-        private List<MarkCoordinate> Sides
-            = new List<MarkCoordinate>();
-
-        public FreeSideStrategy()
-        {
-            Sides.Add(new MarkCoordinate(0, 1));
-            Sides.Add(new MarkCoordinate(1, 0));
-            Sides.Add(new MarkCoordinate(1, 2));
-            Sides.Add(new MarkCoordinate(2, 1));
-        }
 
         public bool CanHandle(Board board)
         {
-            foreach ( var side in Sides)
+            foreach ( var side in board.Sides)
             {
                 if ( board.IsCellOfType(Cell.Empty, side.Row, side.Column))
                     return true;
@@ -25,10 +15,9 @@ namespace TicTacToeGame.Strategies
             return false;
         }
 
-
         public void Update(Board board)
         {
-            foreach (var side in Sides)
+            foreach (var side in board.Sides)
             {
                 if (board.IsCellOfType(Cell.Empty, side.Row, side.Column))
                 {
