@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TicTacToeGame.Strategies
+namespace TicTacToeGame.Models
 {
     public class Line
     {

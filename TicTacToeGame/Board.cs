@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame

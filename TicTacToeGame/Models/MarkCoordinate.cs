@@ -1,4 +1,4 @@
-﻿namespace TicTacToeGame.Strategies
+﻿namespace TicTacToeGame.Models
 {
     public class MarkCoordinate
     {

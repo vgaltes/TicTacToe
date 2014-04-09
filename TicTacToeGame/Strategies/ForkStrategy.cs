@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TicTacToeGame.Models;
 namespace TicTacToeGame.Strategies
 {
     public class ForkStrategy : TicTacToeStrategy
