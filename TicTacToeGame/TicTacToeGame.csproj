@@ -56,7 +56,7 @@
     <Compile Include="Strategies\FreeCornerStrategy.cs" />
     <Compile Include="Strategies\FreeSideStrategy.cs" />
     <Compile Include="Strategies\Line.cs" />
-    <Compile Include="Strategies\LineStrategy.cs" />
+    <Compile Include="Strategies\EvaluatedLineStrategy.cs" />
     <Compile Include="Strategies\MarkCoordinate.cs" />
     <Compile Include="Strategies\OppositeCornerStrategy.cs" />
     <Compile Include="Strategies\TicTacToeStrategy.cs" />

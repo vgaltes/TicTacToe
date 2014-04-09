@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace TicTacToeGame.Strategies
 {
-    public abstract class LineStrategy : TicTacToeStrategy
+    public abstract class EvaluatedLineStrategy : TicTacToeStrategy
     {
         private Cell cellTypeToEvaluate;
 
-        public LineStrategy(Cell cellTypeToEvaluate)
+        public EvaluatedLineStrategy(Cell cellTypeToEvaluate)
         {
             this.cellTypeToEvaluate = cellTypeToEvaluate;
         }
