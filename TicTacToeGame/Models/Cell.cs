@@ -1,4 +1,4 @@
-﻿namespace TicTacToeGame
+﻿namespace TicTacToeGame.Models
 {
     public enum Cell
     {

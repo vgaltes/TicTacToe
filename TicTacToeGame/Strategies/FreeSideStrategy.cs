@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TicTacToeGame.Models;
 namespace TicTacToeGame.Strategies
 {
     public class FreeSideStrategy : TicTacToeStrategy
