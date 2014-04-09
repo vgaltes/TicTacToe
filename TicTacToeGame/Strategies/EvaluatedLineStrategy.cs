@@ -61,10 +61,5 @@ namespace TicTacToeGame.Strategies
             int cellCount = board.CountCellsOfTypeInLine(Cell.Empty, line);
             return cellCount == 1;
         }
-
-        private int CountCellsOfType(Cell cellType, Board board, Line line)
-        {
-            return board.CountCellsOfTypeInLine(cellType, line);
-        }
     }
 }
