@@ -4,20 +4,9 @@ namespace TicTacToeGame.Strategies
 {
     public class FreeCornerStrategy : TicTacToeStrategy
     {
-        private List<MarkCoordinate> Corners
-            = new List<MarkCoordinate>();
-
-        public FreeCornerStrategy()
-        {
-            Corners.Add(new MarkCoordinate(0, 0));
-            Corners.Add(new MarkCoordinate(0, 2));
-            Corners.Add(new MarkCoordinate(2, 0));
-            Corners.Add(new MarkCoordinate(2, 2));
-        }
-
         public bool CanHandle(Board board)
         {
-            foreach (var corner in Corners)
+            foreach (var corner in board.Corners)
             {
                 if ( board.IsCellOfType(Cell.Empty, corner.Row, corner.Column))
                     return true;
@@ -28,7 +17,7 @@ namespace TicTacToeGame.Strategies
 
         public void Update(Board board)
         {
-            foreach (var corner in Corners)
+            foreach (var corner in board.Corners)
             {
                 if (board.IsCellOfType(Cell.Empty, corner.Row, corner.Column))
                 {

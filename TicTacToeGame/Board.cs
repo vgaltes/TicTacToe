@@ -121,6 +121,17 @@ namespace TicTacToeGame
             }
         }
 
+        public IEnumerable<MarkCoordinate> Corners
+        {
+            get
+            {
+                foreach ( var cornerAndOpposite in cornersAndOpposites)
+                {
+                    yield return new MarkCoordinate(cornerAndOpposite.Key.Row, cornerAndOpposite.Key.Column);
+                }
+            }
+        }
+
         public Board GetCopyWithExtraCellOfType(Cell cell, int row, int column)
         {
             var imaginaryBoard = new Board();
