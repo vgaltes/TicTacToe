@@ -66,24 +66,24 @@ namespace TicTacToeGame
             sides.Add(new MarkCoordinate(2, 1));
         }
 
-        public void FillOpponentCell(int row, int column)
+        public void FillOpponentCell(MarkCoordinate cellCoordinate)
         {
-            FillCellWithType(Cell.Opponent, row, column);
+            FillCellWithType(Cell.Opponent, cellCoordinate);
         }
 
-        public void FillAICell(int row, int column)
+        public void FillAICell(MarkCoordinate cellCoordinate)
         {
-            FillCellWithType(Cell.AI, row, column);
+            FillCellWithType(Cell.AI, cellCoordinate);
         }
 
-        public void FillCellWithType(Cell cell, int row, int column)
+        public void FillCellWithType(Cell cell, MarkCoordinate cellCoordinate)
         {
-            Cells[row, column] = cell;
+            Cells[cellCoordinate.Row, cellCoordinate.Column] = cell;
         }
 
-        public bool IsCellOfType(Cell cell, int row, int column)
+        public bool IsCellOfType(Cell cell, MarkCoordinate cellCoordinate)
         {
-            return Cells[row, column] == cell;
+            return Cells[cellCoordinate.Row, cellCoordinate.Column] == cell;
         }
 
         public int CountCellsOfTypeInLine(Cell cellType, Line line)
@@ -151,23 +151,25 @@ namespace TicTacToeGame
             }
         }
 
-        public Board GetCopyWithExtraCellOfType(Cell cell, int row, int column)
+        public Board GetCopyWithExtraCellOfType(Cell cell, MarkCoordinate cellCoordinate)
         {
             var imaginaryBoard = new Board();
             Array.Copy(Cells, imaginaryBoard.Cells, Cells.Length);
-            imaginaryBoard.FillCellWithType(cell, row, column);
+            imaginaryBoard.FillCellWithType(cell, cellCoordinate);
 
             return imaginaryBoard;
         }
 
         public bool IsCenterEmpty()
         {
-            return IsCellOfType(Cell.Empty, CENTER_ROW, CENTER_COLUMN);
+            var centerCoordinate = new MarkCoordinate(CENTER_ROW, CENTER_COLUMN);
+            return IsCellOfType(Cell.Empty, centerCoordinate);
         }
 
         public void FillCenterWithAICell()
         {
-            FillAICell(CENTER_ROW, CENTER_COLUMN);
+            var centerCoordinate = new MarkCoordinate(CENTER_ROW, CENTER_COLUMN);
+            FillAICell(centerCoordinate);
         }
 
         public Cell this[int row, int column]

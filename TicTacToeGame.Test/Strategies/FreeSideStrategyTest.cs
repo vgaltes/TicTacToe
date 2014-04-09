@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using TicTacToeGame.Strategies;
 using NUnit.Framework;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Test.Strategies
 {
@@ -36,7 +37,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, 0, 1).Should().BeTrue();
+            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(0, 1)).Should().BeTrue();
         }
 
         [Test]
@@ -56,7 +57,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, 1, 0).Should().BeTrue();
+            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(1, 0)).Should().BeTrue();
         }
 
         [Test]
@@ -76,7 +77,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, 1, 2).Should().BeTrue();
+            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(1, 2)).Should().BeTrue();
         }
 
         [Test]
@@ -96,7 +97,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, 2, 1).Should().BeTrue();
+            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(2, 1)).Should().BeTrue();
         }
     }
 }

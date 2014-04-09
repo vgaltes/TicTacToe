@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console
 {
@@ -20,7 +21,7 @@ namespace TicTacToeGame.Console
             {
                 int[] coordinates = line.Split(',').Select(c => int.Parse(c)).ToArray();
 
-                ticTacToeGameRunner.Play(coordinates[0], coordinates[1]);
+                ticTacToeGameRunner.Play(new MarkCoordinate(coordinates[0], coordinates[1]));
 
                 boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToeGameRunner.GetBoard());
                 System.Console.WriteLine(boardAsString);

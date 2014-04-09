@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.Test
 {
@@ -14,10 +15,6 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void GetBoardRepresentationOfAnEmptyBoard_ReturnsEmptyBoardDrawnAsAString()
         {
-            //Cell[,] board = new Cell[3, 3]{{Cell.Empty, Cell.Empty, Cell.Empty},
-            //                                    {Cell.Empty, Cell.Empty, Cell.Empty},
-            //                                    {Cell.Empty, Cell.Empty, Cell.Empty}};
-
             Board board = new Board();
 
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
@@ -31,14 +28,10 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void GetBoardRepresentationOfBoardWithAIInSomeCells_ReturnsTheBoardDrawnAsAString()
         {
-            //Cell[,] board = new Cell[3, 3]{{Cell.AI, Cell.Empty, Cell.Empty},
-            //                                    {Cell.Empty, Cell.AI, Cell.Empty},
-            //                                    {Cell.Empty, Cell.Empty, Cell.AI}};
-
             Board board = new Board();
-            board.FillAICell(0, 0);
-            board.FillAICell(1, 1);
-            board.FillAICell(2, 2);
+            board.FillAICell(new MarkCoordinate(0, 0));
+            board.FillAICell(new MarkCoordinate(1, 1));
+            board.FillAICell(new MarkCoordinate(2, 2));
 
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
             var boardRepresentation = ticTacToeBoardDrawer.GetRepresentationOf(board);
@@ -51,17 +44,13 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void GetBoardRepresentationOfBoardWithOpponentInSomeCells_ReturnsTheBoardDrawnAsAString()
         {
-            //Cell[,] board = new Cell[3, 3]{{Cell.Empty, Cell.Opponent, Cell.Opponent},
-            //                                    {Cell.Opponent, Cell.Empty, Cell.Opponent},
-            //                                    {Cell.Opponent, Cell.Opponent, Cell.Empty}};
-
             Board board = new Board();
-            board.FillOpponentCell(0, 1);
-            board.FillOpponentCell(0, 2);
-            board.FillOpponentCell(1, 0);
-            board.FillOpponentCell(1, 2);
-            board.FillOpponentCell(2, 0);
-            board.FillOpponentCell(2, 1);
+            board.FillOpponentCell(new MarkCoordinate(0, 1));
+            board.FillOpponentCell(new MarkCoordinate(0, 2));
+            board.FillOpponentCell(new MarkCoordinate(1, 0));
+            board.FillOpponentCell(new MarkCoordinate(1, 2));
+            board.FillOpponentCell(new MarkCoordinate(2, 0));
+            board.FillOpponentCell(new MarkCoordinate(2, 1));
             
 
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();

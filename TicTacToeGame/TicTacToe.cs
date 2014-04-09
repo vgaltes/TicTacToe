@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame
@@ -42,9 +43,9 @@ namespace TicTacToeGame
             }
         }       
 
-        public virtual void OpponentMove(int row, int column)
+        public virtual void OpponentMove(MarkCoordinate cellCoordinate)
         {
-            this.Board.FillOpponentCell(row, column);
+            this.Board.FillOpponentCell(cellCoordinate);
         }
     }
 }

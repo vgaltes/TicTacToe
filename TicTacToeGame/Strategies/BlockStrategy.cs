@@ -1,4 +1,5 @@
 ﻿using System;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Strategies
 {

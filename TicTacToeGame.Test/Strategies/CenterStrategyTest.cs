@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame.Test.Strategies

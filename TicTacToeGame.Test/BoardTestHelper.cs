@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TicTacToeGame.Models;
 namespace TicTacToeGame.Test
 {
     public static class BoardTestHelper
@@ -10,7 +11,7 @@ namespace TicTacToeGame.Test
 
         public static Board GetABoardWithAMarkInTheCenterOfType(Cell cell)
         {
-            return GetABoardWithAMark(new Mark(1, 1, cell));
+            return GetABoardWithAMark(new Mark(cell, new MarkCoordinate(1,1)));
         }
 
         public static Board GetABoardWithAMark(Mark mark)
@@ -24,7 +25,7 @@ namespace TicTacToeGame.Test
 
             foreach (var mark in marks)
             {
-                board.FillCellWithType(mark.Cell, mark.Row, mark.Column);
+                board.FillCellWithType(mark.Cell, mark.CellCoordinate);
             }
 
             return board;
@@ -35,7 +36,7 @@ namespace TicTacToeGame.Test
             var board = new Board();
             foreach( var emptyCell in board.EmptyCells)
             {
-                board.FillAICell(emptyCell.Row, emptyCell.Column);
+                board.FillAICell(emptyCell);
             }
 
             return board;
@@ -45,7 +46,7 @@ namespace TicTacToeGame.Test
         {
             var board = GetAFullBoard();
 
-            board.FillCellWithType(Cell.Empty, row, column);
+            board.FillCellWithType(Cell.Empty, new MarkCoordinate(row, column));
 
             return board;
         }

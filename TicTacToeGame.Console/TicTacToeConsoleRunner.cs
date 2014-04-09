@@ -1,4 +1,5 @@
-﻿namespace TicTacToeGame.Console
+﻿using TicTacToeGame.Models;
+namespace TicTacToeGame.Console
 {
     public class TicTacToeConsoleRunner
     {
@@ -10,9 +11,9 @@
             //ticTacToe.AIMove();
         }
 
-        public void Play(int row, int column)
+        public void Play(MarkCoordinate cellCoordinate)
         {
-            ticTacToe.OpponentMove(row, column);
+            ticTacToe.OpponentMove(cellCoordinate);
             ticTacToe.AIMove();
         }
 

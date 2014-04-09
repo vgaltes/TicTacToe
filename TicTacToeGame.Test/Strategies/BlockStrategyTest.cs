@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using FluentAssertions;
 using NUnit.Framework;
+using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame.Test.Strategies
@@ -127,7 +128,7 @@ namespace TicTacToeGame.Test.Strategies
              });
 
             initialBoard.FillCellWithType((Cell)Enum.Parse(typeof(Cell), line.EvaluateValue),
-                line.RowEvaluate, line.ColumnEvaluate);
+                new MarkCoordinate(line.RowEvaluate, line.ColumnEvaluate));
 
             var canHandle = blockStrategy.CanHandle(initialBoard);
 
@@ -147,7 +148,7 @@ namespace TicTacToeGame.Test.Strategies
             if (line.ExpectedCanHandleValue)
             {
                 blockStrategy.Update(initialBoard);
-                initialBoard.IsCellOfType(Cell.AI, line.RowEvaluate, line.ColumnEvaluate);
+                initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(line.RowEvaluate, line.ColumnEvaluate));
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Strategies
 {
@@ -8,7 +9,7 @@ namespace TicTacToeGame.Strategies
         {
             foreach (var corner in board.Corners)
             {
-                if ( board.IsCellOfType(Cell.Empty, corner.Row, corner.Column))
+                if ( board.IsCellOfType(Cell.Empty, corner))
                     return true;
             }
 
@@ -19,9 +20,9 @@ namespace TicTacToeGame.Strategies
         {
             foreach (var corner in board.Corners)
             {
-                if (board.IsCellOfType(Cell.Empty, corner.Row, corner.Column))
+                if (board.IsCellOfType(Cell.Empty, corner))
                 {
-                    board.FillAICell(corner.Row, corner.Column);
+                    board.FillAICell(corner);
                     return;
                 }
             }

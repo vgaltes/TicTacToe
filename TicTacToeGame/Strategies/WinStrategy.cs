@@ -1,4 +1,5 @@
-﻿namespace TicTacToeGame.Strategies
+﻿using TicTacToeGame.Models;
+namespace TicTacToeGame.Strategies
 {
     public class WinStrategy : EvaluatedLineStrategy
     {

@@ -1,4 +1,5 @@
-﻿namespace TicTacToeGame.Console
+﻿using TicTacToeGame.Models;
+namespace TicTacToeGame.Console
 {
     public class TicTacToeBoardDrawer
     {

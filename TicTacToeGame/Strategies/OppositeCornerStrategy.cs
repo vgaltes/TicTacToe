@@ -24,12 +24,12 @@ namespace TicTacToeGame.Strategies
         
         private bool IsOppositeCornerFree(MarkCoordinate markCoordinate, Board board)
         {
-            return board.IsCellOfType(Cell.Empty, markCoordinate.Row, markCoordinate.Column);
+            return board.IsCellOfType(Cell.Empty, markCoordinate);
         }
 
         private bool IsThereAndOpponentInTheCorner(MarkCoordinate markCoordinate, Board board)
         {
-            return board.IsCellOfType(Cell.Opponent, markCoordinate.Row, markCoordinate.Column);
+            return board.IsCellOfType(Cell.Opponent, markCoordinate);
         }
 
         private void PutAMarkInTheOppositeSquare(Board board)
@@ -39,7 +39,7 @@ namespace TicTacToeGame.Strategies
                 if (IsThereAndOpponentInTheCorner(cornerAndOpposite.Key, board)
                     && IsOppositeCornerFree(cornerAndOpposite.Value, board))
                 {
-                    board.FillAICell(cornerAndOpposite.Value.Row, cornerAndOpposite.Value.Column);
+                    board.FillAICell(cornerAndOpposite.Value);
                     return;
                 }
             }
