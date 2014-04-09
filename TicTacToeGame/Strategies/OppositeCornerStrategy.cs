@@ -4,20 +4,9 @@ namespace TicTacToeGame.Strategies
 {
     public class OppositeCornerStrategy : TicTacToeStrategy
     {
-        private Dictionary<MarkCoordinate, MarkCoordinate> CornersAndOpposites
-            = new Dictionary<MarkCoordinate, MarkCoordinate>();
-
-        public OppositeCornerStrategy()
-        {
-            CornersAndOpposites.Add(new MarkCoordinate(0, 0), new MarkCoordinate(2, 2));
-            CornersAndOpposites.Add(new MarkCoordinate(0, 2), new MarkCoordinate(2, 0));
-            CornersAndOpposites.Add(new MarkCoordinate(2, 0), new MarkCoordinate(0, 2));
-            CornersAndOpposites.Add(new MarkCoordinate(2, 2), new MarkCoordinate(0, 0));
-        }
-
         public bool CanHandle(Board board)
         {   
-            foreach ( var cornerAndOpposite in CornersAndOpposites )
+            foreach ( var cornerAndOpposite in board.CornersAndOpposites )
             {
                 if ( IsThereAndOpponentInTheCorner(cornerAndOpposite.Key, board) 
                     && IsOppositeCornerFree(cornerAndOpposite.Value, board))
@@ -44,7 +33,7 @@ namespace TicTacToeGame.Strategies
 
         private void PutAMarkInTheOppositeSquare(Board board)
         {
-            foreach (var cornerAndOpposite in CornersAndOpposites)
+            foreach (var cornerAndOpposite in board.CornersAndOpposites)
             {
                 if (IsThereAndOpponentInTheCorner(cornerAndOpposite.Key, board)
                     && IsOppositeCornerFree(cornerAndOpposite.Value, board))

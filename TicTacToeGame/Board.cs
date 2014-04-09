@@ -14,6 +14,8 @@ namespace TicTacToeGame
 
         private Cell[,] Cells { get; set; }
         private List<Line> lines = new List<Line>();
+        private Dictionary<MarkCoordinate, MarkCoordinate> cornersAndOpposites
+            = new Dictionary<MarkCoordinate, MarkCoordinate>();
 
         public Board()
         {
@@ -22,6 +24,7 @@ namespace TicTacToeGame
             AddRows();
             AddColumns();
             AddDiagonals();
+            AddCornersAndOpposites();
         }
         
         private void AddRows()
@@ -42,6 +45,14 @@ namespace TicTacToeGame
         {
             lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(1, 1), new MarkCoordinate(2, 2)));
             lines.Add(new Line(new MarkCoordinate(0, 2), new MarkCoordinate(1, 1), new MarkCoordinate(2, 0)));
+        }
+
+        private void AddCornersAndOpposites()
+        {
+            cornersAndOpposites.Add(new MarkCoordinate(0, 0), new MarkCoordinate(2, 2));
+            cornersAndOpposites.Add(new MarkCoordinate(0, 2), new MarkCoordinate(2, 0));
+            cornersAndOpposites.Add(new MarkCoordinate(2, 0), new MarkCoordinate(0, 2));
+            cornersAndOpposites.Add(new MarkCoordinate(2, 2), new MarkCoordinate(0, 0));
         }
 
         public void FillOpponentCell(int row, int column)
@@ -99,6 +110,14 @@ namespace TicTacToeGame
             get
             {
                 return lines.AsEnumerable<Line>();
+            }
+        }
+
+        public Dictionary<MarkCoordinate, MarkCoordinate> CornersAndOpposites
+        {
+            get
+            {
+                return cornersAndOpposites;
             }
         }
 
