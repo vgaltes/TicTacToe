@@ -4,36 +4,21 @@ using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame
 {
-    public class TicTacToe
+    public class TicTacToe : ITicTacToe
     {
-        public virtual Board Board { get; private set; }
+        public Board Board { get; private set; }
         
-        private List<TicTacToeStrategy> Strategies;
+        private List<TicTacToeStrategy> strategies;
 
-        public TicTacToe()
+        public TicTacToe(List<TicTacToeStrategy> strategies)
         {
             Board = new Board();
-            CreateStrategies();
+            this.strategies = strategies;
         }
 
-        private void CreateStrategies()
+        public void AIMove()
         {
-            Strategies = new List<TicTacToeStrategy>
-            {
-                new WinStrategy(),
-                new BlockStrategy(),
-                new ForkStrategy(),
-                new BlockForkStrategy(),
-                new CenterStrategy(),
-                new OppositeCornerStrategy(),
-                new FreeCornerStrategy(),
-                new FreeSideStrategy()
-            };
-        }
-
-        public virtual void AIMove()
-        {
-            foreach ( var strategy in Strategies)
+            foreach ( var strategy in strategies)
             {
                 if ( strategy.CanHandle(Board))
                 {
@@ -43,7 +28,7 @@ namespace TicTacToeGame
             }
         }       
 
-        public virtual void OpponentMove(MarkCoordinate cellCoordinate)
+        public void OpponentMove(MarkCoordinate cellCoordinate)
         {
             this.Board.FillOpponentCell(cellCoordinate);
         }

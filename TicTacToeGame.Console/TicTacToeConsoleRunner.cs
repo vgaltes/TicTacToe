@@ -3,9 +3,9 @@ namespace TicTacToeGame.Console
 {
     public class TicTacToeConsoleRunner
     {
-        private readonly TicTacToe ticTacToe;
+        private readonly ITicTacToe ticTacToe;
 
-        public TicTacToeConsoleRunner(TicTacToe ticTacToe)
+        public TicTacToeConsoleRunner(ITicTacToe ticTacToe)
         {
             this.ticTacToe = ticTacToe;
             //ticTacToe.AIMove();

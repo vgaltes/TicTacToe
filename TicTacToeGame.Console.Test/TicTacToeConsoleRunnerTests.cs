@@ -8,13 +8,13 @@ namespace TicTacToeGame.Console.Test
     [TestFixture]
     public class TicTacToeConsoleRunnerTests
     {
-        Mock<TicTacToe> ticTacToe;
+        Mock<ITicTacToe> ticTacToe;
         TicTacToeConsoleRunner ticTacToeConsoleRunner;
 
         [SetUp]
         public void TestInitialize()
         {
-            ticTacToe = new Mock<TicTacToe>();
+            ticTacToe = new Mock<ITicTacToe>();
             ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object);
         }
 
