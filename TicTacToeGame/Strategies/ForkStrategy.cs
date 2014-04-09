@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 namespace TicTacToeGame.Strategies
 {
-    public class ForkStrategy : LineStrategy
+    public class ForkStrategy : TicTacToeStrategy
     {
-        public ForkStrategy() : base(Cell.AI) { }
-
-        public override bool CanHandle(Board board)
+        public bool CanHandle(Board board)
         {
             foreach (var emptyCell in board.EmptyCells)
             {
@@ -15,7 +13,7 @@ namespace TicTacToeGame.Strategies
 
                 var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell.Row, emptyCell.Column);
 
-                foreach (var line in Lines)
+                foreach (var line in board.Lines)
                 {
                     if (IsLineSuitableForAFork(imaginaryBoard, line))
                         suitableLines++;
@@ -28,7 +26,7 @@ namespace TicTacToeGame.Strategies
             return false;
         }
 
-        public override void Update(Board board)
+        public void Update(Board board)
         {
             
             foreach (var emptyCell in board.EmptyCells)
@@ -37,7 +35,7 @@ namespace TicTacToeGame.Strategies
 
                 var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell.Row, emptyCell.Column);
 
-                foreach ( var line in Lines)
+                foreach ( var line in board.Lines)
                 { 
                     if (IsLineSuitableForAFork(imaginaryBoard, line))
                             suitableLines++;
@@ -49,18 +47,6 @@ namespace TicTacToeGame.Strategies
                     return;
                 }
             }            
-        }
-
-        private IEnumerable<Line> LinesWhichCrossesTheCell(MarkCoordinate cell)
-        {
-            foreach (var line in Lines)
-            {
-                foreach ( var coordinate in line.Coordinates )
-                {
-                    if (coordinate.Row == cell.Row && coordinate.Column == cell.Column)
-                        yield return line;
-                }
-            }
         }
 
         private bool IsLineSuitableForAFork(Board board, Line line)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame
@@ -12,10 +13,35 @@ namespace TicTacToeGame
         public const int CENTER_COLUMN = 1;
 
         private Cell[,] Cells { get; set; }
+        private List<Line> lines = new List<Line>();
 
         public Board()
         {
             Cells = new Cell[NUMBER_OF_ROWS, NUMBER_OF_COLUMNS];
+
+            AddRows();
+            AddColumns();
+            AddDiagonals();
+        }
+        
+        private void AddRows()
+        {
+            lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(0, 1), new MarkCoordinate(0, 2)));
+            lines.Add(new Line(new MarkCoordinate(1, 0), new MarkCoordinate(1, 1), new MarkCoordinate(1, 2)));
+            lines.Add(new Line(new MarkCoordinate(2, 0), new MarkCoordinate(2, 1), new MarkCoordinate(2, 2)));
+        }
+
+        private void AddColumns()
+        {
+            lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(1, 0), new MarkCoordinate(2, 0)));
+            lines.Add(new Line(new MarkCoordinate(0, 1), new MarkCoordinate(1, 1), new MarkCoordinate(2, 1)));
+            lines.Add(new Line(new MarkCoordinate(0, 2), new MarkCoordinate(1, 2), new MarkCoordinate(2, 2)));
+        }
+        
+        private void AddDiagonals()
+        {
+            lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(1, 1), new MarkCoordinate(2, 2)));
+            lines.Add(new Line(new MarkCoordinate(0, 2), new MarkCoordinate(1, 1), new MarkCoordinate(2, 0)));
         }
 
         public void FillOpponentCell(int row, int column)
@@ -65,6 +91,14 @@ namespace TicTacToeGame
                         }
                     }
                 }
+            }
+        }
+
+        public IEnumerable<Line> Lines
+        {
+            get
+            {
+                return lines.AsEnumerable<Line>();
             }
         }
 
