@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TicTacToeGame.Models;
+﻿using TicTacToeGame.Models;
+
 namespace TicTacToeGame.Strategies
 {
     public class ForkStrategy : TicTacToeStrategy
     {
+        private const int MINIMUM_LINES_TO_FORK = 2;
+        private const int AI_CELLS_IN_A_FORK_LINE = 2;
+
         public bool CanHandle(Board board)
         {
             return GetCellCoordinatesSuitableForFork(board).IsValid;
@@ -30,7 +31,7 @@ namespace TicTacToeGame.Strategies
                         suitableLines++;
                 }
 
-                if (suitableLines >= 2)
+                if (suitableLines >= MINIMUM_LINES_TO_FORK)
                     return emptyCell;
             }
 
@@ -50,7 +51,7 @@ namespace TicTacToeGame.Strategies
                     aiCells++;
             }
 
-            return aiCells == 2;
+            return aiCells == AI_CELLS_IN_A_FORK_LINE;
         }
     }
 }
