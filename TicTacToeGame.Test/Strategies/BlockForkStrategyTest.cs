@@ -37,7 +37,7 @@ namespace TicTacToeGame.Test.Strategies
         }
 
         [Test]
-        public void GivenThereIsAnAICellInTheSecondCornerAndAnOpponentCellInTheFirstCorner_CanHandleReturnsTrue()
+        public void GivenThereIsAnAICellInTheSecondCornerAndAnOpponentCellInTheFirstCorner_CanHandleReturnsFalse()
         {
             var blockForkStrategy = new BlockForkStrategy();
 
@@ -48,26 +48,46 @@ namespace TicTacToeGame.Test.Strategies
 
             var canHandle = blockForkStrategy.CanHandle(initialBoard);
 
-            canHandle.Should().BeTrue();
+            canHandle.Should().BeFalse();
         }
 
         [Test]
-        public void GivenThereIsAnAICellInTheSecondCornerAndAnOpponentCellInTheFirstCorner_UpdatePutsAMarkInTheCenter()
+        public void GivenThereIsAnAICellInTheSecondCornerAndOpponentCellsInTheFirstCornerAndThirdCorner_CanHandleReturnsTrue()
         {
             var blockForkStrategy = new BlockForkStrategy();
 
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.OpponentFromCoordinates(0,0),
-                Mark.AIFromCoordinates(0, 2)
+                Mark.AIFromCoordinates(0, 2),
+                Mark.OpponentFromCoordinates(2,2)
+            });
+
+            var canHandle = blockForkStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
+        }
+
+        [Test]
+        public void GivenThereIsAnAICellInTheSecondCornerAndOpponentCellsInTheFirstCornerAndThirdCorner_UpdatePutsAMarkInTheFirstSide()
+        {
+            var blockForkStrategy = new BlockForkStrategy();
+
+            var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
+                Mark.OpponentFromCoordinates(0,0),
+                Mark.AIFromCoordinates(0, 2),
+                Mark.OpponentFromCoordinates(2,2)
             });
             blockForkStrategy.Update(initialBoard);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.OpponentFromCoordinates(0,0),
                 Mark.AIFromCoordinates(0, 2),
+                Mark.OpponentFromCoordinates(2,2),
                 Mark.AIFromCoordinates(1, 1)
             });
 
-            initialBoard.Should().Be(expectedBoard);
+            var canHandle = blockForkStrategy.CanHandle(initialBoard);
+
+            canHandle.Should().BeTrue();
         }
     }}

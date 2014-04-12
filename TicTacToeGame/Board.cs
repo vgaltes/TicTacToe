@@ -232,5 +232,21 @@ namespace TicTacToeGame
                 return "O";
             return " ";
         }
+
+        internal bool HasLessOpponentCellsThan(int numberOfCells)
+        {
+            int opponentCells = 0;
+
+            for (int row = 0; row < NUMBER_OF_ROWS; row++)
+            {
+                for (int column = 0; column < NUMBER_OF_COLUMNS; column++)
+                {
+                    if (Cells[row, column] == CellType.Opponent)
+                        opponentCells++;
+                }
+            }
+
+            return opponentCells < numberOfCells;
+        }
     }
 }

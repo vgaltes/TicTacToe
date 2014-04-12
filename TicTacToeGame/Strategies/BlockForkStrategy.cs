@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using TicTacToeGame.Models;
+﻿using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Strategies
 {
     public class BlockForkStrategy : TicTacToeStrategy
     {
+        private const int MINIMUM_OPPONENT_CELLS_TO_BLOCK_FORK = 2;
         public bool CanHandle(Board board)
         {
+            if (board.HasLessOpponentCellsThan(MINIMUM_OPPONENT_CELLS_TO_BLOCK_FORK))
+                return false;
+
             return GetCellCoordinatesSuitableForBlockFork(board).IsValid;
         }
 
         public void Update(Board board)
         {
-
             board.FillAICell(GetCellCoordinatesSuitableForBlockFork(board));            
         }
 
@@ -24,7 +25,7 @@ namespace TicTacToeGame.Strategies
                 var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
 
                 var winStrategy = new WinStrategy();
-                if ( winStrategy.CanHandle(board) )
+                if (winStrategy.CanHandle(imaginaryBoard))
                 {
                     return emptyCell;
                 }
