@@ -8,16 +8,12 @@ namespace TicTacToeGame.Strategies
     {
         public bool CanHandle(Board board)
         {
-            return GetCellCoordinatesSuitableForFork(board) != null;
+            return GetCellCoordinatesSuitableForFork(board).IsValid;
         }
 
         public void Update(Board board)
         {
-            var cellCoordinatesSuitableForFork = GetCellCoordinatesSuitableForFork(board);
-            if ( cellCoordinatesSuitableForFork != null)
-            {
-                board.FillAICell(cellCoordinatesSuitableForFork);
-            }
+            board.FillAICell(GetCellCoordinatesSuitableForFork(board));
         }
 
         private CellCoordinates GetCellCoordinatesSuitableForFork(Board board)
@@ -38,7 +34,7 @@ namespace TicTacToeGame.Strategies
                     return emptyCell;
             }
 
-            return null;
+            return CellCoordinates.InvalidCoordinates;
         }
 
         private bool IsLineSuitableForAFork(Board board, Line line)

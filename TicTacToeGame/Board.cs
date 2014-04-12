@@ -78,7 +78,8 @@ namespace TicTacToeGame
 
         public void FillCellWithType(CellType cell, CellCoordinates cellCoordinate)
         {
-            Cells[cellCoordinate.Row, cellCoordinate.Column] = cell;
+            if ( cellCoordinate.IsValid)
+                Cells[cellCoordinate.Row, cellCoordinate.Column] = cell;
         }
 
         public bool IsCellOfType(CellType cell, CellCoordinates cellCoordinate)
