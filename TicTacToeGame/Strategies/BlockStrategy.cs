@@ -3,7 +3,7 @@ using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Strategies
 {
-    public class BlockStrategy : EvaluatedLineStrategy
+    public class BlockStrategy : EvaluateLineStrategy
     {
         public BlockStrategy() : base (CellType.Opponent)
         {

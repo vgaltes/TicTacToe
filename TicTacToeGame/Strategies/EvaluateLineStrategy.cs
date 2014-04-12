@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TicTacToeGame.Models;
+﻿using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Strategies
 {
-    public abstract class EvaluatedLineStrategy : TicTacToeStrategy
+    public abstract class EvaluateLineStrategy : TicTacToeStrategy
     {
         private CellType cellTypeToEvaluate;
 
-        public EvaluatedLineStrategy(CellType cellTypeToEvaluate)
+        public EvaluateLineStrategy(CellType cellTypeToEvaluate)
         {
             this.cellTypeToEvaluate = cellTypeToEvaluate;
         }
