@@ -6,15 +6,15 @@ namespace TicTacToeGame.Strategies
     {
         public bool CanHandle(Board board)
         {
-            return GetEmptyCellInSideCoordinates(board).IsValid;
+            return GetFirstEmptyCellCoordinatesInASide(board).IsValid;
         }
 
         public void Update(Board board)
         {
-            board.FillAICell(GetEmptyCellInSideCoordinates(board));
+            board.FillAICell(GetFirstEmptyCellCoordinatesInASide(board));
         }
 
-        private CellCoordinates GetEmptyCellInSideCoordinates(Board board)
+        private CellCoordinates GetFirstEmptyCellCoordinatesInASide(Board board)
         {
             foreach ( var side in board.Sides)
             {
