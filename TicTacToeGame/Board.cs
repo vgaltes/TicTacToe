@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
 
@@ -68,7 +69,15 @@ namespace TicTacToeGame
 
         public void FillOpponentCell(CellCoordinates cellCoordinate)
         {
+            if (IsCellNotEmpty(cellCoordinate))
+                throw new NotAllowedMovementException();
+
             FillCellWithType(CellType.Opponent, cellCoordinate);
+        }
+
+        private bool IsCellNotEmpty(CellCoordinates cellCoordinate)
+        {
+            return Cells[cellCoordinate.Row, cellCoordinate.Column] != CellType.Empty;
         }
 
         public void FillAICell(CellCoordinates cellCoordinate)
