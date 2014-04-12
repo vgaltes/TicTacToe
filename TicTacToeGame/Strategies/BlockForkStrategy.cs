@@ -12,11 +12,8 @@ namespace TicTacToeGame.Strategies
             {
                 var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
 
-                foreach (var line in board.Lines)
-                {
-                    if (IsLineSuitableForABlockFork(imaginaryBoard, line))
-                        return true;
-                }
+                var winStrategy = new WinStrategy();
+                return winStrategy.CanHandle(board);
             }
 
             return false;
@@ -53,6 +50,7 @@ namespace TicTacToeGame.Strategies
             }
 
             return aiCells == 2;
+            
         }
     }
 }

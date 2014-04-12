@@ -9,14 +9,14 @@ namespace TicTacToeGame.Test.Strategies
     public class BlockForkStrategyTest
     {
         [Test]
-        public void GivenThereIsAnAICellInTheFirstCorner_CanHandleReturnsTrue()
+        public void GivenThereIsAnAICellInTheFirstCorner_CanHandleReturnsFalse()
         {
             var blockForkStrategy = new BlockForkStrategy();
 
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
             var canHandle = blockForkStrategy.CanHandle(initialBoard);
 
-            canHandle.Should().BeTrue();
+            canHandle.Should().BeFalse();
         }
 
         [Test]
