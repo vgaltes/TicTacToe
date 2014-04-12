@@ -7,8 +7,6 @@ namespace TicTacToeGame
     {
         void AIMove();
 
-        Board Board { get; }
-
         void OpponentMove(CellCoordinates cellCoordinate);
     }
 }

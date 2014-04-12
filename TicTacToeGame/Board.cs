@@ -80,7 +80,7 @@ namespace TicTacToeGame
             return Cells[cellCoordinate.Row, cellCoordinate.Column] != CellType.Empty;
         }
 
-        public void FillAICell(CellCoordinates cellCoordinate)
+        public virtual void FillAICell(CellCoordinates cellCoordinate)
         {
             FillCellWithType(CellType.AI, cellCoordinate);
         }

@@ -58,7 +58,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="TicTacToeBoardDrawerTests.cs" />
-    <Compile Include="TicTacToeConsoleRunnerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

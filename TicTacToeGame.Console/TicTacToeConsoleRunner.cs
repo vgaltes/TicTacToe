@@ -17,9 +17,9 @@ namespace TicTacToeGame.Console
             ticTacToe.AIMove();
         }
 
-        public Board GetBoard()
-        {
-            return ticTacToe.Board;
-        }
+        //public Board GetBoard()
+        //{
+        //    return ticTacToe.Board;
+        //}
     }
 }

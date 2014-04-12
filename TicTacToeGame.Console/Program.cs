@@ -12,7 +12,7 @@ namespace TicTacToeGame.Console
     {
         static void Main(string[] args)
         {
-            
+            /*
             var ticTacToeGameRunner = new TicTacToeConsoleRunner(CreateTicTacToe());
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
             var boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToeGameRunner.GetBoard());
@@ -27,7 +27,7 @@ namespace TicTacToeGame.Console
                 boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToeGameRunner.GetBoard());
                 System.Console.WriteLine(boardAsString);
                 line = System.Console.ReadLine();
-            } while (line != "q!");
+            } while (line != "q!");*/
         }
 
         private static TicTacToe CreateTicTacToe()
@@ -44,7 +44,9 @@ namespace TicTacToeGame.Console
                 new FreeSideStrategy()
             };
 
-            return new TicTacToe(strategies);
+            var board = new Board();
+
+            return new TicTacToe(board, strategies);
         }
     }
 }

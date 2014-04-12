@@ -6,13 +6,13 @@ namespace TicTacToeGame
 {
     public class TicTacToe : ITicTacToe
     {
-        public Board Board { get; private set; }
+        private readonly Board board;
         
-        private List<TicTacToeStrategy> strategies;
+        private readonly List<TicTacToeStrategy> strategies;
 
-        public TicTacToe(List<TicTacToeStrategy> strategies)
+        public TicTacToe(Board board, List<TicTacToeStrategy> strategies)
         {
-            Board = new Board();
+            this.board = board;
             this.strategies = strategies;
         }
 
@@ -20,9 +20,9 @@ namespace TicTacToeGame
         {
             foreach ( var strategy in strategies)
             {
-                if ( strategy.CanHandle(Board))
+                if (strategy.CanHandle(board))
                 {
-                    strategy.Update(Board);
+                    strategy.Update(board);
                     break;
                 }
             }
@@ -30,7 +30,7 @@ namespace TicTacToeGame
 
         public void OpponentMove(CellCoordinates cellCoordinate)
         {
-            this.Board.FillOpponentCell(cellCoordinate);
+            this.board.FillOpponentCell(cellCoordinate);
         }
     }
 }
