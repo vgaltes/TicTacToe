@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Exceptions\NotAllowedMovementException.cs" />
     <Compile Include="ITicTacToe.cs" />
     <Compile Include="Models\CellType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
