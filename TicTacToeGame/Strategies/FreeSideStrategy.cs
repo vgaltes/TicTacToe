@@ -6,24 +6,23 @@ namespace TicTacToeGame.Strategies
     {
         public bool CanHandle(Board board)
         {
-            foreach ( var side in board.Sides)
-            {
-                if ( board.IsCellOfType(CellType.Empty, side))
-                    return true;
-            }
-
-            return false;
+            return GetEmptyCellInSideCoordinates(board).IsValid;
         }
 
         public void Update(Board board)
         {
-            foreach (var side in board.Sides)
+            board.FillAICell(GetEmptyCellInSideCoordinates(board));
+        }
+
+        private CellCoordinates GetEmptyCellInSideCoordinates(Board board)
+        {
+            foreach ( var side in board.Sides)
             {
                 if (board.IsCellOfType(CellType.Empty, side))
-                {
-                    board.FillAICell(side);
-                }
+                    return side;
             }
+
+            return CellCoordinates.InvalidCoordinates;
         }
     }
 }
