@@ -5,9 +5,9 @@ namespace TicTacToeGame.Test
     {
         public MarkCoordinate CellCoordinate { get; private set; }
 
-        public Cell Cell { get; private set; }
+        public CellType Cell { get; private set; }
 
-        public Mark(Cell cell, MarkCoordinate cellCoordinate)
+        public Mark(CellType cell, MarkCoordinate cellCoordinate)
         {
             Cell = cell;
             CellCoordinate = cellCoordinate;
@@ -15,12 +15,12 @@ namespace TicTacToeGame.Test
 
         internal static Mark AIFromCoordinates(int row, int column)
         {
-            return new Mark(Cell.AI, new MarkCoordinate(row, column));
+            return new Mark(CellType.AI, new MarkCoordinate(row, column));
         }
 
         internal static Mark OpponentFromCoordinates(int row, int column)
         {
-            return new Mark(Cell.Opponent, new MarkCoordinate(row, column));
+            return new Mark(CellType.Opponent, new MarkCoordinate(row, column));
         }
     }
 }

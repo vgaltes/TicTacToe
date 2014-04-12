@@ -6,10 +6,10 @@ namespace TicTacToeGame.Test
     {
         public static Board GetAnEmptyBoard()
         {
-            return GetABoardWithAMarkInTheCenterOfType(Cell.Empty);
+            return GetABoardWithAMarkInTheCenterOfType(CellType.Empty);
         }
 
-        public static Board GetABoardWithAMarkInTheCenterOfType(Cell cell)
+        public static Board GetABoardWithAMarkInTheCenterOfType(CellType cell)
         {
             return GetABoardWithAMark(new Mark(cell, new MarkCoordinate(1,1)));
         }
@@ -46,7 +46,7 @@ namespace TicTacToeGame.Test
         {
             var board = GetAFullBoard();
 
-            board.FillCellWithType(Cell.Empty, new MarkCoordinate(row, column));
+            board.FillCellWithType(CellType.Empty, new MarkCoordinate(row, column));
 
             return board;
         }

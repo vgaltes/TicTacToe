@@ -6,9 +6,9 @@ namespace TicTacToeGame.Strategies
 {
     public abstract class EvaluatedLineStrategy : TicTacToeStrategy
     {
-        private Cell cellTypeToEvaluate;
+        private CellType cellTypeToEvaluate;
 
-        public EvaluatedLineStrategy(Cell cellTypeToEvaluate)
+        public EvaluatedLineStrategy(CellType cellTypeToEvaluate)
         {
             this.cellTypeToEvaluate = cellTypeToEvaluate;
         }
@@ -45,7 +45,7 @@ namespace TicTacToeGame.Strategies
 
         private void FillMarkCoordinateIfEmpty(Board board, MarkCoordinate cellCoordinate)
         {
-            if ( board.IsCellOfType(Cell.Empty, cellCoordinate))
+            if ( board.IsCellOfType(CellType.Empty, cellCoordinate))
             {
                 board.FillAICell(cellCoordinate);
             }
@@ -59,7 +59,7 @@ namespace TicTacToeGame.Strategies
 
         protected bool LineHasOneEmptyCell(Board board, Line line)
         {
-            int cellCount = board.CountCellsOfTypeInLine(Cell.Empty, line);
+            int cellCount = board.CountCellsOfTypeInLine(CellType.Empty, line);
             return cellCount == 1;
         }
     }

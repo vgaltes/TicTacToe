@@ -9,7 +9,7 @@ namespace TicTacToeGame.Strategies
         {
             foreach (var corner in board.Corners)
             {
-                if ( board.IsCellOfType(Cell.Empty, corner))
+                if ( board.IsCellOfType(CellType.Empty, corner))
                     return true;
             }
 
@@ -20,7 +20,7 @@ namespace TicTacToeGame.Strategies
         {
             foreach (var corner in board.Corners)
             {
-                if (board.IsCellOfType(Cell.Empty, corner))
+                if (board.IsCellOfType(CellType.Empty, corner))
                 {
                     board.FillAICell(corner);
                     return;

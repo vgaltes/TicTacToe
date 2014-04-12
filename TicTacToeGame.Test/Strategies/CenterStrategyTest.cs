@@ -22,7 +22,7 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenTheCenterIsNotFree_CanHandleReturnsFalse()
         {
-            var initialBoard = BoardTestHelper.GetABoardWithAMarkInTheCenterOfType(Cell.Opponent);
+            var initialBoard = BoardTestHelper.GetABoardWithAMarkInTheCenterOfType(CellType.Opponent);
 
             var centerStrategy = new CenterStrategy();
             var canHandle = centerStrategy.CanHandle(initialBoard);
@@ -38,7 +38,7 @@ namespace TicTacToeGame.Test.Strategies
             var centerStrategy = new CenterStrategy();
             centerStrategy.Update(initialBoard);
 
-            var expectedBoard = BoardTestHelper.GetABoardWithAMarkInTheCenterOfType(Cell.AI);
+            var expectedBoard = BoardTestHelper.GetABoardWithAMarkInTheCenterOfType(CellType.AI);
 
             initialBoard.Should().Be(expectedBoard);
         }

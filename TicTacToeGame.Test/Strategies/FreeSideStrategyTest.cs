@@ -37,7 +37,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(0, 1)).Should().BeTrue();
+            initialBoard.IsCellOfType(CellType.AI, new MarkCoordinate(0, 1)).Should().BeTrue();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(1, 0)).Should().BeTrue();
+            initialBoard.IsCellOfType(CellType.AI, new MarkCoordinate(1, 0)).Should().BeTrue();
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(1, 2)).Should().BeTrue();
+            initialBoard.IsCellOfType(CellType.AI, new MarkCoordinate(1, 2)).Should().BeTrue();
         }
 
         [Test]
@@ -97,7 +97,7 @@ namespace TicTacToeGame.Test.Strategies
 
             freeSideStrategy.Update(initialBoard);
 
-            initialBoard.IsCellOfType(Cell.AI, new MarkCoordinate(2, 1)).Should().BeTrue();
+            initialBoard.IsCellOfType(CellType.AI, new MarkCoordinate(2, 1)).Should().BeTrue();
         }
     }
 }

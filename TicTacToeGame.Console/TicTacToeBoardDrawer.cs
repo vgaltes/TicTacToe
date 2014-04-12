@@ -11,11 +11,11 @@ namespace TicTacToeGame.Console
                 Draw(board[2, 0]), Draw(board[2, 1]), Draw(board[2, 2]));
         }
 
-        private string Draw(Cell cell)
+        private string Draw(CellType cell)
         {
-            if (cell == Cell.AI)
+            if (cell == CellType.AI)
                 return "X";
-            if (cell == Cell.Opponent)
+            if (cell == CellType.Opponent)
                 return "O";
             return " ";
         }

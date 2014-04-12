@@ -1,6 +1,6 @@
 ﻿namespace TicTacToeGame.Models
 {
-    public enum Cell
+    public enum CellType
     {
         Empty,
         AI,

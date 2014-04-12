@@ -13,7 +13,7 @@ namespace TicTacToeGame
         public const int CENTER_ROW = 1;
         public const int CENTER_COLUMN = 1;
 
-        private Cell[,] Cells { get; set; }
+        private CellType[,] Cells { get; set; }
         private List<Line> lines = new List<Line>();
         private Dictionary<MarkCoordinate, MarkCoordinate> cornersAndOpposites
             = new Dictionary<MarkCoordinate, MarkCoordinate>();
@@ -21,7 +21,7 @@ namespace TicTacToeGame
 
         public Board()
         {
-            Cells = new Cell[NUMBER_OF_ROWS, NUMBER_OF_COLUMNS];
+            Cells = new CellType[NUMBER_OF_ROWS, NUMBER_OF_COLUMNS];
 
             AddRows();
             AddColumns();
@@ -68,25 +68,25 @@ namespace TicTacToeGame
 
         public void FillOpponentCell(MarkCoordinate cellCoordinate)
         {
-            FillCellWithType(Cell.Opponent, cellCoordinate);
+            FillCellWithType(CellType.Opponent, cellCoordinate);
         }
 
         public void FillAICell(MarkCoordinate cellCoordinate)
         {
-            FillCellWithType(Cell.AI, cellCoordinate);
+            FillCellWithType(CellType.AI, cellCoordinate);
         }
 
-        public void FillCellWithType(Cell cell, MarkCoordinate cellCoordinate)
+        public void FillCellWithType(CellType cell, MarkCoordinate cellCoordinate)
         {
             Cells[cellCoordinate.Row, cellCoordinate.Column] = cell;
         }
 
-        public bool IsCellOfType(Cell cell, MarkCoordinate cellCoordinate)
+        public bool IsCellOfType(CellType cell, MarkCoordinate cellCoordinate)
         {
             return Cells[cellCoordinate.Row, cellCoordinate.Column] == cell;
         }
 
-        public int CountCellsOfTypeInLine(Cell cellType, Line line)
+        public int CountCellsOfTypeInLine(CellType cellType, Line line)
         {
             int cellCount = 0;
 
@@ -107,7 +107,7 @@ namespace TicTacToeGame
                 {
                     for (int column = 0; column < NUMBER_OF_COLUMNS; column++)
                     {
-                        if (Cells[row, column] == Cell.Empty)
+                        if (Cells[row, column] == CellType.Empty)
                         {
                             yield return new MarkCoordinate(row, column);
                         }
@@ -151,7 +151,7 @@ namespace TicTacToeGame
             }
         }
 
-        public Board GetCopyWithExtraCellOfType(Cell cell, MarkCoordinate cellCoordinate)
+        public Board GetCopyWithExtraCellOfType(CellType cell, MarkCoordinate cellCoordinate)
         {
             var imaginaryBoard = new Board();
             Array.Copy(Cells, imaginaryBoard.Cells, Cells.Length);
@@ -163,7 +163,7 @@ namespace TicTacToeGame
         public bool IsCenterEmpty()
         {
             var centerCoordinate = new MarkCoordinate(CENTER_ROW, CENTER_COLUMN);
-            return IsCellOfType(Cell.Empty, centerCoordinate);
+            return IsCellOfType(CellType.Empty, centerCoordinate);
         }
 
         public void FillCenterWithAICell()
@@ -172,7 +172,7 @@ namespace TicTacToeGame
             FillAICell(centerCoordinate);
         }
 
-        public Cell this[int row, int column]
+        public CellType this[int row, int column]
         {
             get
             {

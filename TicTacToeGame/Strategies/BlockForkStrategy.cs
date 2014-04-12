@@ -10,7 +10,7 @@ namespace TicTacToeGame.Strategies
         {
             foreach (var emptyCell in board.EmptyCells)
             {
-                var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell);
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
 
                 foreach (var line in board.Lines)
                 {
@@ -26,7 +26,7 @@ namespace TicTacToeGame.Strategies
         {
             foreach (var emptyCell in board.EmptyCells)
             {
-                var imaginaryBoard = board.GetCopyWithExtraCellOfType(Cell.AI, emptyCell);
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
 
                 foreach (var line in board.Lines)
                 {
@@ -45,10 +45,10 @@ namespace TicTacToeGame.Strategies
 
             foreach (var coordinate in line.Coordinates)
             {
-                if ( board.IsCellOfType(Cell.Opponent, coordinate))
+                if ( board.IsCellOfType(CellType.Opponent, coordinate))
                     return false;
 
-                if ( board.IsCellOfType(Cell.AI, coordinate))
+                if ( board.IsCellOfType(CellType.AI, coordinate))
                     aiCells++;
             }
 
