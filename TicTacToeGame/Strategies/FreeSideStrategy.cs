@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using TicTacToeGame.Models;
+﻿using TicTacToeGame.Models;
+
 namespace TicTacToeGame.Strategies
 {
     public class FreeSideStrategy : TicTacToeStrategy
     {
-
         public bool CanHandle(Board board)
         {
             foreach ( var side in board.Sides)
