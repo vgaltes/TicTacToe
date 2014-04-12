@@ -8,49 +8,29 @@ namespace TicTacToeGame.Strategies
     {
         public bool CanHandle(Board board)
         {
+            return GetCellCoordinatesSuitableForBlockFork(board).IsValid;
+        }
+
+        public void Update(Board board)
+        {
+
+            board.FillAICell(GetCellCoordinatesSuitableForBlockFork(board));            
+        }
+
+        private CellCoordinates GetCellCoordinatesSuitableForBlockFork(Board board)
+        {
             foreach (var emptyCell in board.EmptyCells)
             {
                 var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
 
                 var winStrategy = new WinStrategy();
-                return winStrategy.CanHandle(board);
-            }
-
-            return false;
-        }
-
-        public void Update(Board board)
-        {
-            foreach (var emptyCell in board.EmptyCells)
-            {
-                var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
-
-                foreach (var line in board.Lines)
+                if ( winStrategy.CanHandle(board) )
                 {
-                    if (IsLineSuitableForABlockFork(imaginaryBoard, line))
-                    {
-                        board.FillAICell(emptyCell);
-                        return;
-                    }
+                    return emptyCell;
                 }
             }
-        }
 
-        private bool IsLineSuitableForABlockFork(Board board, Line line)
-        {
-            int aiCells = 0;
-
-            foreach (var coordinate in line.Coordinates)
-            {
-                if ( board.IsCellOfType(CellType.Opponent, coordinate))
-                    return false;
-
-                if ( board.IsCellOfType(CellType.AI, coordinate))
-                    aiCells++;
-            }
-
-            return aiCells == 2;
-            
+            return CellCoordinates.InvalidCoordinates;
         }
     }
 }
