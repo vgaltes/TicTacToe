@@ -43,7 +43,7 @@ namespace TicTacToeGame.Strategies
             }
         }
 
-        private void FillMarkCoordinateIfEmpty(Board board, MarkCoordinate cellCoordinate)
+        private void FillMarkCoordinateIfEmpty(Board board, CellCoordinates cellCoordinate)
         {
             if ( board.IsCellOfType(CellType.Empty, cellCoordinate))
             {

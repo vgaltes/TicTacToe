@@ -9,6 +9,6 @@ namespace TicTacToeGame
 
         Board Board { get; }
 
-        void OpponentMove(MarkCoordinate cellCoordinate);
+        void OpponentMove(CellCoordinates cellCoordinate);
     }
 }

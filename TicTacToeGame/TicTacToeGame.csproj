@@ -58,7 +58,7 @@
     <Compile Include="Strategies\FreeSideStrategy.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="Strategies\EvaluatedLineStrategy.cs" />
-    <Compile Include="Models\MarkCoordinate.cs" />
+    <Compile Include="Models\CellCoordinates.cs" />
     <Compile Include="Strategies\OppositeCornerStrategy.cs" />
     <Compile Include="Strategies\TicTacToeStrategy.cs" />
     <Compile Include="Strategies\WinStrategy.cs" />

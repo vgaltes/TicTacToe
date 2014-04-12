@@ -4,9 +4,9 @@ namespace TicTacToeGame.Models
 {
     public class Line
     {
-        public List<MarkCoordinate> Coordinates = new List<MarkCoordinate>();
+        public List<CellCoordinates> Coordinates = new List<CellCoordinates>();
 
-        public Line(MarkCoordinate start, MarkCoordinate middle, MarkCoordinate end)
+        public Line(CellCoordinates start, CellCoordinates middle, CellCoordinates end)
         {
             Coordinates.Add(start);
             Coordinates.Add(middle);

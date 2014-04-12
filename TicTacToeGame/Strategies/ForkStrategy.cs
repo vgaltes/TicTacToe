@@ -20,7 +20,7 @@ namespace TicTacToeGame.Strategies
             }
         }
 
-        private MarkCoordinate GetCellCoordinatesSuitableForFork(Board board)
+        private CellCoordinates GetCellCoordinatesSuitableForFork(Board board)
         {
             foreach (var emptyCell in board.EmptyCells)
             {

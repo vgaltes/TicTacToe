@@ -62,7 +62,7 @@ namespace TicTacToeGame.Test.Strategies
              });
 
             initialBoard.FillCellWithType((CellType)Enum.Parse(typeof(CellType), line.EvaluateValue),
-                new MarkCoordinate(line.RowEvaluate, line.ColumnEvaluate));
+                new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
 
             var canHandle = blockStrategy.CanHandle(initialBoard);
 
@@ -82,7 +82,7 @@ namespace TicTacToeGame.Test.Strategies
             if (line.ExpectedCanHandleValue)
             {
                 blockStrategy.Update(initialBoard);
-                initialBoard.IsCellOfType(CellType.AI, new MarkCoordinate(line.RowEvaluate, line.ColumnEvaluate));
+                initialBoard.IsCellOfType(CellType.AI, new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
             }
         }
 

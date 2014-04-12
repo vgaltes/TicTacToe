@@ -11,7 +11,7 @@ namespace TicTacToeGame.Test
 
         public static Board GetABoardWithAMarkInTheCenterOfType(CellType cell)
         {
-            return GetABoardWithAMark(new Mark(cell, new MarkCoordinate(1,1)));
+            return GetABoardWithAMark(new Mark(cell, new CellCoordinates(1,1)));
         }
 
         public static Board GetABoardWithAMark(Mark mark)
@@ -46,7 +46,7 @@ namespace TicTacToeGame.Test
         {
             var board = GetAFullBoard();
 
-            board.FillCellWithType(CellType.Empty, new MarkCoordinate(row, column));
+            board.FillCellWithType(CellType.Empty, new CellCoordinates(row, column));
 
             return board;
         }

@@ -21,7 +21,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenThePlayerPlays_TheGameHandlesTheMove()
         {
-            var cellCoordinate = new MarkCoordinate(0, 0);
+            var cellCoordinate = new CellCoordinates(0, 0);
             ticTacToeConsoleRunner.Play(cellCoordinate);
 
             ticTacToe.Verify(ttt => ttt.OpponentMove(cellCoordinate));
@@ -30,7 +30,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenThePlayerPlays_TheGamePlaysTheAI()
         {
-            ticTacToeConsoleRunner.Play(new MarkCoordinate(0, 0));
+            ticTacToeConsoleRunner.Play(new CellCoordinates(0, 0));
 
             ticTacToe.Verify(ttt => ttt.AIMove());
         }

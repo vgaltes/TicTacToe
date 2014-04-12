@@ -28,7 +28,7 @@ namespace TicTacToeGame
             }
         }       
 
-        public void OpponentMove(MarkCoordinate cellCoordinate)
+        public void OpponentMove(CellCoordinates cellCoordinate)
         {
             this.Board.FillOpponentCell(cellCoordinate);
         }

@@ -11,7 +11,7 @@ namespace TicTacToeGame.Console
             //ticTacToe.AIMove();
         }
 
-        public void Play(MarkCoordinate cellCoordinate)
+        public void Play(CellCoordinates cellCoordinate)
         {
             ticTacToe.OpponentMove(cellCoordinate);
             ticTacToe.AIMove();

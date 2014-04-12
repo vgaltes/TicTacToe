@@ -22,12 +22,12 @@ namespace TicTacToeGame.Strategies
             PutAMarkInTheOppositeSquare(board);
         }
         
-        private bool IsOppositeCornerFree(MarkCoordinate markCoordinate, Board board)
+        private bool IsOppositeCornerFree(CellCoordinates markCoordinate, Board board)
         {
             return board.IsCellOfType(CellType.Empty, markCoordinate);
         }
 
-        private bool IsThereAndOpponentInTheCorner(MarkCoordinate markCoordinate, Board board)
+        private bool IsThereAndOpponentInTheCorner(CellCoordinates markCoordinate, Board board)
         {
             return board.IsCellOfType(CellType.Opponent, markCoordinate);
         }

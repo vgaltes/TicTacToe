@@ -29,9 +29,9 @@ namespace TicTacToeGame.Console.Test
         public void GetBoardRepresentationOfBoardWithAIInSomeCells_ReturnsTheBoardDrawnAsAString()
         {
             Board board = new Board();
-            board.FillAICell(new MarkCoordinate(0, 0));
-            board.FillAICell(new MarkCoordinate(1, 1));
-            board.FillAICell(new MarkCoordinate(2, 2));
+            board.FillAICell(new CellCoordinates(0, 0));
+            board.FillAICell(new CellCoordinates(1, 1));
+            board.FillAICell(new CellCoordinates(2, 2));
 
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
             var boardRepresentation = ticTacToeBoardDrawer.GetRepresentationOf(board);
@@ -45,12 +45,12 @@ namespace TicTacToeGame.Console.Test
         public void GetBoardRepresentationOfBoardWithOpponentInSomeCells_ReturnsTheBoardDrawnAsAString()
         {
             Board board = new Board();
-            board.FillOpponentCell(new MarkCoordinate(0, 1));
-            board.FillOpponentCell(new MarkCoordinate(0, 2));
-            board.FillOpponentCell(new MarkCoordinate(1, 0));
-            board.FillOpponentCell(new MarkCoordinate(1, 2));
-            board.FillOpponentCell(new MarkCoordinate(2, 0));
-            board.FillOpponentCell(new MarkCoordinate(2, 1));
+            board.FillOpponentCell(new CellCoordinates(0, 1));
+            board.FillOpponentCell(new CellCoordinates(0, 2));
+            board.FillOpponentCell(new CellCoordinates(1, 0));
+            board.FillOpponentCell(new CellCoordinates(1, 2));
+            board.FillOpponentCell(new CellCoordinates(2, 0));
+            board.FillOpponentCell(new CellCoordinates(2, 1));
             
 
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();

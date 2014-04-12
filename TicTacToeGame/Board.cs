@@ -15,9 +15,9 @@ namespace TicTacToeGame
 
         private CellType[,] Cells { get; set; }
         private List<Line> lines = new List<Line>();
-        private Dictionary<MarkCoordinate, MarkCoordinate> cornersAndOpposites
-            = new Dictionary<MarkCoordinate, MarkCoordinate>();
-        private List<MarkCoordinate> sides = new List<MarkCoordinate>();
+        private Dictionary<CellCoordinates, CellCoordinates> cornersAndOpposites
+            = new Dictionary<CellCoordinates, CellCoordinates>();
+        private List<CellCoordinates> sides = new List<CellCoordinates>();
 
         public Board()
         {
@@ -32,56 +32,56 @@ namespace TicTacToeGame
         
         private void AddRows()
         {
-            lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(0, 1), new MarkCoordinate(0, 2)));
-            lines.Add(new Line(new MarkCoordinate(1, 0), new MarkCoordinate(1, 1), new MarkCoordinate(1, 2)));
-            lines.Add(new Line(new MarkCoordinate(2, 0), new MarkCoordinate(2, 1), new MarkCoordinate(2, 2)));
+            lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(0, 1), new CellCoordinates(0, 2)));
+            lines.Add(new Line(new CellCoordinates(1, 0), new CellCoordinates(1, 1), new CellCoordinates(1, 2)));
+            lines.Add(new Line(new CellCoordinates(2, 0), new CellCoordinates(2, 1), new CellCoordinates(2, 2)));
         }
 
         private void AddColumns()
         {
-            lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(1, 0), new MarkCoordinate(2, 0)));
-            lines.Add(new Line(new MarkCoordinate(0, 1), new MarkCoordinate(1, 1), new MarkCoordinate(2, 1)));
-            lines.Add(new Line(new MarkCoordinate(0, 2), new MarkCoordinate(1, 2), new MarkCoordinate(2, 2)));
+            lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(1, 0), new CellCoordinates(2, 0)));
+            lines.Add(new Line(new CellCoordinates(0, 1), new CellCoordinates(1, 1), new CellCoordinates(2, 1)));
+            lines.Add(new Line(new CellCoordinates(0, 2), new CellCoordinates(1, 2), new CellCoordinates(2, 2)));
         }
         
         private void AddDiagonals()
         {
-            lines.Add(new Line(new MarkCoordinate(0, 0), new MarkCoordinate(1, 1), new MarkCoordinate(2, 2)));
-            lines.Add(new Line(new MarkCoordinate(0, 2), new MarkCoordinate(1, 1), new MarkCoordinate(2, 0)));
+            lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(1, 1), new CellCoordinates(2, 2)));
+            lines.Add(new Line(new CellCoordinates(0, 2), new CellCoordinates(1, 1), new CellCoordinates(2, 0)));
         }
 
         private void AddCornersAndOpposites()
         {
-            cornersAndOpposites.Add(new MarkCoordinate(0, 0), new MarkCoordinate(2, 2));
-            cornersAndOpposites.Add(new MarkCoordinate(0, 2), new MarkCoordinate(2, 0));
-            cornersAndOpposites.Add(new MarkCoordinate(2, 0), new MarkCoordinate(0, 2));
-            cornersAndOpposites.Add(new MarkCoordinate(2, 2), new MarkCoordinate(0, 0));
+            cornersAndOpposites.Add(new CellCoordinates(0, 0), new CellCoordinates(2, 2));
+            cornersAndOpposites.Add(new CellCoordinates(0, 2), new CellCoordinates(2, 0));
+            cornersAndOpposites.Add(new CellCoordinates(2, 0), new CellCoordinates(0, 2));
+            cornersAndOpposites.Add(new CellCoordinates(2, 2), new CellCoordinates(0, 0));
         }
 
         private void AddSides()
         {
-            sides.Add(new MarkCoordinate(0, 1));
-            sides.Add(new MarkCoordinate(1, 0));
-            sides.Add(new MarkCoordinate(1, 2));
-            sides.Add(new MarkCoordinate(2, 1));
+            sides.Add(new CellCoordinates(0, 1));
+            sides.Add(new CellCoordinates(1, 0));
+            sides.Add(new CellCoordinates(1, 2));
+            sides.Add(new CellCoordinates(2, 1));
         }
 
-        public void FillOpponentCell(MarkCoordinate cellCoordinate)
+        public void FillOpponentCell(CellCoordinates cellCoordinate)
         {
             FillCellWithType(CellType.Opponent, cellCoordinate);
         }
 
-        public void FillAICell(MarkCoordinate cellCoordinate)
+        public void FillAICell(CellCoordinates cellCoordinate)
         {
             FillCellWithType(CellType.AI, cellCoordinate);
         }
 
-        public void FillCellWithType(CellType cell, MarkCoordinate cellCoordinate)
+        public void FillCellWithType(CellType cell, CellCoordinates cellCoordinate)
         {
             Cells[cellCoordinate.Row, cellCoordinate.Column] = cell;
         }
 
-        public bool IsCellOfType(CellType cell, MarkCoordinate cellCoordinate)
+        public bool IsCellOfType(CellType cell, CellCoordinates cellCoordinate)
         {
             return Cells[cellCoordinate.Row, cellCoordinate.Column] == cell;
         }
@@ -99,7 +99,7 @@ namespace TicTacToeGame
             return cellCount;
         }
 
-        public IEnumerable<MarkCoordinate> EmptyCells
+        public IEnumerable<CellCoordinates> EmptyCells
         {
             get
             {
@@ -109,7 +109,7 @@ namespace TicTacToeGame
                     {
                         if (Cells[row, column] == CellType.Empty)
                         {
-                            yield return new MarkCoordinate(row, column);
+                            yield return new CellCoordinates(row, column);
                         }
                     }
                 }
@@ -124,7 +124,7 @@ namespace TicTacToeGame
             }
         }
 
-        public Dictionary<MarkCoordinate, MarkCoordinate> CornersAndOpposites
+        public Dictionary<CellCoordinates, CellCoordinates> CornersAndOpposites
         {
             get
             {
@@ -132,26 +132,26 @@ namespace TicTacToeGame
             }
         }
 
-        public IEnumerable<MarkCoordinate> Corners
+        public IEnumerable<CellCoordinates> Corners
         {
             get
             {
                 foreach ( var cornerAndOpposite in cornersAndOpposites)
                 {
-                    yield return new MarkCoordinate(cornerAndOpposite.Key.Row, cornerAndOpposite.Key.Column);
+                    yield return new CellCoordinates(cornerAndOpposite.Key.Row, cornerAndOpposite.Key.Column);
                 }
             }
         }
 
-        public IEnumerable<MarkCoordinate> Sides
+        public IEnumerable<CellCoordinates> Sides
         {
             get
             {
-                return sides.AsEnumerable<MarkCoordinate>();
+                return sides.AsEnumerable<CellCoordinates>();
             }
         }
 
-        public Board GetCopyWithExtraCellOfType(CellType cell, MarkCoordinate cellCoordinate)
+        public Board GetCopyWithExtraCellOfType(CellType cell, CellCoordinates cellCoordinate)
         {
             var imaginaryBoard = new Board();
             Array.Copy(Cells, imaginaryBoard.Cells, Cells.Length);
@@ -162,13 +162,13 @@ namespace TicTacToeGame
 
         public bool IsCenterEmpty()
         {
-            var centerCoordinate = new MarkCoordinate(CENTER_ROW, CENTER_COLUMN);
+            var centerCoordinate = new CellCoordinates(CENTER_ROW, CENTER_COLUMN);
             return IsCellOfType(CellType.Empty, centerCoordinate);
         }
 
         public void FillCenterWithAICell()
         {
-            var centerCoordinate = new MarkCoordinate(CENTER_ROW, CENTER_COLUMN);
+            var centerCoordinate = new CellCoordinates(CENTER_ROW, CENTER_COLUMN);
             FillAICell(centerCoordinate);
         }
 

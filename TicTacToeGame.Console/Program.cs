@@ -22,7 +22,7 @@ namespace TicTacToeGame.Console
             {
                 int[] coordinates = line.Split(',').Select(c => int.Parse(c)).ToArray();
 
-                ticTacToeGameRunner.Play(new MarkCoordinate(coordinates[0], coordinates[1]));
+                ticTacToeGameRunner.Play(new CellCoordinates(coordinates[0], coordinates[1]));
 
                 boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToeGameRunner.GetBoard());
                 System.Console.WriteLine(boardAsString);
