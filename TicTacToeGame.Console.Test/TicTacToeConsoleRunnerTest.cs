@@ -112,5 +112,15 @@ namespace TicTacToeGame.Console.Test
 
             ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()), Times.Once());
         }
+
+        [Test]
+        public void WhenRunningGame_ReadInputUntilValidCoordinate()
+        {
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("a,a").Returns("").Returns("1,1");
+
+            ticTacToeConsoleRunner.Run();
+
+            consoleIO.Verify(c => c.ReadLine(), Times.AtLeast(4));
+        }
     }
 }
