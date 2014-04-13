@@ -23,5 +23,14 @@
                 return new CellCoordinates(-1, -1, false);
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            var objectToCompare = obj as CellCoordinates;
+
+            return this.Row == objectToCompare.Row
+                && this.Column == objectToCompare.Column
+                && this.IsValid == objectToCompare.IsValid;
+        }
     }
 }

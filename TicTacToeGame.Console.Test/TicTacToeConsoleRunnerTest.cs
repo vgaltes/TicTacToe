@@ -125,18 +125,22 @@ namespace TicTacToeGame.Console.Test
         }
 
         [Test]
-        public void WhenRunningGame_IfTheStateIsPlaying_PlayOpponentWithTheCoordinates()
+        public void WhenRunningGame_WhileTheStateIsPlaying_PlayOpponentWithTheCoordinates()
         {
-            var opponentMove = new CellCoordinates(1,1);
+            var firstOpponentMove = new CellCoordinates(1,1);
+            var secondOpponentMove = new CellCoordinates(1, 2);
             consoleIO.SetupSequence(c => c.ReadLine())
                 .Returns("1")
-                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column));
+                .Returns(string.Format("{0},{1}", firstOpponentMove.Row, firstOpponentMove.Column))
+                .Returns(string.Format("{0},{1}", secondOpponentMove.Row, secondOpponentMove.Column))
+                .Returns("q!");
             ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
 
             ticTacToeConsoleRunner.Run();
 
-            ticTacToe.Verify(ttt => ttt.OpponentMove(opponentMove));
+            ticTacToe.Verify(ttt => ttt.OpponentMove(firstOpponentMove));
+            ticTacToe.Verify(ttt => ttt.OpponentMove(secondOpponentMove));
         }
     }
 }

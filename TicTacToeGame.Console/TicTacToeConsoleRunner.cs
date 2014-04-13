@@ -31,7 +31,17 @@ namespace TicTacToeGame.Console
             SetInitialPlayer();
             DrawBoard();
 
-            GetUserInput();
+            var userInput = GetUserInput();
+
+            while (userInput != QUIT_COMMAND)
+            {
+                if (ticTacToe.State == TicTacToeState.Playing)
+                {
+                    PlayGame(userInput);
+                }
+
+                userInput = consoleIO.ReadLine();
+            }
         }
 
         private void SetInitialPlayer()
@@ -74,6 +84,17 @@ namespace TicTacToeGame.Console
                 line = consoleIO.ReadLine();
             }
             return line;
+        }
+
+        private void PlayGame(string userInput)
+        {
+            ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
+        }
+
+        private static CellCoordinates GetCoordinatesFromUserInput(string userInput)
+        {
+            int[] coordinates = userInput.Split(',').Select(c => int.Parse(c)).ToArray();
+            return new CellCoordinates(coordinates[0], coordinates[1]);
         }
     }
 }
