@@ -89,5 +89,12 @@ namespace TicTacToeGame
             this.State = TicTacToeState.Playing;
             board.Reset();
         }
+
+
+        public void SetInitialPlayer(CellType initialPlayer)
+        {
+            if (initialPlayer == CellType.AI)
+                AIMove();
+        }
     }
 }

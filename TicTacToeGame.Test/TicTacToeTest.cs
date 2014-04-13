@@ -96,5 +96,17 @@ namespace TicTacToeGame.Test
 
             ticTacToe.Board.Should().Be(expectedBoard);
         }
+
+        [Test]
+        public void WhenSettingInitialPlayerToAi_TheGamePlaysAI()
+        {
+            var board = new Mock<Board>();
+            ITicTacToe ticTacToe = new TicTacToe(board.Object,
+                new List<TicTacToeStrategy> { new AllwaysUpdateStrategy() });
+
+            ticTacToe.SetInitialPlayer(CellType.AI);
+
+            board.Verify(b => b.FillAICell(It.IsAny<CellCoordinates>()), Times.Once);
+        }
     }
 }

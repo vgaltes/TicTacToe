@@ -19,7 +19,11 @@ namespace TicTacToeGame.Console
 
         static void Main(string[] args)
         {
-            var ticTacToe = CreateTicTacToe();
+            System.Console.WriteLine("qui vols que comenci. 1 per tu 2 per ai");
+            var option = System.Console.ReadLine();
+            var initialPlayer = (CellType)Enum.Parse(typeof(CellType), option);
+
+            var ticTacToe = CreateTicTacToe(initialPlayer);
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
 
             DrawBoard(ticTacToe, ticTacToeBoardDrawer);
@@ -42,13 +46,21 @@ namespace TicTacToeGame.Console
                     {
                         extraInfo = UNEXPECTED_EXCEPTION;
                     }
+                }
 
+                if ( ticTacToe.State == TicTacToeState.Playing)
+                {
                     DrawBoard(ticTacToe, ticTacToeBoardDrawer);
                     userInput = GetUserInput();
                 }
                 else
                 {
+                    DrawBoard(ticTacToe, ticTacToeBoardDrawer);
+                    System.Console.ReadKey();
                     ticTacToe.Reset();
+                    extraInfo = string.Empty;
+                    DrawBoard(ticTacToe, ticTacToeBoardDrawer);
+                    userInput = GetUserInput();
                 }
             } while (userInput != QUIT_COMMAND);
         }
@@ -70,9 +82,9 @@ namespace TicTacToeGame.Console
             System.Console.Clear();
 
             if (ticTacToe.State == TicTacToeState.AIWins)
-                extraInfo = "AI WINS!";
+                extraInfo = "AI WINS! Press any key to restart game.";
             else if (ticTacToe.State == TicTacToeState.OpponentWins)
-                extraInfo = "YOU WIN!";
+                extraInfo = "YOU WIN! Press any key to restart game.";
 
             string boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
             
@@ -80,7 +92,7 @@ namespace TicTacToeGame.Console
             System.Console.WriteLine(boardAsString);
         }
 
-        private static ITicTacToe CreateTicTacToe()
+        private static ITicTacToe CreateTicTacToe(CellType initialPlayer)
         {
             var strategies = new List<TicTacToeStrategy>
             {
@@ -96,7 +108,10 @@ namespace TicTacToeGame.Console
 
             var board = new Board();
 
-            return new TicTacToe(board, strategies);
+            ITicTacToe ticTacToe = new TicTacToe(board, strategies);
+            ticTacToe.SetInitialPlayer(initialPlayer);
+
+            return ticTacToe;
         }
     }
 }
