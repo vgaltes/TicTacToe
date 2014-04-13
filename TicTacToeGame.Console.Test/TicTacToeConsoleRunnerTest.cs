@@ -14,15 +14,23 @@ namespace TicTacToeGame.Console.Test
     [TestFixture]
     public class TicTacToeConsoleRunnerTest
     {
+        Mock<ITicTacToe> ticTacToe;
+        Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
+        Mock<ConsoleIO> consoleIO;
+        TicTacToeConsoleRunner ticTacToeConsoleRunner;
+        [SetUp]
+        public void TestSetUp()
+        {
+            ticTacToe = new Mock<ITicTacToe>();
+            ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
+            consoleIO = new Mock<ConsoleIO>();
+
+            ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
+        }
+
         [Test]
         public void WhenRunningGame_AsksForPlayer()
         {
-            var ticTacToe = new Mock<ITicTacToe>();
-            var ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
-            var consoleIO = new Mock<ConsoleIO>();
-
-            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
-
             ticTacToeConsoleRunner.Run();
 
             consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer));
@@ -31,11 +39,6 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfThePlayerIsNotValid_AsksOneMoreTime()
         {
-            var ticTacToe = new Mock<ITicTacToe>();
-            var ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
-            var consoleIO = new Mock<ConsoleIO>();
-
-            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
             consoleIO.SetupSequence(c => c.ReadLine()).Returns("3").Returns("2");
 
             ticTacToeConsoleRunner.Run();
@@ -46,11 +49,6 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfThePlayerIsAI_CallTicTacToeWithCellTypeAI()
         {
-            var ticTacToe = new Mock<ITicTacToe>();
-            var ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
-            var consoleIO = new Mock<ConsoleIO>();
-
-            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
             consoleIO.SetupSequence(c => c.ReadLine()).Returns("1");
 
             ticTacToeConsoleRunner.Run();
