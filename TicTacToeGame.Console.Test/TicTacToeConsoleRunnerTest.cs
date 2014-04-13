@@ -61,10 +61,13 @@ namespace TicTacToeGame.Console.Test
         public void WhenRunningGame_DrawEmptyBoardAtStart()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns("1");
+            var boardRepresentation = "board representation";
+            ticTacToeBoardDrawer.Setup(tbd => tbd.GetRepresentationOf(It.IsAny<Board>())).Returns(boardRepresentation);
 
             ticTacToeConsoleRunner.Run();
 
             ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()));
+            consoleIO.Verify(c => c.WriteLine(boardRepresentation));
         }
 
         [Test]
