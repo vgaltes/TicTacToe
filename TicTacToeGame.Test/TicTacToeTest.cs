@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
 using TicTacToeGame.Test.Fakes;
@@ -61,6 +62,20 @@ namespace TicTacToeGame.Test
             ticTacToe.OpponentMove(new CellCoordinates(2, 0));
 
             ticTacToe.State.Should().Be(TicTacToeState.AIWins);
+        }
+
+        [Test, ExpectedException(ExpectedException=typeof(NotAllowedMovementException))]
+        public void GivenTheStateIsNotPlaying_WhenOpponentMoves_MovementNotAllowedExceptionIsThrown()
+        {
+            var board = new Mock<Board>();
+            var ticTacToe = new TicTacToe(board.Object,
+                new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
+
+            ticTacToe.OpponentMove(new CellCoordinates(1, 0));
+            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
+            ticTacToe.OpponentMove(new CellCoordinates(1, 2));
+
+            ticTacToe.OpponentMove(new CellCoordinates(2, 0));
         }
     }
 }
