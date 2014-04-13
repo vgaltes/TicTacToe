@@ -8,6 +8,9 @@ namespace TicTacToeGame.Console
 {
     public class TicTacToeConsoleRunner
     {
+        private const string AI_PLAYER = "1";
+        private const string HUMAN_PLAYER = "2";
+
         private readonly ITicTacToe ticTacToe;
         private readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
         private readonly ConsoleIO consoleIO;
@@ -28,7 +31,7 @@ namespace TicTacToeGame.Console
         {
             consoleIO.WriteLine(Resources.SelectPlayer);
             var option = consoleIO.ReadLine();
-            if (option != "1" && option != "2")
+            if (option != AI_PLAYER && option != HUMAN_PLAYER)
                 SetInitialPlayer();
             else
             {
