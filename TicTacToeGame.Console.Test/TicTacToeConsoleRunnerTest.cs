@@ -148,11 +148,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_DrawBoardAfterOpponentPlays()
         {
-            var opponentMove = new CellCoordinates(1, 1);
-            consoleIO.SetupSequence(c => c.ReadLine())
-                .Returns("1")
-                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
-                .Returns("q!");
+            SetupOneMovementAndQuit();
 
             ticTacToeConsoleRunner.Run();
 
@@ -162,11 +158,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfAMovementNotAllowedExceptionIsThrown_PrintIt()
         {
-            var opponentMove = new CellCoordinates(1, 1);
-            consoleIO.SetupSequence(c => c.ReadLine())
-                .Returns("1")
-                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
-                .Returns("q!");
+            SetupOneMovementAndQuit();
             ticTacToe.Setup(ttt => ttt.OpponentMove(It.IsAny<CellCoordinates>()))
                 .Throws<NotAllowedMovementException>();
 
@@ -180,6 +172,28 @@ namespace TicTacToeGame.Console.Test
             if ( line != null)
                 return line.Contains(Resources.MovementNotAllowed);
             return false;
+        }
+
+        [Test]
+        public void WhenRunningAGame_IfAfterPlayingTheStateIsNotPlaying_ReadKey()
+        {
+            ticTacToe.SetupSequence(ttt => ttt.State)
+                .Returns(TicTacToeState.Playing)
+                .Returns(TicTacToeState.Draw);
+
+            SetupOneMovementAndQuit();
+
+            consoleIO.Verify(c => c.ReadKey(), Times.Once());
+
+        }
+
+        private void SetupOneMovementAndQuit()
+        {
+            var opponentMove = new CellCoordinates(1, 1);
+            consoleIO.SetupSequence(c => c.ReadLine())
+                .Returns("1")
+                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
+                .Returns("q!");
         }
     }
 }
