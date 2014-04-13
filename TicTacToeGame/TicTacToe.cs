@@ -16,9 +16,23 @@ namespace TicTacToeGame
             this.strategies = strategies;
         }
 
-        public void AIMove()
+        public void OpponentMove(CellCoordinates cellCoordinate)
         {
-            foreach ( var strategy in strategies)
+            this.board.FillOpponentCell(cellCoordinate);
+            AIMove();
+        }
+
+        public Board Board
+        {
+            get
+            {
+                return board;
+            }
+        }
+
+        private void AIMove()
+        {
+            foreach (var strategy in strategies)
             {
                 if (strategy.CanHandle(board))
                 {
@@ -27,10 +41,5 @@ namespace TicTacToeGame
                 }
             }
         }       
-
-        public void OpponentMove(CellCoordinates cellCoordinate)
-        {
-            this.board.FillOpponentCell(cellCoordinate);
-        }
     }
 }

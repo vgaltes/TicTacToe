@@ -12,22 +12,20 @@ namespace TicTacToeGame.Console
     {
         static void Main(string[] args)
         {
-            /*
-            var ticTacToeGameRunner = new TicTacToeConsoleRunner(CreateTicTacToe());
+            var ticTacToe = CreateTicTacToe();
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
-            var boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToeGameRunner.GetBoard());
+            var boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
             System.Console.WriteLine(boardAsString);
             string line = System.Console.ReadLine();
             do
             {
                 int[] coordinates = line.Split(',').Select(c => int.Parse(c)).ToArray();
+                ticTacToe.OpponentMove(new CellCoordinates(coordinates[0], coordinates[1]));
 
-                ticTacToeGameRunner.Play(new CellCoordinates(coordinates[0], coordinates[1]));
-
-                boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToeGameRunner.GetBoard());
+                boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
                 System.Console.WriteLine(boardAsString);
                 line = System.Console.ReadLine();
-            } while (line != "q!");*/
+            } while (line != "q!");
         }
 
         private static TicTacToe CreateTicTacToe()

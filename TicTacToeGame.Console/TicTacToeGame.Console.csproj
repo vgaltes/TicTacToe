@@ -44,7 +44,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicTacToeBoardDrawer.cs" />
-    <Compile Include="TicTacToeConsoleRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

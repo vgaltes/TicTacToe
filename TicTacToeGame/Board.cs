@@ -30,7 +30,7 @@ namespace TicTacToeGame
             AddCornersAndOpposites();
             AddSides();
         }
-        
+
         private void AddRows()
         {
             lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(0, 1), new CellCoordinates(0, 2)));
@@ -44,7 +44,7 @@ namespace TicTacToeGame
             lines.Add(new Line(new CellCoordinates(0, 1), new CellCoordinates(1, 1), new CellCoordinates(2, 1)));
             lines.Add(new Line(new CellCoordinates(0, 2), new CellCoordinates(1, 2), new CellCoordinates(2, 2)));
         }
-        
+
         private void AddDiagonals()
         {
             lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(1, 1), new CellCoordinates(2, 2)));
@@ -87,7 +87,7 @@ namespace TicTacToeGame
 
         public void FillCellWithType(CellType cell, CellCoordinates cellCoordinate)
         {
-            if ( cellCoordinate.IsValid)
+            if (cellCoordinate.IsValid)
                 Cells[cellCoordinate.Row, cellCoordinate.Column] = cell;
         }
 
@@ -146,7 +146,7 @@ namespace TicTacToeGame
         {
             get
             {
-                foreach ( var cornerAndOpposite in cornersAndOpposites)
+                foreach (var cornerAndOpposite in cornersAndOpposites)
                 {
                     yield return new CellCoordinates(cornerAndOpposite.Key.Row, cornerAndOpposite.Key.Column);
                 }
@@ -193,7 +193,7 @@ namespace TicTacToeGame
         public override bool Equals(object obj)
         {
             Board boardToCompare = obj as Board;
-            if ( boardToCompare == null)
+            if (boardToCompare == null)
                 return false;
 
             for (int row = 0; row < NUMBER_OF_ROWS; row++)
@@ -217,7 +217,7 @@ namespace TicTacToeGame
             {
                 for (int column = 0; column < NUMBER_OF_COLUMNS; column++)
                 {
-                    hashCode += multiplier * (int) Cells[row, column];
+                    hashCode += multiplier * (int)Cells[row, column];
                     multiplier += 10;
                 }
             }
@@ -256,6 +256,22 @@ namespace TicTacToeGame
             }
 
             return opponentCells < numberOfCells;
+        }
+
+        public int NumberOfRows
+        {
+            get
+            {
+                return NUMBER_OF_ROWS;
+            }
+        }
+
+        public int NumberOfColumns
+        {
+            get
+            {
+                return NUMBER_OF_COLUMNS;
+            }
         }
     }
 }
