@@ -77,5 +77,14 @@ namespace TicTacToeGame.Console {
                 return ResourceManager.GetString("SelectPlayer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YOU WIN! Press any key to restart game..
+        /// </summary>
+        public static string YouWin {
+            get {
+                return ResourceManager.GetString("YouWin", resourceCulture);
+            }
+        }
     }
 }

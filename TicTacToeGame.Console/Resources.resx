@@ -123,4 +123,7 @@
   <data name="SelectPlayer" xml:space="preserve">
     <value>Press 1 to let AI make the first movement.\nPress 2 to make you the first movement.</value>
   </data>
+  <data name="YouWin" xml:space="preserve">
+    <value>YOU WIN! Press any key to restart game.</value>
+  </data>
 </root>

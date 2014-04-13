@@ -80,5 +80,16 @@ namespace TicTacToeGame.Console.Test
 
             consoleIO.Verify(c => c.WriteLine(Resources.AiWins));
         }
+
+        [Test]
+        public void WhenRunningGame_IfTheStateIsOpponentWinsWriteIt()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns("1");
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.OpponentWins);
+
+            ticTacToeConsoleRunner.Run();
+
+            consoleIO.Verify(c => c.WriteLine(Resources.YouWin));
+        }
     }
 }
