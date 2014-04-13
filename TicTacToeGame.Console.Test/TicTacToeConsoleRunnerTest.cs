@@ -125,13 +125,14 @@ namespace TicTacToeGame.Console.Test
         }
 
         [Test]
-        public void WhenRunningGame_PlayOpponentWithTheCoordinates()
+        public void WhenRunningGame_IfTheStateIsPlaying_PlayOpponentWithTheCoordinates()
         {
             var opponentMove = new CellCoordinates(1,1);
             consoleIO.SetupSequence(c => c.ReadLine())
                 .Returns("1")
                 .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column));
             ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
 
             ticTacToeConsoleRunner.Run();
 
