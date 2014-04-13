@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console
 {
@@ -29,6 +30,11 @@ namespace TicTacToeGame.Console
             var option = consoleIO.ReadLine();
             if (option != "1" && option != "2")
                 SetInitialPlayer();
+            else
+            {
+                var initialPlayer = (CellType)Enum.Parse(typeof(CellType), option);
+                ticTacToe.SetInitialPlayer(initialPlayer);
+            }
         }
     }
 }
