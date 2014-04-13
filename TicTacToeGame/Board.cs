@@ -269,5 +269,16 @@ namespace TicTacToeGame
                 return SIZE;
             }
         }
+
+        internal void Reset()
+        {
+            for (int row = 0; row < SIZE; row++)
+            {
+                for (int column = 0; column < SIZE; column++)
+                {
+                    Cells[row, column] = CellType.Empty;
+                }
+            }
+        }
     }
 }

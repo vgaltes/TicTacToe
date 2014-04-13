@@ -16,7 +16,7 @@ namespace TicTacToeGame.Test
         public void WhenThePlayerPlays_TheGamePlaysTheAI()
         {
             var board = new Mock<Board>();
-            var ticTacToe = new TicTacToe(board.Object, 
+            ITicTacToe ticTacToe = new TicTacToe(board.Object, 
                 new List<TicTacToeStrategy> { new AllwaysUpdateStrategy() });
 
             ticTacToe.OpponentMove(new CellCoordinates(1, 1));
@@ -27,7 +27,7 @@ namespace TicTacToeGame.Test
         [Test]
         public void GivenThreeOpponentMarksInALine_StateIsOpponentWins()
         {
-            var ticTacToe = new TicTacToe(new Board(),
+            ITicTacToe ticTacToe = new TicTacToe(new Board(),
                 new List<TicTacToeStrategy>());
 
             ticTacToe.OpponentMove(new CellCoordinates(0, 0));
@@ -41,7 +41,7 @@ namespace TicTacToeGame.Test
         public void GivenThreeOpponentMarksInALine_TheGameDoesntPlayAI()
         {
             var board = new Mock<Board>();
-            var ticTacToe = new TicTacToe(board.Object,
+            ITicTacToe ticTacToe = new TicTacToe(board.Object,
                 new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
 
             ticTacToe.OpponentMove(new CellCoordinates(1, 0));
@@ -54,7 +54,7 @@ namespace TicTacToeGame.Test
         [Test]
         public void GivenThreeAIMarksInALine_StateIsAIWins()
         {
-            var ticTacToe = new TicTacToe(new Board(),
+            ITicTacToe ticTacToe = new TicTacToe(new Board(),
                 new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
 
             ticTacToe.OpponentMove(new CellCoordinates(1, 0));
@@ -68,7 +68,7 @@ namespace TicTacToeGame.Test
         public void GivenTheStateIsNotPlaying_WhenOpponentMoves_MovementNotAllowedExceptionIsThrown()
         {
             var board = new Mock<Board>();
-            var ticTacToe = new TicTacToe(board.Object,
+            ITicTacToe ticTacToe = new TicTacToe(board.Object,
                 new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
 
             ticTacToe.OpponentMove(new CellCoordinates(1, 0));
@@ -76,6 +76,25 @@ namespace TicTacToeGame.Test
             ticTacToe.OpponentMove(new CellCoordinates(1, 2));
 
             ticTacToe.OpponentMove(new CellCoordinates(2, 0));
+        }
+
+        [Test]
+        public void GivenSomeoneWins_ResetPutsAllCellsEmptyAndStateToPlaying()
+        {
+            ITicTacToe ticTacToe = new TicTacToe(new Board(),
+                new List<TicTacToeStrategy>());
+
+            ticTacToe.OpponentMove(new CellCoordinates(0, 0));
+            ticTacToe.OpponentMove(new CellCoordinates(0, 1));
+            ticTacToe.OpponentMove(new CellCoordinates(0, 2));
+
+            ticTacToe.Reset();
+            
+            ticTacToe.State.Should().Be(TicTacToeState.Playing);
+
+            var expectedBoard = BoardTestHelper.GetAnEmptyBoard();
+
+            ticTacToe.Board.Should().Be(expectedBoard);
         }
     }
 }

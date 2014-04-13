@@ -83,5 +83,11 @@ namespace TicTacToeGame
 
             return false;
         }
+
+        public void Reset()
+        {
+            this.State = TicTacToeState.Playing;
+            board.Reset();
+        }
     }
 }

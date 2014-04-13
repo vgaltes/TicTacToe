@@ -27,23 +27,29 @@ namespace TicTacToeGame.Console
             string userInput = GetUserInput();
             do
             {
-                try
+                if (ticTacToe.State == TicTacToeState.Playing)
                 {
-                    extraInfo = string.Empty;
-                    ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
-                }
-                catch ( NotAllowedMovementException)
-                {
-                    extraInfo = MOVEMENT_NOT_ALLOWED;
-                }
-                catch (Exception)
-                {
-                    extraInfo = UNEXPECTED_EXCEPTION;
-                }
+                    try
+                    {
+                        extraInfo = string.Empty;
+                        ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
+                    }
+                    catch (NotAllowedMovementException)
+                    {
+                        extraInfo = MOVEMENT_NOT_ALLOWED;
+                    }
+                    catch (Exception)
+                    {
+                        extraInfo = UNEXPECTED_EXCEPTION;
+                    }
 
-                DrawBoard(ticTacToe, ticTacToeBoardDrawer);
-                userInput = GetUserInput();
-
+                    DrawBoard(ticTacToe, ticTacToeBoardDrawer);
+                    userInput = GetUserInput();
+                }
+                else
+                {
+                    ticTacToe.Reset();
+                }
             } while (userInput != QUIT_COMMAND);
         }
 
@@ -59,16 +65,22 @@ namespace TicTacToeGame.Console
             return new CellCoordinates(coordinates[0], coordinates[1]);
         }
 
-        private static void DrawBoard(TicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer)
+        private static void DrawBoard(ITicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer)
         {
             System.Console.Clear();
 
+            if (ticTacToe.State == TicTacToeState.AIWins)
+                extraInfo = "AI WINS!";
+            else if (ticTacToe.State == TicTacToeState.OpponentWins)
+                extraInfo = "YOU WIN!";
+
             string boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
+            
             System.Console.WriteLine(extraInfo);
             System.Console.WriteLine(boardAsString);
         }
 
-        private static TicTacToe CreateTicTacToe()
+        private static ITicTacToe CreateTicTacToe()
         {
             var strategies = new List<TicTacToeStrategy>
             {
