@@ -69,7 +69,7 @@ namespace TicTacToeGame
 
         public void FillOpponentCell(CellCoordinates cellCoordinate)
         {
-            if (IsCellNotEmpty(cellCoordinate))
+            if (AreCoordinatesOutsideTheBoard(cellCoordinate) || IsCellNotEmpty(cellCoordinate) )
                 throw new NotAllowedMovementException();
 
             FillCellWithType(CellType.Opponent, cellCoordinate);
@@ -78,6 +78,11 @@ namespace TicTacToeGame
         private bool IsCellNotEmpty(CellCoordinates cellCoordinate)
         {
             return Cells[cellCoordinate.Row, cellCoordinate.Column] != CellType.Empty;
+        }
+
+        private bool AreCoordinatesOutsideTheBoard(CellCoordinates cellCoordinate)
+        {
+            return (cellCoordinate.Row >= NUMBER_OF_ROWS || cellCoordinate.Column >= NUMBER_OF_COLUMNS);
         }
 
         public virtual void FillAICell(CellCoordinates cellCoordinate)
