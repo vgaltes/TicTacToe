@@ -55,5 +55,15 @@ namespace TicTacToeGame.Console.Test
 
             ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.AI));
         }
+
+        [Test]
+        public void WhenRunningGame_DrawEmptyBoardAtStart()
+        {
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1");
+
+            ticTacToeConsoleRunner.Run();
+
+            ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()));
+        }
     }
 }
