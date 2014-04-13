@@ -21,6 +21,7 @@ namespace TicTacToeGame
             this.board.FillOpponentCell(cellCoordinate);
             CalculateState();
             AIMove();
+            CalculateState();
         }
 
         public Board Board
@@ -65,6 +66,21 @@ namespace TicTacToeGame
 
             if (numberOfOpponentCells == numberOfOpponentCellsToWin)
                 this.State = TicTacToeState.OpponentWins;
+
+            var numberOfAICellsToWin = board.NumberOfColumns;
+            var numberOfAICells = 0;
+
+            foreach (var line in board.Lines)
+            {
+                foreach (var cellCoordinate in line.Coordinates)
+                {
+                    if (board.IsCellOfType(CellType.AI, cellCoordinate))
+                        numberOfAICells++;
+                }
+            }
+
+            if (numberOfAICells == numberOfAICellsToWin)
+                this.State = TicTacToeState.AIWins;
         }
     }
 }
