@@ -70,6 +70,15 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DRAW! Press any key to restart game..
+        /// </summary>
+        public static string Draw {
+            get {
+                return ResourceManager.GetString("Draw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press 1 to let AI make the first movement.\nPress 2 to make you the first movement..
         /// </summary>
         public static string SelectPlayer {
