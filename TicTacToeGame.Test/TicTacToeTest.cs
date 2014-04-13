@@ -37,6 +37,20 @@ namespace TicTacToeGame.Test
         }
 
         [Test]
+        public void GivenThreeOpponentMarksInALine_TheGameDoesntPlayAI()
+        {
+            var board = new Mock<Board>();
+            var ticTacToe = new TicTacToe(board.Object,
+                new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
+
+            ticTacToe.OpponentMove(new CellCoordinates(1, 0));
+            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
+            ticTacToe.OpponentMove(new CellCoordinates(1, 2));
+
+            board.Verify(b => b.FillAICell(It.IsAny<CellCoordinates>()), Times.Exactly(2));
+        }
+
+        [Test]
         public void GivenThreeAIMarksInALine_StateIsAIWins()
         {
             var ticTacToe = new TicTacToe(new Board(),
