@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console
@@ -90,7 +91,14 @@ namespace TicTacToeGame.Console
 
         private void PlayGame(string userInput)
         {
-            ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
+            try
+            {
+                ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
+            }
+            catch (NotAllowedMovementException)
+            {
+                extraInfo = string.Format("{0}\n{1}", Resources.MovementNotAllowed, Resources.WriteCoordinates);
+            }
         }
 
         private static CellCoordinates GetCoordinatesFromUserInput(string userInput)

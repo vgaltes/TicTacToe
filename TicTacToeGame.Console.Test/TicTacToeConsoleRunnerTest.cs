@@ -172,7 +172,14 @@ namespace TicTacToeGame.Console.Test
 
             ticTacToeConsoleRunner.Run();
 
-            consoleIO.Verify(c => c.WriteLine(Resources.MovementNotAllowed));
+            consoleIO.Verify(c => c.WriteLine(It.Is<string>( s => ValidateMovementNotAllowedWasWritten(s))));
+        }
+
+        private bool ValidateMovementNotAllowedWasWritten(string line)
+        {
+            if ( line != null)
+                return line.Contains(Resources.MovementNotAllowed);
+            return false;
         }
     }
 }

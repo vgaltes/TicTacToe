@@ -97,6 +97,15 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Write the coordinates where you want to move. \nThe format is [row],[column].\nWrite q! to quit..
+        /// </summary>
+        public static string WriteCoordinates {
+            get {
+                return ResourceManager.GetString("WriteCoordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to YOU WIN! Press any key to restart game..
         /// </summary>
         public static string YouWin {
