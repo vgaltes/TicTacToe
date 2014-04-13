@@ -123,6 +123,9 @@
   <data name="Draw" xml:space="preserve">
     <value>DRAW! Press any key to restart game.</value>
   </data>
+  <data name="MovementNotAllowed" xml:space="preserve">
+    <value>MOVEMENT NOT ALLOWED. PLEASE ENTER NEW COORDINATES.</value>
+  </data>
   <data name="SelectPlayer" xml:space="preserve">
     <value>Press 1 to let AI make the first movement.\nPress 2 to make you the first movement.</value>
   </data>

@@ -79,6 +79,15 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MOVEMENT NOT ALLOWED. PLEASE ENTER NEW COORDINATES..
+        /// </summary>
+        public static string MovementNotAllowed {
+            get {
+                return ResourceManager.GetString("MovementNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press 1 to let AI make the first movement.\nPress 2 to make you the first movement..
         /// </summary>
         public static string SelectPlayer {

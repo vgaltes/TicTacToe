@@ -40,6 +40,8 @@ namespace TicTacToeGame.Console
                     PlayGame(userInput);
                 }
 
+                DrawBoard();
+
                 userInput = consoleIO.ReadLine();
             }
         }

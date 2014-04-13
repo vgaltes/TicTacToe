@@ -8,6 +8,7 @@ using Moq;
 using FluentAssertions;
 using TicTacToeGame.Console;
 using TicTacToeGame.Models;
+using TicTacToeGame.Exceptions;
 
 namespace TicTacToeGame.Console.Test
 {
@@ -157,6 +158,24 @@ namespace TicTacToeGame.Console.Test
             ticTacToeConsoleRunner.Run();
 
             ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void WhenRunningGame_IfAMovementNotAllowedExceptionIsThrown_PrintIt()
+        {
+            var opponentMove = new CellCoordinates(1, 1);
+            consoleIO.SetupSequence(c => c.ReadLine())
+                .Returns("1")
+                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
+                .Returns("q!");
+            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
+            ticTacToe.Setup(ttt => ttt.OpponentMove(It.IsAny<CellCoordinates>()))
+                .Throws<NotAllowedMovementException>();
+
+            ticTacToeConsoleRunner.Run();
+
+            consoleIO.Verify(c => c.WriteLine(Resources.MovementNotAllowed));
         }
     }
 }
