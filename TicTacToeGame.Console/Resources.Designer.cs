@@ -88,7 +88,8 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Press 1 to let AI make the first movement.\nPress 2 to make you the first movement..
+        ///   Looks up a localized string similar to Press 1 to let AI make the first movement.
+        ///Press 2 to make you the first movement..
         /// </summary>
         public static string SelectPlayer {
             get {
@@ -97,7 +98,9 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Write the coordinates where you want to move. \nThe format is [row],[column].\nWrite q! to quit..
+        ///   Looks up a localized string similar to Write the coordinates where you want to move.
+        ///The format is [row],[column].
+        ///Write q! to quit..
         /// </summary>
         public static string WriteCoordinates {
             get {

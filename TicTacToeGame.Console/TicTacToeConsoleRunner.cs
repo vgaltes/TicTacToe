@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
@@ -54,6 +52,7 @@ namespace TicTacToeGame.Console
 
         private void SetInitialPlayer()
         {
+            consoleIO.Clear();
             consoleIO.WriteLine(Resources.SelectPlayer);
             var option = consoleIO.ReadLine();
             if (option != AI_PLAYER && option != HUMAN_PLAYER)
@@ -62,6 +61,7 @@ namespace TicTacToeGame.Console
             {
                 var initialPlayer = (CellType)Enum.Parse(typeof(CellType), option);
                 ticTacToe.SetInitialPlayer(initialPlayer);
+                extraInfo = Resources.WriteCoordinates;
             }
         }
 
@@ -98,6 +98,7 @@ namespace TicTacToeGame.Console
         {
             try
             {
+                extraInfo = Resources.WriteCoordinates;
                 ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
             }
             catch (NotAllowedMovementException)

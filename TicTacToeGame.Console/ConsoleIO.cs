@@ -9,22 +9,22 @@ namespace TicTacToeGame.Console
     {
         public virtual void WriteLine(string line)
         {
-            throw new NotImplementedException();
+            System.Console.WriteLine(line);
         }
 
         public virtual string ReadLine()
         {
-            throw new NotImplementedException();
+            return System.Console.ReadLine();
         }
 
         public virtual void Clear()
         {
-            throw new NotImplementedException();
+            System.Console.Clear();
         }
 
         public virtual void ReadKey()
         {
-            throw new NotImplementedException();
+            System.Console.ReadKey();
         }
     }
 }
