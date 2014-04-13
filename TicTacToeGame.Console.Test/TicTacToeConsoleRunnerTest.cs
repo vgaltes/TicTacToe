@@ -50,7 +50,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfThePlayerIsAI_CallTicTacToeWithCellTypeAI()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1");
+            consoleIO.Setup(c => c.ReadLine()).Returns("1");
 
             ticTacToeConsoleRunner.Run();
 
@@ -60,11 +60,22 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_DrawEmptyBoardAtStart()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1");
+            consoleIO.Setup(c => c.ReadLine()).Returns("1");
 
             ticTacToeConsoleRunner.Run();
 
             ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()));
+        }
+
+        [Test]
+        public void WhenRunningGame_IfTheStateIsAIWinsWriteIt()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns("1");
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.AIWins);
+
+            ticTacToeConsoleRunner.Run();
+
+            consoleIO.Verify(c => c.WriteLine(Resources.AiWins));
         }
     }
 }

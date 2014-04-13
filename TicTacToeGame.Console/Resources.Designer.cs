@@ -61,6 +61,15 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AI WINS! Press any key to restart game..
+        /// </summary>
+        public static string AiWins {
+            get {
+                return ResourceManager.GetString("AiWins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press 1 to let AI make the first movement.\nPress 2 to make you the first movement..
         /// </summary>
         public static string SelectPlayer {

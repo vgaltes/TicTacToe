@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AiWins" xml:space="preserve">
+    <value>AI WINS! Press any key to restart game.</value>
+  </data>
   <data name="SelectPlayer" xml:space="preserve">
     <value>Press 1 to let AI make the first movement.\nPress 2 to make you the first movement.</value>
   </data>
