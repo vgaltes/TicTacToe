@@ -102,5 +102,15 @@ namespace TicTacToeGame.Console.Test
 
             consoleIO.Verify(c => c.WriteLine(Resources.Draw));
         }
+
+        [Test]
+        public void WhenRunningGame_IfTheUserWritesTheQuitCommandTheGameEnds()
+        {
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("q!");
+
+            ticTacToeConsoleRunner.Run();
+
+            ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()), Times.Once());
+        }
     }
 }
