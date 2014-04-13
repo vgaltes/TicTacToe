@@ -188,6 +188,20 @@ namespace TicTacToeGame.Console.Test
 
         }
 
+        [Test]
+        public void WhenRunningAGame_IfAfterPlayingTheStateIsNotPlaying_ResetTicTacToe()
+        {
+            ticTacToe.SetupGet(ttt => ttt.State)
+                .Returns(TicTacToeState.Draw);
+
+            SetupOneMovementAndQuit();
+
+            ticTacToeConsoleRunner.Run();
+
+            ticTacToe.Verify(ttt => ttt.Reset());
+
+        }
+
         private void SetupOneMovementAndQuit()
         {
             var opponentMove = new CellCoordinates(1, 1);
