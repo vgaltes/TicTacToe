@@ -211,41 +211,7 @@ namespace TicTacToeGame
 
             return true;
         }
-
-        public override int GetHashCode()
-        {
-            int hashCode = 0;
-            int multiplier = 1;
-
-            for (int row = 0; row < SIZE; row++)
-            {
-                for (int column = 0; column < SIZE; column++)
-                {
-                    hashCode += multiplier * (int)Cells[row, column];
-                    multiplier += 10;
-                }
-            }
-
-            return hashCode;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0}|{1}|{2}\n-----\n{3}|{4}|{5}\n-----\n{6}|{7}|{8}",
-                Draw(Cells[0, 0]), Draw(Cells[0, 1]), Draw(Cells[0, 2]),
-                Draw(Cells[1, 0]), Draw(Cells[1, 1]), Draw(Cells[1, 2]),
-                Draw(Cells[2, 0]), Draw(Cells[2, 1]), Draw(Cells[2, 2]));
-        }
-
-        private string Draw(CellType cell)
-        {
-            if (cell == CellType.AI)
-                return "X";
-            if (cell == CellType.Opponent)
-                return "O";
-            return " ";
-        }
-
+        
         internal bool HasLessOpponentCellsThan(int numberOfCells)
         {
             int opponentCells = 0;

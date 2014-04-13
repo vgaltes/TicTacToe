@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
@@ -14,60 +15,82 @@ namespace TicTacToeGame.Console
         private const string UNEXPECTED_EXCEPTION =
             "UNEXPECTED EXCEPTION HAS OCURRED. PLEASE ENTER NEW COORDINATES.";
         private const string QUIT_COMMAND = "q!";
-
+        private const string SELECT_PLAYER = "Press 1 to let AI make the first movement.\nPress 2 to make you the first movement.";
+        private const string WRITE_COORDINATES = "Write the coordinates where you want to move. \nThe format is [row],[column].\nWrite q! to quit.";
+        private const string AI_WINS = "AI WINS! Press any key to restart game.";
+        private const string YOU_WIN = "YOU WIN! Press any key to restart game.";
+        private const string DRAW = "DRAW! Press any key to restart game.";
         private static string extraInfo = string.Empty;
 
         static void Main(string[] args)
         {
-            System.Console.WriteLine("qui vols que comenci. 1 per tu 2 per ai");
-            var option = System.Console.ReadLine();
-            var initialPlayer = (CellType)Enum.Parse(typeof(CellType), option);
-
-            var ticTacToe = CreateTicTacToe(initialPlayer);
+            var ticTacToe = CreateTicTacToe();
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
+
+            SetInitialPlayer(ticTacToe);
+            DrawBoard(ticTacToe, ticTacToeBoardDrawer);
+
+            string userInput = GetUserInput(ticTacToe);
+            while (userInput != QUIT_COMMAND)
+            {
+                userInput = RunGame(ticTacToe, ticTacToeBoardDrawer, userInput);
+            }
+        }
+
+        private static string RunGame(ITicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer, string userInput)
+        {
+            if (ticTacToe.State == TicTacToeState.Playing)
+            {
+                PlayGame(ticTacToe, userInput);
+            }
 
             DrawBoard(ticTacToe, ticTacToeBoardDrawer);
 
-            string userInput = GetUserInput();
-            do
+            if ( ticTacToe.State != TicTacToeState.Playing)
             {
-                if (ticTacToe.State == TicTacToeState.Playing)
-                {
-                    try
-                    {
-                        extraInfo = string.Empty;
-                        ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
-                    }
-                    catch (NotAllowedMovementException)
-                    {
-                        extraInfo = MOVEMENT_NOT_ALLOWED;
-                    }
-                    catch (Exception)
-                    {
-                        extraInfo = UNEXPECTED_EXCEPTION;
-                    }
-                }
+                System.Console.ReadKey();
+                ResetGame(ticTacToe, ticTacToeBoardDrawer);
+            }
 
-                if ( ticTacToe.State == TicTacToeState.Playing)
-                {
-                    DrawBoard(ticTacToe, ticTacToeBoardDrawer);
-                    userInput = GetUserInput();
-                }
-                else
-                {
-                    DrawBoard(ticTacToe, ticTacToeBoardDrawer);
-                    System.Console.ReadKey();
-                    ticTacToe.Reset();
-                    extraInfo = string.Empty;
-                    DrawBoard(ticTacToe, ticTacToeBoardDrawer);
-                    userInput = GetUserInput();
-                }
-            } while (userInput != QUIT_COMMAND);
+            userInput = GetUserInput(ticTacToe);
+
+            return userInput;
         }
 
-        private static string GetUserInput()
+        private static void PlayGame(ITicTacToe ticTacToe, string userInput)
         {
-            string line = System.Console.ReadLine();
+            try
+            {
+                extraInfo = WRITE_COORDINATES;
+                ticTacToe.OpponentMove(GetCoordinatesFromUserInput(userInput));
+            }
+            catch (NotAllowedMovementException)
+            {
+                extraInfo = string.Format("{0}\n{1}", MOVEMENT_NOT_ALLOWED, WRITE_COORDINATES);
+            }
+            catch (Exception)
+            {
+                extraInfo = string.Format("{0}\n{1}", UNEXPECTED_EXCEPTION, WRITE_COORDINATES);
+            }
+        }
+
+        private static void ResetGame(ITicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer)
+        {
+            System.Console.Clear();
+            ticTacToe.Reset();
+            SetInitialPlayer(ticTacToe);
+            DrawBoard(ticTacToe, ticTacToeBoardDrawer);
+        }
+
+        private static string GetUserInput(ITicTacToe ticTacToe)
+        {
+            string line = string.Empty;
+            string regexExpression = string.Format("[\\d],[\\d]", ticTacToe.Board.Size - 1);
+
+            while (line != QUIT_COMMAND && !Regex.IsMatch(line, regexExpression))
+            {
+                line = System.Console.ReadLine();
+            }
             return line;
         }
 
@@ -82,9 +105,11 @@ namespace TicTacToeGame.Console
             System.Console.Clear();
 
             if (ticTacToe.State == TicTacToeState.AIWins)
-                extraInfo = "AI WINS! Press any key to restart game.";
+                extraInfo = AI_WINS;
             else if (ticTacToe.State == TicTacToeState.OpponentWins)
-                extraInfo = "YOU WIN! Press any key to restart game.";
+                extraInfo = YOU_WIN;
+            else if (ticTacToe.State == TicTacToeState.Draw)
+                extraInfo = DRAW;
 
             string boardAsString = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
             
@@ -92,7 +117,7 @@ namespace TicTacToeGame.Console
             System.Console.WriteLine(boardAsString);
         }
 
-        private static ITicTacToe CreateTicTacToe(CellType initialPlayer)
+        private static ITicTacToe CreateTicTacToe()
         {
             var strategies = new List<TicTacToeStrategy>
             {
@@ -109,9 +134,21 @@ namespace TicTacToeGame.Console
             var board = new Board();
 
             ITicTacToe ticTacToe = new TicTacToe(board, strategies);
-            ticTacToe.SetInitialPlayer(initialPlayer);
-
             return ticTacToe;
+        }
+
+        private static void SetInitialPlayer(ITicTacToe ticTacToe)
+        {
+            System.Console.WriteLine(SELECT_PLAYER);
+            var option = System.Console.ReadLine();
+            if (option != "1" && option != "2")
+                SetInitialPlayer(ticTacToe);
+            else
+            {
+                var initialPlayer = (CellType)Enum.Parse(typeof(CellType), option);
+                ticTacToe.SetInitialPlayer(initialPlayer);
+                extraInfo = WRITE_COORDINATES;
+            }
         }
     }
 }

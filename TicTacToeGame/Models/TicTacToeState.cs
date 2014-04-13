@@ -4,6 +4,7 @@
     {
         Playing,
         OpponentWins,
-        AIWins
+        AIWins,
+        Draw
     }
 }

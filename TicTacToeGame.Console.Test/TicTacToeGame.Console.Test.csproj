@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="TicTacToeBoardDrawerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicTacToeConsoleRunnerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
