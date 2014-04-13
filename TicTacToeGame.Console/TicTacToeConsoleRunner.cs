@@ -115,6 +115,7 @@ namespace TicTacToeGame.Console
         private void ResetGame()
         {
             consoleIO.ReadKey();
+            ticTacToe.Reset();
         }
     }
 }
