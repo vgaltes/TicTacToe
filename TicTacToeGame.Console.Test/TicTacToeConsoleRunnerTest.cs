@@ -206,7 +206,12 @@ namespace TicTacToeGame.Console.Test
             ticTacToe.SetupGet(ttt => ttt.State)
                 .Returns(TicTacToeState.Draw);
 
-            SetupOneMovementAndQuit();
+            var opponentMove = new CellCoordinates(1, 1);
+            consoleIO.SetupSequence(c => c.ReadLine())
+                .Returns("1")
+                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
+                .Returns("1")
+                .Returns("q!");
 
             ticTacToeConsoleRunner.Run();
 
