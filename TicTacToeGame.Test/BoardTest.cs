@@ -16,5 +16,13 @@ namespace TicTacToeGame.Test
 
             board.FillOpponentCell(cellCoordinates);
         }
+
+        [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
+        public void WhenPuttingAnOpponentCellOutsideTheBoard_NotAllowedMovementExceptionIsThrown()
+        {
+            var board = new Board();
+            var cellCoordinates = new CellCoordinates(4, 4);
+            board.FillOpponentCell(cellCoordinates);
+        }
     }
 }
