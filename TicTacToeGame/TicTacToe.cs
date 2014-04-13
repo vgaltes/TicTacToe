@@ -20,8 +20,11 @@ namespace TicTacToeGame
         {
             this.board.FillOpponentCell(cellCoordinate);
             CalculateState();
-            AIMove();
-            CalculateState();
+            if (State == TicTacToeState.Playing)
+            {
+                AIMove();
+                CalculateState();
+            }
         }
 
         public Board Board
@@ -61,18 +64,20 @@ namespace TicTacToeGame
         private bool EvaluateWinnerIs(CellType cellType)
         {
             var numberOfCellsToWin = board.Size;
-            var numberOfCells = 0;
-
+            
             foreach (var line in board.Lines)
             {
+                var numberOfCells = 0;
                 foreach (var cellCoordinate in line.Coordinates)
                 {
                     if (board.IsCellOfType(cellType, cellCoordinate))
                         numberOfCells++;
                 }
+                if (numberOfCells == numberOfCellsToWin)
+                    return true;
             }
 
-            return (numberOfCells == numberOfCellsToWin);
+            return false;
         }
     }
 }
