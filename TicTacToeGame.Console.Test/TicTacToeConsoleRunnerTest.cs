@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Moq;
 using FluentAssertions;
 using TicTacToeGame.Console;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.Test
 {
@@ -40,6 +41,21 @@ namespace TicTacToeGame.Console.Test
             ticTacToeConsoleRunner.Run();
 
             consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer), Times.Exactly(2));
+        }
+
+        [Test]
+        public void WhenRunningGame_IfThePlayerIsAI_CallTicTacToeWithCellTypeAI()
+        {
+            var ticTacToe = new Mock<ITicTacToe>();
+            var ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
+            var consoleIO = new Mock<ConsoleIO>();
+
+            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1");
+
+            ticTacToeConsoleRunner.Run();
+
+            ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.AI));
         }
     }
 }
