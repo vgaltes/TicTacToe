@@ -14,7 +14,7 @@ namespace TicTacToeGame.Test.Fakes
 
         public void Update(Board board)
         {
-            for (var column = 0; column < board.NumberOfColumns; column ++  )
+            for (var column = 0; column < board.Size; column++)
             {
                 if (board.IsCellOfType(CellType.Empty, new CellCoordinates(FIRST_ROW, column)))
                 {

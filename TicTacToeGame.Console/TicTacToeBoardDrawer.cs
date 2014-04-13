@@ -11,7 +11,7 @@ namespace TicTacToeGame.Console
         {
             string boardRepresentation = string.Empty;
 
-            for (int row = 0; row < board.NumberOfRows; row++ )
+            for (int row = 0; row < board.Size; row++ )
             {
                 boardRepresentation += DrawDataRow(board, row);
                 boardRepresentation += DrawSeparatorRow(board, row);
@@ -24,7 +24,7 @@ namespace TicTacToeGame.Console
         {
             var boardRepresentation = string.Empty;
 
-            for (int column = 0; column < board.NumberOfColumns; column++)
+            for (int column = 0; column < board.Size; column++)
             {
                 boardRepresentation += Draw(board[row, column]);
                 if (IsNotLastColumn(board, column))
@@ -41,7 +41,7 @@ namespace TicTacToeGame.Console
             if (IsNotLastRow(board, row))
             {
                 boardRepresentation += NEW_LINE;
-                for (int column = 0; column < board.NumberOfColumns; column++)
+                for (int column = 0; column < board.Size; column++)
                 {
                     boardRepresentation += ROWS_SEPARATOR;
                     if (IsNotLastColumn(board, column))
@@ -54,12 +54,12 @@ namespace TicTacToeGame.Console
 
         private static bool IsNotLastColumn(Board board, int column)
         {
-            return column < board.NumberOfColumns - 1;
+            return column < board.Size - 1;
         }
 
         private static bool IsNotLastRow(Board board, int row)
         {
-            return row < board.NumberOfRows - 1;
+            return row < board.Size - 1;
         }
 
         private string Draw(CellType cell)

@@ -9,8 +9,7 @@ namespace TicTacToeGame
 {
     public class Board
     {
-        public const int NUMBER_OF_ROWS = 3;
-        public const int NUMBER_OF_COLUMNS = 3;
+        public const int SIZE = 3;
         public const int CENTER_ROW = 1;
         public const int CENTER_COLUMN = 1;
 
@@ -22,7 +21,7 @@ namespace TicTacToeGame
 
         public Board()
         {
-            Cells = new CellType[NUMBER_OF_ROWS, NUMBER_OF_COLUMNS];
+            Cells = new CellType[SIZE, SIZE];
 
             AddRows();
             AddColumns();
@@ -82,7 +81,7 @@ namespace TicTacToeGame
 
         private bool AreCoordinatesOutsideTheBoard(CellCoordinates cellCoordinate)
         {
-            return (cellCoordinate.Row >= NUMBER_OF_ROWS || cellCoordinate.Column >= NUMBER_OF_COLUMNS);
+            return (cellCoordinate.Row >= SIZE || cellCoordinate.Column >= SIZE);
         }
 
         public virtual void FillAICell(CellCoordinates cellCoordinate)
@@ -118,9 +117,9 @@ namespace TicTacToeGame
         {
             get
             {
-                for (int row = 0; row < NUMBER_OF_ROWS; row++)
+                for (int row = 0; row < SIZE; row++)
                 {
-                    for (int column = 0; column < NUMBER_OF_COLUMNS; column++)
+                    for (int column = 0; column < SIZE; column++)
                     {
                         if (Cells[row, column] == CellType.Empty)
                         {
@@ -201,9 +200,9 @@ namespace TicTacToeGame
             if (boardToCompare == null)
                 return false;
 
-            for (int row = 0; row < NUMBER_OF_ROWS; row++)
+            for (int row = 0; row < SIZE; row++)
             {
-                for (int column = 0; column < NUMBER_OF_COLUMNS; column++)
+                for (int column = 0; column < SIZE; column++)
                 {
                     if (Cells[row, column] != boardToCompare[row, column])
                         return false;
@@ -218,9 +217,9 @@ namespace TicTacToeGame
             int hashCode = 0;
             int multiplier = 1;
 
-            for (int row = 0; row < NUMBER_OF_ROWS; row++)
+            for (int row = 0; row < SIZE; row++)
             {
-                for (int column = 0; column < NUMBER_OF_COLUMNS; column++)
+                for (int column = 0; column < SIZE; column++)
                 {
                     hashCode += multiplier * (int)Cells[row, column];
                     multiplier += 10;
@@ -251,9 +250,9 @@ namespace TicTacToeGame
         {
             int opponentCells = 0;
 
-            for (int row = 0; row < NUMBER_OF_ROWS; row++)
+            for (int row = 0; row < SIZE; row++)
             {
-                for (int column = 0; column < NUMBER_OF_COLUMNS; column++)
+                for (int column = 0; column < SIZE; column++)
                 {
                     if (Cells[row, column] == CellType.Opponent)
                         opponentCells++;
@@ -263,19 +262,11 @@ namespace TicTacToeGame
             return opponentCells < numberOfCells;
         }
 
-        public int NumberOfRows
+        public int Size
         {
             get
             {
-                return NUMBER_OF_ROWS;
-            }
-        }
-
-        public int NumberOfColumns
-        {
-            get
-            {
-                return NUMBER_OF_COLUMNS;
+                return SIZE;
             }
         }
     }

@@ -52,35 +52,27 @@ namespace TicTacToeGame
 
         private void CalculateState()
         {
-            var numberOfOpponentCellsToWin = board.NumberOfColumns;
-            var numberOfOpponentCells = 0;
+            if (EvaluateWinnerIs(CellType.Opponent))
+                State = TicTacToeState.OpponentWins;
+            else if (EvaluateWinnerIs(CellType.AI))
+                State = TicTacToeState.AIWins;
+        }
+
+        private bool EvaluateWinnerIs(CellType cellType)
+        {
+            var numberOfCellsToWin = board.Size;
+            var numberOfCells = 0;
 
             foreach (var line in board.Lines)
             {
                 foreach (var cellCoordinate in line.Coordinates)
                 {
-                    if (board.IsCellOfType(CellType.Opponent, cellCoordinate))
-                        numberOfOpponentCells++;
+                    if (board.IsCellOfType(cellType, cellCoordinate))
+                        numberOfCells++;
                 }
             }
 
-            if (numberOfOpponentCells == numberOfOpponentCellsToWin)
-                this.State = TicTacToeState.OpponentWins;
-
-            var numberOfAICellsToWin = board.NumberOfColumns;
-            var numberOfAICells = 0;
-
-            foreach (var line in board.Lines)
-            {
-                foreach (var cellCoordinate in line.Coordinates)
-                {
-                    if (board.IsCellOfType(CellType.AI, cellCoordinate))
-                        numberOfAICells++;
-                }
-            }
-
-            if (numberOfAICells == numberOfAICellsToWin)
-                this.State = TicTacToeState.AIWins;
+            return (numberOfCells == numberOfCellsToWin);
         }
     }
 }
