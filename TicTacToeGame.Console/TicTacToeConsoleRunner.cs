@@ -25,6 +25,7 @@ namespace TicTacToeGame.Console
         public void Run()
         {
             SetInitialPlayer();
+            DrawBoard();
         }
 
         private void SetInitialPlayer()
@@ -38,6 +39,11 @@ namespace TicTacToeGame.Console
                 var initialPlayer = (CellType)Enum.Parse(typeof(CellType), option);
                 ticTacToe.SetInitialPlayer(initialPlayer);
             }
+        }
+
+        private void DrawBoard()
+        {
+            var board = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace TicTacToeGame.Console.Test
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
         TicTacToeConsoleRunner ticTacToeConsoleRunner;
+
         [SetUp]
         public void TestSetUp()
         {

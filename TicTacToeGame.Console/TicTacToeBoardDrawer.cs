@@ -7,7 +7,7 @@ namespace TicTacToeGame.Console
         private const string ROWS_SEPARATOR = "-";
         private const string NEW_LINE = "\n";
 
-        public string GetRepresentationOf(Board board)
+        public virtual string GetRepresentationOf(Board board)
         {
             string boardRepresentation = string.Empty;
 
