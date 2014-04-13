@@ -20,7 +20,15 @@ namespace TicTacToeGame.Console
 
         public void Run()
         {
+            SetInitialPlayer();
+        }
+
+        private void SetInitialPlayer()
+        {
             consoleIO.WriteLine(Resources.SelectPlayer);
+            var option = consoleIO.ReadLine();
+            if (option != "1" && option != "2")
+                SetInitialPlayer();
         }
     }
 }
