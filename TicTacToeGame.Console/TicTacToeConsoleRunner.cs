@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console
@@ -10,6 +11,7 @@ namespace TicTacToeGame.Console
     {
         private const string AI_PLAYER = "1";
         private const string HUMAN_PLAYER = "2";
+        private const string QUIT_COMMAND = "q!";
 
         private readonly ITicTacToe ticTacToe;
         private readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
@@ -28,6 +30,8 @@ namespace TicTacToeGame.Console
         {
             SetInitialPlayer();
             DrawBoard();
+
+            GetUserInput();
         }
 
         private void SetInitialPlayer()
@@ -58,6 +62,18 @@ namespace TicTacToeGame.Console
 
             var board = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
             consoleIO.WriteLine(board);
+        }
+
+        private string GetUserInput()
+        {
+            string line = string.Empty;
+            string regexExpression = string.Format("[\\d],[\\d]", ticTacToe.Board.Size - 1);
+
+            while (line != QUIT_COMMAND && !Regex.IsMatch(line, regexExpression))
+            {
+                line = consoleIO.ReadLine();
+            }
+            return line;
         }
     }
 }

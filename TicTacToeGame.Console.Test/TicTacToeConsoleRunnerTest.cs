@@ -117,6 +117,7 @@ namespace TicTacToeGame.Console.Test
         public void WhenRunningGame_ReadInputUntilValidCoordinate()
         {
             consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("a,a").Returns("").Returns("1,1");
+            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
 
             ticTacToeConsoleRunner.Run();
 
