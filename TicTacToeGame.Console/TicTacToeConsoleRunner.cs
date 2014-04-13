@@ -7,13 +7,12 @@ namespace TicTacToeGame.Console
 {
     public class TicTacToeConsoleRunner
     {
-        private ITicTacToe ticTacToe;
-        private TicTacToeBoardDrawer ticTacToeBoardDrawer;
-        private ConsoleIO consoleIO;
+        private readonly ITicTacToe ticTacToe;
+        private readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
+        private readonly ConsoleIO consoleIO;
 
         public TicTacToeConsoleRunner(ITicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer, ConsoleIO consoleIO)
         {
-            // TODO: Complete member initialization
             this.ticTacToe = ticTacToe;
             this.ticTacToeBoardDrawer = ticTacToeBoardDrawer;
             this.consoleIO = consoleIO;
@@ -21,7 +20,7 @@ namespace TicTacToeGame.Console
 
         public void Run()
         {
-            throw new NotImplementedException();
+            consoleIO.WriteLine(Resources.SelectPlayer);
         }
     }
 }

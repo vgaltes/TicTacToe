@@ -7,7 +7,7 @@ namespace TicTacToeGame.Console
 {
     public class ConsoleIO
     {
-        public object WriteLine(string p)
+        public virtual void WriteLine(string line)
         {
             throw new NotImplementedException();
         }
