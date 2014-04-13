@@ -53,6 +53,7 @@ namespace TicTacToeGame.Console
             consoleIO.WriteLine(extraInfo);
 
             var board = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
+            consoleIO.WriteLine(board);
         }
     }
 }
