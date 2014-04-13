@@ -123,5 +123,19 @@ namespace TicTacToeGame.Console.Test
 
             consoleIO.Verify(c => c.ReadLine(), Times.AtLeast(4));
         }
+
+        [Test]
+        public void WhenRunningGame_PlayOpponentWithTheCoordinates()
+        {
+            var opponentMove = new CellCoordinates(1,1);
+            consoleIO.SetupSequence(c => c.ReadLine())
+                .Returns("1")
+                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column));
+            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
+
+            ticTacToeConsoleRunner.Run();
+
+            ticTacToe.Verify(ttt => ttt.OpponentMove(opponentMove));
+        }
     }
 }
