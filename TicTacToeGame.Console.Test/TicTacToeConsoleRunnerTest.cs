@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Moq;
 using NUnit.Framework;
-using Moq;
-using FluentAssertions;
-using TicTacToeGame.Console;
-using TicTacToeGame.Models;
 using TicTacToeGame.Exceptions;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.Test
 {
     [TestFixture]
     public class TicTacToeConsoleRunnerTest
     {
+        private const string QUIT_COMMAND = "q!";
+        private const string AI_PLAYER = "1";
+        private const string HUMAN_PLAYER = "2";
+        private const string INVALID_PLAYER = "3";
+        private const string INVALID_COORDINATES = "a,a";
+        private const string ANOTHER_INVALID_COORDINATES = "";
+        private const string VALID_COORDINATES = "1,1";
+        private const string BOARD_REPRESENTATION = "board representation";
+
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
@@ -36,7 +38,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_AsksForPlayer()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("2").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(HUMAN_PLAYER).Returns(QUIT_COMMAND);
             ticTacToeConsoleRunner.Run();
 
             consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer));
@@ -45,7 +47,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfThePlayerIsNotValid_AsksOneMoreTime()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("3").Returns("2").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(INVALID_PLAYER).Returns(HUMAN_PLAYER).Returns(QUIT_COMMAND);
 
             ticTacToeConsoleRunner.Run();
 
@@ -55,7 +57,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfThePlayerIsAI_CallTicTacToeWithCellTypeAI()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
 
             ticTacToeConsoleRunner.Run();
 
@@ -65,20 +67,19 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_DrawEmptyBoardAtStart()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("q!");
-            var boardRepresentation = "board representation";
-            ticTacToeBoardDrawer.Setup(tbd => tbd.GetRepresentationOf(It.IsAny<Board>())).Returns(boardRepresentation);
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
+            ticTacToeBoardDrawer.Setup(tbd => tbd.GetRepresentationOf(It.IsAny<Board>())).Returns(BOARD_REPRESENTATION);
 
             ticTacToeConsoleRunner.Run();
 
             ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()));
-            consoleIO.Verify(c => c.WriteLine(boardRepresentation));
+            consoleIO.Verify(c => c.WriteLine(BOARD_REPRESENTATION));
         }
 
         [Test]
         public void WhenRunningGame_IfTheStateIsAIWinsWriteIt()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.AIWins);
 
             ticTacToeConsoleRunner.Run();
@@ -89,7 +90,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfTheStateIsOpponentWinsWriteIt()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.OpponentWins);
 
             ticTacToeConsoleRunner.Run();
@@ -100,7 +101,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfTheStateIsDrawWriteIt()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Draw);
 
             ticTacToeConsoleRunner.Run();
@@ -111,7 +112,7 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfTheUserWritesTheQuitCommandTheGameEnds()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
 
             ticTacToeConsoleRunner.Run();
 
@@ -121,7 +122,9 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_ReadInputUntilValidCoordinate()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns("1").Returns("a,a").Returns("").Returns("1,1").Returns("q!");
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER)
+                .Returns(INVALID_COORDINATES).Returns(ANOTHER_INVALID_COORDINATES)
+                .Returns(VALID_COORDINATES).Returns(QUIT_COMMAND);
             
             ticTacToeConsoleRunner.Run();
 
@@ -134,10 +137,10 @@ namespace TicTacToeGame.Console.Test
             var firstOpponentMove = new CellCoordinates(1,1);
             var secondOpponentMove = new CellCoordinates(1, 2);
             consoleIO.SetupSequence(c => c.ReadLine())
-                .Returns("1")
+                .Returns(AI_PLAYER)
                 .Returns(string.Format("{0},{1}", firstOpponentMove.Row, firstOpponentMove.Column))
                 .Returns(string.Format("{0},{1}", secondOpponentMove.Row, secondOpponentMove.Column))
-                .Returns("q!");
+                .Returns(QUIT_COMMAND);
 
             ticTacToeConsoleRunner.Run();
 
@@ -217,19 +220,19 @@ namespace TicTacToeGame.Console.Test
         {
             var opponentMove = new CellCoordinates(1, 1);
             consoleIO.SetupSequence(c => c.ReadLine())
-                .Returns("1")
+                .Returns(AI_PLAYER)
                 .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
-                .Returns("1")
-                .Returns("q!");
+                .Returns(AI_PLAYER)
+                .Returns(QUIT_COMMAND);
         }
 
         private void SetupOneMovementAndQuit()
         {
             var opponentMove = new CellCoordinates(1, 1);
             consoleIO.SetupSequence(c => c.ReadLine())
-                .Returns("1")
+                .Returns(AI_PLAYER)
                 .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
-                .Returns("q!");
+                .Returns(QUIT_COMMAND);
         }
     }
 }
