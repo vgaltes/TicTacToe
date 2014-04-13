@@ -142,5 +142,21 @@ namespace TicTacToeGame.Console.Test
             ticTacToe.Verify(ttt => ttt.OpponentMove(firstOpponentMove));
             ticTacToe.Verify(ttt => ttt.OpponentMove(secondOpponentMove));
         }
+
+        [Test]
+        public void WhenRunningGame_DrawBoardAfterOpponentPlays()
+        {
+            var opponentMove = new CellCoordinates(1, 1);
+            consoleIO.SetupSequence(c => c.ReadLine())
+                .Returns("1")
+                .Returns(string.Format("{0},{1}", opponentMove.Row, opponentMove.Column))
+                .Returns("q!");
+            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
+
+            ticTacToeConsoleRunner.Run();
+
+            ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()), Times.Exactly(2));
+        }
     }
 }
