@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 using TicTacToeGame.Strategies;
 
@@ -18,6 +19,9 @@ namespace TicTacToeGame
 
         public void OpponentMove(CellCoordinates cellCoordinate)
         {
+            if (State != TicTacToeState.Playing)
+                throw new NotAllowedMovementException();
+
             this.board.FillOpponentCell(cellCoordinate);
             CalculateState();
             if (State == TicTacToeState.Playing)
