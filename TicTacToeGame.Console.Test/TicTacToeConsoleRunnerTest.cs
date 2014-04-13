@@ -185,7 +185,6 @@ namespace TicTacToeGame.Console.Test
             ticTacToeConsoleRunner.Run();
 
             consoleIO.Verify(c => c.ReadKey(), Times.Once());
-
         }
 
         [Test]
@@ -199,7 +198,19 @@ namespace TicTacToeGame.Console.Test
             ticTacToeConsoleRunner.Run();
 
             ticTacToe.Verify(ttt => ttt.Reset());
+        }
 
+        [Test]
+        public void WhenRunningAGame_IfAfterPlayingTheStateIsNotPlaying_AsksForPlayer()
+        {
+            ticTacToe.SetupGet(ttt => ttt.State)
+                .Returns(TicTacToeState.Draw);
+
+            SetupOneMovementAndQuit();
+
+            ticTacToeConsoleRunner.Run();
+
+            consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer), Times.Exactly(2));
         }
 
         private void SetupOneMovementAndQuit()
