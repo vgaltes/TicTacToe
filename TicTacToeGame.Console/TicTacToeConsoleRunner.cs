@@ -117,6 +117,7 @@ namespace TicTacToeGame.Console
             consoleIO.ReadKey();
             ticTacToe.Reset();
             SetInitialPlayer();
+            DrawBoard();
         }
     }
 }
