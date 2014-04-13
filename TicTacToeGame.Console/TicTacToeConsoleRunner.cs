@@ -49,6 +49,8 @@ namespace TicTacToeGame.Console
 
             if (ticTacToe.State == TicTacToeState.AIWins)
                 extraInfo = Resources.AiWins;
+            else if (ticTacToe.State == TicTacToeState.OpponentWins)
+                extraInfo = Resources.YouWin;
 
             consoleIO.WriteLine(extraInfo);
 
