@@ -11,5 +11,10 @@ namespace TicTacToeGame.Console
         {
             throw new NotImplementedException();
         }
+
+        public virtual string ReadLine()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
