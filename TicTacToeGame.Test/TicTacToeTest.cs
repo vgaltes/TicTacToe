@@ -24,7 +24,7 @@ namespace TicTacToeGame.Test
         }
 
         [Test]
-        public void GivenThreeOpponentMarksInALine_StateISOpponentWins()
+        public void GivenThreeOpponentMarksInALine_StateIsOpponentWins()
         {
             var ticTacToe = new TicTacToe(new Board(),
                 new List<TicTacToeStrategy>());
@@ -34,6 +34,19 @@ namespace TicTacToeGame.Test
             ticTacToe.OpponentMove(new CellCoordinates(0, 2));
 
             ticTacToe.State.Should().Be(TicTacToeState.OpponentWins);           
+        }
+
+        [Test]
+        public void GivenThreeAIMarksInALine_StateIsAIWins()
+        {
+            var ticTacToe = new TicTacToe(new Board(),
+                new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
+
+            ticTacToe.OpponentMove(new CellCoordinates(1, 0));
+            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
+            ticTacToe.OpponentMove(new CellCoordinates(2, 0));
+
+            ticTacToe.State.Should().Be(TicTacToeState.AIWins);
         }
     }
 }

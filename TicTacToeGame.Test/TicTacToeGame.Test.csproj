@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="BoardTest.cs" />
     <Compile Include="BoardTestHelper.cs" />
+    <Compile Include="Fakes\FillFirstRowStrategy.cs" />
     <Compile Include="Fakes\AllwaysUpdateStrategy.cs" />
     <Compile Include="Mark.cs" />
     <Compile Include="Strategies\BlockForkStrategyTest.cs" />
