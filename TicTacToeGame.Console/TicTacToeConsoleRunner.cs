@@ -43,6 +43,11 @@ namespace TicTacToeGame.Console
 
                 DrawBoard();
 
+                if ( ticTacToe.State != TicTacToeState.Playing)
+                {
+                    ResetGame();
+                }
+
                 userInput = consoleIO.ReadLine();
             }
         }
@@ -105,6 +110,11 @@ namespace TicTacToeGame.Console
         {
             int[] coordinates = userInput.Split(',').Select(c => int.Parse(c)).ToArray();
             return new CellCoordinates(coordinates[0], coordinates[1]);
+        }
+
+        private void ResetGame()
+        {
+            consoleIO.ReadKey();
         }
     }
 }

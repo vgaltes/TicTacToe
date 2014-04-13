@@ -177,11 +177,12 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningAGame_IfAfterPlayingTheStateIsNotPlaying_ReadKey()
         {
-            ticTacToe.SetupSequence(ttt => ttt.State)
-                .Returns(TicTacToeState.Playing)
+            ticTacToe.SetupGet(ttt => ttt.State)
                 .Returns(TicTacToeState.Draw);
 
             SetupOneMovementAndQuit();
+
+            ticTacToeConsoleRunner.Run();
 
             consoleIO.Verify(c => c.ReadKey(), Times.Once());
 
