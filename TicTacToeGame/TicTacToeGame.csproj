@@ -48,6 +48,7 @@
     <Compile Include="Exceptions\NotAllowedMovementException.cs" />
     <Compile Include="ITicTacToe.cs" />
     <Compile Include="Models\CellType.cs" />
+    <Compile Include="Models\TicTacToeState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategies\BlockForkStrategy.cs" />
     <Compile Include="Strategies\BlockStrategy.cs" />

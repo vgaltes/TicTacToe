@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using TicTacToeGame.Models;
@@ -17,9 +18,22 @@ namespace TicTacToeGame.Test
             var ticTacToe = new TicTacToe(board.Object, 
                 new List<TicTacToeStrategy> { new AllwaysUpdateStrategy() });
 
-            ticTacToe.OpponentMove(new Models.CellCoordinates(1, 1));
+            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
 
             board.Verify(b => b.FillAICell(It.IsAny<CellCoordinates>()));
+        }
+
+        [Test]
+        public void GivenThreeOpponentMarksInALine_StateISOpponentWins()
+        {
+            var ticTacToe = new TicTacToe(new Board(),
+                new List<TicTacToeStrategy>());
+
+            ticTacToe.OpponentMove(new CellCoordinates(0, 0));
+            ticTacToe.OpponentMove(new CellCoordinates(0, 1));
+            ticTacToe.OpponentMove(new CellCoordinates(0, 2));
+
+            ticTacToe.State.Should().Be(TicTacToeState.OpponentWins);           
         }
     }
 }

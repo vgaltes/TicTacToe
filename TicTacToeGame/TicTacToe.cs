@@ -30,6 +30,12 @@ namespace TicTacToeGame
             }
         }
 
+        public TicTacToeState State
+        {
+            get;
+            private set;
+        }
+
         private void AIMove()
         {
             foreach (var strategy in strategies)
