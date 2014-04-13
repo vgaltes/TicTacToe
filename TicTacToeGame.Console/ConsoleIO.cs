@@ -16,5 +16,10 @@ namespace TicTacToeGame.Console
         {
             throw new NotImplementedException();
         }
+
+        public virtual void Clear()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

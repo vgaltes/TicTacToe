@@ -15,6 +15,8 @@ namespace TicTacToeGame.Console
         private readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
         private readonly ConsoleIO consoleIO;
 
+        private string extraInfo = string.Empty;
+
         public TicTacToeConsoleRunner(ITicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer, ConsoleIO consoleIO)
         {
             this.ticTacToe = ticTacToe;
@@ -43,6 +45,13 @@ namespace TicTacToeGame.Console
 
         private void DrawBoard()
         {
+            consoleIO.Clear();
+
+            if (ticTacToe.State == TicTacToeState.AIWins)
+                extraInfo = Resources.AiWins;
+
+            consoleIO.WriteLine(extraInfo);
+
             var board = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
         }
     }
