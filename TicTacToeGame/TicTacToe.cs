@@ -19,6 +19,7 @@ namespace TicTacToeGame
         public void OpponentMove(CellCoordinates cellCoordinate)
         {
             this.board.FillOpponentCell(cellCoordinate);
+            CalculateState();
             AIMove();
         }
 
@@ -46,6 +47,24 @@ namespace TicTacToeGame
                     break;
                 }
             }
-        }       
+        }
+
+        private void CalculateState()
+        {
+            var numberOfOpponentCellsToWin = board.NumberOfColumns;
+            var numberOfOpponentCells = 0;
+
+            foreach (var line in board.Lines)
+            {
+                foreach (var cellCoordinate in line.Coordinates)
+                {
+                    if (board.IsCellOfType(CellType.Opponent, cellCoordinate))
+                        numberOfOpponentCells++;
+                }
+            }
+
+            if (numberOfOpponentCells == numberOfOpponentCellsToWin)
+                this.State = TicTacToeState.OpponentWins;
+        }
     }
 }
