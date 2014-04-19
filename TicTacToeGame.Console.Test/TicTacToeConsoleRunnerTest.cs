@@ -16,7 +16,7 @@ namespace TicTacToeGame.Console.Test
         private const string NEGATIVE_COORDINATES = "-1,-1";
         private const string ANOTHER_INVALID_COORDINATES = "";
         private const string VALID_COORDINATES = "1,1";
-        private const string HUGE_COORDINATES = "99999999999999999999999999999999999999999999999999999999999999999999999999999999999,9999999999999999999999999999999999999999999999999999999999999999999999999999";
+        private const string HUGE_COORDINATES = "2147483648,2147483648";
         private const string BOARD_REPRESENTATION = "board representation";
 
         Mock<ITicTacToe> ticTacToe;
