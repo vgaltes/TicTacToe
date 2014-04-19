@@ -14,6 +14,7 @@ namespace TicTacToeGame.Console.States
         {
             try
             {
+
                 int intUserInput = GetUserInputAsInteger(userInput);
 
                 if (Enum.IsDefined(typeof(CellType), intUserInput))

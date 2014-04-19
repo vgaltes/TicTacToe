@@ -69,6 +69,7 @@ namespace TicTacToeGame.Console.Test.States
             asking4PlayerState.Evaluate(AI_PLAYER);
 
             consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer), Times.Once());
+            consoleIO.Verify(c => c.ReadLine(), Times.Once());
         }
     }
 }
