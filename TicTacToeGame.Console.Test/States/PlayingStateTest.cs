@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TicTacToeGame.Console.States;
 using TicTacToeGame.Models;
+using FluentAssertions;
 
 namespace TicTacToeGame.Console.Test.States
 {
@@ -10,6 +11,7 @@ namespace TicTacToeGame.Console.Test.States
     {
         private const string VALID_COORDINATES_AS_STRING = "1,1";
         private const string ANOTHER_VALID_COORDINATES_AS_STRING = "2,2";
+        private const string QUIT_COMMAND = "q!";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
         private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
 
@@ -67,6 +69,16 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             ticTacToe.Verify(ttt => ttt.OpponentMove(ANOTHER_VALID_COORDINATES), Times.Once());
+        }
+
+        [Test]
+        public void GivenUserWritesQuit_StateIsQuitGameState()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(QUIT_COMMAND);
+
+            playingState.Evaluate();
+
+            tttConsoleRunner.State.Should().BeOfType<QuitGameState>();
         }
     }
 }
