@@ -48,8 +48,6 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void IfUserChoosesOpponent_TicTacToeSetInitialPlayerIsCalledWitCellTypeOpponent()
         {
-            var asking4PlayerState = new AskingForPlayerState(tttConsoleRunner);
-
             asking4PlayerState.Evaluate(HUMAN_PLAYER);
 
             ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.Opponent), Times.Once());
