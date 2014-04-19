@@ -9,6 +9,8 @@ namespace TicTacToeGame.Console.States
 {
     public class PlayingState : TicTacToeConsoleRunnerState
     {
+        private const string QUIT_COMMAND = "q!";
+
         public PlayingState(TicTacToeConsoleRunnerState state)
         {
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
@@ -21,11 +23,17 @@ namespace TicTacToeGame.Console.States
         public override void Evaluate()
         {
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
-            string coordinates = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
+            string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
 
-            var cellCoordinates = GetCoordinatesFromUserInput(coordinates);
-
-            this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(cellCoordinates);
+            if (userInput == QUIT_COMMAND)
+            {
+                this.TicTacToeConsoleRunner.State = new QuitGameState(this);
+            }
+            else
+            {
+                var cellCoordinates = GetCoordinatesFromUserInput(userInput);
+                this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(cellCoordinates);
+            }
         }
 
         private static CellCoordinates GetCoordinatesFromUserInput(string userInput)
