@@ -21,9 +21,17 @@ namespace TicTacToeGame.Console.States
         public override void Evaluate()
         {
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
-            this.TicTacToeConsoleRunner.consoleIO.ReadLine();
+            string coordinates = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
 
-            this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(new CellCoordinates(1, 1));
+            var cellCoordinates = GetCoordinatesFromUserInput(coordinates);
+
+            this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(cellCoordinates);
+        }
+
+        private static CellCoordinates GetCoordinatesFromUserInput(string userInput)
+        {
+            int[] coordinates = userInput.Split(',').Select(c => int.Parse(c)).ToArray();
+            return new CellCoordinates(coordinates[0], coordinates[1]);
         }
     }
 }

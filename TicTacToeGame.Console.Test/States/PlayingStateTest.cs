@@ -34,6 +34,7 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void AskForCoordinates()
         {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
             playingState.Evaluate();
 
             consoleIO.Verify(c => c.WriteLine(Resources.WriteCoordinates));
@@ -42,6 +43,7 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void ReadCoordinates()
         {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
             playingState.Evaluate();
 
             consoleIO.Verify(c => c.ReadLine(), Times.Once());
