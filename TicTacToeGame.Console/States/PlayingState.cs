@@ -19,7 +19,7 @@ namespace TicTacToeGame.Console.States
         }
         public override void Evaluate()
         {
-            throw new NotImplementedException();
+            this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
         }
     }
 }
