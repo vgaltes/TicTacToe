@@ -64,12 +64,11 @@ namespace TicTacToeGame.Console.Test.States
         }
 
         [Test]
-        public void IfUserChoosesAIOrHuman_BoardIsDrawn()
+        public void AskForPlayerOnlyOnce()
         {
             asking4PlayerState.Evaluate(AI_PLAYER);
 
-            ticTacToeBoardDrawer.Verify(bd => bd.GetRepresentationOf(It.IsAny<Board>()), Times.Once());
-            consoleIO.Verify(c => c.WriteLine(It.IsAny<string>()), Times.Once());
+            consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer), Times.Once());
         }
     }
 }
