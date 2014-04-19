@@ -14,6 +14,7 @@ namespace TicTacToeGame.Console.Test.States
         private const string QUIT_COMMAND = "q!";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
         private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
+        private const string OUT_OF_BOUNDS_COORDINATES = "5,5";
 
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
@@ -79,6 +80,16 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             tttConsoleRunner.State.Should().BeOfType<QuitGameState>();
+        }
+
+        [Test]
+        public void GivenUserWritesCoordinatesOutOfTheBounds_ExtraInfoIsSettedWithTheError()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(OUT_OF_BOUNDS_COORDINATES);
+
+            playingState.Evaluate();
+
+            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.MovementNotAllowed);
         }
     }
 }
