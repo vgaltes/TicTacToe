@@ -62,5 +62,14 @@ namespace TicTacToeGame.Console.Test.States
 
             tttConsoleRunner.State.Should().BeOfType(typeof(AskingForPlayerState));
         }
+
+        [Test]
+        public void IfUserChoosesAIOrHuman_BoardIsDrawn()
+        {
+            asking4PlayerState.Evaluate(AI_PLAYER);
+
+            ticTacToeBoardDrawer.Verify(bd => bd.GetRepresentationOf(It.IsAny<Board>()), Times.Once());
+            consoleIO.Verify(c => c.WriteLine(It.IsAny<string>()), Times.Once());
+        }
     }
 }
