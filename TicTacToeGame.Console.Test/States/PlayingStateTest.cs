@@ -17,6 +17,7 @@ namespace TicTacToeGame.Console.Test.States
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
         private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
         private const string OUT_OF_BOUNDS_COORDINATES = "5,5";
+        private const string NON_NUMERIC_COORDINATES = "a,a";
 
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
@@ -109,6 +110,16 @@ namespace TicTacToeGame.Console.Test.States
         public void GivenUserWritesCoordinatesBeyondMaxInt_ExtraInfoIsSettedWithTheError()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns(BEYOND_MAX_INT_COORDINATES);
+
+            playingState.Evaluate();
+
+            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
+        }
+
+        [Test]
+        public void GivenUserWritesNonNumericCoordinates_ExtraInfoIsSettedWithTheError()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(NON_NUMERIC_COORDINATES);
 
             playingState.Evaluate();
 
