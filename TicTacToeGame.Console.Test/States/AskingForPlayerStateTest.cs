@@ -41,5 +41,20 @@ namespace TicTacToeGame.Console.Test.States
 
             ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.AI), Times.Once());
         }
+
+        [Test]
+        public void IfUserChoosesOpponent_TicTacToeSetInitialPlayerIsCalledWitCellTypeOpponent()
+        {
+            var ticTacToe = new Mock<ITicTacToe>();
+            var ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
+            var consoleIO = new Mock<ConsoleIO>();
+            var tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
+
+            var asking4PlayerState = new AskingForPlayerState(tttConsoleRunner);
+
+            asking4PlayerState.Evaluate(HUMAN_PLAYER);
+
+            ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.Opponent), Times.Once());
+        }
     }
 }
