@@ -23,8 +23,15 @@ namespace TicTacToeGame.Console.States
                 {
                     SetInitialPlayer(userSelected);
                 }
+                else
+                {
+                    InfoFromPreviousStep = Resources.SelectPlayer_InvalidOption;
+                }
             }
-            catch { }
+            catch 
+            {
+                InfoFromPreviousStep = Resources.SelectPlayer_InvalidOption;
+            }
         }
 
         private int GetUserInputAsInteger(string userInput)
