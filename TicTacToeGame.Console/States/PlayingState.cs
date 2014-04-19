@@ -45,9 +45,11 @@ namespace TicTacToeGame.Console.States
         }
 
         private CellCoordinates GetCoordinatesFromUserInput(string userInput)
-        {
+        {            
+            VerifyCoordinatesAreValidIntegers(userInput);
             int[] coordinates = userInput.Split(',').Select(c => int.Parse(c)).ToArray();
             VerifyCoordinatesAreInTheBoard(coordinates);
+
             return new CellCoordinates(coordinates[0], coordinates[1]);
         }
 
@@ -57,6 +59,17 @@ namespace TicTacToeGame.Console.States
                 coordinates[1] > TicTacToeConsoleRunner.ticTacToe.Board.Size ||
                 coordinates[0] < 0 ||
                 coordinates[1] < 0)
+                throw new NotAllowedMovementException();
+        }
+
+        private void VerifyCoordinatesAreValidIntegers(string line)
+        {
+            string[] coordinates = line.Split(',');
+            int[] intCoordinates = new int[2];
+            bool rowValid = int.TryParse(coordinates[0], out intCoordinates[0]);
+            bool columnValid = int.TryParse(coordinates[1], out intCoordinates[1]);
+
+            if ( !rowValid || !columnValid )
                 throw new NotAllowedMovementException();
         }
     }
