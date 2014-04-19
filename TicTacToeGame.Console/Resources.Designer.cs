@@ -98,6 +98,15 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid option..
+        /// </summary>
+        public static string SelectPlayer_InvalidOption {
+            get {
+                return ResourceManager.GetString("SelectPlayer_InvalidOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Write the coordinates where you want to move.
         ///The format is [row],[column].
         ///Write q! to quit..

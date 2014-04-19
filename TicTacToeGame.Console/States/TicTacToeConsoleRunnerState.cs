@@ -10,6 +10,8 @@ namespace TicTacToeGame.Console.States
     {
         public TicTacToeConsoleRunner TicTacToeConsoleRunner { get; set; }
 
+        public string InfoFromPreviousStep { get; set; }
+
         public abstract void Evaluate();
     }
 }

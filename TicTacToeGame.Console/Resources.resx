@@ -130,6 +130,9 @@
     <value>Press 1 to let AI make the first movement.
 Press 2 to make you the first movement.</value>
   </data>
+  <data name="SelectPlayer_InvalidOption" xml:space="preserve">
+    <value>Invalid option.</value>
+  </data>
   <data name="WriteCoordinates" xml:space="preserve">
     <value>Write the coordinates where you want to move.
 The format is [row],[column].

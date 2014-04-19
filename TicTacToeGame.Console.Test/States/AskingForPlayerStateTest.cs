@@ -76,5 +76,14 @@ namespace TicTacToeGame.Console.Test.States
             consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer), Times.Once());
             consoleIO.Verify(c => c.ReadLine(), Times.Once());
         }
+
+        [Test]
+        public void IfUserChoosesNorOpponentNeitherAI_ExtraInfoIsSettedWithTheErrorInformation()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(INVALID_OPTION);
+            asking4PlayerState.Evaluate();
+
+            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.SelectPlayer_InvalidOption);
+        }
     }
 }
