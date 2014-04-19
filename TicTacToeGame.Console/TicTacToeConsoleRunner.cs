@@ -41,7 +41,7 @@ namespace TicTacToeGame.Console
 
                 DrawBoard();
 
-                if ( ticTacToe.State != TicTacToeState.Playing)
+                if (ticTacToe.State != TicTacToeState.Playing)
                 {
                     ResetGame();
                 }
@@ -85,13 +85,45 @@ namespace TicTacToeGame.Console
         private string GetUserInput()
         {
             string line = string.Empty;
-            string regexExpression = string.Format("[\\d],[\\d]", ticTacToe.Board.Size - 1);
 
-            while (line != QUIT_COMMAND && !Regex.IsMatch(line, regexExpression))
+            do
             {
                 line = consoleIO.ReadLine();
-            }
+            } while (!IsValidInput(line));
+
             return line;
+        }
+
+        private bool IsValidInput(string line)
+        {
+            string regexExpression = string.Format("[\\d],[\\d]", ticTacToe.Board.Size - 1);
+
+            if (line == QUIT_COMMAND)
+                return true;
+            else
+                return Regex.IsMatch(line, regexExpression)
+                && CoordinatesAreValidIntegers(line)
+                && CoordinatesInRange(line);
+        }
+
+        private bool CoordinatesAreValidIntegers(string line)
+        {
+            string[] coordinates = line.Split(',');
+            int[] intCoordinates = new int[2];
+            bool rowValid = int.TryParse(coordinates[0], out intCoordinates[0]);
+            bool columnValid = int.TryParse(coordinates[1], out intCoordinates[1]);
+
+            return rowValid && columnValid;
+        }
+
+        private bool CoordinatesInRange(string line)
+        {
+            string[] coordinates = line.Split(',');
+            int row, column;
+            row = int.Parse(coordinates[0]);
+            column = int.Parse(coordinates[1]);
+
+            return row < ticTacToe.Board.Size && column < ticTacToe.Board.Size;
         }
 
         private void PlayGame(string userInput)

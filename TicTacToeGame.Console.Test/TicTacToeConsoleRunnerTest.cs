@@ -13,8 +13,10 @@ namespace TicTacToeGame.Console.Test
         private const string HUMAN_PLAYER = "2";
         private const string INVALID_PLAYER = "3";
         private const string INVALID_COORDINATES = "a,a";
+        private const string NEGATIVE_COORDINATES = "-1,-1";
         private const string ANOTHER_INVALID_COORDINATES = "";
         private const string VALID_COORDINATES = "1,1";
+        private const string HUGE_COORDINATES = "99999999999999999999999999999999999999999999999999999999999999999999999999999999999,9999999999999999999999999999999999999999999999999999999999999999999999999999";
         private const string BOARD_REPRESENTATION = "board representation";
 
         Mock<ITicTacToe> ticTacToe;
@@ -129,6 +131,28 @@ namespace TicTacToeGame.Console.Test
             ticTacToeConsoleRunner.Run();
 
             consoleIO.Verify(c => c.ReadLine(), Times.AtLeast(4));
+        }
+
+        [Test]
+        public void WhenRunningGame_NegativeCoordinatesIsNotAValidCoordinate()
+        {
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER)
+                .Returns(NEGATIVE_COORDINATES).Returns(QUIT_COMMAND);
+
+            ticTacToeConsoleRunner.Run();
+
+            consoleIO.Verify(c => c.ReadLine(), Times.Exactly(3));
+        }
+
+        [Test]
+        public void WhenRunningGame_HugeCoordinatesAreNotValidCoordinates()
+        {
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER)
+                .Returns(HUGE_COORDINATES).Returns(QUIT_COMMAND);
+
+            ticTacToeConsoleRunner.Run();
+
+            consoleIO.Verify(c => c.ReadLine(), Times.Exactly(3));
         }
 
         [Test]
