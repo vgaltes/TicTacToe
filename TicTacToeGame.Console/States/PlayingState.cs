@@ -23,7 +23,9 @@ namespace TicTacToeGame.Console.States
         }
         public override void Evaluate()
         {
+            WriteInfoFromPreviousStep();
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
+            DrawBoard();
             string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
 
             if (userInput == QUIT_COMMAND)
@@ -71,6 +73,20 @@ namespace TicTacToeGame.Console.States
 
             if ( !rowValid || !columnValid )
                 throw new NotAllowedMovementException();
+        }
+
+        private void WriteInfoFromPreviousStep()
+        {
+            TicTacToeConsoleRunner.consoleIO.Clear();
+            TicTacToeConsoleRunner.consoleIO.WriteLine(InfoFromPreviousStep);
+        }
+
+        private void DrawBoard()
+        {
+            var board = TicTacToeConsoleRunner.ticTacToeBoardDrawer.
+                GetRepresentationOf(TicTacToeConsoleRunner.ticTacToe.Board);
+
+            TicTacToeConsoleRunner.consoleIO.WriteLine(board);
         }
     }
 }
