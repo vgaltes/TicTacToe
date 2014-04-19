@@ -34,7 +34,8 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void IfUserChoosesAI_NextStateIsPlaying()
         {
-            asking4PlayerState.Evaluate(AI_PLAYER);
+            consoleIO.Setup(c => c.ReadLine()).Returns(AI_PLAYER);
+            asking4PlayerState.Evaluate();
 
             tttConsoleRunner.State.Should().BeOfType(typeof(PlayingState));
         }
@@ -42,7 +43,8 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void IfUserChoosesAI_TicTacToeSetInitialPlayerIsCalledWitCellTypeAI()
         {
-            asking4PlayerState.Evaluate(AI_PLAYER);
+            consoleIO.Setup(c => c.ReadLine()).Returns(AI_PLAYER);
+            asking4PlayerState.Evaluate();
 
             ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.AI), Times.Once());
         }
@@ -50,7 +52,8 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void IfUserChoosesOpponent_TicTacToeSetInitialPlayerIsCalledWitCellTypeOpponent()
         {
-            asking4PlayerState.Evaluate(HUMAN_PLAYER);
+            consoleIO.Setup(c => c.ReadLine()).Returns(HUMAN_PLAYER);
+            asking4PlayerState.Evaluate();
 
             ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.Opponent), Times.Once());
         }
@@ -58,7 +61,8 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void IfUserChoosesNorOpponentNeitherAI_StateRemainsAskingForPlayer()
         {
-            asking4PlayerState.Evaluate(INVALID_OPTION);
+            consoleIO.Setup(c => c.ReadLine()).Returns(INVALID_OPTION);
+            asking4PlayerState.Evaluate();
 
             tttConsoleRunner.State.Should().BeOfType(typeof(AskingForPlayerState));
         }
@@ -66,7 +70,8 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void AskForPlayerOnlyOnce()
         {
-            asking4PlayerState.Evaluate(AI_PLAYER);
+            consoleIO.Setup(c => c.ReadLine()).Returns(AI_PLAYER);
+            asking4PlayerState.Evaluate();
 
             consoleIO.Verify(c => c.WriteLine(Resources.SelectPlayer), Times.Once());
             consoleIO.Verify(c => c.ReadLine(), Times.Once());

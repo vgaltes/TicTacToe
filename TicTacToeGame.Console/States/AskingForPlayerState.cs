@@ -10,16 +10,18 @@ namespace TicTacToeGame.Console.States
             TicTacToeConsoleRunner = ticTacTeoConsoleRunner;
         }
 
-        public override void Evaluate(string userInput)
+        public override void Evaluate()
         {
             try
             {
+                TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.SelectPlayer);
+                string userSelected = TicTacToeConsoleRunner.consoleIO.ReadLine();
 
-                int intUserInput = GetUserInputAsInteger(userInput);
+                int intUserInput = GetUserInputAsInteger(userSelected);
 
                 if (Enum.IsDefined(typeof(CellType), intUserInput))
                 {
-                    SetInitialPlayer(userInput);
+                    SetInitialPlayer(userSelected);
                 }
             }
             catch { }
