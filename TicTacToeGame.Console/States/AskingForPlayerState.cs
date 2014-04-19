@@ -1,4 +1,5 @@
-﻿using TicTacToeGame.Models;
+﻿using System;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.States
 {
@@ -11,7 +12,8 @@ namespace TicTacToeGame.Console.States
 
         public override void Evaluate(string userInput)
         {
-            TicTacToeConsoleRunner.ticTacToe.SetInitialPlayer(CellType.AI);
+            var initialPlayer = (CellType)Enum.Parse(typeof(CellType), userInput);
+            TicTacToeConsoleRunner.ticTacToe.SetInitialPlayer(initialPlayer);
             TicTacToeConsoleRunner.State = new PlayingState(this);
         }
     }
