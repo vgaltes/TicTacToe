@@ -12,9 +12,18 @@ namespace TicTacToeGame.Console.States
 
         public override void Evaluate(string userInput)
         {
-            var initialPlayer = (CellType)Enum.Parse(typeof(CellType), userInput);
-            TicTacToeConsoleRunner.ticTacToe.SetInitialPlayer(initialPlayer);
-            TicTacToeConsoleRunner.State = new PlayingState(this);
+            int intUserInput;
+            bool isInteger = int.TryParse(userInput, out intUserInput);
+            if (!isInteger)
+                return;
+
+            if (Enum.IsDefined(typeof(CellType), intUserInput))
+            {
+                CellType userToStart;
+                Enum.TryParse<CellType>(userInput, out userToStart);
+                TicTacToeConsoleRunner.ticTacToe.SetInitialPlayer(userToStart);
+                TicTacToeConsoleRunner.State = new PlayingState(this);
+            }
         }
     }
 }

@@ -28,6 +28,7 @@ namespace TicTacToeGame.Console.Test.States
             tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
 
             asking4PlayerState = new AskingForPlayerState(tttConsoleRunner);
+            tttConsoleRunner.State = asking4PlayerState;
         }
 
         [Test]
