@@ -197,7 +197,7 @@ namespace TicTacToeGame.Console.Test
         private bool ValidateMovementNotAllowedWasWritten(string line)
         {
             if ( line != null)
-                return line.Contains(Resources.MovementNotAllowed);
+                return line.Contains(Resources.NotAllowedMovement);
             return false;
         }
 

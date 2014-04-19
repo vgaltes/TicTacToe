@@ -138,7 +138,7 @@ namespace TicTacToeGame.Console
             }
             catch (NotAllowedMovementException)
             {
-                extraInfo = string.Format("{0}\n{1}", Resources.MovementNotAllowed, Resources.WriteCoordinates);
+                extraInfo = string.Format("{0}\n{1}", Resources.NotAllowedMovement, Resources.WriteCoordinates);
             }
         }
 

@@ -26,6 +26,7 @@ namespace TicTacToeGame.Console.Test.States
         public void TestSetUp()
         {
             ticTacToe = new Mock<ITicTacToe>();
+            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
             tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
@@ -89,7 +90,7 @@ namespace TicTacToeGame.Console.Test.States
 
             playingState.Evaluate();
 
-            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.MovementNotAllowed);
+            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
         }
     }
 }

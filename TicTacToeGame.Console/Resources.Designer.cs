@@ -81,9 +81,9 @@ namespace TicTacToeGame.Console {
         /// <summary>
         ///   Looks up a localized string similar to MOVEMENT NOT ALLOWED. PLEASE ENTER NEW COORDINATES..
         /// </summary>
-        public static string MovementNotAllowed {
+        public static string NotAllowedMovement {
             get {
-                return ResourceManager.GetString("MovementNotAllowed", resourceCulture);
+                return ResourceManager.GetString("NotAllowedMovement", resourceCulture);
             }
         }
         
