@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using TicTacToeGame.Console.States;
 using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 
@@ -17,6 +18,8 @@ namespace TicTacToeGame.Console
         private readonly ConsoleIO consoleIO;
 
         private string extraInfo = string.Empty;
+
+        public TicTacToeConsoleRunnerState State { get; private set; }
 
         public TicTacToeConsoleRunner(ITicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer, ConsoleIO consoleIO)
         {

@@ -73,6 +73,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="States\AskingForPlayerStateTest.cs" />
     <Compile Include="TicTacToeBoardDrawerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicTacToeConsoleRunnerTest.cs" />

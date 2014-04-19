@@ -49,6 +49,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="States\AskingForPlayerState.cs" />
+    <Compile Include="States\PlayingState.cs" />
+    <Compile Include="States\TicTacToeConsoleRunnerState.cs" />
     <Compile Include="TicTacToeBoardDrawer.cs" />
     <Compile Include="TicTacToeConsoleRunner.cs" />
   </ItemGroup>
