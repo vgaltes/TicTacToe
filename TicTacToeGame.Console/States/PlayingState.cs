@@ -12,7 +12,7 @@ namespace TicTacToeGame.Console.States
         {
             TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
         }
-        public override void Run()
+        public override void Evaluate(string userInput)
         {
             throw new NotImplementedException();
         }

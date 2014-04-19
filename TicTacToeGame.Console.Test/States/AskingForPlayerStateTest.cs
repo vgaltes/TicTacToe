@@ -10,6 +10,7 @@ namespace TicTacToeGame.Console.Test.States
     public class AskingForPlayerStateTest
     {
         private const string AI_PLAYER = "1";
+        private const string HUMAN_PLAYER = "2";
 
         [Test]
         public void IfUserChoosesAI_NextStateIsPlaying()
@@ -21,9 +22,7 @@ namespace TicTacToeGame.Console.Test.States
             
             var asking4PlayerState = new AskingForPlayerState(tttConsoleRunner);
 
-            consoleIO.Setup(c => c.ReadLine()).Returns(AI_PLAYER);
-
-            asking4PlayerState.Run();
+            asking4PlayerState.Evaluate(AI_PLAYER);
 
             tttConsoleRunner.State.Should().BeOfType(typeof(PlayingState));
         }
@@ -38,9 +37,7 @@ namespace TicTacToeGame.Console.Test.States
 
             var asking4PlayerState = new AskingForPlayerState(tttConsoleRunner);
 
-            consoleIO.Setup(c => c.ReadLine()).Returns(AI_PLAYER);
-
-            asking4PlayerState.Run();
+            asking4PlayerState.Evaluate(AI_PLAYER);
 
             ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.AI), Times.Once());
         }

@@ -9,7 +9,7 @@ namespace TicTacToeGame.Console.States
             TicTacToeConsoleRunner = ticTacTeoConsoleRunner;
         }
 
-        public override void Run()
+        public override void Evaluate(string userInput)
         {
             TicTacToeConsoleRunner.ticTacToe.SetInitialPlayer(CellType.AI);
             TicTacToeConsoleRunner.State = new PlayingState(this);

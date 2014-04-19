@@ -10,6 +10,6 @@ namespace TicTacToeGame.Console.States
     {
         public TicTacToeConsoleRunner TicTacToeConsoleRunner { get; set; }
 
-        public abstract void Run();
+        public abstract void Evaluate(string userInput);
     }
 }
