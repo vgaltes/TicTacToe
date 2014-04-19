@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.States
 {
@@ -21,6 +22,8 @@ namespace TicTacToeGame.Console.States
         {
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
             this.TicTacToeConsoleRunner.consoleIO.ReadLine();
+
+            this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(new CellCoordinates(1, 1));
         }
     }
 }
