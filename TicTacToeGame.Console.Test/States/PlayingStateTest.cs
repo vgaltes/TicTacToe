@@ -9,7 +9,9 @@ namespace TicTacToeGame.Console.Test.States
     public class PlayingStateTest
     {
         private const string VALID_COORDINATES_AS_STRING = "1,1";
+        private const string ANOTHER_VALID_COORDINATES_AS_STRING = "2,2";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
+        private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
 
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
@@ -53,6 +55,16 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             ticTacToe.Verify(ttt => ttt.OpponentMove(VALID_COORDINATES), Times.Once());
+        }
+
+        [Test]
+        public void GivenAValidCoordinates_CallOpponentMoveWithTheCoordinatesTransaltedFromUserInput()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(ANOTHER_VALID_COORDINATES_AS_STRING);
+
+            playingState.Evaluate();
+
+            ticTacToe.Verify(ttt => ttt.OpponentMove(ANOTHER_VALID_COORDINATES), Times.Once());
         }
     }
 }
