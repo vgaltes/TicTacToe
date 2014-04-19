@@ -8,6 +8,10 @@ namespace TicTacToeGame.Console.States
 {
     public class PlayingState : TicTacToeConsoleRunnerState
     {
+        public PlayingState(TicTacToeConsoleRunnerState state)
+        {
+            TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
+        }
         public override void Run()
         {
             throw new NotImplementedException();

@@ -8,16 +8,14 @@ namespace TicTacToeGame.Console.States
 {
     public class AskingForPlayerState : TicTacToeConsoleRunnerState
     {
-        TicTacToeConsoleRunner ticTacToeConsoleRunner;
-
         public AskingForPlayerState(TicTacToeConsoleRunner ticTacTeoConsoleRunner)
         {
-            this.ticTacToeConsoleRunner = ticTacTeoConsoleRunner;
+            TicTacToeConsoleRunner = ticTacTeoConsoleRunner;
         }
 
         public override void Run()
         {
-            throw new NotImplementedException();
+            TicTacToeConsoleRunner.State = new PlayingState(this);
         }
     }
 }

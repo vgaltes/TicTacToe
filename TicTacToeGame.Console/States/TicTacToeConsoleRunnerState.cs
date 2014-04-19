@@ -8,6 +8,8 @@ namespace TicTacToeGame.Console.States
 {
     public abstract class TicTacToeConsoleRunnerState
     {
+        public TicTacToeConsoleRunner TicTacToeConsoleRunner { get; set; }
+
         public abstract void Run();
     }
 }

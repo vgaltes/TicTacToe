@@ -19,7 +19,7 @@ namespace TicTacToeGame.Console
 
         private string extraInfo = string.Empty;
 
-        public TicTacToeConsoleRunnerState State { get; private set; }
+        public TicTacToeConsoleRunnerState State { get; set; }
 
         public TicTacToeConsoleRunner(ITicTacToe ticTacToe, TicTacToeBoardDrawer ticTacToeBoardDrawer, ConsoleIO consoleIO)
         {
