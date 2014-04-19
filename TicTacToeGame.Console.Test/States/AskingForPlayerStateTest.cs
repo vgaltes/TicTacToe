@@ -11,6 +11,7 @@ namespace TicTacToeGame.Console.Test.States
     {
         private const string AI_PLAYER = "1";
         private const string HUMAN_PLAYER = "2";
+        private const string INVALID_OPTION = "3";
 
         Mock<ITicTacToe>  ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
@@ -51,6 +52,14 @@ namespace TicTacToeGame.Console.Test.States
             asking4PlayerState.Evaluate(HUMAN_PLAYER);
 
             ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.Opponent), Times.Once());
+        }
+
+        [Test]
+        public void IfUserChoosesNorOpponentNeitherAI_StateRemainsAskingForPlayer()
+        {
+            asking4PlayerState.Evaluate(INVALID_OPTION);
+
+            tttConsoleRunner.State.Should().BeOfType(typeof(AskingForPlayerState));
         }
     }
 }
