@@ -18,6 +18,7 @@ namespace TicTacToeGame.Console.Test.States
         private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
         private const string OUT_OF_BOUNDS_COORDINATES = "5,5";
         private const string NON_NUMERIC_COORDINATES = "a,a";
+        private const string BOARD_REPRESENTATION = "boardRepresentation";
 
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
@@ -124,6 +125,18 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
+        }
+
+        [Test]
+        public void DrawBoard()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
+            ticTacToeBoardDrawer.Setup(bd => bd.GetRepresentationOf(It.IsAny<Board>())).Returns(BOARD_REPRESENTATION);
+
+            playingState.Evaluate();
+
+            ticTacToeBoardDrawer.Verify(bd => bd.GetRepresentationOf(It.IsAny<Board>()));
+            consoleIO.Verify(c => c.WriteLine(BOARD_REPRESENTATION));
         }
     }
 }
