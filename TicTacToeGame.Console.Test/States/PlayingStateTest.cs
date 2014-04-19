@@ -1,12 +1,16 @@
 ﻿using Moq;
 using NUnit.Framework;
 using TicTacToeGame.Console.States;
+using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.Test.States
 {
     [TestFixture]
     public class PlayingStateTest
     {
+        private const string VALID_COORDINATES_AS_STRING = "1,1";
+        private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
+
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
@@ -39,6 +43,16 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             consoleIO.Verify(c => c.ReadLine(), Times.Once());
+        }
+
+        [Test]
+        public void GivenAValidCoordinates_CallOpponentMove()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
+
+            playingState.Evaluate();
+
+            ticTacToe.Verify(ttt => ttt.OpponentMove(VALID_COORDINATES), Times.Once());
         }
     }
 }
