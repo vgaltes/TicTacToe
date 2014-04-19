@@ -32,5 +32,13 @@ namespace TicTacToeGame.Console.Test.States
 
             consoleIO.Verify(c => c.WriteLine(Resources.WriteCoordinates));
         }
+
+        [Test]
+        public void ReadCoordinates()
+        {
+            playingState.Evaluate();
+
+            consoleIO.Verify(c => c.ReadLine(), Times.Once());
+        }
     }
 }
