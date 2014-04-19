@@ -54,7 +54,9 @@ namespace TicTacToeGame.Console.States
         private void VerifyCoordinatesAreInTheBoard(int[] coordinates)
         {
             if (coordinates[0] > TicTacToeConsoleRunner.ticTacToe.Board.Size ||
-                coordinates[1] > TicTacToeConsoleRunner.ticTacToe.Board.Size)
+                coordinates[1] > TicTacToeConsoleRunner.ticTacToe.Board.Size ||
+                coordinates[0] < 0 ||
+                coordinates[1] < 0)
                 throw new NotAllowedMovementException();
         }
     }
