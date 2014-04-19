@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.States
 {
@@ -15,6 +11,7 @@ namespace TicTacToeGame.Console.States
 
         public override void Run()
         {
+            TicTacToeConsoleRunner.ticTacToe.SetInitialPlayer(CellType.AI);
             TicTacToeConsoleRunner.State = new PlayingState(this);
         }
     }

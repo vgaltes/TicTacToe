@@ -13,9 +13,9 @@ namespace TicTacToeGame.Console
         private const string HUMAN_PLAYER = "2";
         private const string QUIT_COMMAND = "q!";
 
-        private readonly ITicTacToe ticTacToe;
-        private readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
-        private readonly ConsoleIO consoleIO;
+        public readonly ITicTacToe ticTacToe;
+        public readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
+        public readonly ConsoleIO consoleIO;
 
         private string extraInfo = string.Empty;
 
