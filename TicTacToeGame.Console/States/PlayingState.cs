@@ -25,6 +25,7 @@ namespace TicTacToeGame.Console.States
         public PlayingState(TicTacToeConsoleRunner tttConsoleRunner)
         {
             this.TicTacToeConsoleRunner = tttConsoleRunner;
+            SetNextStates();
         }
 
         public override void Evaluate()
