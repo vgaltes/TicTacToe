@@ -149,5 +149,16 @@ namespace TicTacToeGame.Console.Test.States
 
             tttConsoleRunner.State.Should().BeOfType<AIWinsState>();
         }
+
+        [Test]
+        public void GivenTheStateAfterPlayingIsOpponentWins_TheNewStateIsHumanWinsState()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.OpponentWins);
+
+            playingState.Evaluate();
+
+            tttConsoleRunner.State.Should().BeOfType<HumanWinsState>();
+        }
     }
 }

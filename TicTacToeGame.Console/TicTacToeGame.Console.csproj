@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="States\AIWinsState.cs" />
     <Compile Include="States\AskingForPlayerState.cs" />
+    <Compile Include="States\HumanWinsState.cs" />
     <Compile Include="States\PlayingState.cs" />
     <Compile Include="States\QuitGameState.cs" />
     <Compile Include="States\TicTacToeConsoleRunnerState.cs" />

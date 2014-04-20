@@ -38,6 +38,9 @@ namespace TicTacToeGame.Console.States
                 {
                     var cellCoordinates = GetCoordinatesFromUserInput(userInput);
                     this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(cellCoordinates);
+
+                    if (this.TicTacToeConsoleRunner.ticTacToe.State == TicTacToeState.AIWins)
+                        this.TicTacToeConsoleRunner.State = new AIWinsState(this);
                 }
                 catch ( NotAllowedMovementException)
                 {
