@@ -50,6 +50,8 @@ namespace TicTacToeGame
                     break;
                 }
             }
+
+            CalculateState();
         }
 
         private void CalculateState()
