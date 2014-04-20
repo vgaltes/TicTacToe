@@ -41,6 +41,8 @@ namespace TicTacToeGame.Console.States
 
                     if (this.TicTacToeConsoleRunner.ticTacToe.State == TicTacToeState.AIWins)
                         this.TicTacToeConsoleRunner.State = new AIWinsState(this);
+                    else if (this.TicTacToeConsoleRunner.ticTacToe.State == TicTacToeState.OpponentWins)
+                        this.TicTacToeConsoleRunner.State = new HumanWinsState(this);
                 }
                 catch ( NotAllowedMovementException)
                 {
