@@ -13,7 +13,8 @@ namespace TicTacToeGame
         public const int CENTER_ROW = 1;
         public const int CENTER_COLUMN = 1;
 
-        private CellType[,] Cells { get; set; }
+        private CellType[] Cells { get; set; }
+
         private List<Line> lines = new List<Line>();
         private Dictionary<CellCoordinates, CellCoordinates> cornersAndOpposites
             = new Dictionary<CellCoordinates, CellCoordinates>();
@@ -21,7 +22,7 @@ namespace TicTacToeGame
 
         public Board()
         {
-            Cells = new CellType[SIZE, SIZE];
+            Cells = new CellType[SIZE * SIZE];
 
             AddRows();
             AddColumns();
@@ -76,7 +77,7 @@ namespace TicTacToeGame
 
         private bool IsCellNotEmpty(CellCoordinates cellCoordinate)
         {
-            return Cells[cellCoordinate.Row, cellCoordinate.Column] != CellType.Empty;
+            return Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] != CellType.Empty;
         }
 
         private bool AreCoordinatesOutsideTheBoard(CellCoordinates cellCoordinate)
@@ -92,12 +93,12 @@ namespace TicTacToeGame
         public void FillCellWithType(CellType cell, CellCoordinates cellCoordinate)
         {
             if (cellCoordinate.IsValid)
-                Cells[cellCoordinate.Row, cellCoordinate.Column] = cell;
+                Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] = cell;
         }
 
         public bool IsCellOfType(CellType cell, CellCoordinates cellCoordinate)
         {
-            return Cells[cellCoordinate.Row, cellCoordinate.Column] == cell;
+            return Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] == cell;
         }
 
         public int CountCellsOfTypeInLine(CellType cellType, Line line)
@@ -106,7 +107,7 @@ namespace TicTacToeGame
 
             foreach (var coordinate in line.Coordinates)
             {
-                if (Cells[coordinate.Row, coordinate.Column] == cellType)
+                if (Cells[coordinate.Row * SIZE + coordinate.Column] == cellType)
                     cellCount++;
             }
 
@@ -121,7 +122,7 @@ namespace TicTacToeGame
                 {
                     for (int column = 0; column < SIZE; column++)
                     {
-                        if (Cells[row, column] == CellType.Empty)
+                        if (Cells[row * SIZE + column] == CellType.Empty)
                         {
                             yield return new CellCoordinates(row, column);
                         }
@@ -186,11 +187,11 @@ namespace TicTacToeGame
             FillAICell(centerCoordinate);
         }
 
-        public CellType this[int row, int column]
+        public CellType this[int index]
         {
             get
             {
-                return Cells[row, column];
+                return Cells[index];
             }
         }
 
@@ -200,14 +201,9 @@ namespace TicTacToeGame
             if (boardToCompare == null)
                 return false;
 
-            for (int row = 0; row < SIZE; row++)
-            {
-                for (int column = 0; column < SIZE; column++)
-                {
-                    if (Cells[row, column] != boardToCompare[row, column])
+            for (int i = 0; i < SIZE * SIZE; i++)
+                    if (Cells[i] != boardToCompare[i])
                         return false;
-                }
-            }
 
             return true;
         }
@@ -216,14 +212,9 @@ namespace TicTacToeGame
         {
             int opponentCells = 0;
 
-            for (int row = 0; row < SIZE; row++)
-            {
-                for (int column = 0; column < SIZE; column++)
-                {
-                    if (Cells[row, column] == CellType.Opponent)
+            for (int i = 0; i < SIZE * SIZE; i++)
+                    if (Cells[i] == CellType.Opponent)
                         opponentCells++;
-                }
-            }
 
             return opponentCells < numberOfCells;
         }
@@ -238,13 +229,8 @@ namespace TicTacToeGame
 
         internal void Reset()
         {
-            for (int row = 0; row < SIZE; row++)
-            {
-                for (int column = 0; column < SIZE; column++)
-                {
-                    Cells[row, column] = CellType.Empty;
-                }
-            }
+            for (int i = 0; i < SIZE * SIZE; i++)
+                Cells[i] = CellType.Empty;
         }
     }
 }

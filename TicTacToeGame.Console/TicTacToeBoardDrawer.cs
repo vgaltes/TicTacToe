@@ -26,7 +26,7 @@ namespace TicTacToeGame.Console
 
             for (int column = 0; column < board.Size; column++)
             {
-                boardRepresentation += Draw(board[row, column]);
+                boardRepresentation += Draw(board[row * board.Size + column]);
                 if (IsNotLastColumn(board, column))
                     boardRepresentation += COLUMNS_SEPARATOR;
             }
