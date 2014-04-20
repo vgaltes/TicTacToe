@@ -138,5 +138,16 @@ namespace TicTacToeGame.Console.Test.States
             ticTacToeBoardDrawer.Verify(bd => bd.GetRepresentationOf(It.IsAny<Board>()));
             consoleIO.Verify(c => c.WriteLine(BOARD_REPRESENTATION));
         }
+
+        [Test]
+        public void GivenTheStateAfterPlayingIsAIWins_TheNewStateIsAIWinsState()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.AIWins);
+
+            playingState.Evaluate();
+
+            tttConsoleRunner.State.Should().BeOfType<AIWinsState>();
+        }
     }
 }
