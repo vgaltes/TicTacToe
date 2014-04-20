@@ -171,5 +171,16 @@ namespace TicTacToeGame.Console.Test.States
 
             tttConsoleRunner.State.Should().BeOfType<DrawState>();
         }
+
+        [Test]
+        public void GivenTheStateAfterPlayingIsPlaying_CallAIMove()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
+            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
+
+            playingState.Evaluate();
+
+            ticTacToe.Verify(ttt => ttt.AIMove(), Times.Once());
+        }
     }
 }
