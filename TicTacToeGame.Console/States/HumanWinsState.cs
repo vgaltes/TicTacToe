@@ -12,6 +12,11 @@ namespace TicTacToeGame.Console.States
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
         }
 
+        public HumanWinsState(TicTacToeConsoleRunner tttConsoleRunner)
+        {
+            this.TicTacToeConsoleRunner = tttConsoleRunner;
+        }
+
         public override void Evaluate()
         {
             throw new NotImplementedException();

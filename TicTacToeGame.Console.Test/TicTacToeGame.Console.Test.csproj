@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="States\AIWinsStateTest.cs" />
     <Compile Include="States\AskingForPlayerStateTest.cs" />
+    <Compile Include="States\HumanWinsStateTest.cs" />
     <Compile Include="States\PlayingStateTest.cs" />
     <Compile Include="TicTacToeBoardDrawerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
