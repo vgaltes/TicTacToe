@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using TicTacToeGame.Console.States;
+using FluentAssertions;
 
 namespace TicTacToeGame.Console.Test.States
 {
@@ -31,6 +32,14 @@ namespace TicTacToeGame.Console.Test.States
             aiWinsState.Evaluate();
 
             consoleIO.Verify(c => c.WriteLine(Resources.AiWins));
+        }
+
+        [Test]
+        public void WhenUserPressAKey_NextStateIsAskingForPlayer()
+        {
+            aiWinsState.Evaluate();
+
+            tttConsoleRunner.State.Should().BeOfType<AskingForPlayerState>();
         }
     }
 }
