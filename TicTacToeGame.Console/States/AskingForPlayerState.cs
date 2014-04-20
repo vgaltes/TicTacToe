@@ -10,6 +10,11 @@ namespace TicTacToeGame.Console.States
             TicTacToeConsoleRunner = ticTacTeoConsoleRunner;
         }
 
+        public AskingForPlayerState(TicTacToeConsoleRunnerState state)
+        {
+            TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
+        }
+
         public override void Evaluate()
         {
             try
