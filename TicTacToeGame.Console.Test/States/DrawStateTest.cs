@@ -33,5 +33,14 @@ namespace TicTacToeGame.Console.Test.States
 
             consoleIO.Verify(c => c.WriteLine(Resources.Draw));
         }
+
+        [Test]
+        public void WhenUserPressAKey_NextStateIsAskingForPlayer()
+        {
+            drawState.Evaluate();
+
+            consoleIO.Verify(c => c.ReadKey(), Times.Once());
+            tttConsoleRunner.State.Should().BeOfType<AskingForPlayerState>();
+        }
     }
 }
