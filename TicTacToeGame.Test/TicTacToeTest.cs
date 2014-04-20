@@ -11,19 +11,7 @@ namespace TicTacToeGame.Test
 {
     [TestFixture]
     public class TicTacToeTest
-    {
-        [Test]
-        public void WhenThePlayerPlays_TheGamePlaysTheAI()
-        {
-            var board = new Mock<Board>();
-            ITicTacToe ticTacToe = new TicTacToe(board.Object, 
-                new List<TicTacToeStrategy> { new AllwaysUpdateStrategy() });
-
-            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
-
-            board.Verify(b => b.FillAICell(It.IsAny<CellCoordinates>()));
-        }
-
+    {        
         [Test]
         public void GivenThreeOpponentMarksInALine_StateIsOpponentWins()
         {
@@ -38,28 +26,14 @@ namespace TicTacToeGame.Test
         }
 
         [Test]
-        public void GivenThreeOpponentMarksInALine_TheGameDoesntPlayAI()
-        {
-            var board = new Mock<Board>();
-            ITicTacToe ticTacToe = new TicTacToe(board.Object,
-                new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
-
-            ticTacToe.OpponentMove(new CellCoordinates(1, 0));
-            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
-            ticTacToe.OpponentMove(new CellCoordinates(1, 2));
-
-            board.Verify(b => b.FillAICell(It.IsAny<CellCoordinates>()), Times.Exactly(2));
-        }
-
-        [Test]
         public void GivenThreeAIMarksInALine_StateIsAIWins()
         {
             ITicTacToe ticTacToe = new TicTacToe(new Board(),
                 new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
 
-            ticTacToe.OpponentMove(new CellCoordinates(1, 0));
-            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
-            ticTacToe.OpponentMove(new CellCoordinates(2, 0));
+            ticTacToe.AIMove();
+            ticTacToe.AIMove();
+            ticTacToe.AIMove();
 
             ticTacToe.State.Should().Be(TicTacToeState.AIWins);
         }

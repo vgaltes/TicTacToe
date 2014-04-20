@@ -11,6 +11,8 @@ namespace TicTacToeGame
 
         void OpponentMove(CellCoordinates cellCoordinate);
 
+        void AIMove();
+
         void Reset();
 
         void SetInitialPlayer(CellType initialPlayer);

@@ -24,11 +24,6 @@ namespace TicTacToeGame
 
             this.board.FillOpponentCell(cellCoordinate);
             CalculateState();
-            if (State == TicTacToeState.Playing)
-            {
-                AIMove();
-                CalculateState();
-            }
         }
 
         public Board Board
@@ -45,7 +40,7 @@ namespace TicTacToeGame
             private set;
         }
 
-        private void AIMove()
+        public void AIMove()
         {
             foreach (var strategy in strategies)
             {
