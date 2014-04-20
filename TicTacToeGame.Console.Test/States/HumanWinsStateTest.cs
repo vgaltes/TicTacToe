@@ -33,5 +33,14 @@ namespace TicTacToeGame.Console.Test.States
 
             consoleIO.Verify(c => c.WriteLine(Resources.YouWin));
         }
+
+        [Test]
+        public void WhenUserPressAKey_NextStateIsAskingForPlayer()
+        {
+            humanWinsState.Evaluate();
+
+            consoleIO.Verify(c => c.ReadKey(), Times.Once());
+            tttConsoleRunner.State.Should().BeOfType<AskingForPlayerState>();
+        }
     }
 }
