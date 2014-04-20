@@ -12,6 +12,8 @@ namespace TicTacToeGame.Console.States
 
         public string InfoFromPreviousStep { get; set; }
 
+        public bool IsFinished { get; protected set; }
+
         public abstract void Evaluate();
     }
 }

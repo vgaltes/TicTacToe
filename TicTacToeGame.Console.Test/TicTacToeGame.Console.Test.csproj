@@ -78,6 +78,7 @@
     <Compile Include="States\DrawStateTest.cs" />
     <Compile Include="States\HumanWinsStateTest.cs" />
     <Compile Include="States\PlayingStateTest.cs" />
+    <Compile Include="States\QuitGameStateTest.cs" />
     <Compile Include="TicTacToeBoardDrawerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicTacToeConsoleRunnerTest.cs" />

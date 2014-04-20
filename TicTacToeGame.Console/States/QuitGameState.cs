@@ -9,6 +9,11 @@ namespace TicTacToeGame.Console.States
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
         }
 
+        public QuitGameState(TicTacToeConsoleRunner tttConsoleRunner)
+        {
+            this.TicTacToeConsoleRunner = tttConsoleRunner;
+        }
+
         public override void Evaluate()
         {
             throw new NotImplementedException();
