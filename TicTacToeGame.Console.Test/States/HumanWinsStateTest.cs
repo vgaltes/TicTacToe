@@ -42,5 +42,13 @@ namespace TicTacToeGame.Console.Test.States
             consoleIO.Verify(c => c.ReadKey(), Times.Once());
             tttConsoleRunner.State.Should().BeOfType<AskingForPlayerState>();
         }
+
+        [Test]
+        public void ResetTicTacToe()
+        {
+            humanWinsState.Evaluate();
+
+            ticTacToe.Verify(ttt => ttt.Reset(), Times.Once());
+        }
     }
 }
