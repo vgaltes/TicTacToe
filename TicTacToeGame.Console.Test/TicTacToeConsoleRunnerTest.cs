@@ -81,7 +81,10 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfTheStateIsAIWinsWriteIt()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER)
+                .Returns(VALID_COORDINATES)
+                .Returns(AI_PLAYER)
+                .Returns(QUIT_COMMAND);
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.AIWins);
 
             ticTacToeConsoleRunner.Run();
@@ -92,7 +95,10 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfTheStateIsOpponentWinsWriteIt()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER)
+                .Returns(VALID_COORDINATES)
+                .Returns(AI_PLAYER)
+                .Returns(QUIT_COMMAND);
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.OpponentWins);
 
             ticTacToeConsoleRunner.Run();
@@ -103,7 +109,10 @@ namespace TicTacToeGame.Console.Test
         [Test]
         public void WhenRunningGame_IfTheStateIsDrawWriteIt()
         {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER).Returns(QUIT_COMMAND);
+            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER)
+                .Returns(VALID_COORDINATES)
+                .Returns(AI_PLAYER)
+                .Returns(QUIT_COMMAND);
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Draw);
 
             ticTacToeConsoleRunner.Run();
