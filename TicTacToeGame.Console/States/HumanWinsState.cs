@@ -20,6 +20,8 @@ namespace TicTacToeGame.Console.States
         public override void Evaluate()
         {
             TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.YouWin);
+            TicTacToeConsoleRunner.consoleIO.ReadKey();
+            TicTacToeConsoleRunner.State = new AskingForPlayerState(this);
         }
     }
 }
