@@ -41,5 +41,13 @@ namespace TicTacToeGame.Console.Test.States
 
             tttConsoleRunner.State.Should().BeOfType<AskingForPlayerState>();
         }
+
+        [Test]
+        public void ResetTicTacToe()
+        {
+            aiWinsState.Evaluate();
+
+            ticTacToe.Verify(ttt => ttt.Reset(), Times.Once());
+        }
     }
 }

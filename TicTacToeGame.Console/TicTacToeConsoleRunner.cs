@@ -26,10 +26,13 @@ namespace TicTacToeGame.Console
             this.ticTacToe = ticTacToe;
             this.ticTacToeBoardDrawer = ticTacToeBoardDrawer;
             this.consoleIO = consoleIO;
+
+            this.State = new AskingForPlayerState(this);
         }
 
         public void Run()
         {
+            /*
             SetInitialPlayer();
             DrawBoard();
 
@@ -50,6 +53,11 @@ namespace TicTacToeGame.Console
                 }
 
                 userInput = consoleIO.ReadLine();
+            }*/
+
+            while ( !State.IsFinished)
+            {
+                State.Evaluate();
             }
         }
 

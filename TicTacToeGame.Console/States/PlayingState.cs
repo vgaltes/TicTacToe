@@ -94,10 +94,17 @@ namespace TicTacToeGame.Console.States
 
         private void VerifyCoordinatesAreValidIntegers(string line)
         {
-            string[] coordinates = line.Split(',');
             int[] intCoordinates = new int[2];
-            bool rowValid = int.TryParse(coordinates[0], out intCoordinates[0]);
-            bool columnValid = int.TryParse(coordinates[1], out intCoordinates[1]);
+            bool rowValid = false;
+            bool columnValid = false;
+
+            string[] coordinates = line.Split(',');
+
+            if (coordinates == null || coordinates.Length != 2)
+                throw new NotAllowedMovementException();
+
+            rowValid = int.TryParse(coordinates[0], out intCoordinates[0]);
+            columnValid = int.TryParse(coordinates[1], out intCoordinates[1]);
 
             if ( !rowValid || !columnValid )
                 throw new NotAllowedMovementException();

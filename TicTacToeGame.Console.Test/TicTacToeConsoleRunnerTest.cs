@@ -237,7 +237,7 @@ namespace TicTacToeGame.Console.Test
 
             ticTacToeConsoleRunner.Run();
 
-            ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()), Times.Exactly(3));
+            ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()), Times.Exactly(2));
         }
 
         private void SetupOneMovementAndDraw()
