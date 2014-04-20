@@ -64,6 +64,10 @@ namespace TicTacToeGame.Console.States
                 this.TicTacToeConsoleRunner.State =
                     (TicTacToeConsoleRunnerState)constructorInfo.Invoke(new object[] { this });
             }
+            else
+            {
+                this.TicTacToeConsoleRunner.ticTacToe.AIMove();
+            }
         }
 
         private void SetNextStates()
