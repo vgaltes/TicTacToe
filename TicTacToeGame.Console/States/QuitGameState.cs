@@ -16,7 +16,7 @@ namespace TicTacToeGame.Console.States
 
         public override void Evaluate()
         {
-            throw new NotImplementedException();
+            IsFinished = true;
         }
     }
 }
