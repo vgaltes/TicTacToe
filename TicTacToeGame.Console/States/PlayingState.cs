@@ -46,40 +46,45 @@ namespace TicTacToeGame.Console.States
                     var cellCoordinates = GetCoordinatesFromUserInput(userInput);
                     this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(cellCoordinates);
 
-                    SetNextState();
+                    if (HasToChangeState())
+                    {
+                        SetNextState();
+                    }
+                    else
+                    {
+                        this.TicTacToeConsoleRunner.ticTacToe.AIMove();
+                    }
                 }
-                catch ( NotAllowedMovementException)
+                catch (NotAllowedMovementException)
                 {
                     this.InfoFromPreviousStep = Resources.NotAllowedMovement;
                 }
             }
         }
 
+        private bool HasToChangeState()
+        {
+            return nextStates.ContainsKey(this.TicTacToeConsoleRunner.ticTacToe.State);
+        }
+
         private void SetNextState()
         {
-            if (nextStates.ContainsKey(this.TicTacToeConsoleRunner.ticTacToe.State))
-            {
-                Type nextState = nextStates[this.TicTacToeConsoleRunner.ticTacToe.State];
-                ConstructorInfo constructorInfo = nextState.GetConstructor(new[] { typeof(TicTacToeConsoleRunnerState) });
-                this.TicTacToeConsoleRunner.State =
-                    (TicTacToeConsoleRunnerState)constructorInfo.Invoke(new object[] { this });
-            }
-            else
-            {
-                this.TicTacToeConsoleRunner.ticTacToe.AIMove();
-            }
+            Type nextState = nextStates[this.TicTacToeConsoleRunner.ticTacToe.State];
+            ConstructorInfo constructorInfo = nextState.GetConstructor(new[] { typeof(TicTacToeConsoleRunnerState) });
+            this.TicTacToeConsoleRunner.State =
+                (TicTacToeConsoleRunnerState)constructorInfo.Invoke(new object[] { this });
         }
 
         private void SetNextStates()
         {
             nextStates = new Dictionary<TicTacToeState, Type>();
-            nextStates.Add(TicTacToeState.AIWins, typeof(AIWinsState) );
+            nextStates.Add(TicTacToeState.AIWins, typeof(AIWinsState));
             nextStates.Add(TicTacToeState.OpponentWins, typeof(HumanWinsState));
             nextStates.Add(TicTacToeState.Draw, typeof(DrawState));
         }
 
         private CellCoordinates GetCoordinatesFromUserInput(string userInput)
-        {            
+        {
             VerifyCoordinatesAreValidIntegers(userInput);
             int[] coordinates = userInput.Split(',').Select(c => int.Parse(c)).ToArray();
             VerifyCoordinatesAreInTheBoard(coordinates);
@@ -110,7 +115,7 @@ namespace TicTacToeGame.Console.States
             rowValid = int.TryParse(coordinates[0], out intCoordinates[0]);
             columnValid = int.TryParse(coordinates[1], out intCoordinates[1]);
 
-            if ( !rowValid || !columnValid )
+            if (!rowValid || !columnValid)
                 throw new NotAllowedMovementException();
         }
 
