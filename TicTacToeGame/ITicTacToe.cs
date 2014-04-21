@@ -14,7 +14,5 @@ namespace TicTacToeGame
         void AIMove();
 
         void Reset();
-
-        void SetInitialPlayer(CellType initialPlayer);
     }
 }
