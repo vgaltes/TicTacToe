@@ -25,6 +25,9 @@ namespace TicTacToeGame.Console.Players
         public string AskForUserInput()
         {
             consoleIO.WriteLine(Resources.WriteCoordinates);
+            consoleIO.WriteHorizontalSeparator();
+            consoleIO.WriteLine(string.Empty);
+            consoleIO.Write("> ");
             return consoleIO.ReadLine();
         }
 

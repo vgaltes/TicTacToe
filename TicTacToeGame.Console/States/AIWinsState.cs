@@ -19,6 +19,8 @@ namespace TicTacToeGame.Console.States
 
         public override void Evaluate()
         {
+            this.TicTacToeConsoleRunner.consoleIO.Clear();
+            this.TicTacToeConsoleRunner.DrawBoard();
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.AiWins);
             this.TicTacToeConsoleRunner.consoleIO.ReadKey();
             this.TicTacToeConsoleRunner.ticTacToe.Reset();

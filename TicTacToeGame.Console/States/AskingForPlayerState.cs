@@ -19,7 +19,11 @@ namespace TicTacToeGame.Console.States
         {
             try
             {
+                TicTacToeConsoleRunner.consoleIO.Clear();
+                TicTacToeConsoleRunner.DrawHeader();
                 TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.SelectPlayer);
+                TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
+                TicTacToeConsoleRunner.consoleIO.Write("> ");
                 string userSelected = TicTacToeConsoleRunner.consoleIO.ReadLine();
 
                 int intUserInput = GetUserInputAsInteger(userSelected);

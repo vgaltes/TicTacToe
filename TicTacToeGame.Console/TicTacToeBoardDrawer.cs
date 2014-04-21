@@ -65,10 +65,10 @@ namespace TicTacToeGame.Console
         private string Draw(CellType cell)
         {
             if (cell == CellType.AI)
-                return "X";
+                return @"X";
             if (cell == CellType.Opponent)
-                return "O";
-            return " ";
+                return @"O";
+            return @" ";
         }
     }
 }

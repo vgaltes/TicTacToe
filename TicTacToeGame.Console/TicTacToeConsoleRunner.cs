@@ -33,5 +33,33 @@ namespace TicTacToeGame.Console
                 State.Evaluate();
             }
         }
+
+        public void DrawBoard()
+        {
+            var board = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
+
+            consoleIO.WriteLine(board);
+        }
+
+        public void DrawHeader()
+        {
+            consoleIO.Clear();
+            consoleIO.SetForegroundColor(System.ConsoleColor.DarkBlue);
+            
+            var header =
+                @"  _______ _        _______           _______
+ |__   __(_)      |__   __|         |__   __|        
+    | |   _  ___     | | __ _  ___     | | ___   ___ 
+    | |  | |/ __|    | |/ _` |/ __|    | |/ _ \ / _ \
+    | |  | | (__     | | (_| | (__     | | (_) |  __/
+    |_|  |_|\___|    |_|\__,_|\___|    |_|\___/ \___|
+
+
+
+";
+            
+            consoleIO.WriteLine(header);
+            consoleIO.ResetColor();
+        }
     }
 }

@@ -34,10 +34,13 @@ namespace TicTacToeGame.Console.States
 
         public override void Evaluate()
         {
+            TicTacToeConsoleRunner.DrawHeader();
             WriteInfoFromPreviousStep();
 
             DrawBoard();
 
+            TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
+            TicTacToeConsoleRunner.consoleIO.WriteHorizontalSeparator();
             string userInput = this.currentPlayer.AskForUserInput();
 
             if (userInput == QUIT_COMMAND)
@@ -97,17 +100,13 @@ namespace TicTacToeGame.Console.States
 
 
         private void WriteInfoFromPreviousStep()
-        {
-            TicTacToeConsoleRunner.consoleIO.Clear();
+        {   
             TicTacToeConsoleRunner.consoleIO.WriteLine(InfoFromPreviousStep);
         }
 
         private void DrawBoard()
         {
-            var board = TicTacToeConsoleRunner.ticTacToeBoardDrawer.
-                GetRepresentationOf(TicTacToeConsoleRunner.ticTacToe.Board);
-
-            TicTacToeConsoleRunner.consoleIO.WriteLine(board);
+            TicTacToeConsoleRunner.DrawBoard();
         }
     }
 }
