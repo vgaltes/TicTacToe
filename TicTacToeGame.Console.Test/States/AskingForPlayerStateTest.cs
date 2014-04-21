@@ -48,12 +48,12 @@ namespace TicTacToeGame.Console.Test.States
         }
 
         [Test]
-        public void IfUserChoosesAI_TicTacToeSetInitialPlayerIsCalledWitCellTypeAI()
+        public void IfUserChoosesAI_PlayingStateCurrentPlayerIsSettedWithPlayer2()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns(AI_PLAYER);
             asking4PlayerState.Evaluate();
 
-            ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.AI), Times.Once());
+            ((PlayingState)tttConsoleRunner.State).CurrentPlayer.Should().BeOfType<AIPlayer>();
         }
 
         [Test]

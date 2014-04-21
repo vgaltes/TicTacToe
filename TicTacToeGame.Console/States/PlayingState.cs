@@ -16,19 +16,19 @@ namespace TicTacToeGame.Console.States
 
         private Dictionary<TicTacToeState, Type> nextStates;
 
-        private Player currentPlayer;
+        public Player CurrentPlayer {get; set;}
 
         public PlayingState(TicTacToeConsoleRunnerState state)
         {
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
-            this.currentPlayer = state.TicTacToeConsoleRunner.player1;
+            this.CurrentPlayer = state.TicTacToeConsoleRunner.player1;
             SetNextStates();
         }
 
         public PlayingState(TicTacToeConsoleRunner tttConsoleRunner)
         {
             this.TicTacToeConsoleRunner = tttConsoleRunner;
-            this.currentPlayer = tttConsoleRunner.player1;
+            this.CurrentPlayer = tttConsoleRunner.player1;
             SetNextStates();
         }
 
@@ -41,7 +41,7 @@ namespace TicTacToeGame.Console.States
 
             TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
             TicTacToeConsoleRunner.consoleIO.WriteHorizontalSeparator();
-            string userInput = this.currentPlayer.AskForUserInput();
+            string userInput = this.CurrentPlayer.AskForUserInput();
 
             if (userInput == QUIT_COMMAND)
             {
@@ -51,7 +51,7 @@ namespace TicTacToeGame.Console.States
             {
                 try
                 {
-                    this.currentPlayer.Move(userInput);
+                    this.CurrentPlayer.Move(userInput);
                     if (HasToChangeState())
                     {
                         SetNextState();
@@ -70,10 +70,10 @@ namespace TicTacToeGame.Console.States
 
         private void SetNextPlayer()
         {
-            if (currentPlayer == this.TicTacToeConsoleRunner.player1)
-                currentPlayer = this.TicTacToeConsoleRunner.player2;
+            if (CurrentPlayer == this.TicTacToeConsoleRunner.player1)
+                CurrentPlayer = this.TicTacToeConsoleRunner.player2;
             else
-                currentPlayer = this.TicTacToeConsoleRunner.player1;
+                CurrentPlayer = this.TicTacToeConsoleRunner.player1;
         }
 
         private bool HasToChangeState()
