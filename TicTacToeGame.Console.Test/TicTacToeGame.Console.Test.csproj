@@ -73,6 +73,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Players\HumanPlayerTest.cs" />
     <Compile Include="States\AIWinsStateTest.cs" />
     <Compile Include="States\AskingForPlayerStateTest.cs" />
     <Compile Include="States\DrawStateTest.cs" />

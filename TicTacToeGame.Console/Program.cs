@@ -13,7 +13,7 @@ namespace TicTacToeGame.Console
             var consoleIO = new ConsoleIO();
 
             var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe, ticTacToeBoardDrawer, 
-                consoleIO, new HumanPlayer(), new AIPlayer());
+                consoleIO, new HumanPlayer(consoleIO), new AIPlayer());
 
             ticTacToeConsoleRunner.Run();
         }
