@@ -19,6 +19,7 @@ namespace TicTacToeGame.Console.Test.Players
 
             var userInput = humanPlayer.AskForUserInput();
 
+            consoleIO.Verify(c => c.WriteLine(Resources.WriteCoordinates), Times.Once());
             consoleIO.Verify(c => c.ReadLine(), Times.Once());
             userInput.Should().Be(expectedUserInput);
         }
