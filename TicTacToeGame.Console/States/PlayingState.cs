@@ -16,16 +16,19 @@ namespace TicTacToeGame.Console.States
 
         private Dictionary<TicTacToeState, Type> nextStates;
 
+        private Player currentPlayer;
+
         public PlayingState(TicTacToeConsoleRunnerState state)
         {
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
-
+            this.currentPlayer = state.TicTacToeConsoleRunner.player1;
             SetNextStates();
         }
 
         public PlayingState(TicTacToeConsoleRunner tttConsoleRunner)
         {
             this.TicTacToeConsoleRunner = tttConsoleRunner;
+            this.currentPlayer = tttConsoleRunner.player1;
             SetNextStates();
         }
 
@@ -36,7 +39,7 @@ namespace TicTacToeGame.Console.States
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
             DrawBoard();
 
-            string userInput = this.TicTacToeConsoleRunner.player1.AskForUserInput();
+            string userInput = this.currentPlayer.AskForUserInput();
             
 
             // string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
@@ -47,10 +50,14 @@ namespace TicTacToeGame.Console.States
             }
             else
             {
-                this.TicTacToeConsoleRunner.player1.Move(userInput);
+                this.currentPlayer.Move(userInput);
                 if (HasToChangeState())
                 {
                     SetNextState();
+                }
+                else
+                {
+                    SetNextPlayer();
                 }
 
                 /*try
@@ -72,6 +79,14 @@ namespace TicTacToeGame.Console.States
                     this.InfoFromPreviousStep = Resources.NotAllowedMovement;
                 }*/
             }
+        }
+
+        private void SetNextPlayer()
+        {
+            if (currentPlayer == this.TicTacToeConsoleRunner.player1)
+                currentPlayer = this.TicTacToeConsoleRunner.player2;
+            else
+                currentPlayer = this.TicTacToeConsoleRunner.player1;
         }
 
         private bool HasToChangeState()
