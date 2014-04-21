@@ -66,15 +66,6 @@ namespace TicTacToeGame.Console.Test.States
         }
 
         [Test]
-        public void AskForCoordinates()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
-            playingState.Evaluate();
-
-            consoleIO.Verify(c => c.WriteLine(Resources.WriteCoordinates));
-        }
-
-        [Test]
         public void GivenPlayer1HasMoved_WhenEvaluatingState_Player2AskForUserInputAndMove()
         {
             player1.Setup(p => p.AskForUserInput()).Returns(VALID_COORDINATES_AS_STRING);
