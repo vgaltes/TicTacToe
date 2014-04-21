@@ -16,6 +16,7 @@ namespace TicTacToeGame.Console.Test.States
         AIWinsState aiWinsState;
         Mock<Player> player1;
         Mock<Player> player2;
+        private const string BOARD_REPRESENTATION = "boardRepresentation";
 
         [SetUp]
         public void TestSetUp()
@@ -54,6 +55,18 @@ namespace TicTacToeGame.Console.Test.States
             aiWinsState.Evaluate();
 
             ticTacToe.Verify(ttt => ttt.Reset(), Times.Once());
+        }
+
+        [Test]
+        public void DrawBoard()
+        {
+            ticTacToeBoardDrawer.Setup(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()))
+                .Returns(BOARD_REPRESENTATION);
+
+            aiWinsState.Evaluate();
+
+            ticTacToeBoardDrawer.Verify(tbd => tbd.GetRepresentationOf(It.IsAny<Board>()), Times.Once);
+            consoleIO.Verify(c => c.WriteLine(BOARD_REPRESENTATION));
         }
     }
 }
