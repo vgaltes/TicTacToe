@@ -97,21 +97,7 @@ namespace TicTacToeGame.Console.Test.States
 
             tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
         }
-
-        /*
-        
-        
-
-        [Test]
-        public void GivenUserWritesNonNumericCoordinates_ExtraInfoIsSettedWithTheError()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(NON_NUMERIC_COORDINATES);
-
-            playingState.Evaluate();
-
-            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
-        }*/
-
+                
         [Test]
         public void DrawBoard()
         {

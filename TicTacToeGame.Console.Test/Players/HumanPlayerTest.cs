@@ -14,6 +14,7 @@ namespace TicTacToeGame.Console.Test.Players
         private const string OUT_OF_BOUNDS_COORDINATES = "5,5";
         private const string NEGATIVE_COORDINATES = "-1,-1";
         private string BEYOND_MAX_INT_COORDINATES = "2147483648, 2147483648";
+        private const string NON_NUMERIC_COORDINATES = "a,a";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
 
         Mock<ConsoleIO> consoleIO;
@@ -67,6 +68,12 @@ namespace TicTacToeGame.Console.Test.Players
         public void GivenUserWritesCoordinatesBeyondMaxInt_ThrowNotAllowedMovementException()
         {
             humanPlayer.Move(BEYOND_MAX_INT_COORDINATES);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
+        public void GivenUserWritesNonNumericCoordinates_ThrowNotAllowedMovementException()
+        {
+            humanPlayer.Move(NON_NUMERIC_COORDINATES);
         }
     }
 }
