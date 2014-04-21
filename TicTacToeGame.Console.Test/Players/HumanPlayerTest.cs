@@ -52,15 +52,21 @@ namespace TicTacToeGame.Console.Test.Players
         }
 
         [Test, ExpectedException(ExpectedException=typeof(NotAllowedMovementException))]
-        public void GivenUserWritesCoordinatesOutOfTheBounds_ExtraInfoIsSettedWithTheError()
+        public void GivenUserWritesCoordinatesOutOfTheBounds_ThrowNotAllowedMovementException()
         {
             humanPlayer.Move(OUT_OF_BOUNDS_COORDINATES);
         }
 
         [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
-        public void GivenUserWritesNegativeCoordinates_ExtraInfoIsSettedWithTheError()
+        public void GivenUserWritesNegativeCoordinates_ThrowNotAllowedMovementException()
         {
             humanPlayer.Move(NEGATIVE_COORDINATES);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
+        public void GivenUserWritesCoordinatesBeyondMaxInt_ThrowNotAllowedMovementException()
+        {
+            humanPlayer.Move(BEYOND_MAX_INT_COORDINATES);
         }
     }
 }

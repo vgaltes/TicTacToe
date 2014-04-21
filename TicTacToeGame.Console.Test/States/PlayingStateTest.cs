@@ -100,15 +100,7 @@ namespace TicTacToeGame.Console.Test.States
 
         /*
         
-        [Test]
-        public void GivenUserWritesCoordinatesBeyondMaxInt_ExtraInfoIsSettedWithTheError()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(BEYOND_MAX_INT_COORDINATES);
-
-            playingState.Evaluate();
-
-            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
-        }
+        
 
         [Test]
         public void GivenUserWritesNonNumericCoordinates_ExtraInfoIsSettedWithTheError()
