@@ -2,8 +2,8 @@
 {
     public interface Player
     {
-        object Move();
+        void Move(string userInput);
 
-        object AskForUserInput();
+        string AskForUserInput();
     }
 }

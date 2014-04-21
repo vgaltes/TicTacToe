@@ -32,12 +32,14 @@ namespace TicTacToeGame.Console.States
         public override void Evaluate()
         {
             WriteInfoFromPreviousStep();
+
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
             DrawBoard();
 
-            this.TicTacToeConsoleRunner.player1.Move();
+            string userInput = this.TicTacToeConsoleRunner.player1.AskForUserInput();
+            
 
-            string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
+            // string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
 
             if (userInput == QUIT_COMMAND)
             {
@@ -45,7 +47,13 @@ namespace TicTacToeGame.Console.States
             }
             else
             {
-                try
+                this.TicTacToeConsoleRunner.player1.Move(userInput);
+                if (HasToChangeState())
+                {
+                    SetNextState();
+                }
+
+                /*try
                 {
                     var cellCoordinates = GetCoordinatesFromUserInput(userInput);
                     this.TicTacToeConsoleRunner.ticTacToe.HumanMove(cellCoordinates);
@@ -62,7 +70,7 @@ namespace TicTacToeGame.Console.States
                 catch (NotAllowedMovementException)
                 {
                     this.InfoFromPreviousStep = Resources.NotAllowedMovement;
-                }
+                }*/
             }
         }
 
