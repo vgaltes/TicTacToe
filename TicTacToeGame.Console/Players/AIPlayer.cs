@@ -15,7 +15,7 @@ namespace TicTacToeGame.Console.Players
 
         public void Move(string userInput)
         {
-            throw new NotImplementedException();
+            this.ticTacToe.AIMove();
         }
 
         public string AskForUserInput()

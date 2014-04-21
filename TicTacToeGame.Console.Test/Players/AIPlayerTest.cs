@@ -28,5 +28,13 @@ namespace TicTacToeGame.Console.Test.Players
             consoleIO.Verify(c => c.WriteLine(Resources.AIIsGonnaMove));
             consoleIO.Verify(c => c.ReadLine());
         }
+
+        [Test]
+        public void WhenMoving_CallTicTacTocAIMove()
+        {
+            aiPlayer.Move(string.Empty);
+
+            ticTacToe.Verify(ttt => ttt.AIMove());
+        }
     }
 }
