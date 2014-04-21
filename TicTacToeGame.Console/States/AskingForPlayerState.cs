@@ -19,13 +19,8 @@ namespace TicTacToeGame.Console.States
         {
             try
             {
-                TicTacToeConsoleRunner.consoleIO.Clear();
-                TicTacToeConsoleRunner.DrawHeader();
-                TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.SelectPlayer);
-                TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
-                TicTacToeConsoleRunner.consoleIO.Write("> ");
+                DrawInputMessages();
                 string userSelected = TicTacToeConsoleRunner.consoleIO.ReadLine();
-
                 int intUserInput = GetUserInputAsInteger(userSelected);
 
                 if (Enum.IsDefined(typeof(CellType), intUserInput))
@@ -41,6 +36,15 @@ namespace TicTacToeGame.Console.States
             {
                 InfoFromPreviousStep = Resources.SelectPlayer_InvalidOption;
             }
+        }
+
+        private void DrawInputMessages()
+        {
+            TicTacToeConsoleRunner.consoleIO.Clear();
+            TicTacToeConsoleRunner.DrawHeader();
+            TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.SelectPlayer);
+            TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
+            TicTacToeConsoleRunner.consoleIO.Write("> ");
         }
 
         private int GetUserInputAsInteger(string userInput)

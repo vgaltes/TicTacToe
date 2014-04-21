@@ -39,12 +39,7 @@ namespace TicTacToeGame.Console
         {
             System.Console.WriteLine(HORIZONTAL_SEPARATOR);
         }
-
-        internal void SetBackgroundColor(ConsoleColor color)
-        {
-            System.Console.BackgroundColor = color;
-        }
-
+        
         internal void SetForegroundColor(ConsoleColor color)
         {
             System.Console.ForegroundColor = color;
