@@ -81,15 +81,7 @@ namespace TicTacToeGame.Console.Test.States
         /*
         
 
-        [Test]
-        public void GivenAValidCoordinates_CallOpponentMove()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
-
-            playingState.Evaluate();
-
-            ticTacToe.Verify(ttt => ttt.HumanMove(VALID_COORDINATES), Times.Once());
-        }
+        
 
         [Test]
         public void GivenAValidCoordinates_CallOpponentMoveWithTheCoordinatesTransaltedFromUserInput()
