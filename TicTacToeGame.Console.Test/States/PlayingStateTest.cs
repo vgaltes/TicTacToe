@@ -13,7 +13,7 @@ namespace TicTacToeGame.Console.Test.States
     {
         private const string VALID_COORDINATES_AS_STRING = "1,1";
         private const string ANOTHER_VALID_COORDINATES_AS_STRING = "2,2";
-        private const string NEGATIVE_COORDINATES = "-1,-1";
+        
         private const string QUIT_COMMAND = "q!";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
         private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
@@ -100,17 +100,6 @@ namespace TicTacToeGame.Console.Test.States
 
         /*
         
-
-        [Test]
-        public void GivenUserWritesNegativeCoordinates_ExtraInfoIsSettedWithTheError()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(NEGATIVE_COORDINATES);
-
-            playingState.Evaluate();
-
-            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
-        }
-
         [Test]
         public void GivenUserWritesCoordinatesBeyondMaxInt_ExtraInfoIsSettedWithTheError()
         {

@@ -12,6 +12,7 @@ namespace TicTacToeGame.Console.Test.Players
     {
         private const string VALID_COORDINATES_AS_STRING = "1,1";
         private const string OUT_OF_BOUNDS_COORDINATES = "5,5";
+        private const string NEGATIVE_COORDINATES = "-1,-1";
         private string BEYOND_MAX_INT_COORDINATES = "2147483648, 2147483648";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
 
@@ -54,6 +55,12 @@ namespace TicTacToeGame.Console.Test.Players
         public void GivenUserWritesCoordinatesOutOfTheBounds_ExtraInfoIsSettedWithTheError()
         {
             humanPlayer.Move(OUT_OF_BOUNDS_COORDINATES);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
+        public void GivenUserWritesNegativeCoordinates_ExtraInfoIsSettedWithTheError()
+        {
+            humanPlayer.Move(NEGATIVE_COORDINATES);
         }
     }
 }
