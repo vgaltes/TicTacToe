@@ -65,17 +65,6 @@ namespace TicTacToeGame.Console.Test
         }
 
         [Test]
-        public void WhenRunningGame_IfThePlayerIsAI_CallTicTacToeWithCellTypeAI()
-        {
-            consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER);
-            player1.Setup(p => p.AskForUserInput()).Returns(QUIT_COMMAND);
-
-            ticTacToeConsoleRunner.Run();
-
-            ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.AI));
-        }
-
-        [Test]
         public void WhenRunningGame_DrawEmptyBoardAtStart()
         {
             consoleIO.SetupSequence(c => c.ReadLine()).Returns(AI_PLAYER);
