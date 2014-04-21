@@ -14,11 +14,10 @@ namespace TicTacToeGame.Console.Test.States
         private const string VALID_COORDINATES_AS_STRING = "1,1";
         private const string ANOTHER_VALID_COORDINATES_AS_STRING = "2,2";
         private const string NEGATIVE_COORDINATES = "-1,-1";
-        private string BEYOND_MAX_INT_COORDINATES = "2147483648, 2147483648";
         private const string QUIT_COMMAND = "q!";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
         private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
-        private const string OUT_OF_BOUNDS_COORDINATES = "5,5";
+        
         private const string NON_NUMERIC_COORDINATES = "a,a";
         private const string BOARD_REPRESENTATION = "boardRepresentation";
 
@@ -100,15 +99,7 @@ namespace TicTacToeGame.Console.Test.States
         }
 
         /*
-        [Test]
-        public void GivenUserWritesCoordinatesOutOfTheBounds_ExtraInfoIsSettedWithTheError()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(OUT_OF_BOUNDS_COORDINATES);
-
-            playingState.Evaluate();
-
-            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
-        }
+        
 
         [Test]
         public void GivenUserWritesNegativeCoordinates_ExtraInfoIsSettedWithTheError()

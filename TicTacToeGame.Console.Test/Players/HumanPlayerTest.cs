@@ -3,17 +3,21 @@ using Moq;
 using TicTacToeGame.Console.Players;
 using FluentAssertions;
 using TicTacToeGame.Models;
+using TicTacToeGame.Exceptions;
 
 namespace TicTacToeGame.Console.Test.Players
 {
     [TestFixture]
     public class HumanPlayerTest
     {
+        private const string VALID_COORDINATES_AS_STRING = "1,1";
+        private const string OUT_OF_BOUNDS_COORDINATES = "5,5";
+        private string BEYOND_MAX_INT_COORDINATES = "2147483648, 2147483648";
+        private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
+
         Mock<ConsoleIO> consoleIO;
         Mock<ITicTacToe> ticTacToe;
-        HumanPlayer humanPlayer;
-        private const string VALID_COORDINATES_AS_STRING = "1,1";
-        private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
+        HumanPlayer humanPlayer;        
 
         [SetUp]
         public void TestSetUp()
@@ -44,6 +48,12 @@ namespace TicTacToeGame.Console.Test.Players
             humanPlayer.Move(VALID_COORDINATES_AS_STRING);
 
             ticTacToe.Verify(ttt => ttt.HumanMove(VALID_COORDINATES), Times.Once());
+        }
+
+        [Test, ExpectedException(ExpectedException=typeof(NotAllowedMovementException))]
+        public void GivenUserWritesCoordinatesOutOfTheBounds_ExtraInfoIsSettedWithTheError()
+        {
+            humanPlayer.Move(OUT_OF_BOUNDS_COORDINATES);
         }
     }
 }
