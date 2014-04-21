@@ -40,9 +40,6 @@ namespace TicTacToeGame.Console.States
 
             string userInput = this.currentPlayer.AskForUserInput();
 
-
-            // string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
-
             if (userInput == QUIT_COMMAND)
             {
                 this.TicTacToeConsoleRunner.State = new QuitGameState(this);
@@ -65,25 +62,6 @@ namespace TicTacToeGame.Console.States
                 {
                     this.InfoFromPreviousStep = Resources.NotAllowedMovement;
                 }
-
-                /*try
-                {
-                    var cellCoordinates = GetCoordinatesFromUserInput(userInput);
-                    this.TicTacToeConsoleRunner.ticTacToe.HumanMove(cellCoordinates);
-
-                    if (HasToChangeState())
-                    {
-                        SetNextState();
-                    }
-                    else
-                    {
-                        this.TicTacToeConsoleRunner.ticTacToe.AIMove();
-                    }
-                }
-                catch (NotAllowedMovementException)
-                {
-                    this.InfoFromPreviousStep = Resources.NotAllowedMovement;
-                }*/
             }
         }
 
