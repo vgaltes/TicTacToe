@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AIIsGonnaMove" xml:space="preserve">
-    <value>AI is gonna move. Press any key to continue.</value>
+    <value>AI is gonna move. Press enter to continue or q! to quit.</value>
   </data>
   <data name="AiWins" xml:space="preserve">
     <value>AI WINS! Press any key to restart game.</value>

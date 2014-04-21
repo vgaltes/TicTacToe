@@ -20,7 +20,8 @@ namespace TicTacToeGame.Console.Players
 
         public string AskForUserInput()
         {
-            throw new NotImplementedException();
+            consoleIO.WriteLine(Resources.AIIsGonnaMove);
+            return consoleIO.ReadLine();
         }
     }
 }

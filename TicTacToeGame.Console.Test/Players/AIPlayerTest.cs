@@ -26,7 +26,7 @@ namespace TicTacToeGame.Console.Test.Players
             aiPlayer.AskForUserInput();
 
             consoleIO.Verify(c => c.WriteLine(Resources.AIIsGonnaMove));
-            consoleIO.Verify(c => c.ReadKey());
+            consoleIO.Verify(c => c.ReadLine());
         }
     }
 }

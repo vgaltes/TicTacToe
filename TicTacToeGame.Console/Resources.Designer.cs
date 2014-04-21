@@ -61,7 +61,7 @@ namespace TicTacToeGame.Console {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AI is gonna move. Press any key to continue..
+        ///   Looks up a localized string similar to AI is gonna move. Press enter to continue or q! to quit..
         /// </summary>
         public static string AIIsGonnaMove {
             get {
