@@ -33,8 +33,6 @@ namespace TicTacToeGame.Console.Test.States
             consoleIO = new Mock<ConsoleIO>();
             player1 = new Mock<Player>();
             player2 = new Mock<Player>();
-            player1 = new Mock<Player>();
-            player2 = new Mock<Player>();
 
             tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
                 ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
