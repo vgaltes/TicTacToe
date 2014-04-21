@@ -17,7 +17,7 @@ namespace TicTacToeGame
             this.strategies = strategies;
         }
 
-        public void OpponentMove(CellCoordinates cellCoordinate)
+        public void HumanMove(CellCoordinates cellCoordinate)
         {
             if (State != TicTacToeState.Playing)
                 throw new NotAllowedMovementException();

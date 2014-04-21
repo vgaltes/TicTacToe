@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TicTacToeGame.Console.Players;
 using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 
@@ -22,7 +23,7 @@ namespace TicTacToeGame.Console.States
             SetNextStates();
         }
 
-        public PlayingState(TicTacToeConsoleRunner tttConsoleRunner)
+        public PlayingState(TicTacToeConsoleRunner tttConsoleRunner, Player player1, Player player2)
         {
             this.TicTacToeConsoleRunner = tttConsoleRunner;
             SetNextStates();
@@ -44,7 +45,7 @@ namespace TicTacToeGame.Console.States
                 try
                 {
                     var cellCoordinates = GetCoordinatesFromUserInput(userInput);
-                    this.TicTacToeConsoleRunner.ticTacToe.OpponentMove(cellCoordinates);
+                    this.TicTacToeConsoleRunner.ticTacToe.HumanMove(cellCoordinates);
 
                     if (HasToChangeState())
                     {

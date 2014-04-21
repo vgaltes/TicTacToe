@@ -18,9 +18,9 @@ namespace TicTacToeGame.Test
             ITicTacToe ticTacToe = new TicTacToe(new Board(),
                 new List<TicTacToeStrategy>());
 
-            ticTacToe.OpponentMove(new CellCoordinates(0, 0));
-            ticTacToe.OpponentMove(new CellCoordinates(0, 1));
-            ticTacToe.OpponentMove(new CellCoordinates(0, 2));
+            ticTacToe.HumanMove(new CellCoordinates(0, 0));
+            ticTacToe.HumanMove(new CellCoordinates(0, 1));
+            ticTacToe.HumanMove(new CellCoordinates(0, 2));
 
             ticTacToe.State.Should().Be(TicTacToeState.OpponentWins);           
         }
@@ -45,11 +45,11 @@ namespace TicTacToeGame.Test
             ITicTacToe ticTacToe = new TicTacToe(board.Object,
                 new List<TicTacToeStrategy> { new FillFirstRowStrategy() });
 
-            ticTacToe.OpponentMove(new CellCoordinates(1, 0));
-            ticTacToe.OpponentMove(new CellCoordinates(1, 1));
-            ticTacToe.OpponentMove(new CellCoordinates(1, 2));
+            ticTacToe.HumanMove(new CellCoordinates(1, 0));
+            ticTacToe.HumanMove(new CellCoordinates(1, 1));
+            ticTacToe.HumanMove(new CellCoordinates(1, 2));
 
-            ticTacToe.OpponentMove(new CellCoordinates(2, 0));
+            ticTacToe.HumanMove(new CellCoordinates(2, 0));
         }
 
         [Test]
@@ -58,9 +58,9 @@ namespace TicTacToeGame.Test
             ITicTacToe ticTacToe = new TicTacToe(new Board(),
                 new List<TicTacToeStrategy>());
 
-            ticTacToe.OpponentMove(new CellCoordinates(0, 0));
-            ticTacToe.OpponentMove(new CellCoordinates(0, 1));
-            ticTacToe.OpponentMove(new CellCoordinates(0, 2));
+            ticTacToe.HumanMove(new CellCoordinates(0, 0));
+            ticTacToe.HumanMove(new CellCoordinates(0, 1));
+            ticTacToe.HumanMove(new CellCoordinates(0, 2));
 
             ticTacToe.Reset();
             

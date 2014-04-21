@@ -177,8 +177,8 @@ namespace TicTacToeGame.Console.Test
 
             ticTacToeConsoleRunner.Run();
 
-            ticTacToe.Verify(ttt => ttt.OpponentMove(firstOpponentMove));
-            ticTacToe.Verify(ttt => ttt.OpponentMove(secondOpponentMove));
+            ticTacToe.Verify(ttt => ttt.HumanMove(firstOpponentMove));
+            ticTacToe.Verify(ttt => ttt.HumanMove(secondOpponentMove));
         }
 
         [Test]
@@ -195,7 +195,7 @@ namespace TicTacToeGame.Console.Test
         public void WhenRunningGame_IfAMovementNotAllowedExceptionIsThrown_PrintIt()
         {
             SetupOneMovementAndQuit();
-            ticTacToe.Setup(ttt => ttt.OpponentMove(It.IsAny<CellCoordinates>()))
+            ticTacToe.Setup(ttt => ttt.HumanMove(It.IsAny<CellCoordinates>()))
                 .Throws<NotAllowedMovementException>();
 
             ticTacToeConsoleRunner.Run();

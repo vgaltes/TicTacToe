@@ -3,6 +3,7 @@ using NUnit.Framework;
 using TicTacToeGame.Console.States;
 using TicTacToeGame.Models;
 using FluentAssertions;
+using TicTacToeGame.Console.Players;
 
 namespace TicTacToeGame.Console.Test.States
 {
@@ -23,6 +24,8 @@ namespace TicTacToeGame.Console.Test.States
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
+        Mock<Player> player1;
+        Mock<Player> player2;
         TicTacToeConsoleRunner tttConsoleRunner;
         PlayingState playingState;
 
@@ -34,9 +37,19 @@ namespace TicTacToeGame.Console.Test.States
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
             tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
-
-            playingState = new PlayingState(tttConsoleRunner);
+            player1 = new Mock<Player>();
+            player2 = new Mock<Player>();
+            playingState = new PlayingState(tttConsoleRunner, player1.Object, player2.Object);
             tttConsoleRunner.State = playingState;
+        }
+
+        [Test]
+        public void WhenMovingForTheFirstTime_CallPlayer1Play()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
+            playingState.Evaluate();
+
+            player1.Verify(p => p.Move());
         }
 
         [Test]
@@ -64,7 +77,7 @@ namespace TicTacToeGame.Console.Test.States
 
             playingState.Evaluate();
 
-            ticTacToe.Verify(ttt => ttt.OpponentMove(VALID_COORDINATES), Times.Once());
+            ticTacToe.Verify(ttt => ttt.HumanMove(VALID_COORDINATES), Times.Once());
         }
 
         [Test]
@@ -74,7 +87,7 @@ namespace TicTacToeGame.Console.Test.States
 
             playingState.Evaluate();
 
-            ticTacToe.Verify(ttt => ttt.OpponentMove(ANOTHER_VALID_COORDINATES), Times.Once());
+            ticTacToe.Verify(ttt => ttt.HumanMove(ANOTHER_VALID_COORDINATES), Times.Once());
         }
 
         [Test]

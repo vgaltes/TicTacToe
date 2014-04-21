@@ -9,7 +9,7 @@ namespace TicTacToeGame
 
         Board Board { get; }
 
-        void OpponentMove(CellCoordinates cellCoordinate);
+        void HumanMove(CellCoordinates cellCoordinate);
 
         void AIMove();
 
