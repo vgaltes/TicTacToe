@@ -8,8 +8,18 @@ namespace TicTacToeGame.Console
         public readonly ITicTacToe ticTacToe;
         public readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
         public readonly ConsoleIO consoleIO;
-        public readonly Player player1;
-        public readonly Player player2;
+        public readonly Player[] Players;
+        private const string header =
+                @"  _______ _        _______           _______
+ |__   __(_)      |__   __|         |__   __|        
+    | |   _  ___     | | __ _  ___     | | ___   ___ 
+    | |  | |/ __|    | |/ _` |/ __|    | |/ _ \ / _ \
+    | |  | | (__     | | (_| | (__     | | (_) |  __/
+    |_|  |_|\___|    |_|\__,_|\___|    |_|\___/ \___|
+
+
+
+";
 
         public TicTacToeConsoleRunnerState State { get; set; }
 
@@ -20,9 +30,7 @@ namespace TicTacToeGame.Console
             this.ticTacToe = ticTacToe;
             this.ticTacToeBoardDrawer = ticTacToeBoardDrawer;
             this.consoleIO = consoleIO;
-            this.player1 = player1;
-            this.player2 = player2;
-
+            Players = new Player[2] { player1, player2 };
             this.State = new AskingForPlayerState(this);
         }
 
@@ -44,20 +52,7 @@ namespace TicTacToeGame.Console
         public void DrawHeader()
         {
             consoleIO.Clear();
-            consoleIO.SetForegroundColor(System.ConsoleColor.DarkBlue);
-            
-            var header =
-                @"  _______ _        _______           _______
- |__   __(_)      |__   __|         |__   __|        
-    | |   _  ___     | | __ _  ___     | | ___   ___ 
-    | |  | |/ __|    | |/ _` |/ __|    | |/ _ \ / _ \
-    | |  | | (__     | | (_| | (__     | | (_) |  __/
-    |_|  |_|\___|    |_|\__,_|\___|    |_|\___/ \___|
-
-
-
-";
-            
+            consoleIO.SetForegroundColor(System.ConsoleColor.DarkBlue);            
             consoleIO.WriteLine(header);
             consoleIO.ResetColor();
         }

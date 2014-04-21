@@ -21,10 +21,7 @@ namespace TicTacToeGame.Console.States
         public PlayingState(TicTacToeConsoleRunnerState state, int initialPlayer)
         {
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
-            if ( initialPlayer == 1)
-                this.CurrentPlayer = state.TicTacToeConsoleRunner.player1;
-            else
-                this.CurrentPlayer = state.TicTacToeConsoleRunner.player2;
+            this.CurrentPlayer = state.TicTacToeConsoleRunner.Players[initialPlayer - 1];
 
             SetNextStates();
         }
@@ -32,7 +29,7 @@ namespace TicTacToeGame.Console.States
         public PlayingState(TicTacToeConsoleRunner tttConsoleRunner)
         {
             this.TicTacToeConsoleRunner = tttConsoleRunner;
-            this.CurrentPlayer = tttConsoleRunner.player1;
+            this.CurrentPlayer = tttConsoleRunner.Players[0];
             SetNextStates();
         }
 
@@ -74,10 +71,7 @@ namespace TicTacToeGame.Console.States
 
         private void SetNextPlayer()
         {
-            if (CurrentPlayer == this.TicTacToeConsoleRunner.player1)
-                CurrentPlayer = this.TicTacToeConsoleRunner.player2;
-            else
-                CurrentPlayer = this.TicTacToeConsoleRunner.player1;
+            CurrentPlayer = this.TicTacToeConsoleRunner.Players.First(p => p!= CurrentPlayer);
         }
 
         private bool HasToChangeState()
@@ -100,8 +94,6 @@ namespace TicTacToeGame.Console.States
             nextStates.Add(TicTacToeState.OpponentWins, typeof(HumanWinsState));
             nextStates.Add(TicTacToeState.Draw, typeof(DrawState));
         }
-
-
 
         private void WriteInfoFromPreviousStep()
         {   
