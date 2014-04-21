@@ -18,7 +18,8 @@ namespace TicTacToeGame.Console.Players
 
         public string AskForUserInput()
         {
-            throw new NotImplementedException();
+            consoleIO.WriteLine(Resources.WriteCoordinates);
+            return consoleIO.ReadLine();
         }
     }
 }

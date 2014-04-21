@@ -35,8 +35,7 @@ namespace TicTacToeGame.Console.States
         public override void Evaluate()
         {
             WriteInfoFromPreviousStep();
-
-            this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
+                        
             DrawBoard();
 
             string userInput = this.currentPlayer.AskForUserInput();
