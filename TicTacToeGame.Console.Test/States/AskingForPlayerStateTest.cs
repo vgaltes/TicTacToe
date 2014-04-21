@@ -62,7 +62,7 @@ namespace TicTacToeGame.Console.Test.States
             consoleIO.Setup(c => c.ReadLine()).Returns(HUMAN_PLAYER);
             asking4PlayerState.Evaluate();
 
-            ticTacToe.Verify(ttt => ttt.SetInitialPlayer(CellType.Opponent), Times.Once());
+            ((PlayingState)tttConsoleRunner.State).CurrentPlayer.Should().Be(player2.Object);
         }
 
         [Test]
