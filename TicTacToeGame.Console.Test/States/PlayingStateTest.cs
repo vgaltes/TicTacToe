@@ -44,7 +44,7 @@ namespace TicTacToeGame.Console.Test.States
         }
 
         [Test]
-        public void WhenMovingForTheFirstTime_CallPlayer1Play()
+        public void WhenMovingForTheFirstTime_CallPlayer1Move()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
             playingState.Evaluate();
