@@ -18,10 +18,14 @@ namespace TicTacToeGame.Console.States
 
         public Player CurrentPlayer {get; set;}
 
-        public PlayingState(TicTacToeConsoleRunnerState state)
+        public PlayingState(TicTacToeConsoleRunnerState state, int initialPlayer)
         {
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
-            this.CurrentPlayer = state.TicTacToeConsoleRunner.player1;
+            if ( initialPlayer == 1)
+                this.CurrentPlayer = state.TicTacToeConsoleRunner.player1;
+            else
+                this.CurrentPlayer = state.TicTacToeConsoleRunner.player2;
+
             SetNextStates();
         }
 

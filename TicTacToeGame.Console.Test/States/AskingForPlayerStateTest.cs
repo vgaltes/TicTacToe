@@ -48,12 +48,12 @@ namespace TicTacToeGame.Console.Test.States
         }
 
         [Test]
-        public void IfUserChoosesAI_PlayingStateCurrentPlayerIsSettedWithPlayer2()
+        public void IfUserChoosesAI_PlayingStateCurrentPlayerIsSettedWithPlayer1()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns(AI_PLAYER);
             asking4PlayerState.Evaluate();
 
-            ((PlayingState)tttConsoleRunner.State).CurrentPlayer.Should().BeOfType<AIPlayer>();
+            ((PlayingState)tttConsoleRunner.State).CurrentPlayer.Should().Be(player1.Object);
         }
 
         [Test]

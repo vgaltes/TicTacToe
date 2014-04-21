@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using TicTacToeGame.Models;
 
 namespace TicTacToeGame.Console.States
 {
     public class AskingForPlayerState : TicTacToeConsoleRunnerState
     {
+        int[] allowedPlayers = new int[2] { 1, 2 };
         public AskingForPlayerState(TicTacToeConsoleRunner ticTacTeoConsoleRunner)
         {
             TicTacToeConsoleRunner = ticTacTeoConsoleRunner;
@@ -20,12 +22,11 @@ namespace TicTacToeGame.Console.States
             try
             {
                 DrawInputMessages();
-                string userSelected = TicTacToeConsoleRunner.consoleIO.ReadLine();
-                int intUserInput = GetUserInputAsInteger(userSelected);
+                int initialPlayer = GetInitialPlayerSelectedByUser();
 
-                if (Enum.IsDefined(typeof(CellType), intUserInput))
+                if (allowedPlayers.Contains(initialPlayer))
                 {
-                    SetInitialPlayer(userSelected);
+                    SetInitialPlayer(initialPlayer);
                 }
                 else
                 {
@@ -47,17 +48,16 @@ namespace TicTacToeGame.Console.States
             TicTacToeConsoleRunner.consoleIO.Write("> ");
         }
 
-        private int GetUserInputAsInteger(string userInput)
+        private int GetInitialPlayerSelectedByUser()
         {
-            return int.Parse(userInput);
+            string userSelected = TicTacToeConsoleRunner.consoleIO.ReadLine();
+            return int.Parse(userSelected);
         }
 
-        private void SetInitialPlayer(string userInput)
+        private void SetInitialPlayer(int initialPlayerSelected)
         {
-            CellType userToStart;
-            Enum.TryParse<CellType>(userInput, out userToStart);
-            TicTacToeConsoleRunner.ticTacToe.SetInitialPlayer(userToStart);
-            TicTacToeConsoleRunner.State = new PlayingState(this);
+            
+            TicTacToeConsoleRunner.State = new PlayingState(this, initialPlayerSelected);
         }
     }
 }
