@@ -35,11 +35,11 @@ namespace TicTacToeGame.Console.States
         public override void Evaluate()
         {
             WriteInfoFromPreviousStep();
-                        
+
             DrawBoard();
 
             string userInput = this.currentPlayer.AskForUserInput();
-            
+
 
             // string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
 
@@ -49,14 +49,21 @@ namespace TicTacToeGame.Console.States
             }
             else
             {
-                this.currentPlayer.Move(userInput);
-                if (HasToChangeState())
+                try
                 {
-                    SetNextState();
+                    this.currentPlayer.Move(userInput);
+                    if (HasToChangeState())
+                    {
+                        SetNextState();
+                    }
+                    else
+                    {
+                        SetNextPlayer();
+                    }
                 }
-                else
+                catch (NotAllowedMovementException)
                 {
-                    SetNextPlayer();
+                    this.InfoFromPreviousStep = Resources.NotAllowedMovement;
                 }
 
                 /*try
@@ -109,7 +116,7 @@ namespace TicTacToeGame.Console.States
             nextStates.Add(TicTacToeState.Draw, typeof(DrawState));
         }
 
-        
+
 
         private void WriteInfoFromPreviousStep()
         {
