@@ -37,12 +37,8 @@ namespace TicTacToeGame.Console.States
         {
             TicTacToeConsoleRunner.DrawHeader();
             WriteInfoFromPreviousStep();
-
             DrawBoard();
-
-            TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
-            TicTacToeConsoleRunner.consoleIO.WriteHorizontalSeparator();
-            string userInput = this.CurrentPlayer.AskForUserInput();
+            string userInput = AskForUserInput();
 
             if (userInput == QUIT_COMMAND)
             {
@@ -54,19 +50,23 @@ namespace TicTacToeGame.Console.States
                 {
                     this.CurrentPlayer.Move(userInput);
                     if (HasToChangeState())
-                    {
                         SetNextState();
-                    }
                     else
-                    {
                         SetNextPlayer();
-                    }
                 }
                 catch (NotAllowedMovementException)
                 {
                     this.InfoFromPreviousStep = Resources.NotAllowedMovement;
                 }
             }
+        }
+
+        private string AskForUserInput()
+        {
+            TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
+            TicTacToeConsoleRunner.consoleIO.WriteHorizontalSeparator();
+            string userInput = this.CurrentPlayer.AskForUserInput();
+            return userInput;
         }
 
         private void SetNextPlayer()
