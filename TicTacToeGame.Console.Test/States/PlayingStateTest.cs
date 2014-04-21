@@ -12,13 +12,8 @@ namespace TicTacToeGame.Console.Test.States
     public class PlayingStateTest
     {
         private const string VALID_COORDINATES_AS_STRING = "1,1";
-        private const string ANOTHER_VALID_COORDINATES_AS_STRING = "2,2";
-        
         private const string QUIT_COMMAND = "q!";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
-        private CellCoordinates ANOTHER_VALID_COORDINATES = new CellCoordinates(2, 2);
-        
-        private const string NON_NUMERIC_COORDINATES = "a,a";
         private const string BOARD_REPRESENTATION = "boardRepresentation";
 
         Mock<ITicTacToe> ticTacToe;
@@ -142,17 +137,5 @@ namespace TicTacToeGame.Console.Test.States
 
             tttConsoleRunner.State.Should().BeOfType<DrawState>();
         }
-
-        /*
-        [Test]
-        public void GivenTheStateAfterPlayingIsPlaying_CallAIMove()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
-            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
-
-            playingState.Evaluate();
-
-            ticTacToe.Verify(ttt => ttt.AIMove(), Times.Once());
-        }*/
     }
 }
