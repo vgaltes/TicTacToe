@@ -4,6 +4,7 @@ using TicTacToeGame.Console.States;
 using TicTacToeGame.Models;
 using FluentAssertions;
 using TicTacToeGame.Console.Players;
+using TicTacToeGame.Exceptions;
 
 namespace TicTacToeGame.Console.Test.States
 {
@@ -77,22 +78,7 @@ namespace TicTacToeGame.Console.Test.States
             player2.Verify(p => p.AskForUserInput(), Times.Once());
             player2.Verify(p => p.Move(VALID_COORDINATES_AS_STRING));
         }
-
-        /*
         
-
-        
-
-        [Test]
-        public void GivenAValidCoordinates_CallOpponentMoveWithTheCoordinatesTransaltedFromUserInput()
-        {
-            consoleIO.Setup(c => c.ReadLine()).Returns(ANOTHER_VALID_COORDINATES_AS_STRING);
-
-            playingState.Evaluate();
-
-            ticTacToe.Verify(ttt => ttt.HumanMove(ANOTHER_VALID_COORDINATES), Times.Once());
-        }*/
-
         [Test]
         public void GivenUserWritesQuit_StateIsQuitGameState()
         {
@@ -101,6 +87,16 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             tttConsoleRunner.State.Should().BeOfType<QuitGameState>();
+        }
+
+        [Test]
+        public void GivenPlayerThrowsNotAllowedMovementException_ExtraInfoIsSettedWithTheError()
+        {
+            player1.Setup(p => p.Move(It.IsAny<string>())).Throws<NotAllowedMovementException>();
+
+            playingState.Evaluate();
+
+            tttConsoleRunner.State.InfoFromPreviousStep.Should().Be(Resources.NotAllowedMovement);
         }
 
         /*
