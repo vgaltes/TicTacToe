@@ -16,9 +16,6 @@ namespace TicTacToeGame.Console.States
 
         private Dictionary<TicTacToeState, Type> nextStates;
 
-        private Player player1;
-        private Player player2;
-
         public PlayingState(TicTacToeConsoleRunnerState state)
         {
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
@@ -26,11 +23,9 @@ namespace TicTacToeGame.Console.States
             SetNextStates();
         }
 
-        public PlayingState(TicTacToeConsoleRunner tttConsoleRunner, Player player1, Player player2)
+        public PlayingState(TicTacToeConsoleRunner tttConsoleRunner)
         {
             this.TicTacToeConsoleRunner = tttConsoleRunner;
-            this.player1 = player1;
-            this.player2 = player2;
             SetNextStates();
         }
 
@@ -40,7 +35,7 @@ namespace TicTacToeGame.Console.States
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.WriteCoordinates);
             DrawBoard();
 
-            player1.Move();
+            this.TicTacToeConsoleRunner.player1.Move();
 
             string userInput = this.TicTacToeConsoleRunner.consoleIO.ReadLine();
 

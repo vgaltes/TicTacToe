@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TicTacToeGame.Console.States;
 using FluentAssertions;
+using TicTacToeGame.Console.Players;
 
 namespace TicTacToeGame.Console.Test.States
 {
@@ -13,6 +14,8 @@ namespace TicTacToeGame.Console.Test.States
         Mock<ConsoleIO> consoleIO;
         TicTacToeConsoleRunner tttConsoleRunner;
         AIWinsState aiWinsState;
+        Mock<Player> player1;
+        Mock<Player> player2;
 
         [SetUp]
         public void TestSetUp()
@@ -20,7 +23,10 @@ namespace TicTacToeGame.Console.Test.States
             ticTacToe = new Mock<ITicTacToe>();
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
-            tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
+            player1 = new Mock<Player>();
+            player2 = new Mock<Player>();
+            tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+                ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
 
             aiWinsState = new AIWinsState(tttConsoleRunner);
             tttConsoleRunner.State = aiWinsState;

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleIO.cs" />
+    <Compile Include="Players\AIPlayer.cs" />
+    <Compile Include="Players\HumanPlayer.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TicTacToeGame.Console.Players;
 using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame.Console
@@ -11,7 +12,8 @@ namespace TicTacToeGame.Console
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
             var consoleIO = new ConsoleIO();
 
-            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe, ticTacToeBoardDrawer, consoleIO);
+            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe, ticTacToeBoardDrawer, 
+                consoleIO, new HumanPlayer(), new AIPlayer());
 
             ticTacToeConsoleRunner.Run();
         }

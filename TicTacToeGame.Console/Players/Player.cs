@@ -3,5 +3,7 @@
     public interface Player
     {
         object Move();
+
+        object AskForUserInput();
     }
 }

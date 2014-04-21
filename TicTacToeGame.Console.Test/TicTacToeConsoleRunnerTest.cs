@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
+using TicTacToeGame.Console.Players;
 using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
 
@@ -22,6 +23,8 @@ namespace TicTacToeGame.Console.Test
         Mock<ITicTacToe> ticTacToe;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
+        Mock<Player> player1;
+        Mock<Player> player2;
         TicTacToeConsoleRunner ticTacToeConsoleRunner;
 
         [SetUp]
@@ -30,11 +33,14 @@ namespace TicTacToeGame.Console.Test
             ticTacToe = new Mock<ITicTacToe>();
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
+            player1 = new Mock<Player>();
+            player2 = new Mock<Player>();
 
             ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
             ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
 
-            ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
+            ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+                ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
         }
 
         [Test]

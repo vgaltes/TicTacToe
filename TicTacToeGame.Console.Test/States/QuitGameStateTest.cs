@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TicTacToeGame.Console.States;
 using FluentAssertions;
+using TicTacToeGame.Console.Players;
 
 namespace TicTacToeGame.Console.Test.States
 {
@@ -14,7 +15,11 @@ namespace TicTacToeGame.Console.Test.States
             var ticTacToe = new Mock<ITicTacToe>();
             var ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             var consoleIO = new Mock<ConsoleIO>();
-            var tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
+            var player1 = new Mock<Player>();
+            var player2 = new Mock<Player>();
+
+            var tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+                ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
             
             var quitGameState = new QuitGameState(tttConsoleRunner);
             tttConsoleRunner.State = quitGameState;

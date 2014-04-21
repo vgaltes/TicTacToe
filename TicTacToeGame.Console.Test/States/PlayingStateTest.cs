@@ -36,10 +36,13 @@ namespace TicTacToeGame.Console.Test.States
             ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
-            tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, ticTacToeBoardDrawer.Object, consoleIO.Object);
             player1 = new Mock<Player>();
             player2 = new Mock<Player>();
-            playingState = new PlayingState(tttConsoleRunner, player1.Object, player2.Object);
+            tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+                ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
+            player1 = new Mock<Player>();
+            player2 = new Mock<Player>();
+            playingState = new PlayingState(tttConsoleRunner);
             tttConsoleRunner.State = playingState;
         }
 
@@ -50,6 +53,15 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             player1.Verify(p => p.Move());
+        }
+
+        [Test]
+        public void WhenMovingForTheFirstTime_CallPlayer1AskForUserInput()
+        {
+            consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
+            playingState.Evaluate();
+
+            player1.Verify(p => p.AskForUserInput());
         }
 
         [Test]
