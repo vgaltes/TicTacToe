@@ -20,6 +20,7 @@ namespace TicTacToeGame.Console.Test.Players
         {
             consoleIO = new Mock<ConsoleIO>();
             ticTacToe = new Mock<ITicTacToe>();
+            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
             humanPlayer = new HumanPlayer(consoleIO.Object, ticTacToe.Object);
         }
 
