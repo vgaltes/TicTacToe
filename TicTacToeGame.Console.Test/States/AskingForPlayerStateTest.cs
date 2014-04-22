@@ -15,7 +15,7 @@ namespace TicTacToeGame.Console.Test.States
         private const string INVALID_OPTION = "3";
         private const string NON_INTEGER_OPTION = "a";
 
-        Mock<ITicTacToe>  ticTacToe;
+        Mock<Board>  board;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
         TicTacToeConsoleRunner tttConsoleRunner;
@@ -26,12 +26,12 @@ namespace TicTacToeGame.Console.Test.States
         [SetUp]
         public void TestSetUp()
         {
-            ticTacToe = new Mock<ITicTacToe>();
+            board = new Mock<Board>();
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
             player1 = new Mock<Player>();
             player2 = new Mock<Player>();
-            tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+            tttConsoleRunner = new TicTacToeConsoleRunner(board.Object, 
                 ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
 
             asking4PlayerState = new AskingForPlayerState(tttConsoleRunner);

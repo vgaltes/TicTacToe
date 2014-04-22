@@ -56,7 +56,6 @@ namespace TicTacToeGame.Console.States
 
         private void SetInitialPlayer(int initialPlayerSelected)
         {
-            
             TicTacToeConsoleRunner.State = new PlayingState(this, initialPlayerSelected);
         }
     }

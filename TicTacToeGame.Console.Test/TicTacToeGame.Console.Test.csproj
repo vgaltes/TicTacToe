@@ -93,6 +93,10 @@
       <Project>{6c88dd5c-8d2d-4c7a-8576-d2405a2f0c5d}</Project>
       <Name>TicTacToeGame.Console</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TicTacToeGame.Test\TicTacToeGame.Test.csproj">
+      <Project>{28fca8dc-fb97-4f4b-97ed-4e491cb53469}</Project>
+      <Name>TicTacToeGame.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TicTacToeGame\TicTacToeGame.csproj">
       <Project>{1d4d550b-159e-4061-a3c0-e73b244b9aec}</Project>
       <Name>TicTacToeGame</Name>

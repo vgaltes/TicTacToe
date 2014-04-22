@@ -21,7 +21,7 @@ namespace TicTacToeGame.Console.States
         {
             TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.YouWin);
             TicTacToeConsoleRunner.consoleIO.ReadKey();
-            TicTacToeConsoleRunner.ticTacToe.Reset();
+            TicTacToeConsoleRunner.board.Reset();
             TicTacToeConsoleRunner.State = new AskingForPlayerState(this);
         }
     }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TicTacToeGame.Exceptions;
 using TicTacToeGame.Models;
-using TicTacToeGame.Strategies;
 
 namespace TicTacToeGame
 {
@@ -12,72 +11,122 @@ namespace TicTacToeGame
         public const int SIZE = 3;
         public const int CENTER_ROW = 1;
         public const int CENTER_COLUMN = 1;
+        public const char EMPTY_CELL = ' ';
 
-        private CellType[] Cells { get; set; }
+        private char[] Cells { get; set; }
 
-        private List<Line> lines = new List<Line>();
-        private Dictionary<CellCoordinates, CellCoordinates> cornersAndOpposites
-            = new Dictionary<CellCoordinates, CellCoordinates>();
-        private List<CellCoordinates> sides = new List<CellCoordinates>();
+        private List<int[]> lines = new List<int[]>();
+        private List<int[]> cornersAndOpposites = new List<int[]>();
+        private List<int> sides = new List<int>();
+
+        public virtual TicTacToeBoardState State { get; set; }
+        public virtual char Winner{get;set;}
 
         public Board()
         {
-            Cells = new CellType[SIZE * SIZE];
+            Cells = new char[SIZE * SIZE];
+            for (int i = 0; i < SIZE * SIZE; i++)
+                Cells[i] = EMPTY_CELL;
 
-            AddRows();
-            AddColumns();
-            AddDiagonals();
+            AddLines();
             AddCornersAndOpposites();
             AddSides();
+
+            State = TicTacToeBoardState.Playing;
+            Winner = EMPTY_CELL;
         }
 
-        private void AddRows()
+        private void AddLines()
         {
-            lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(0, 1), new CellCoordinates(0, 2)));
-            lines.Add(new Line(new CellCoordinates(1, 0), new CellCoordinates(1, 1), new CellCoordinates(1, 2)));
-            lines.Add(new Line(new CellCoordinates(2, 0), new CellCoordinates(2, 1), new CellCoordinates(2, 2)));
-        }
+            lines.Add(new int[3] { 0, 1, 2 });
+            lines.Add(new int[3] { 3, 4, 5 });
+            lines.Add(new int[3] { 6, 7, 8 });
 
-        private void AddColumns()
-        {
-            lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(1, 0), new CellCoordinates(2, 0)));
-            lines.Add(new Line(new CellCoordinates(0, 1), new CellCoordinates(1, 1), new CellCoordinates(2, 1)));
-            lines.Add(new Line(new CellCoordinates(0, 2), new CellCoordinates(1, 2), new CellCoordinates(2, 2)));
-        }
+            lines.Add(new int[3] { 0, 3, 6 });
+            lines.Add(new int[3] { 1, 4, 7 });
+            lines.Add(new int[3] { 2, 5, 8 });
 
-        private void AddDiagonals()
-        {
-            lines.Add(new Line(new CellCoordinates(0, 0), new CellCoordinates(1, 1), new CellCoordinates(2, 2)));
-            lines.Add(new Line(new CellCoordinates(0, 2), new CellCoordinates(1, 1), new CellCoordinates(2, 0)));
+            lines.Add(new int[3] { 0, 4, 8 });
+            lines.Add(new int[3] { 2, 4, 6 });
         }
 
         private void AddCornersAndOpposites()
         {
-            cornersAndOpposites.Add(new CellCoordinates(0, 0), new CellCoordinates(2, 2));
-            cornersAndOpposites.Add(new CellCoordinates(0, 2), new CellCoordinates(2, 0));
-            cornersAndOpposites.Add(new CellCoordinates(2, 0), new CellCoordinates(0, 2));
-            cornersAndOpposites.Add(new CellCoordinates(2, 2), new CellCoordinates(0, 0));
+            cornersAndOpposites.Add(new int[2] { 0, 8 });
+            cornersAndOpposites.Add(new int[2] { 2, 6 });
+            cornersAndOpposites.Add(new int[2] { 6, 2 });
+            cornersAndOpposites.Add(new int[2] { 8, 0 });
         }
 
         private void AddSides()
         {
-            sides.Add(new CellCoordinates(0, 1));
-            sides.Add(new CellCoordinates(1, 0));
-            sides.Add(new CellCoordinates(1, 2));
-            sides.Add(new CellCoordinates(2, 1));
+            sides.AddRange(new int[4] { 1, 3, 5, 7 });
         }
 
-        public void FillOpponentCell(CellCoordinates cellCoordinate)
+        public virtual void FillCell(CellCoordinates cellCoordinate, char mark)
         {
-            if (AreCoordinatesOutsideTheBoard(cellCoordinate) || IsCellNotEmpty(cellCoordinate) )
+            if (State != TicTacToeBoardState.Playing ||
+                AreCoordinatesOutsideTheBoard(cellCoordinate) || IsCellNotEmpty(cellCoordinate))
                 throw new NotAllowedMovementException();
 
-            FillCellWithType(CellType.Opponent, cellCoordinate);
+            Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] = mark;
+            CheckForWinner();
+        }
+
+        public virtual void FillCell(int cellCoordinate, char mark)
+        {
+            if (State != TicTacToeBoardState.Playing ||
+                AreCoordinatesOutsideTheBoard(cellCoordinate) || IsCellNotEmpty(cellCoordinate))
+                throw new NotAllowedMovementException();
+
+            Cells[cellCoordinate] = mark;
+            CheckForWinner();
+        }
+
+        private void CheckForWinner()
+        {
+            var numberOfCellsToWin = Size;
+            
+            foreach (var line in lines)
+            {
+                var numberOfCells = 1;
+                var cellType = Cells[line[0]];
+                if ( cellType != EMPTY_CELL)
+                {
+                    for ( int i = 1; i < SIZE; i++)
+                    {
+                        if (IsCellOfType(cellType, line[i]))
+                            numberOfCells++;
+                    }
+
+                    if (numberOfCells == numberOfCellsToWin)
+                    {
+                        State = TicTacToeBoardState.SomeoneWins;
+                        Winner = cellType;
+                        break;
+                    }
+                }
+            }                
+        }
+
+        public bool IsCellEmpty(CellCoordinates cellCoordinate)
+        {
+            return Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] == EMPTY_CELL;
+        }
+
+        public bool IsCellEmpty(int cellCoordinate)
+        {
+            return Cells[cellCoordinate] == EMPTY_CELL;
         }
 
         private bool IsCellNotEmpty(CellCoordinates cellCoordinate)
         {
-            return Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] != CellType.Empty;
+            return !IsCellEmpty(cellCoordinate);
+        }
+
+        private bool IsCellNotEmpty(int cellCoordinate)
+        {
+            return !IsCellEmpty(cellCoordinate);
         }
 
         private bool AreCoordinatesOutsideTheBoard(CellCoordinates cellCoordinate)
@@ -85,61 +134,55 @@ namespace TicTacToeGame
             return (cellCoordinate.Row >= SIZE || cellCoordinate.Column >= SIZE);
         }
 
-        public virtual void FillAICell(CellCoordinates cellCoordinate)
+        private bool AreCoordinatesOutsideTheBoard(int cellCoordinate)
         {
-            FillCellWithType(CellType.AI, cellCoordinate);
+            return (cellCoordinate >= SIZE * SIZE);
         }
 
-        public void FillCellWithType(CellType cell, CellCoordinates cellCoordinate)
+        public bool IsCellOfType(char mark, CellCoordinates cellCoordinate)
         {
-            if (cellCoordinate.IsValid)
-                Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] = cell;
+            return Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] == mark;
         }
 
-        public bool IsCellOfType(CellType cell, CellCoordinates cellCoordinate)
+        public bool IsCellOfType(char mark, int cellCoordinate)
         {
-            return Cells[cellCoordinate.Row * SIZE + cellCoordinate.Column] == cell;
+            return Cells[cellCoordinate] == mark;
         }
 
-        public int CountCellsOfTypeInLine(CellType cellType, Line line)
+        public int CountCellsOfTypeInLine(char mark, int[] line)
         {
             int cellCount = 0;
 
-            foreach (var coordinate in line.Coordinates)
+            foreach (var coordinate in line)
             {
-                if (Cells[coordinate.Row * SIZE + coordinate.Column] == cellType)
+                if (Cells[coordinate] == mark)
                     cellCount++;
             }
 
             return cellCount;
         }
 
-        public IEnumerable<CellCoordinates> EmptyCells
+        public IEnumerable<int> EmptyCells
         {
             get
             {
-                for (int row = 0; row < SIZE; row++)
+                for ( int i = 0; i < SIZE * SIZE; i++)
                 {
-                    for (int column = 0; column < SIZE; column++)
-                    {
-                        if (Cells[row * SIZE + column] == CellType.Empty)
-                        {
-                            yield return new CellCoordinates(row, column);
-                        }
-                    }
+                    if (IsCellEmpty(i))
+                        yield return i;
                 }
             }
         }
 
-        public IEnumerable<Line> Lines
+        public IEnumerable<int[]> Lines
         {
             get
             {
-                return lines.AsEnumerable<Line>();
+                return lines;
             }
         }
 
-        public Dictionary<CellCoordinates, CellCoordinates> CornersAndOpposites
+        public List<int[]> CornersAndOpposites
         {
             get
             {
@@ -147,30 +190,30 @@ namespace TicTacToeGame
             }
         }
 
-        public IEnumerable<CellCoordinates> Corners
+        public IEnumerable<int> Corners
         {
             get
             {
                 foreach (var cornerAndOpposite in cornersAndOpposites)
                 {
-                    yield return new CellCoordinates(cornerAndOpposite.Key.Row, cornerAndOpposite.Key.Column);
+                    yield return cornerAndOpposite[0];
                 }
             }
         }
 
-        public IEnumerable<CellCoordinates> Sides
+        public IEnumerable<int> Sides
         {
             get
             {
-                return sides.AsEnumerable<CellCoordinates>();
+                return sides.AsEnumerable();
             }
         }
 
-        public Board GetCopyWithExtraCellOfType(CellType cell, CellCoordinates cellCoordinate)
+        public Board GetCopyWithExtraCellOfType(char mark, int cellCoordinate)
         {
             var imaginaryBoard = new Board();
             Array.Copy(Cells, imaginaryBoard.Cells, Cells.Length);
-            imaginaryBoard.FillCellWithType(cell, cellCoordinate);
+            imaginaryBoard.FillCell(cellCoordinate, mark);
 
             return imaginaryBoard;
         }
@@ -178,16 +221,16 @@ namespace TicTacToeGame
         public bool IsCenterEmpty()
         {
             var centerCoordinate = new CellCoordinates(CENTER_ROW, CENTER_COLUMN);
-            return IsCellOfType(CellType.Empty, centerCoordinate);
+            return IsCellOfType(' ', centerCoordinate);
         }
 
-        public void FillCenterWithAICell()
+        public void FillCenterWithCell(char mark)
         {
             var centerCoordinate = new CellCoordinates(CENTER_ROW, CENTER_COLUMN);
-            FillAICell(centerCoordinate);
+            FillCell(centerCoordinate, mark);
         }
 
-        public CellType this[int index]
+        public char this[int index]
         {
             get
             {
@@ -202,19 +245,19 @@ namespace TicTacToeGame
                 return false;
 
             for (int i = 0; i < SIZE * SIZE; i++)
-                    if (Cells[i] != boardToCompare[i])
+                if (Cells[i] != boardToCompare[i])
                         return false;
 
             return true;
         }
         
-        internal bool HasLessOpponentCellsThan(int numberOfCells)
+        internal bool HasLessCellsOfTypeThan(char mark, int numberOfCells)
         {
             int opponentCells = 0;
 
             for (int i = 0; i < SIZE * SIZE; i++)
-                    if (Cells[i] == CellType.Opponent)
-                        opponentCells++;
+                if ( Cells[i] == mark)
+                    opponentCells++;
 
             return opponentCells < numberOfCells;
         }
@@ -227,10 +270,13 @@ namespace TicTacToeGame
             }
         }
 
-        internal void Reset()
+        public virtual void Reset()
         {
             for (int i = 0; i < SIZE * SIZE; i++)
-                Cells[i] = CellType.Empty;
+                Cells[i] = EMPTY_CELL;
+
+            State = TicTacToeBoardState.Playing;
+            Winner = EMPTY_CELL;
         }
     }
 }

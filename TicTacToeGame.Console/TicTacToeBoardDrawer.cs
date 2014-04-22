@@ -26,7 +26,7 @@ namespace TicTacToeGame.Console
 
             for (int column = 0; column < board.Size; column++)
             {
-                boardRepresentation += Draw(board[row * board.Size + column]);
+                boardRepresentation += board[row * board.Size + column];
                 if (IsNotLastColumn(board, column))
                     boardRepresentation += COLUMNS_SEPARATOR;
             }
@@ -60,15 +60,6 @@ namespace TicTacToeGame.Console
         private static bool IsNotLastRow(Board board, int row)
         {
             return row < board.Size - 1;
-        }
-
-        private string Draw(CellType cell)
-        {
-            if (cell == CellType.AI)
-                return @"X";
-            if (cell == CellType.Opponent)
-                return @"O";
-            return @" ";
         }
     }
 }

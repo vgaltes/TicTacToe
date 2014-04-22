@@ -12,7 +12,10 @@ namespace TicTacToeGame.Test.Strategies
     [TestFixture]
     public class BlockStrategyTest
     {
-        BlockStrategy blockStrategy = new BlockStrategy();
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+
+        BlockStrategy blockStrategy = new BlockStrategy(AI_MARK, OPPONENTS_MARK);
 
         [Test]
         public void GivenThereAreTwoMarksInARowStartingInFirstCorner_CanHandleReturnsTrue()
@@ -22,7 +25,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(0, 1)
             });
 
-            var canHandle = blockStrategy.CanHandle(initialBoard);
+            var canHandle = blockStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -36,7 +39,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.AIFromCoordinates(0,2)
             });
 
-            var canHandle = blockStrategy.CanHandle(initialBoard);
+            var canHandle = blockStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -49,7 +52,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(0, 2)
             });
 
-            var canHandle = blockStrategy.CanHandle(initialBoard);
+            var canHandle = blockStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -63,7 +66,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.AIFromCoordinates(0,0)
             });
 
-            var canHandle = blockStrategy.CanHandle(initialBoard);
+            var canHandle = blockStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -76,7 +79,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(1, 1)
             });
 
-            var canHandle = blockStrategy.CanHandle(initialBoard);
+            var canHandle = blockStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -127,10 +130,11 @@ namespace TicTacToeGame.Test.Strategies
                 endMark
              });
 
-            initialBoard.FillCellWithType((CellType)Enum.Parse(typeof(CellType), line.EvaluateValue),
-                new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
+            var cellValue = line.EvaluateValue == "AI" ? AI_MARK : ' ';
 
-            var canHandle = blockStrategy.CanHandle(initialBoard);
+            initialBoard.FillCell(new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate), cellValue);
+
+            var canHandle = blockStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().Be(line.ExpectedCanHandleValue);
         }
@@ -147,8 +151,8 @@ namespace TicTacToeGame.Test.Strategies
 
             if (line.ExpectedCanHandleValue)
             {
-                blockStrategy.Update(initialBoard);
-                initialBoard.IsCellOfType(CellType.AI, new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
+                blockStrategy.Update(initialBoard, AI_MARK);
+                initialBoard.IsCellOfType(AI_MARK, new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
             }
         }
 

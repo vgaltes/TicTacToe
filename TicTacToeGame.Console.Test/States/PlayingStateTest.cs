@@ -15,8 +15,10 @@ namespace TicTacToeGame.Console.Test.States
         private const string QUIT_COMMAND = "q!";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
         private const string BOARD_REPRESENTATION = "boardRepresentation";
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
 
-        Mock<ITicTacToe> ticTacToe;
+        Mock<Board> board;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
         Mock<Player> player1;
@@ -27,14 +29,13 @@ namespace TicTacToeGame.Console.Test.States
         [SetUp]
         public void TestSetUp()
         {
-            ticTacToe = new Mock<ITicTacToe>();
-            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
+            board = new Mock<Board>();
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
             player1 = new Mock<Player>();
             player2 = new Mock<Player>();
 
-            tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+            tttConsoleRunner = new TicTacToeConsoleRunner(board.Object, 
                 ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
             
             playingState = new PlayingState(tttConsoleRunner);
@@ -47,7 +48,7 @@ namespace TicTacToeGame.Console.Test.States
             player1.Setup(p => p.AskForUserInput()).Returns(VALID_COORDINATES_AS_STRING);
             playingState.Evaluate();
 
-            player1.Verify(p => p.Move(VALID_COORDINATES_AS_STRING));
+            player1.Verify(p => p.Move(board.Object, VALID_COORDINATES_AS_STRING));
         }
 
         [Test]
@@ -68,7 +69,7 @@ namespace TicTacToeGame.Console.Test.States
             playingState.Evaluate();
 
             player2.Verify(p => p.AskForUserInput(), Times.Once());
-            player2.Verify(p => p.Move(VALID_COORDINATES_AS_STRING));
+            player2.Verify(p => p.Move(board.Object, VALID_COORDINATES_AS_STRING));
         }
         
         [Test]
@@ -84,7 +85,7 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void GivenPlayerThrowsNotAllowedMovementException_ExtraInfoIsSettedWithTheError()
         {
-            player1.Setup(p => p.Move(It.IsAny<string>())).Throws<NotAllowedMovementException>();
+            player1.Setup(p => p.Move(board.Object, It.IsAny<string>())).Throws<NotAllowedMovementException>();
 
             playingState.Evaluate();
 
@@ -107,7 +108,10 @@ namespace TicTacToeGame.Console.Test.States
         public void GivenTheStateAfterPlayingIsAIWins_TheNewStateIsAIWinsState()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
-            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.AIWins);
+            board.SetupGet(b => b.State).Returns(TicTacToeBoardState.SomeoneWins);
+            board.SetupGet(b => b.Winner).Returns(AI_MARK);
+            player1.SetupGet(p => p.Mark).Returns(AI_MARK);
+            player2.SetupGet(p => p.Mark).Returns(OPPONENTS_MARK);
 
             playingState.Evaluate();
 
@@ -118,7 +122,10 @@ namespace TicTacToeGame.Console.Test.States
         public void GivenTheStateAfterPlayingIsOpponentWins_TheNewStateIsHumanWinsState()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
-            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.OpponentWins);
+            board.SetupGet(b => b.State).Returns(TicTacToeBoardState.SomeoneWins);
+            board.SetupGet(b => b.Winner).Returns(OPPONENTS_MARK);
+            player1.SetupGet(p => p.Mark).Returns(AI_MARK);
+            player2.SetupGet(p => p.Mark).Returns(OPPONENTS_MARK);
 
             playingState.Evaluate();
 
@@ -129,7 +136,7 @@ namespace TicTacToeGame.Console.Test.States
         public void GivenTheStateAfterPlayingIsDraw_TheNewStateIsDrawState()
         {
             consoleIO.Setup(c => c.ReadLine()).Returns(VALID_COORDINATES_AS_STRING);
-            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Draw);
+            board.SetupGet(b => b.State).Returns(TicTacToeBoardState.Draw);
 
             playingState.Evaluate();
 

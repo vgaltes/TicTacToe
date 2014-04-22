@@ -9,6 +9,7 @@ namespace TicTacToeGame.Console
     {
         private const string HORIZONTAL_SEPARATOR = "-----------------------------------------------";
         private const string VERTICAL_SEPARATOR = "|";
+        private const string PROMPT = "> ";
 
         public virtual void WriteLine(string line)
         {
@@ -38,6 +39,11 @@ namespace TicTacToeGame.Console
         internal void WriteHorizontalSeparator()
         {
             System.Console.WriteLine(HORIZONTAL_SEPARATOR);
+        }
+
+        internal void WritePrompt()
+        {
+            System.Console.Write(PROMPT);
         }
         
         internal void SetForegroundColor(ConsoleColor color)

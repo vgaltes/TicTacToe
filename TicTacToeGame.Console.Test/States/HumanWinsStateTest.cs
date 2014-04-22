@@ -9,7 +9,7 @@ namespace TicTacToeGame.Console.Test.States
     [TestFixture]
     public class HumanWinsStateTest
     {
-        Mock<ITicTacToe> ticTacToe;
+        Mock<Board> board;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
         TicTacToeConsoleRunner tttConsoleRunner;
@@ -20,13 +20,13 @@ namespace TicTacToeGame.Console.Test.States
         [SetUp]
         public void TestSetUp()
         {
-            ticTacToe = new Mock<ITicTacToe>();
+            board = new Mock<Board>();
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
             player1 = new Mock<Player>();
             player2 = new Mock<Player>();
 
-            tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+            tttConsoleRunner = new TicTacToeConsoleRunner(board.Object, 
                 ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
 
             humanWinsState = new HumanWinsState(tttConsoleRunner);
@@ -55,7 +55,7 @@ namespace TicTacToeGame.Console.Test.States
         {
             humanWinsState.Evaluate();
 
-            ticTacToe.Verify(ttt => ttt.Reset(), Times.Once());
+            board.Verify(b => b.Reset(), Times.Once());
         }
     }
 }

@@ -4,25 +4,29 @@ namespace TicTacToeGame.Strategies
 {
     public class FreeCornerStrategy : TicTacToeStrategy
     {
-        public bool CanHandle(Board board)
+        private const int INVALID_COORDINATES = -1;
+
+        public FreeCornerStrategy(char myMark, char opponentsMark) : base(myMark, opponentsMark) { }
+
+        public override bool CanHandle(Board board, char mark)
         {
-            return GetFirstEmptyCellCoordinatesInACorner(board).IsValid;
+            return GetFirstEmptyCellCoordinatesInACorner(board) != INVALID_COORDINATES;
         }
 
-        public void Update(Board board)
+        public override void Update(Board board, char mark)
         {
-            board.FillAICell(GetFirstEmptyCellCoordinatesInACorner(board));
+            board.FillCell(GetFirstEmptyCellCoordinatesInACorner(board), mark);
         }
 
-        private CellCoordinates GetFirstEmptyCellCoordinatesInACorner(Board board)
+        private int GetFirstEmptyCellCoordinatesInACorner(Board board)
         {
             foreach (var corner in board.Corners)
             {
-                if (board.IsCellOfType(CellType.Empty, corner))
+                if (board.IsCellOfType(' ', corner))
                     return corner;
             }
 
-            return CellCoordinates.InvalidCoordinates;
+            return INVALID_COORDINATES;
         }
     }
 }

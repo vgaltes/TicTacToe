@@ -46,8 +46,7 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Exceptions\NotAllowedMovementException.cs" />
-    <Compile Include="ITicTacToe.cs" />
-    <Compile Include="Models\CellType.cs" />
+    <Compile Include="Models\TicTacToeBoardState.cs" />
     <Compile Include="Models\TicTacToeState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategies\BlockForkStrategy.cs" />
@@ -58,13 +57,11 @@
     </Compile>
     <Compile Include="Strategies\FreeCornerStrategy.cs" />
     <Compile Include="Strategies\FreeSideStrategy.cs" />
-    <Compile Include="Models\Line.cs" />
     <Compile Include="Strategies\EvaluateLineStrategy.cs" />
     <Compile Include="Models\CellCoordinates.cs" />
     <Compile Include="Strategies\OppositeCornerStrategy.cs" />
     <Compile Include="Strategies\TicTacToeStrategy.cs" />
     <Compile Include="Strategies\WinStrategy.cs" />
-    <Compile Include="TicTacToe.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

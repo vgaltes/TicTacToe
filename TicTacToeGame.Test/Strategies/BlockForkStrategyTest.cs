@@ -8,13 +8,15 @@ namespace TicTacToeGame.Test.Strategies
     [TestFixture]
     public class BlockForkStrategyTest
     {
-        [Test]
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+        BlockForkStrategy blockForkStrategy = new BlockForkStrategy(AI_MARK, OPPONENTS_MARK);
+
+         [Test]
         public void GivenThereIsAnAICellInTheFirstCorner_CanHandleReturnsFalse()
         {
-            var blockForkStrategy = new BlockForkStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
-            var canHandle = blockForkStrategy.CanHandle(initialBoard);
+            var canHandle = blockForkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -22,8 +24,6 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereAreCellsInTheFirstQuarter_CanHandleReturnsFalse()
         {
-            var blockForkStrategy = new BlockForkStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.AIFromCoordinates(0, 0),
                 Mark.OpponentFromCoordinates(0, 1),
@@ -31,7 +31,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(1, 1),
             });
 
-            var canHandle = blockForkStrategy.CanHandle(initialBoard);
+            var canHandle = blockForkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -39,14 +39,12 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnAICellInTheSecondCornerAndAnOpponentCellInTheFirstCorner_CanHandleReturnsFalse()
         {
-            var blockForkStrategy = new BlockForkStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.OpponentFromCoordinates(0,0),
                 Mark.AIFromCoordinates(0, 2)
             });
 
-            var canHandle = blockForkStrategy.CanHandle(initialBoard);
+            var canHandle = blockForkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -54,15 +52,13 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnAICellInTheSecondCornerAndOpponentCellsInTheFirstCornerAndThirdCorner_CanHandleReturnsTrue()
         {
-            var blockForkStrategy = new BlockForkStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.OpponentFromCoordinates(0,0),
                 Mark.AIFromCoordinates(0, 2),
                 Mark.OpponentFromCoordinates(2,2)
             });
 
-            var canHandle = blockForkStrategy.CanHandle(initialBoard);
+            var canHandle = blockForkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -70,14 +66,12 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnAICellInTheSecondCornerAndOpponentCellsInTheFirstCornerAndThirdCorner_UpdatePutsAMarkInTheFirstSide()
         {
-            var blockForkStrategy = new BlockForkStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.OpponentFromCoordinates(0,0),
                 Mark.AIFromCoordinates(0, 2),
                 Mark.OpponentFromCoordinates(2,2)
             });
-            blockForkStrategy.Update(initialBoard);
+            blockForkStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.OpponentFromCoordinates(0,0),
@@ -86,8 +80,9 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.AIFromCoordinates(1, 1)
             });
 
-            var canHandle = blockForkStrategy.CanHandle(initialBoard);
+            var canHandle = blockForkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
-    }}
+    }
+}

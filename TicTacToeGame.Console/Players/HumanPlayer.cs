@@ -8,18 +8,17 @@ namespace TicTacToeGame.Console.Players
     public class HumanPlayer : Player
     {
         ConsoleIO consoleIO;
-        ITicTacToe ticTacToe;
 
-        public HumanPlayer(ConsoleIO consoleIO, ITicTacToe ticTacToe)
+        public HumanPlayer(ConsoleIO consoleIO, char mark)
         {
             this.consoleIO = consoleIO;
-            this.ticTacToe = ticTacToe;
+            this.Mark = mark;
         }
 
-        public void Move(string userInput)
+        public void Move(Board board, string userInput)
         {
-            var cellCoordinates = GetCoordinatesFromUserInput(userInput);
-            ticTacToe.HumanMove(cellCoordinates);
+            var cellCoordinates = GetCoordinatesFromUserInput(board, userInput);
+            board.FillCell(cellCoordinates, Mark);
         }
 
         public string AskForUserInput()
@@ -27,23 +26,25 @@ namespace TicTacToeGame.Console.Players
             consoleIO.WriteLine(Resources.WriteCoordinates);
             consoleIO.WriteHorizontalSeparator();
             consoleIO.WriteLine(string.Empty);
-            consoleIO.Write("> ");
+            consoleIO.WritePrompt();
             return consoleIO.ReadLine();
         }
 
-        private CellCoordinates GetCoordinatesFromUserInput(string userInput)
+        public char Mark { get; set; }
+
+        private CellCoordinates GetCoordinatesFromUserInput(Board board, string userInput)
         {
             VerifyCoordinatesAreValidIntegers(userInput);
             int[] coordinates = userInput.Split(',').Select(c => int.Parse(c)).ToArray();
-            VerifyCoordinatesAreInTheBoard(coordinates);
+            VerifyCoordinatesAreInTheBoard(board, coordinates);
 
             return new CellCoordinates(coordinates[0], coordinates[1]);
         }
 
-        private void VerifyCoordinatesAreInTheBoard(int[] coordinates)
+        private void VerifyCoordinatesAreInTheBoard(Board board, int[] coordinates)
         {
-            if (coordinates[0] > ticTacToe.Board.Size ||
-                coordinates[1] > ticTacToe.Board.Size ||
+            if (coordinates[0] > board.Size ||
+                coordinates[1] > board.Size ||
                 coordinates[0] < 0 ||
                 coordinates[1] < 0)
                 throw new NotAllowedMovementException();

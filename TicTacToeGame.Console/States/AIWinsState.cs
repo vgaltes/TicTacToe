@@ -19,11 +19,16 @@ namespace TicTacToeGame.Console.States
 
         public override void Evaluate()
         {
-            this.TicTacToeConsoleRunner.consoleIO.Clear();
+            this.TicTacToeConsoleRunner.DrawHeader();
+            this.TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
             this.TicTacToeConsoleRunner.DrawBoard();
+            this.TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
+            this.TicTacToeConsoleRunner.consoleIO.WriteHorizontalSeparator();
             this.TicTacToeConsoleRunner.consoleIO.WriteLine(Resources.AiWins);
+            this.TicTacToeConsoleRunner.consoleIO.WriteLine(string.Empty);
+            this.TicTacToeConsoleRunner.consoleIO.WritePrompt();
             this.TicTacToeConsoleRunner.consoleIO.ReadKey();
-            this.TicTacToeConsoleRunner.ticTacToe.Reset();
+            this.TicTacToeConsoleRunner.board.Reset();
             this.TicTacToeConsoleRunner.State = new AskingForPlayerState(this);
         }
     }

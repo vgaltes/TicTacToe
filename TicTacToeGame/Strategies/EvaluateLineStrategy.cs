@@ -4,14 +4,14 @@ namespace TicTacToeGame.Strategies
 {
     public abstract class EvaluateLineStrategy : TicTacToeStrategy
     {
-        private CellType cellTypeToEvaluate;
+        private char markToEvaluate;
 
-        public EvaluateLineStrategy(CellType cellTypeToEvaluate)
+        public EvaluateLineStrategy(char markToEvaluate) : base(markToEvaluate, ' ')
         {
-            this.cellTypeToEvaluate = cellTypeToEvaluate;
+            this.markToEvaluate = markToEvaluate;
         }
-                
-        public virtual bool CanHandle(Board board)
+
+        public override bool CanHandle(Board board, char mark)
         {
             foreach (var line in board.Lines)
             {
@@ -21,43 +21,44 @@ namespace TicTacToeGame.Strategies
 
             return false;
         }
-        
-        public virtual void Update(Board board)
+
+        public override void Update(Board board, char mark)
         {
             foreach (var line in board.Lines)
             {
                 if (LineHasTwoCellsOfEvaluatedType(board, line) && LineHasOneEmptyCell(board, line))
                 {
-                    FillEmptyCellWithAIMark(board, line);
+                    FillEmptyCellWithAIMark(board, line, mark);
+                    return;
                 }
             }
         }
 
-        private void FillEmptyCellWithAIMark(Board board, Line line)
+        private void FillEmptyCellWithAIMark(Board board, int[] line, char mark)
         {
-            foreach(var coordinate in line.Coordinates)
+            foreach(var coordinate in line)
             {
-                FillMarkCoordinateIfEmpty(board, coordinate);
+                FillMarkCoordinateIfEmpty(board, coordinate, mark);
             }
         }
 
-        private void FillMarkCoordinateIfEmpty(Board board, CellCoordinates cellCoordinate)
+        private void FillMarkCoordinateIfEmpty(Board board, int cellCoordinate, char mark)
         {
-            if ( board.IsCellOfType(CellType.Empty, cellCoordinate))
+            if ( board.IsCellEmpty(cellCoordinate))
             {
-                board.FillAICell(cellCoordinate);
+                board.FillCell(cellCoordinate, mark);
             }
         }
 
-        protected bool LineHasTwoCellsOfEvaluatedType(Board board, Line line)
+        protected bool LineHasTwoCellsOfEvaluatedType(Board board, int[] line)
         {
-            int cellCount = board.CountCellsOfTypeInLine(cellTypeToEvaluate, line);
+            int cellCount = board.CountCellsOfTypeInLine(markToEvaluate, line);
             return cellCount == 2;
         }
 
-        protected bool LineHasOneEmptyCell(Board board, Line line)
+        protected bool LineHasOneEmptyCell(Board board, int[] line)
         {
-            int cellCount = board.CountCellsOfTypeInLine(CellType.Empty, line);
+            int cellCount = board.CountCellsOfTypeInLine(' ', line);
             return cellCount == 1;
         }
     }

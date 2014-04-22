@@ -6,19 +6,23 @@ namespace TicTacToeGame.Test.Fakes
     public class FillFirstRowStrategy : TicTacToeStrategy
     {
         public const int FIRST_ROW = 0;
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
 
-        public bool CanHandle(Board board)
+        public FillFirstRowStrategy() : base(AI_MARK, OPPONENTS_MARK) { }
+
+        public override bool CanHandle(Board board, char mark)
         {
             return true;
         }
 
-        public void Update(Board board)
+        public override void Update(Board board, char mark)
         {
             for (var column = 0; column < board.Size; column++)
             {
-                if (board.IsCellOfType(CellType.Empty, new CellCoordinates(FIRST_ROW, column)))
+                if (board.IsCellOfType(' ', new CellCoordinates(FIRST_ROW, column)))
                 {
-                    board.FillAICell(new CellCoordinates(FIRST_ROW, column));
+                    board.FillCell(new CellCoordinates(FIRST_ROW, column), mark);
                     break;
                 }
             }   

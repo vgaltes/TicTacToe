@@ -5,7 +5,7 @@ namespace TicTacToeGame.Console
 {
     public class TicTacToeConsoleRunner
     {
-        public readonly ITicTacToe ticTacToe;
+        public readonly Board board;
         public readonly TicTacToeBoardDrawer ticTacToeBoardDrawer;
         public readonly ConsoleIO consoleIO;
         public readonly Player[] Players;
@@ -23,11 +23,10 @@ namespace TicTacToeGame.Console
 
         public TicTacToeConsoleRunnerState State { get; set; }
 
-        public TicTacToeConsoleRunner(ITicTacToe ticTacToe, 
-            TicTacToeBoardDrawer ticTacToeBoardDrawer, ConsoleIO consoleIO,
+        public TicTacToeConsoleRunner(Board board, TicTacToeBoardDrawer ticTacToeBoardDrawer, ConsoleIO consoleIO,
             Player player1, Player player2)
         {
-            this.ticTacToe = ticTacToe;
+            this.board = board;
             this.ticTacToeBoardDrawer = ticTacToeBoardDrawer;
             this.consoleIO = consoleIO;
             Players = new Player[2] { player1, player2 };
@@ -44,9 +43,9 @@ namespace TicTacToeGame.Console
 
         public void DrawBoard()
         {
-            var board = ticTacToeBoardDrawer.GetRepresentationOf(ticTacToe.Board);
+            var boardRepresentation = ticTacToeBoardDrawer.GetRepresentationOf(board);
 
-            consoleIO.WriteLine(board);
+            consoleIO.WriteLine(boardRepresentation);
         }
 
         public void DrawHeader()

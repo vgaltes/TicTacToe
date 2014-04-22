@@ -8,13 +8,15 @@ namespace TicTacToeGame.Test.Strategies
     [TestFixture]
     public class OppositeCornerStrategyTest
     {
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+        OppositeCornerStrategy oppositeCornerStrategy = new OppositeCornerStrategy(AI_MARK, OPPONENTS_MARK);
+
         [Test]
         public void GivenThereIsAnOpponentInTheFirstCorner_CanHandleReturnsTrue()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
-            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -22,10 +24,8 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheFirstCorner_TheAIPutsTheMarkInTheFourthCorner()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
-            oppositeCornerStrategy.Update(initialBoard);
+            oppositeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
                 {
@@ -39,11 +39,9 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheSecondCorner_CanHandleReturnsTrue()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 2));
 
-            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -51,11 +49,9 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheSecondCorner_TheAIPutsTheMarkInTheThirdCorner()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 2));
 
-            oppositeCornerStrategy.Update(initialBoard);
+            oppositeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
                 {
@@ -69,11 +65,9 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheThirdCorner_CanHandleReturnsTrue()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(2, 0));
 
-            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -81,11 +75,9 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheThirdCorner_TheAIPutsTheMarkInTheSecondCorner()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(2, 0));
 
-            oppositeCornerStrategy.Update(initialBoard);
+            oppositeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
                 {
@@ -99,11 +91,9 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheFourthCorner_CanHandleReturnsTrue()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(2, 2));
 
-            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -111,11 +101,9 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheFourthCorner_TheAIPutsTheMarkInTheFirstCorner()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(2, 2));
 
-            oppositeCornerStrategy.Update(initialBoard);
+            oppositeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
                 {
@@ -129,11 +117,9 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenAnEmptyBoard_CanHandleReturnsFalse()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
-            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -141,13 +127,11 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheFirstAndFourthCorner_CanHandleReturnsFalse()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>{
                 Mark.OpponentFromCoordinates(0, 0),
                 Mark.OpponentFromCoordinates(2, 2)});
 
-            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = oppositeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -155,15 +139,13 @@ namespace TicTacToeGame.Test.Strategies
         [Test]
         public void GivenThereIsAnOpponentInTheFirstAndSecondCorner_TheAIPutsTheMarkInTheThirdCorner()
         {
-            var oppositeCornerStrategy = new OppositeCornerStrategy();
-
             var initialBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
             {
                 Mark.OpponentFromCoordinates(0, 0),
                 Mark.OpponentFromCoordinates(0, 2)
             });
 
-            oppositeCornerStrategy.Update(initialBoard);
+            oppositeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
                 {

@@ -1,6 +1,10 @@
-﻿using Moq;
+﻿using System.Collections.Generic;
+using Moq;
 using NUnit.Framework;
 using TicTacToeGame.Console.Players;
+using TicTacToeGame.Models;
+using TicTacToeGame.Strategies;
+using TicTacToeGame.Test.Fakes;
 
 namespace TicTacToeGame.Console.Test.Players
 {
@@ -8,16 +12,15 @@ namespace TicTacToeGame.Console.Test.Players
     public class AIPlayerTest
     {
         Mock<ConsoleIO> consoleIO;
-        Mock<ITicTacToe> ticTacToe;
+        Mock<Board> board;
         AIPlayer aiPlayer;
 
         [SetUp]
         public void TestSetUp()
         {
             consoleIO = new Mock<ConsoleIO>();
-            ticTacToe = new Mock<ITicTacToe>();
-            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
-            aiPlayer = new AIPlayer(consoleIO.Object, ticTacToe.Object);
+            board = new Mock<Board>();
+            aiPlayer = new AIPlayer(consoleIO.Object, new List<TicTacToeStrategy>{new AllwaysUpdateStrategy()}, 'O');
         }
 
         [Test]
@@ -32,9 +35,9 @@ namespace TicTacToeGame.Console.Test.Players
         [Test]
         public void WhenMoving_CallTicTacTocAIMove()
         {
-            aiPlayer.Move(string.Empty);
+            aiPlayer.Move(board.Object, string.Empty);
 
-            ticTacToe.Verify(ttt => ttt.AIMove());
+            board.Verify(b => b.FillCell(It.IsAny<CellCoordinates>(), 'O'));
         }
     }
 }

@@ -8,14 +8,16 @@ namespace TicTacToeGame.Test.Strategies
     [TestFixture]
     public class ForkStrategyTest
     {
-        ForkStrategy forkStrategy = new ForkStrategy();
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+        ForkStrategy forkStrategy = new ForkStrategy(AI_MARK, OPPONENTS_MARK);
 
         [Test]
         public void GivenAnEmptyBoard_CanHandleReturnsFalse()
         {
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
-            var canHandle = forkStrategy.CanHandle(initialBoard);
+            var canHandle = forkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -25,7 +27,7 @@ namespace TicTacToeGame.Test.Strategies
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
 
-            var canHandle = forkStrategy.CanHandle(initialBoard);
+            var canHandle = forkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }
@@ -38,7 +40,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.AIFromCoordinates(0, 1)
             });
 
-            var canHandle = forkStrategy.CanHandle(initialBoard);
+            var canHandle = forkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -58,7 +60,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.AIFromCoordinates(1, 0)
             });
 
-            forkStrategy.Update(initialBoard);
+            forkStrategy.Update(initialBoard, AI_MARK);
 
             initialBoard.Should().Be(expectedBoard);
         }
@@ -72,7 +74,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(1,1)
             });
 
-            var canHandle = forkStrategy.CanHandle(initialBoard);
+            var canHandle = forkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -93,7 +95,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(1,1)
             });
 
-            forkStrategy.Update(initialBoard);
+            forkStrategy.Update(initialBoard, AI_MARK);
 
             initialBoard.Should().Be(expectedBoard);
         }
@@ -108,7 +110,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(2,2)
             });
 
-            var canHandle = forkStrategy.CanHandle(initialBoard);
+            var canHandle = forkStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -131,7 +133,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(2,2)
             });
 
-            forkStrategy.Update(initialBoard);
+            forkStrategy.Update(initialBoard, AI_MARK);
 
             initialBoard.Should().Be(expectedBoard);
         }

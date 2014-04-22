@@ -12,7 +12,10 @@ namespace TicTacToeGame.Test.Strategies
     [TestFixture]
     public class WinStrategyTest
     {
-        WinStrategy blockStrategy = new WinStrategy();
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+
+        WinStrategy winStrategy = new WinStrategy(AI_MARK, OPPONENTS_MARK);
                
 
         [Test, TestCaseSource("GetTestDataForRows")]
@@ -61,10 +64,11 @@ namespace TicTacToeGame.Test.Strategies
                 endMark
              });
 
-            initialBoard.FillCellWithType((CellType)Enum.Parse(typeof(CellType), line.EvaluateValue),
-                new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
+            var cellValue = line.EvaluateValue == "AI" ? AI_MARK : ' ';
 
-            var canHandle = blockStrategy.CanHandle(initialBoard);
+            initialBoard.FillCell(new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate), cellValue);
+
+            var canHandle = winStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().Be(line.ExpectedCanHandleValue);
         }
@@ -81,8 +85,8 @@ namespace TicTacToeGame.Test.Strategies
 
             if (line.ExpectedCanHandleValue)
             {
-                blockStrategy.Update(initialBoard);
-                initialBoard.IsCellOfType(CellType.AI, new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
+                winStrategy.Update(initialBoard, AI_MARK);
+                initialBoard.IsCellOfType(AI_MARK, new CellCoordinates(line.RowEvaluate, line.ColumnEvaluate));
             }
         }
 

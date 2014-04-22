@@ -5,33 +5,37 @@ namespace TicTacToeGame.Strategies
     public class BlockForkStrategy : TicTacToeStrategy
     {
         private const int MINIMUM_OPPONENT_CELLS_TO_BLOCK_FORK = 2;
-        public bool CanHandle(Board board)
+        private const int INVALID_COORDINATE = -1;
+
+        public BlockForkStrategy(char myMark, char opponentsMark) : base(myMark, opponentsMark) { }
+
+        public override bool CanHandle(Board board, char mark)
         {
-            if (board.HasLessOpponentCellsThan(MINIMUM_OPPONENT_CELLS_TO_BLOCK_FORK))
+            if (board.HasLessCellsOfTypeThan(opponentsMark, MINIMUM_OPPONENT_CELLS_TO_BLOCK_FORK))
                 return false;
 
-            return GetCellCoordinatesSuitableForBlockFork(board).IsValid;
+            return GetCellCoordinatesSuitableForBlockFork(board, mark) != INVALID_COORDINATE;
         }
 
-        public void Update(Board board)
+        public override void Update(Board board, char mark)
         {
-            board.FillAICell(GetCellCoordinatesSuitableForBlockFork(board));            
+            board.FillCell(GetCellCoordinatesSuitableForBlockFork(board, mark), mark);
         }
 
-        private CellCoordinates GetCellCoordinatesSuitableForBlockFork(Board board)
+        private int GetCellCoordinatesSuitableForBlockFork(Board board, char mark)
         {
             foreach (var emptyCell in board.EmptyCells)
             {
-                var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(mark, emptyCell);
 
-                var winStrategy = new WinStrategy();
-                if (winStrategy.CanHandle(imaginaryBoard))
+                var winStrategy = new WinStrategy(myMark, opponentsMark);
+                if (winStrategy.CanHandle(imaginaryBoard, mark))
                 {
                     return emptyCell;
                 }
             }
 
-            return CellCoordinates.InvalidCoordinates;
+            return INVALID_COORDINATE;
         }
     }
 }

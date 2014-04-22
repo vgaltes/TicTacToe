@@ -14,23 +14,18 @@ namespace TicTacToeGame.Console.States
     {
         private const string QUIT_COMMAND = "q!";
 
-        private Dictionary<TicTacToeState, Type> nextStates;
-
         public Player CurrentPlayer {get; set;}
 
         public PlayingState(TicTacToeConsoleRunnerState state, int initialPlayer)
         {
             this.TicTacToeConsoleRunner = state.TicTacToeConsoleRunner;
             this.CurrentPlayer = state.TicTacToeConsoleRunner.Players[initialPlayer - 1];
-
-            SetNextStates();
         }
 
         public PlayingState(TicTacToeConsoleRunner tttConsoleRunner)
         {
             this.TicTacToeConsoleRunner = tttConsoleRunner;
             this.CurrentPlayer = tttConsoleRunner.Players[0];
-            SetNextStates();
         }
 
         public override void Evaluate()
@@ -46,9 +41,9 @@ namespace TicTacToeGame.Console.States
             }
             else
             {
-                try
+                  try
                 {
-                    this.CurrentPlayer.Move(userInput);
+                    this.CurrentPlayer.Move(TicTacToeConsoleRunner.board, userInput);
                     if (HasToChangeState())
                         SetNextState();
                     else
@@ -76,23 +71,22 @@ namespace TicTacToeGame.Console.States
 
         private bool HasToChangeState()
         {
-            return nextStates.ContainsKey(this.TicTacToeConsoleRunner.ticTacToe.State);
+            return this.TicTacToeConsoleRunner.board.State != TicTacToeBoardState.Playing;
         }
 
         private void SetNextState()
-        {
-            Type nextState = nextStates[this.TicTacToeConsoleRunner.ticTacToe.State];
-            ConstructorInfo constructorInfo = nextState.GetConstructor(new[] { typeof(TicTacToeConsoleRunnerState) });
-            this.TicTacToeConsoleRunner.State =
-                (TicTacToeConsoleRunnerState)constructorInfo.Invoke(new object[] { this });
-        }
-
-        private void SetNextStates()
-        {
-            nextStates = new Dictionary<TicTacToeState, Type>();
-            nextStates.Add(TicTacToeState.AIWins, typeof(AIWinsState));
-            nextStates.Add(TicTacToeState.OpponentWins, typeof(HumanWinsState));
-            nextStates.Add(TicTacToeState.Draw, typeof(DrawState));
+        {   
+            if ( TicTacToeConsoleRunner.board.State == TicTacToeBoardState.Draw)
+            {
+                this.TicTacToeConsoleRunner.State = new DrawState(this);
+            }
+            else
+            {
+                if (TicTacToeConsoleRunner.board.Winner == TicTacToeConsoleRunner.Players[1].Mark)
+                    this.TicTacToeConsoleRunner.State = new HumanWinsState(this);
+                else
+                    this.TicTacToeConsoleRunner.State = new AIWinsState(this);
+            }
         }
 
         private void WriteInfoFromPreviousStep()

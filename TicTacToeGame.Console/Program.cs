@@ -8,34 +8,27 @@ namespace TicTacToeGame.Console
     {
         static void Main(string[] args)
         {
-            var ticTacToe = CreateTicTacToe();
             var ticTacToeBoardDrawer = new TicTacToeBoardDrawer();
             var consoleIO = new ConsoleIO();
+            var board = new Board();
 
-            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe, ticTacToeBoardDrawer,
-                consoleIO, new HumanPlayer(consoleIO, ticTacToe), new AIPlayer(consoleIO, ticTacToe));
+            var strategies = new List<TicTacToeStrategy>
+            {
+                new WinStrategy('O', 'X'),
+                new BlockStrategy('O', 'X'),
+                new ForkStrategy('O', 'X'),
+                new BlockForkStrategy('O', 'X'),
+                new CenterStrategy('O', 'X'),
+                new OppositeCornerStrategy('O', 'X'),
+                new FreeCornerStrategy('O', 'X'),
+                new FreeSideStrategy('O', 'X')
+            };
+
+            var ticTacToeConsoleRunner = new TicTacToeConsoleRunner(board, ticTacToeBoardDrawer,
+                consoleIO, new AIPlayer(consoleIO, strategies, 'O'), new HumanPlayer(consoleIO, 'X'));
 
             ticTacToeConsoleRunner.Run();
         }
-
-        private static ITicTacToe CreateTicTacToe()
-        {
-            var strategies = new List<TicTacToeStrategy>
-            {
-                new WinStrategy(),
-                new BlockStrategy(),
-                new ForkStrategy(),
-                new BlockForkStrategy(),
-                new CenterStrategy(),
-                new OppositeCornerStrategy(),
-                new FreeCornerStrategy(),
-                new FreeSideStrategy()
-            };
-
-            var board = new Board();
-
-            ITicTacToe ticTacToe = new TicTacToe(board, strategies);
-            return ticTacToe;
-        }
+        
     }
 }

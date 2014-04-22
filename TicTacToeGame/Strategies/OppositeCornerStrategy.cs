@@ -4,36 +4,39 @@ namespace TicTacToeGame.Strategies
 {
     public class OppositeCornerStrategy : TicTacToeStrategy
     {
-        public bool CanHandle(Board board)
+        private const int INVALID_COORDINATES = -1;
+        public OppositeCornerStrategy(char myMark, char opponentsMark) : base(myMark, opponentsMark) { }
+
+        public override bool CanHandle(Board board, char mark)
         {
-            return GetFirstEmptyCellCoordinatesInAnOppositeCorner(board).IsValid;
-        }
-        
-        public void Update(Board board)
-        {
-            board.FillAICell(GetFirstEmptyCellCoordinatesInAnOppositeCorner(board));
+            return GetFirstEmptyCellCoordinatesInAnOppositeCorner(board) != INVALID_COORDINATES;
         }
 
-        private CellCoordinates GetFirstEmptyCellCoordinatesInAnOppositeCorner(Board board)
+        public override void Update(Board board, char mark)
+        {
+            board.FillCell(GetFirstEmptyCellCoordinatesInAnOppositeCorner(board), mark);
+        }
+
+        private int GetFirstEmptyCellCoordinatesInAnOppositeCorner(Board board)
         {
             foreach (var cornerAndOpposite in board.CornersAndOpposites)
             {
-                if (IsThereAndOpponentInTheCorner(cornerAndOpposite.Key, board)
-                    && IsOppositeCornerFree(cornerAndOpposite.Value, board))
-                    return cornerAndOpposite.Value;
+                if (IsThereAndOpponentInTheCorner(cornerAndOpposite[0], board)
+                    && IsOppositeCornerFree(cornerAndOpposite[1], board))
+                    return cornerAndOpposite[1];
             }
 
-            return CellCoordinates.InvalidCoordinates;
+            return INVALID_COORDINATES;
         }
         
-        private bool IsOppositeCornerFree(CellCoordinates markCoordinate, Board board)
+        private bool IsOppositeCornerFree(int markCoordinate, Board board)
         {
-            return board.IsCellOfType(CellType.Empty, markCoordinate);
+            return board.IsCellOfType(' ', markCoordinate);
         }
 
-        private bool IsThereAndOpponentInTheCorner(CellCoordinates markCoordinate, Board board)
+        private bool IsThereAndOpponentInTheCorner(int markCoordinate, Board board)
         {
-            return board.IsCellOfType(CellType.Opponent, markCoordinate);
+            return board.IsCellOfType(opponentsMark, markCoordinate);
         }
     }
 }

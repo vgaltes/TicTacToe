@@ -5,7 +5,7 @@ namespace TicTacToeGame.Strategies
 {
     public class BlockStrategy : EvaluateLineStrategy
     {
-        public BlockStrategy() : base (CellType.Opponent)
+        public BlockStrategy(char myMark, char opponentsMark) : base (opponentsMark)
         {
         }        
     }

@@ -5,14 +5,19 @@ namespace TicTacToeGame.Test.Fakes
 {
     public class AllwaysUpdateStrategy : TicTacToeStrategy
     {
-        public bool CanHandle(Board board)
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+        
+        public AllwaysUpdateStrategy() : base(AI_MARK, OPPONENTS_MARK) { }
+
+        public override bool CanHandle(Board board, char mark)
         {
             return true;
         }
 
-        public void Update(Board board)
+        public override void Update(Board board, char mark)
         {
-            board.FillAICell(new CellCoordinates(0, 0));
+            board.FillCell(new CellCoordinates(0, 0), mark);
         }
     }
 }

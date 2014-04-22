@@ -12,13 +12,13 @@ namespace TicTacToeGame.Console.Test.States
         [Test]
         public void WhenEvaluating_SetIsFinishedToTrue()
         {
-            var ticTacToe = new Mock<ITicTacToe>();
+            var board = new Mock<Board>();
             var ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             var consoleIO = new Mock<ConsoleIO>();
             var player1 = new Mock<Player>();
             var player2 = new Mock<Player>();
 
-            var tttConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+            var tttConsoleRunner = new TicTacToeConsoleRunner(board.Object, 
                 ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
             
             var quitGameState = new QuitGameState(tttConsoleRunner);

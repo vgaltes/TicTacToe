@@ -4,14 +4,18 @@ namespace TicTacToeGame.Test
 {
     public static class BoardTestHelper
     {
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+        private const char EMPTY_MARK = ' ';
+
         public static Board GetAnEmptyBoard()
         {
-            return GetABoardWithAMarkInTheCenterOfType(CellType.Empty);
+            return GetABoardWithAMarkInTheCenterOfType(EMPTY_MARK);
         }
 
-        public static Board GetABoardWithAMarkInTheCenterOfType(CellType cell)
+        public static Board GetABoardWithAMarkInTheCenterOfType(char mark)
         {
-            return GetABoardWithAMark(new Mark(cell, new CellCoordinates(1,1)));
+            return GetABoardWithAMark(new Mark(mark, new CellCoordinates(1,1)));
         }
 
         public static Board GetABoardWithAMark(Mark mark)
@@ -25,28 +29,8 @@ namespace TicTacToeGame.Test
 
             foreach (var mark in marks)
             {
-                board.FillCellWithType(mark.Cell, mark.CellCoordinate);
+                board.FillCell(mark.CellCoordinate, mark.Cell);
             }
-
-            return board;
-        }
-
-        internal static Board GetAFullBoard()
-        {
-            var board = new Board();
-            foreach( var emptyCell in board.EmptyCells)
-            {
-                board.FillAICell(emptyCell);
-            }
-
-            return board;
-        }
-
-        internal static Board GetAFullBoardWithAnEmptyCellAt(int row, int column)
-        {
-            var board = GetAFullBoard();
-
-            board.FillCellWithType(CellType.Empty, new CellCoordinates(row, column));
 
             return board;
         }

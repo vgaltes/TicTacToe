@@ -2,8 +2,10 @@
 {
     public interface Player
     {
-        void Move(string userInput);
+        void Move(Board board, string userInput);
 
         string AskForUserInput();
+
+        char Mark { get; set; }
     }
 }

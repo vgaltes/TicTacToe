@@ -20,7 +20,7 @@ namespace TicTacToeGame.Console.Test
         private const string HUGE_COORDINATES = "2147483648,2147483648";
         private const string BOARD_REPRESENTATION = "board representation";
 
-        Mock<ITicTacToe> ticTacToe;
+        Mock<Board> board;
         Mock<TicTacToeBoardDrawer> ticTacToeBoardDrawer;
         Mock<ConsoleIO> consoleIO;
         Mock<Player> player1;
@@ -30,16 +30,15 @@ namespace TicTacToeGame.Console.Test
         [SetUp]
         public void TestSetUp()
         {
-            ticTacToe = new Mock<ITicTacToe>();
+            board = new Mock<Board>();
             ticTacToeBoardDrawer = new Mock<TicTacToeBoardDrawer>();
             consoleIO = new Mock<ConsoleIO>();
             player1 = new Mock<Player>();
             player2 = new Mock<Player>();
 
-            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
-            ticTacToe.SetupGet(ttt => ttt.State).Returns(TicTacToeState.Playing);
+            board.SetupGet(b => b.State).Returns(TicTacToeBoardState.Playing);
 
-            ticTacToeConsoleRunner = new TicTacToeConsoleRunner(ticTacToe.Object, 
+            ticTacToeConsoleRunner = new TicTacToeConsoleRunner(board.Object, 
                 ticTacToeBoardDrawer.Object, consoleIO.Object, player1.Object, player2.Object);
         }
 

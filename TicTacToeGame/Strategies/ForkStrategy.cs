@@ -6,24 +6,27 @@ namespace TicTacToeGame.Strategies
     {
         private const int MINIMUM_LINES_TO_FORK = 2;
         private const int AI_CELLS_IN_A_FORK_LINE = 2;
+        private const int INVALID_COORDINATE = -1;
 
-        public bool CanHandle(Board board)
+        public ForkStrategy(char myMark, char opponentsMark) : base(myMark, opponentsMark) { }
+
+        public override bool CanHandle(Board board, char mark)
         {
-            return GetCellCoordinatesSuitableForFork(board).IsValid;
+            return GetCellCoordinatesSuitableForFork(board, mark) != INVALID_COORDINATE;
         }
 
-        public void Update(Board board)
+        public override void Update(Board board, char mark)
         {
-            board.FillAICell(GetCellCoordinatesSuitableForFork(board));
+            board.FillCell(GetCellCoordinatesSuitableForFork(board, mark), mark);
         }
 
-        private CellCoordinates GetCellCoordinatesSuitableForFork(Board board)
+        private int GetCellCoordinatesSuitableForFork(Board board, char mark)
         {
             foreach (var emptyCell in board.EmptyCells)
             {
                 int suitableLines = 0;
 
-                var imaginaryBoard = board.GetCopyWithExtraCellOfType(CellType.AI, emptyCell);
+                var imaginaryBoard = board.GetCopyWithExtraCellOfType(mark, emptyCell);
 
                 foreach (var line in board.Lines)
                 {
@@ -35,19 +38,19 @@ namespace TicTacToeGame.Strategies
                     return emptyCell;
             }
 
-            return CellCoordinates.InvalidCoordinates;
+            return INVALID_COORDINATE;
         }
 
-        private bool IsLineSuitableForAFork(Board board, Line line)
+        private bool IsLineSuitableForAFork(Board board, int[] line)
         {
             int aiCells = 0;
 
-            foreach(var coordinate in line.Coordinates )
+            foreach(var coordinate in line )
             {
-                if(board.IsCellOfType(CellType.Opponent, coordinate))
+                if(board.IsCellOfType(opponentsMark, coordinate))
                     return false;
 
-                if (board.IsCellOfType(CellType.AI, coordinate))
+                if (board.IsCellOfType(myMark, coordinate))
                     aiCells++;
             }
 

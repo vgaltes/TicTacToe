@@ -12,13 +12,16 @@ namespace TicTacToeGame.Test.Strategies
     [TestFixture]
     public class FreeCornerStrategyTest
     {
+        private const char AI_MARK = 'X';
+        private const char OPPONENTS_MARK = 'O';
+        FreeCornerStrategy freeCornerStrategy = new FreeCornerStrategy(AI_MARK, OPPONENTS_MARK);
+
         [Test]
         public void GivenThereIsTheFirstCornerEmpty_CanHandleReturnsTrue()
         {
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -28,8 +31,7 @@ namespace TicTacToeGame.Test.Strategies
         {
             var initialBoard = BoardTestHelper.GetAnEmptyBoard();
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            freeCornerStrategy.Update(initialBoard);
+            freeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithAMark(Mark.AIFromCoordinates(0, 0));
 
@@ -41,8 +43,7 @@ namespace TicTacToeGame.Test.Strategies
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -52,8 +53,7 @@ namespace TicTacToeGame.Test.Strategies
         {
             var initialBoard = BoardTestHelper.GetABoardWithAMark(Mark.OpponentFromCoordinates(0, 0));
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            freeCornerStrategy.Update(initialBoard);
+            freeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark>
                 {
@@ -72,8 +72,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(0, 2)
             });
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -86,8 +85,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(0, 2)
             });
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            freeCornerStrategy.Update(initialBoard);
+            freeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
                 Mark.OpponentFromCoordinates(0, 0),
@@ -107,8 +105,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(2, 0)
             });
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeTrue();
         }
@@ -122,8 +119,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(2, 0)
             });
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            freeCornerStrategy.Update(initialBoard);
+            freeCornerStrategy.Update(initialBoard, AI_MARK);
 
             var expectedBoard = BoardTestHelper.GetABoardWithMarks(new List<Mark> {
                 Mark.OpponentFromCoordinates(0, 0),
@@ -145,8 +141,7 @@ namespace TicTacToeGame.Test.Strategies
                 Mark.OpponentFromCoordinates(2, 2)
             });
 
-            var freeCornerStrategy = new FreeCornerStrategy();
-            var canHandle = freeCornerStrategy.CanHandle(initialBoard);
+            var canHandle = freeCornerStrategy.CanHandle(initialBoard, AI_MARK);
 
             canHandle.Should().BeFalse();
         }

@@ -4,6 +4,6 @@ namespace TicTacToeGame.Strategies
 {
     public class WinStrategy : EvaluateLineStrategy
     {
-        public WinStrategy() : base(CellType.AI) { }
+        public WinStrategy(char myMark, char opponentsMark) : base(myMark) { }
     }
 }

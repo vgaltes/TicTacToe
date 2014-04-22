@@ -16,18 +16,18 @@ namespace TicTacToeGame.Console.Test.Players
         private string BEYOND_MAX_INT_COORDINATES = "2147483648, 2147483648";
         private const string NON_NUMERIC_COORDINATES = "a,a";
         private CellCoordinates VALID_COORDINATES = new CellCoordinates(1, 1);
+        private const char mark = 'X';
 
         Mock<ConsoleIO> consoleIO;
-        Mock<ITicTacToe> ticTacToe;
+        Mock<Board> board;
         HumanPlayer humanPlayer;        
 
         [SetUp]
         public void TestSetUp()
         {
             consoleIO = new Mock<ConsoleIO>();
-            ticTacToe = new Mock<ITicTacToe>();
-            ticTacToe.SetupGet(ttt => ttt.Board).Returns(new Board());
-            humanPlayer = new HumanPlayer(consoleIO.Object, ticTacToe.Object);
+            board = new Mock<Board>();
+            humanPlayer = new HumanPlayer(consoleIO.Object, mark);
         }
 
         [Test]
@@ -47,33 +47,34 @@ namespace TicTacToeGame.Console.Test.Players
         [Test]
         public void GivenAValidCoordinates_CallMove()
         {
-            humanPlayer.Move(VALID_COORDINATES_AS_STRING);
+            humanPlayer.Move(board.Object, VALID_COORDINATES_AS_STRING);
 
-            ticTacToe.Verify(ttt => ttt.HumanMove(VALID_COORDINATES), Times.Once());
+            board.Verify(b => b.FillCell(VALID_COORDINATES, mark));
+            
         }
 
         [Test, ExpectedException(ExpectedException=typeof(NotAllowedMovementException))]
         public void GivenUserWritesCoordinatesOutOfTheBounds_ThrowNotAllowedMovementException()
         {
-            humanPlayer.Move(OUT_OF_BOUNDS_COORDINATES);
+            humanPlayer.Move(board.Object, OUT_OF_BOUNDS_COORDINATES);
         }
 
         [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
         public void GivenUserWritesNegativeCoordinates_ThrowNotAllowedMovementException()
         {
-            humanPlayer.Move(NEGATIVE_COORDINATES);
+            humanPlayer.Move(board.Object, NEGATIVE_COORDINATES);
         }
 
         [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
         public void GivenUserWritesCoordinatesBeyondMaxInt_ThrowNotAllowedMovementException()
         {
-            humanPlayer.Move(BEYOND_MAX_INT_COORDINATES);
+            humanPlayer.Move(board.Object, BEYOND_MAX_INT_COORDINATES);
         }
 
         [Test, ExpectedException(ExpectedException = typeof(NotAllowedMovementException))]
         public void GivenUserWritesNonNumericCoordinates_ThrowNotAllowedMovementException()
         {
-            humanPlayer.Move(NON_NUMERIC_COORDINATES);
+            humanPlayer.Move(board.Object, NON_NUMERIC_COORDINATES);
         }
     }
 }
